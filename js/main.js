@@ -83,32 +83,85 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Form submission (using Formspree)
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        const submitButton = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitButton.textContent;
+// EmailJS Contact Form Integration
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize EmailJS (replace YOUR_PUBLIC_KEY with your actual public key)
+    emailjs.init('YOUR_PUBLIC_KEY');
 
-        // Validate form
-        const formData = new FormData(contactForm);
-        if (!formData.get('name') || !formData.get('email') || !formData.get('message')) {
-            alert('Please fill in all fields');
-            return;
-        }
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formStatus = document.getElementById('formStatus');
 
-        // Email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(formData.get('email'))) {
-            alert('Please enter a valid email address');
-            return;
-        }
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-        // Show loading state
-        submitButton.textContent = 'Sending...';
-        submitButton.disabled = true;
-    });
-}
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            // Validate form
+            if (!name || !email || !message) {
+                formStatus.textContent = '❌ Please fill in all fields';
+                formStatus.style.display = 'block';
+                formStatus.style.color = 'var(--accent-color)';
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                formStatus.textContent = '❌ Please enter a valid email address';
+                formStatus.style.display = 'block';
+                formStatus.style.color = 'var(--accent-color)';
+                return;
+            }
+
+            // Show loading state
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            formStatus.textContent = 'Sending your message...';
+            formStatus.style.display = 'block';
+            formStatus.style.color = 'var(--muted-text)';
+
+            try {
+                // Send email using EmailJS
+                const response = await emailjs.send(
+                    'YOUR_SERVICE_ID',      // Replace with your service ID
+                    'YOUR_TEMPLATE_ID',     // Replace with your template ID
+                    {
+                        to_email: 'contact@topaitoolrank.com',
+                        from_name: name,
+                        from_email: email,
+                        message: message,
+                        reply_to: email
+                    }
+                );
+
+                if (response.status === 200) {
+                    formStatus.textContent = '✓ Message sent successfully! We\'ll get back to you soon.';
+                    formStatus.style.color = 'var(--secondary-color)';
+                    contactForm.reset();
+
+                    // Clear success message after 5 seconds
+                    setTimeout(() => {
+                        formStatus.style.display = 'none';
+                    }, 5000);
+                } else {
+                    throw new Error('Failed to send message');
+                }
+            } catch (error) {
+                console.error('Email send error:', error);
+                formStatus.textContent = '❌ Error sending message. Please try again or email us directly.';
+                formStatus.style.color = 'var(--accent-color)';
+            } finally {
+                submitBtn.textContent = 'Send Message';
+                submitBtn.disabled = false;
+            }
+        });
+    }
+});
 
 // Active nav link highlight on scroll
 window.addEventListener('scroll', () => {

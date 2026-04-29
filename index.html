@@ -47,6 +47,9 @@
         gtag('config', 'G-XXXXXXXXXX');
     </script>
 
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
 </head>
@@ -167,17 +170,18 @@
         <div class="container">
             <h2>Get Started</h2>
             <p class="section-subtitle">Ready to build something amazing? Let's talk.</p>
-            <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <form class="contact-form" id="contactForm">
                 <div class="form-group">
-                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
                 </div>
                 <div class="form-group">
-                    <input type="email" name="email" placeholder="Your Email" required>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
                 </div>
                 <div class="form-group">
-                    <textarea name="message" placeholder="Tell us about your project" rows="5" required></textarea>
+                    <textarea id="message" name="message" placeholder="Tell us about your project" rows="5" required></textarea>
                 </div>
-                <button type="submit" class="cta-button">Send Message</button>
+                <button type="submit" class="cta-button" id="submitBtn">Send Message</button>
+                <p id="formStatus" style="margin-top: 1rem; text-align: center; display: none;"></p>
             </form>
         </div>
     </section>

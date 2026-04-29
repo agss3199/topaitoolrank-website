@@ -6,7 +6,9 @@
       "Bash(git config:*)",
       "Bash(gh auth:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m 'feat: launch topaitoolrank.com website with 3D hero animation:*)"
+      "Bash(git commit -m 'feat: launch topaitoolrank.com website with 3D hero animation:*)",
+      "Bash(gh repo:*)",
+      "Bash(git commit -m 'feat: replace Formspree with free EmailJS integration:*)"
     ]
   }
 }
