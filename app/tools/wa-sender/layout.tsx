@@ -6,7 +6,9 @@ export const metadata: Metadata = {
   title: "WA Sender - Top AI Tool Rank",
   description:
     "WA Sender: A practical communication tool for WhatsApp and Email campaigns.",
-  canonical: "https://topaitoolrank.com/tools/wa-sender",
+  alternates: {
+    canonical: "https://topaitoolrank.com/tools/wa-sender",
+  },
 };
 
 export default function WASenderLayout({

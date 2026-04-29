@@ -4,7 +4,9 @@ export const metadata: Metadata = {
   title: "Privacy Policy - Top AI Tool Rank",
   description:
     "Read our privacy policy to learn how Top AI Tool Rank collects, uses, and protects your personal data.",
-  canonical: "https://topaitoolrank.com/privacy-policy",
+  alternates: {
+    canonical: "https://topaitoolrank.com/privacy-policy",
+  },
   openGraph: {
     title: "Privacy Policy - Top AI Tool Rank",
     description:

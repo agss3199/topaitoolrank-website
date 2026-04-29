@@ -4,7 +4,9 @@ export const metadata: Metadata = {
   title: "Blog - Top AI Tool Rank",
   description:
     "Read our latest articles about custom software development, AI integration, and digital transformation.",
-  canonical: "https://topaitoolrank.com/blogs/",
+  alternates: {
+    canonical: "https://topaitoolrank.com/blogs/",
+  },
   openGraph: {
     title: "Blog - Top AI Tool Rank",
     description:

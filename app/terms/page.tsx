@@ -4,7 +4,9 @@ export const metadata: Metadata = {
   title: "Terms of Service - Top AI Tool Rank",
   description:
     "Read the terms of service for Top AI Tool Rank, including user responsibilities and disclaimers.",
-  canonical: "https://topaitoolrank.com/terms",
+  alternates: {
+    canonical: "https://topaitoolrank.com/terms",
+  },
   openGraph: {
     title: "Terms of Service - Top AI Tool Rank",
     description: "Read the terms of service for Top AI Tool Rank.",
