@@ -253,8 +253,8 @@ a {
 .hero-orb-two {
   width: 260px;
   height: 260px;
-  left: 10%;
-  bottom: 10%;
+  left: -50px;
+  bottom: -50px;
   background: radial-gradient(circle, rgba(124, 58, 237, 0.18), transparent 68%);
 }
 
@@ -492,16 +492,7 @@ a {
 }
 
 .floating-chip {
-  position: absolute;
-  padding: 11px 16px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.88);
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-card);
-  color: var(--primary-color);
-  font-weight: 850;
-  font-size: 0.9rem;
-  z-index: 10;
+  display: none;
 }
 
 .chip-one {
