@@ -1,183 +1,483 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Top AI Tool Rank - Custom Software & AI Systems</title>
+  <title>Top AI Tool Rank - Custom AI Software & Automation Solutions</title>
+  <meta name="description" content="Build custom AI software, automation systems, internal tools, dashboards, and digital products tailored to your business requirements." />
+  <meta name="keywords" content="custom software, AI software development, AI automation, internal tools, dashboards, web apps, business automation, digital solutions" />
+  <link rel="canonical" href="https://topaitoolrank.com/" />
 
-<meta name="description" content="We design and build high-performance custom software, AI systems, and automation tools tailored to your business.">
-<meta name="keywords" content="custom software, AI development, automation tools, software solutions">
-<link rel="canonical" href="https://topaitoolrank.com/">
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://topaitoolrank.com/" />
+  <meta property="og:title" content="Top AI Tool Rank - Custom AI Software & Automation Solutions" />
+  <meta property="og:description" content="We build custom AI software, automation systems, dashboards, and internal tools for businesses." />
+  <meta property="og:image" content="https://topaitoolrank.com/assets/og-image.png" />
 
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://topaitoolrank.com/">
-<meta property="og:title" content="Custom AI Software That Actually Works">
-<meta property="og:description" content="We build scalable AI-powered software systems tailored to your business.">
-<meta property="og:image" content="https://topaitoolrank.com/assets/og-image.png">
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://topaitoolrank.com/" />
+  <meta property="twitter:title" content="Top AI Tool Rank - Custom AI Software & Automation Solutions" />
+  <meta property="twitter:description" content="We build custom AI software, automation systems, dashboards, and internal tools for businesses." />
+  <meta property="twitter:image" content="https://topaitoolrank.com/assets/og-image.png" />
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Top AI Tool Rank",
+    "url": "https://topaitoolrank.com",
+    "description": "Custom AI software development, automation systems, dashboards, and business tools.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Service",
+      "email": "contact@topaitoolrank.com"
+    }
+  }
+  </script>
 
-<!-- GA -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-D98KCREKZC"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-D98KCREKZC');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D98KCREKZC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-D98KCREKZC");
+  </script>
 
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
 </head>
 
 <body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo">
+        <a href="#home">Top AI Tool Rank</a>
+      </div>
 
-<!-- NAV -->
-<nav class="navbar">
-<div class="container nav-container">
-<div class="logo"><a href="#home">Top AI Tool Rank</a></div>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
 
-<ul class="nav-menu">
-<li><a href="#home" class="nav-link">Home</a></li>
-<li><a href="#services" class="nav-link">Services</a></li>
+        <li class="nav-item-dropdown">
+          <a href="#tools" class="nav-link">Tools</a>
+          <ul class="dropdown">
+            <li><a href="https://whatsapp-sender.vercel.app" target="_blank" rel="noopener">WhatsApp Sender</a></li>
+            <li><a href="javascript:void(0)" class="coming-soon" onclick="alert('Voice Rating is coming soon!')">Voice Rating</a></li>
+          </ul>
+        </li>
 
-<li class="nav-item-dropdown">
-<a href="#tools" class="nav-link">Tools</a>
-<ul class="dropdown">
-<li><a href="https://whatsapp-sender.vercel.app" target="_blank">WhatsApp Sender</a></li>
-<li><a href="javascript:void(0)" onclick="alert('Coming soon')">Voice Rating</a></li>
-</ul>
-</li>
+        <li><a href="/blogs/" class="nav-link">Blogs</a></li>
+        <li><a href="#contact" class="nav-link nav-pill">Contact</a></li>
+      </ul>
 
-<li><a href="/blogs/" class="nav-link">Blogs</a></li>
-<li><a href="#contact" class="nav-link">Contact</a></li>
-</ul>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
 
-<div class="hamburger"><span></span><span></span><span></span></div>
-</div>
-</nav>
+  <main>
+    <section id="home" class="hero">
+      <canvas id="canvas-3d"></canvas>
 
-<!-- HERO -->
-<section id="home" class="hero">
-<canvas id="canvas-3d"></canvas>
+      <div class="hero-orb hero-orb-one"></div>
+      <div class="hero-orb hero-orb-two"></div>
 
-<div class="hero-content">
-<h1 class="glow-text">
-We Build AI Software That<br>
-<span class="gradient-text">Gives You an Edge</span>
-</h1>
+      <div class="container hero-grid">
+        <div class="hero-content reveal">
+          <div class="eyebrow">
+            <span class="pulse-dot"></span>
+            Custom AI software for ambitious businesses
+          </div>
 
-<p>
-Custom-built systems. No templates. No fluff.  
-If your business needs automation, scale, or AI — we build it.
-</p>
+          <h1>
+            Build the software your business actually needs.
+          </h1>
 
-<div class="hero-cta">
-<a href="#contact" class="cta-button primary">Start a Project</a>
-<a href="#services" class="cta-button secondary">See Capabilities</a>
-</div>
-</div>
-</section>
+          <p class="hero-subtitle">
+            I help founders, operators, and growing teams turn messy workflows into clean AI-powered systems, dashboards, automations, and web products.
+          </p>
 
-<!-- TRUST BAR -->
-<section class="trust">
-<div class="container">
-<p>Trusted by founders, operators & fast-scaling teams</p>
-</div>
-</section>
+          <div class="hero-actions">
+            <a href="#contact" class="cta-button primary">Discuss Your Project</a>
+            <a href="#services" class="cta-button secondary">View Services</a>
+          </div>
 
-<!-- SERVICES -->
-<section id="services" class="services">
-<div class="container">
+          <div class="hero-proof">
+            <div>
+              <strong>AI-first</strong>
+              <span>Automation, agents & workflows</span>
+            </div>
+            <div>
+              <strong>Custom-built</strong>
+              <span>No generic templates</span>
+            </div>
+            <div>
+              <strong>Business-focused</strong>
+              <span>Built around real operations</span>
+            </div>
+          </div>
+        </div>
 
-<h2>What We Build</h2>
+        <div class="hero-visual reveal delay-1">
+          <div class="ai-card main-ai-card">
+            <div class="card-top">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
 
-<div class="services-grid">
+            <div class="neural-core">
+              <div class="core-ring ring-one"></div>
+              <div class="core-ring ring-two"></div>
+              <div class="core-ring ring-three"></div>
+              <div class="core-center"></div>
+            </div>
 
-<div class="service-card">
-<h3>Custom Software Systems</h3>
-<p>End-to-end platforms tailored to your workflows. Built to scale, not patch.</p>
-</div>
+            <div class="system-lines">
+              <div><span>Lead workflow automation</span><b>98%</b></div>
+              <div><span>AI content engine</span><b>Live</b></div>
+              <div><span>Custom dashboard</span><b>Ready</b></div>
+            </div>
+          </div>
 
-<div class="service-card">
-<h3>AI & Automation</h3>
-<p>Replace manual work with intelligent systems — from chatbots to decision engines.</p>
-</div>
+          <div class="floating-chip chip-one">AI Agents</div>
+          <div class="floating-chip chip-two">Dashboards</div>
+          <div class="floating-chip chip-three">Automation</div>
+        </div>
+      </div>
+    </section>
 
-<div class="service-card">
-<h3>Internal Tools</h3>
-<p>Dashboards, CRMs, ops systems — built exactly for your business logic.</p>
-</div>
+    <section class="credibility-strip">
+      <div class="container credibility-grid">
+        <div>
+          <span>Built for</span>
+          <strong>Founders</strong>
+        </div>
+        <div>
+          <span>Useful for</span>
+          <strong>Operations Teams</strong>
+        </div>
+        <div>
+          <span>Focused on</span>
+          <strong>Speed + Clarity</strong>
+        </div>
+        <div>
+          <span>Powered by</span>
+          <strong>AI + Software</strong>
+        </div>
+      </div>
+    </section>
 
-<div class="service-card">
-<h3>Rapid MVP Builds</h3>
-<p>Go from idea → working product in weeks, not months.</p>
-</div>
+    <section id="services" class="services section-padding">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="section-kicker">Services</span>
+          <h2>What I can build for you</h2>
+          <p>
+            Whether you need a business tool, AI workflow, customer portal, internal dashboard, or MVP — I can help convert the idea into a working product.
+          </p>
+        </div>
 
-</div>
-</div>
-</section>
+        <div class="services-grid">
+          <article class="service-card reveal">
+            <div class="service-icon">01</div>
+            <h3>Custom Software Development</h3>
+            <p>Web apps, portals, dashboards, CRMs, admin panels, and workflow systems built around your exact business process.</p>
+          </article>
 
-<!-- DIFFERENT -->
-<section class="why-us">
-<div class="container">
+          <article class="service-card reveal delay-1">
+            <div class="service-icon">02</div>
+            <h3>AI Automation Systems</h3>
+            <p>Automate repetitive work using AI agents, document processing, lead qualification, content workflows, and smart assistants.</p>
+          </article>
 
-<h2>Why People Work With Us</h2>
+          <article class="service-card reveal delay-2">
+            <div class="service-icon">03</div>
+            <h3>MVP & Product Builds</h3>
+            <p>Turn an idea into a polished first version that can be shown to customers, investors, or internal teams.</p>
+          </article>
 
-<div class="reasons-grid">
+          <article class="service-card reveal delay-3">
+            <div class="service-icon">04</div>
+            <h3>Dashboards & Internal Tools</h3>
+            <p>Centralize business data, track operations, manage teams, monitor leads, and make decisions faster.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<div class="reason-item">
-<h3>Speed + Quality</h3>
-<p>We ship fast — without cutting corners.</p>
-</div>
+    <section id="tools" class="tools section-padding">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="section-kicker">Tools</span>
+          <h2>Live tools and experiments</h2>
+          <p>
+            I do not just talk about software. I build, test, and ship real tools.
+          </p>
+        </div>
 
-<div class="reason-item">
-<h3>No Templates</h3>
-<p>Everything is built specifically for your business.</p>
-</div>
+        <div class="tools-grid">
+          <article class="tool-card reveal">
+            <div>
+              <span class="tool-badge">Live</span>
+              <h3>WhatsApp Sender</h3>
+              <p>A practical communication tool designed to make outreach and WhatsApp-based workflows easier.</p>
+            </div>
+            <a href="https://whatsapp-sender.vercel.app" target="_blank" rel="noopener" class="tool-link">Try Tool →</a>
+          </article>
 
-<div class="reason-item">
-<h3>Founder Mindset</h3>
-<p>We think like operators, not just developers.</p>
-</div>
+          <article class="tool-card reveal delay-1">
+            <div>
+              <span class="tool-badge muted">Coming Soon</span>
+              <h3>Voice Rating</h3>
+              <p>An upcoming AI-assisted tool for collecting and analyzing voice-based feedback.</p>
+            </div>
+            <a href="javascript:void(0)" class="tool-link disabled" onclick="alert('Voice Rating is coming soon!')">Coming Soon</a>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<div class="reason-item">
-<h3>AI First Approach</h3>
-<p>We design systems that leverage AI from day one.</p>
-</div>
+    <section id="why-us" class="why-us section-padding">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="section-kicker">Why work with me</span>
+          <h2>Your homepage should prove capability. So should your software.</h2>
+          <p>
+            I combine business understanding with AI-first development so the final product is useful, clean, and commercially sensible.
+          </p>
+        </div>
 
-</div>
-</div>
-</section>
+        <div class="reasons-grid">
+          <div class="reason-item reveal">
+            <h3>Business-first thinking</h3>
+            <p>I focus on the workflow, user journey, and outcome before writing code.</p>
+          </div>
 
-<!-- CONTACT -->
-<section id="contact" class="contact">
-<div class="container">
+          <div class="reason-item reveal delay-1">
+            <h3>Modern AI aesthetic</h3>
+            <p>Clean, premium interfaces that make your product feel credible from the first click.</p>
+          </div>
 
-<h2>Let’s Build Something</h2>
-<p class="section-subtitle">Tell me what you're trying to build. I'll tell you how to do it better.</p>
+          <div class="reason-item reveal delay-2">
+            <h3>Fast execution</h3>
+            <p>Ideal for MVPs, internal tools, proof-of-concepts, and automation ideas that need speed.</p>
+          </div>
 
-<form class="contact-form" id="contactForm">
+          <div class="reason-item reveal delay-3">
+            <h3>Built for real use</h3>
+            <p>Not demo-only pages. Systems are designed for actual business operations and future scale.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<input type="text" placeholder="Your Name" required>
-<input type="email" placeholder="Your Email" required>
-<textarea placeholder="What do you want to build?" required></textarea>
+    <section class="process section-padding">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="section-kicker">Process</span>
+          <h2>From idea to working system</h2>
+        </div>
 
-<button type="submit" class="cta-button primary">Send Message</button>
+        <div class="process-grid">
+          <div class="process-step reveal">
+            <span>1</span>
+            <h3>Understand</h3>
+            <p>We map your workflow, users, pain points, and business objective.</p>
+          </div>
 
-</form>
-</div>
-</section>
+          <div class="process-step reveal delay-1">
+            <span>2</span>
+            <h3>Design</h3>
+            <p>I structure the product, screens, database, and automation logic.</p>
+          </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-<div class="container">
-<p>© 2026 Top AI Tool Rank</p>
-</div>
-</footer>
+          <div class="process-step reveal delay-2">
+            <span>3</span>
+            <h3>Build</h3>
+            <p>The software is developed with a clean interface and scalable architecture.</p>
+          </div>
 
+          <div class="process-step reveal delay-3">
+            <span>4</span>
+            <h3>Improve</h3>
+            <p>We test, refine, and prepare it for real users or internal deployment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact section-padding">
+      <div class="container contact-grid">
+        <div class="contact-copy reveal">
+          <span class="section-kicker">Start a project</span>
+          <h2>Have a software idea or automation requirement?</h2>
+          <p>
+            Send a short message with what you want to build. It can be rough. I’ll help you shape it into a clear system.
+          </p>
+
+          <div class="contact-points">
+            <div>✓ Custom software requirements</div>
+            <div>✓ AI automation ideas</div>
+            <div>✓ MVP or internal dashboard builds</div>
+          </div>
+        </div>
+
+        <form class="contact-form reveal delay-1" id="contactForm">
+          <div class="form-group">
+            <input type="text" id="name" name="name" placeholder="Your Name" required />
+          </div>
+
+          <div class="form-group">
+            <input type="email" id="email" name="email" placeholder="Your Email" required />
+          </div>
+
+          <div class="form-group">
+            <textarea id="message" name="message" placeholder="Tell me what you want to build" rows="5" required></textarea>
+          </div>
+
+          <button type="submit" class="cta-button primary" id="submitBtn">Send Message</button>
+          <p id="formStatus"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>
+        <h4>Top AI Tool Rank</h4>
+        <p>Custom AI software, automation systems, dashboards, and business tools.</p>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#tools">Tools</a></li>
+          <li><a href="/blogs/">Blogs</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="/terms.html">Terms of Service</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <p><a href="mailto:contact@topaitoolrank.com">contact@topaitoolrank.com</a></p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Top AI Tool Rank. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("navMenu");
+
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("active");
+      navMenu.classList.toggle("active");
+    });
+
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", () => {
+        hamburger.classList.remove("active");
+        navMenu.classList.remove("active");
+      });
+    });
+
+    const revealItems = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: 0.12 });
+
+    revealItems.forEach(item => revealObserver.observe(item));
+
+    const canvas = document.getElementById("canvas-3d");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = document.querySelector(".hero").offsetHeight;
+      createParticles();
+    }
+
+    function createParticles() {
+      particles = [];
+      const count = Math.min(90, Math.floor(window.innerWidth / 18));
+
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          z: Math.random() * 2 + 0.5,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          radius: Math.random() * 2 + 1
+        });
+      }
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      gradient.addColorStop(0, "rgba(40, 120, 255, 0.12)");
+      gradient.addColorStop(1, "rgba(0, 210, 255, 0.08)");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach((p, i) => {
+        p.x += p.vx * p.z;
+        p.y += p.vy * p.z;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius * p.z, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(35, 112, 255, 0.35)";
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const q = particles[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 130) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(14, 165, 233, ${0.16 * (1 - distance / 130)})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      });
+
+      requestAnimationFrame(drawParticles);
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    drawParticles();
+  </script>
 </body>
 </html>
