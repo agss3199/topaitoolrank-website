@@ -67,16 +67,17 @@ window.addEventListener('scroll', () => {
 });
 
 // Discord Webhook Contact Form Integration
-document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.getElementById('contactForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const formStatus = document.getElementById('formStatus');
+// NOTE: This runs after DOMContentLoaded has already fired (script loaded at end of body)
+// so we don't wrap in DOMContentLoaded event listener
+const contactForm = document.getElementById('contactForm');
+const submitBtn = document.getElementById('submitBtn');
+const formStatus = document.getElementById('formStatus');
 
-    // Replace with your Discord webhook URL
-    const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1498899447621484695/XHuvCQ3ekVJxPDnQlZtz8VKE8ebj4appxuVQQeTaLyv1Xkepg18nckK1S7EJ-n1H43rM';
+// Replace with your Discord webhook URL
+const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1498899447621484695/XHuvCQ3ekVJxPDnQlZtz8VKE8ebj4appxuVQQeTaLyv1Xkepg18nckK1S7EJ-n1H43rM';
 
-    if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             // Get form values
@@ -174,7 +175,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-});
 
 // Active nav link highlight on scroll
 window.addEventListener('scroll', () => {
