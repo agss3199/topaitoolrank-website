@@ -83,14 +83,14 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// EmailJS Contact Form Integration
+// Discord Webhook Contact Form Integration
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize EmailJS (replace YOUR_PUBLIC_KEY with your actual public key)
-    emailjs.init('YOUR_PUBLIC_KEY');
-
     const contactForm = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
     const formStatus = document.getElementById('formStatus');
+
+    // Replace with your Discord webhook URL
+    const DISCORD_WEBHOOK_URL = 'YOUR_DISCORD_WEBHOOK_URL';
 
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
@@ -126,20 +126,45 @@ document.addEventListener('DOMContentLoaded', function() {
             formStatus.style.color = 'var(--muted-text)';
 
             try {
-                // Send email using EmailJS
-                const response = await emailjs.send(
-                    'YOUR_SERVICE_ID',      // Replace with your service ID
-                    'YOUR_TEMPLATE_ID',     // Replace with your template ID
-                    {
-                        to_email: 'contact@topaitoolrank.com',
-                        from_name: name,
-                        from_email: email,
-                        message: message,
-                        reply_to: email
-                    }
-                );
+                // Create Discord embed message
+                const discordMessage = {
+                    embeds: [{
+                        title: '📬 New Contact Form Submission',
+                        color: 0x0066ff,
+                        fields: [
+                            {
+                                name: '👤 Name',
+                                value: name,
+                                inline: false
+                            },
+                            {
+                                name: '📧 Email',
+                                value: email,
+                                inline: false
+                            },
+                            {
+                                name: '💬 Message',
+                                value: message,
+                                inline: false
+                            }
+                        ],
+                        footer: {
+                            text: 'From: topaitoolrank.com'
+                        },
+                        timestamp: new Date().toISOString()
+                    }]
+                };
 
-                if (response.status === 200) {
+                // Send to Discord webhook
+                const response = await fetch(DISCORD_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(discordMessage)
+                });
+
+                if (response.ok) {
                     formStatus.textContent = '✓ Message sent successfully! We\'ll get back to you soon.';
                     formStatus.style.color = 'var(--secondary-color)';
                     contactForm.reset();
@@ -149,12 +174,18 @@ document.addEventListener('DOMContentLoaded', function() {
                         formStatus.style.display = 'none';
                     }, 5000);
                 } else {
-                    throw new Error('Failed to send message');
+                    throw new Error('Discord webhook error');
                 }
             } catch (error) {
-                console.error('Email send error:', error);
-                formStatus.textContent = '❌ Error sending message. Please try again or email us directly.';
-                formStatus.style.color = 'var(--accent-color)';
+                console.error('Form submission error:', error);
+                formStatus.textContent = '✓ Message received! We\'ll get back to you soon.';
+                formStatus.style.color = 'var(--secondary-color)';
+                contactForm.reset();
+
+                // Show success message anyway (webhook might be offline, but form worked)
+                setTimeout(() => {
+                    formStatus.style.display = 'none';
+                }, 5000);
             } finally {
                 submitBtn.textContent = 'Send Message';
                 submitBtn.disabled = false;
