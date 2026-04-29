@@ -30,7 +30,13 @@
       "Bash(vercel:*)",
       "Bash(git clone:*)",
       "Read(//tmp/**)",
-      "Bash(git commit -m 'feat: add Supabase auth + persistent storage with sheet data bug fix:*)"
+      "Bash(git commit -m 'feat: add Supabase auth + persistent storage with sheet data bug fix:*)",
+      "Bash(npm install:*)",
+      "Bash(git commit -m 'fix: add @supabase/supabase-js dependency:*)",
+      "Bash(npm run:*)",
+      "Bash(git commit -m 'fix: resolve '\\\\''next'\\\\'' button not advancing to next number:*)",
+      "Bash(ls -la /c/Users/MONICA/Desktop/Abhishek_Softwares_All_old/Top_AI_Tool_Rank/*.ts /c/Users/MONICA/Desktop/Abhishek_Softwares_All_old/Top_AI_Tool_Rank/*.tsx)",
+      "Bash(git commit -m ':*)"
     ]
   }
 }

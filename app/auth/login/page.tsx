@@ -46,9 +46,22 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-cyan-50 p-4">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+      <div className="w-full max-w-lg bg-white rounded-lg shadow-lg p-8">
         <h1 className="text-3xl font-bold mb-2 text-center text-blue-600">WA Sender</h1>
-        <p className="text-center text-gray-600 mb-8">Log in to your account</p>
+        <p className="text-center text-gray-600 mb-6">Send bulk WhatsApp & Email messages from Excel</p>
+
+        {/* Instructions Section */}
+        <div className="mb-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+          <h2 className="text-sm font-semibold text-blue-900 mb-3">How to Use:</h2>
+          <ol className="text-xs text-gray-700 space-y-2">
+            <li><strong>1. Prepare Excel file:</strong> Include a column with phone numbers or emails. Headers like "Phone", "Mobile", "Number", "Email" are auto-detected.</li>
+            <li><strong>2. Upload file:</strong> After login, click the upload area and select your .xlsx or .xls file.</li>
+            <li><strong>3. Verify columns:</strong> Confirm which column has phone/email numbers. You can override if needed.</li>
+            <li><strong>4. Set country code:</strong> Choose the default country code (e.g., +91 for India). Row-specific codes in Excel will override this.</li>
+            <li><strong>5. Write message:</strong> Enter your WhatsApp message or email subject/body.</li>
+            <li><strong>6. Send:</strong> Click "Open WhatsApp" or "Open Gmail" for each contact. Already-sent contacts are skipped automatically.</li>
+          </ol>
+        </div>
 
         {error && (
           <div className="mb-4 p-3 bg-red-100 border border-red-300 rounded text-red-700 text-sm">

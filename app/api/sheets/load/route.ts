@@ -9,6 +9,10 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'User ID required' }, { status: 400 });
     }
 
+    if (typeof userId !== 'string' || userId.length < 10) {
+      return NextResponse.json({ error: 'Invalid User ID' }, { status: 400 });
+    }
+
     const { data: session, error } = await supabaseAdmin
       .from('wa_sender_sessions')
       .select('*')
@@ -17,6 +21,7 @@ export async function GET(req: NextRequest) {
 
     if (error && error.code !== 'PGRST116') {
       // PGRST116 = not found, which is ok
+      console.error('Load session error:', error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 

@@ -3,10 +3,15 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   try {
-    const { userId, sheet_data, send_mode, country_code, message_template, current_sheet_name, current_index } = await req.json();
+    const { userId, sheet_data, send_mode, country_code, message_template, current_sheet_name, current_index, sent_status } = await req.json();
 
     if (!userId) {
       return NextResponse.json({ error: 'User ID required' }, { status: 400 });
+    }
+
+    // Validate userId is a valid UUID (basic check)
+    if (typeof userId !== 'string' || userId.length < 10) {
+      return NextResponse.json({ error: 'Invalid User ID' }, { status: 400 });
     }
 
     // Check if session exists
@@ -27,11 +32,13 @@ export async function POST(req: NextRequest) {
           message_template,
           current_sheet_name,
           current_index,
+          sent_status: sent_status || {},
           updated_at: new Date().toISOString(),
         })
         .eq('user_id', userId);
 
       if (error) {
+        console.error('Update session error:', error);
         return NextResponse.json({ error: error.message }, { status: 500 });
       }
     } else {
@@ -46,9 +53,11 @@ export async function POST(req: NextRequest) {
           message_template,
           current_sheet_name,
           current_index,
+          sent_status: sent_status || {},
         });
 
       if (error) {
+        console.error('Insert session error:', error);
         return NextResponse.json({ error: error.message }, { status: 500 });
       }
     }
