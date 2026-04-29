@@ -45,71 +45,133 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-cyan-50 p-4">
-      <div className="w-full max-w-lg bg-white rounded-lg shadow-lg p-8">
-        <h1 className="text-3xl font-bold mb-2 text-center text-blue-600">WA Sender</h1>
-        <p className="text-center text-gray-600 mb-6">Send bulk WhatsApp & Email messages from Excel</p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden flex items-center justify-center p-4">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+      </div>
 
-        {/* Instructions Section */}
-        <div className="mb-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-          <h2 className="text-sm font-semibold text-blue-900 mb-3">How to Use:</h2>
-          <ol className="text-xs text-gray-700 space-y-2 list-decimal list-inside">
-            <li><strong>Prepare Excel file:</strong> Include a column with phone numbers or emails. Headers like "Phone", "Mobile", "Number", "Email" are auto-detected.</li>
-            <li><strong>Upload file:</strong> After login, click the upload area and select your .xlsx or .xls file.</li>
-            <li><strong>Verify columns:</strong> Confirm which column has phone/email numbers. You can override if needed.</li>
-            <li><strong>Set country code:</strong> Choose the default country code (e.g., +91 for India). Row-specific codes in Excel will override this.</li>
-            <li><strong>Write message:</strong> Enter your WhatsApp message or email subject/body.</li>
-            <li><strong>Send:</strong> Click "Open WhatsApp" or "Open Gmail" for each contact. Already-sent contacts are skipped automatically.</li>
-          </ol>
+      <div className="relative z-10 w-full max-w-md">
+        <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-8 hover:border-white/40 transition-all duration-300">
+          {/* Header */}
+          <div className="mb-8 text-center">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl mb-4">
+              <span className="text-white font-bold text-lg">WA</span>
+            </div>
+            <h1 className="text-3xl font-bold text-white mb-2">WA Sender</h1>
+            <p className="text-white/60">Bulk WhatsApp & Email from Excel</p>
+          </div>
+
+          {error && (
+            <div className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-200 text-sm backdrop-blur">
+              <div className="flex items-start gap-2">
+                <span className="text-lg">⚠️</span>
+                <div>{error}</div>
+              </div>
+            </div>
+          )}
+
+          {/* Instructions */}
+          <div className="mb-8 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg backdrop-blur">
+            <h2 className="text-sm font-semibold text-blue-200 mb-3 flex items-center gap-2">
+              <span className="text-lg">📋</span> Quick Start
+            </h2>
+            <ol className="text-xs text-blue-100/90 space-y-2 list-decimal list-inside">
+              <li><strong>Prepare Excel:</strong> Phone/Email columns auto-detected</li>
+              <li><strong>Upload & Verify:</strong> Confirm or override columns</li>
+              <li><strong>Set Defaults:</strong> Country code (per-row override works)</li>
+              <li><strong>Write Message:</strong> WhatsApp text or Email body</li>
+              <li><strong>Send:</strong> One click per contact, auto-tracks sent</li>
+            </ol>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-white/80 mb-2">Email Address</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all duration-200"
+                placeholder="you@example.com"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-white/80 mb-2">Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all duration-200"
+                placeholder="••••••••"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/50 hover:-translate-y-1 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none"
+            >
+              {loading ? (
+                <span className="flex items-center justify-center gap-2">
+                  <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                  Logging in...
+                </span>
+              ) : (
+                'Sign In'
+              )}
+            </button>
+          </form>
+
+          {/* Divider */}
+          <div className="my-6 flex items-center gap-4">
+            <div className="flex-1 h-px bg-white/10"></div>
+            <span className="text-white/40 text-xs">OR</span>
+            <div className="flex-1 h-px bg-white/10"></div>
+          </div>
+
+          {/* Sign up link */}
+          <p className="text-center text-white/60 text-sm">
+            No account yet?{' '}
+            <Link href="/auth/signup" className="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors">
+              Create one
+            </Link>
+          </p>
+
+          {/* Footer note */}
+          <p className="text-center text-white/40 text-xs mt-6">
+            🔒 Your data is encrypted and stored securely
+          </p>
         </div>
 
-        {error && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-300 rounded text-red-700 text-sm">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="you@example.com"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="••••••••"
-            />
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 transition"
-          >
-            {loading ? 'Logging in...' : 'Log In'}
-          </button>
-        </form>
-
-        <p className="text-center text-gray-600 mt-6">
-          No account yet?{' '}
-          <Link href="/auth/signup" className="text-blue-600 hover:underline font-medium">
-            Sign up
-          </Link>
-        </p>
+        {/* Bottom accent */}
+        <div className="mt-6 text-center text-white/40 text-xs">
+          <p>WA Sender v1.0 • Built with Next.js & Supabase</p>
+        </div>
       </div>
+
+      <style jsx>{`
+        @keyframes blob {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+      `}</style>
     </div>
   );
 }

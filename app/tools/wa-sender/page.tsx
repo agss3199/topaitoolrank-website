@@ -168,74 +168,74 @@ function ColumnConfirmationModal({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
-        <h2 className="text-xl font-bold mb-4 text-gray-800">Confirm Column Selection</h2>
-        <p className="text-sm text-gray-600 mb-6">Please confirm which columns contain your contact information:</p>
+    <div className="fixed inset-0 bg-black/60 backdrop-blur flex items-center justify-center p-4 z-50">
+      <div className="bg-gradient-to-br from-slate-900 to-slate-800 border border-white/20 rounded-2xl shadow-2xl max-w-md w-full p-8">
+        <h2 className="text-2xl font-bold text-white mb-2">Column Detection</h2>
+        <p className="text-white/60 text-sm mb-6">Confirm which columns contain your data:</p>
 
-        <div className="space-y-4">
+        <div className="space-y-5">
           {mode === 'whatsapp' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number Column</label>
+              <label className="block text-sm font-medium text-white/80 mb-2">📱 Phone Number Column</label>
               <select
                 value={selectedPhone}
                 onChange={(e) => setSelectedPhone(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all"
               >
-                <option value="">Select...</option>
+                <option value="">Select column...</option>
                 {allHeaders.map(h => (
                   <option key={h} value={h}>{h}</option>
                 ))}
               </select>
               {detectedPhoneCol && (
-                <p className="text-xs text-gray-500 mt-1">🔍 Auto-detected: {detectedPhoneCol}</p>
+                <p className="text-xs text-blue-300 mt-2">✨ Auto-detected: <span className="font-semibold">{detectedPhoneCol}</span></p>
               )}
             </div>
           )}
 
           {mode === 'email' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Email Column</label>
+              <label className="block text-sm font-medium text-white/80 mb-2">📧 Email Column</label>
               <select
                 value={selectedEmail}
                 onChange={(e) => setSelectedEmail(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all"
               >
-                <option value="">Select...</option>
+                <option value="">Select column...</option>
                 {allHeaders.map(h => (
                   <option key={h} value={h}>{h}</option>
                 ))}
               </select>
               {detectedEmailCol && (
-                <p className="text-xs text-gray-500 mt-1">🔍 Auto-detected: {detectedEmailCol}</p>
+                <p className="text-xs text-blue-300 mt-2">✨ Auto-detected: <span className="font-semibold">{detectedEmailCol}</span></p>
               )}
             </div>
           )}
 
           {mode === 'whatsapp' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Country Code Column (Optional)</label>
+              <label className="block text-sm font-medium text-white/80 mb-2">🌐 Country Code Column <span className="text-white/40 font-normal">(optional)</span></label>
               <select
                 value={selectedCC}
                 onChange={(e) => setSelectedCC(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all"
               >
-                <option value="">None - Use default for all rows</option>
+                <option value="">Use default for all rows</option>
                 {allHeaders.map(h => (
                   <option key={h} value={h}>{h}</option>
                 ))}
               </select>
               {detectedCountryCodeCol && (
-                <p className="text-xs text-gray-500 mt-1">🔍 Auto-detected: {detectedCountryCodeCol}</p>
+                <p className="text-xs text-blue-300 mt-2">✨ Auto-detected: <span className="font-semibold">{detectedCountryCodeCol}</span></p>
               )}
             </div>
           )}
         </div>
 
-        <div className="flex gap-3 mt-6">
+        <div className="flex gap-3 mt-8">
           <button
             onClick={onCancel}
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+            className="flex-1 px-4 py-2 border border-white/20 rounded-lg text-white/80 hover:bg-white/10 hover:text-white transition-all"
           >
             Cancel
           </button>
@@ -247,7 +247,7 @@ function ColumnConfirmationModal({
               onConfirm(phoneCol, emailCol, ccCol);
             }}
             disabled={mode === 'whatsapp' ? !selectedPhone && !detectedPhoneCol : !selectedEmail && !detectedEmailCol}
-            className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+            className="flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:shadow-lg hover:shadow-blue-500/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium"
           >
             Confirm
           </button>
@@ -543,165 +543,239 @@ export default function WASenderPage() {
   if (!session) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 p-6">
-      <div className="max-w-2xl mx-auto">
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="text-3xl font-bold text-blue-600">WA Sender</h1>
-            <button
-              onClick={() => {
-                localStorage.clear();
-                router.push('/auth/login');
-              }}
-              className="text-sm text-gray-600 hover:text-red-600"
-            >
-              Logout
-            </button>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 p-6">
+      {/* Background animations */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+      </div>
 
-          {notice && (
-            <div className={`mb-4 p-4 rounded ${notice.kind === 'error' ? 'bg-red-100 text-red-700' : notice.kind === 'success' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'}`}>
-              {notice.text}
+      <div className="relative z-10 max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h1 className="text-4xl font-bold text-white mb-1">WA Sender</h1>
+            <p className="text-white/60">Bulk messaging from Excel</p>
+          </div>
+          <button
+            onClick={() => {
+              localStorage.clear();
+              router.push('/auth/login');
+            }}
+            className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white/80 hover:text-white transition-all duration-200"
+          >
+            Logout
+          </button>
+        </div>
+
+        {/* Notifications */}
+        {notice && (
+          <div className={`mb-6 p-4 rounded-lg backdrop-blur border transition-all duration-300 ${
+            notice.kind === 'error'
+              ? 'bg-red-500/20 border-red-500/50 text-red-200'
+              : notice.kind === 'success'
+              ? 'bg-green-500/20 border-green-500/50 text-green-200'
+              : 'bg-blue-500/20 border-blue-500/50 text-blue-200'
+          }`}>
+            <div className="flex items-start gap-3">
+              <span className="text-lg">{notice.kind === 'error' ? '⚠️' : notice.kind === 'success' ? '✅' : 'ℹ️'}</span>
+              <span className="flex-1">{notice.text}</span>
             </div>
-          )}
-
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Upload Excel File</label>
-            <input
-              ref={fileInputRef}
-              type="file"
-              id="file-upload"
-              accept=".xlsx,.xls"
-              onChange={handleFileUpload}
-              disabled={isLoading}
-              className="hidden"
-            />
-            <label
-              htmlFor="file-upload"
-              className="block border-2 border-dashed border-blue-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-500 transition"
-            >
-              <p className="text-gray-700 font-medium">Tap to upload .xlsx or .xls</p>
-            </label>
           </div>
+        )}
 
-          {sheets.length > 0 && (
-            <>
-              <div className="mb-6 p-4 bg-blue-50 rounded-lg">
-                <p className="text-sm text-gray-700">
-                  {total > 0 ? `Recipient ${position} of ${total} (${sentCount} sent)` : 'No valid recipients'}
-                </p>
-              </div>
+        {/* File Upload */}
+        <div className="mb-8">
+          <label className="block text-sm font-medium text-white/80 mb-3">Upload Excel File</label>
+          <input
+            ref={fileInputRef}
+            type="file"
+            id="file-upload"
+            accept=".xlsx,.xls"
+            onChange={handleFileUpload}
+            disabled={isLoading}
+            className="hidden"
+          />
+          <label
+            htmlFor="file-upload"
+            className="block border-2 border-dashed border-blue-500/50 hover:border-blue-500 rounded-xl p-12 text-center cursor-pointer hover:bg-blue-500/5 transition-all duration-200 group"
+          >
+            <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">📁</div>
+            <p className="text-white font-medium mb-1">Drop your Excel file here</p>
+            <p className="text-white/50 text-sm">or click to select (.xlsx, .xls)</p>
+          </label>
+        </div>
 
-              <div className="space-y-4 mb-6">
+        {sheets.length > 0 && (
+          <>
+            {/* Stats Bar */}
+            <div className="mb-8 p-4 bg-white/10 border border-white/20 rounded-lg backdrop-blur">
+              <div className="flex items-center justify-between">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Mode</label>
-                  <select
-                    value={mode}
-                    onChange={(e) => setMode(e.target.value as SendMode)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                  >
-                    <option value="whatsapp">WhatsApp</option>
-                    <option value="email">Email</option>
-                  </select>
+                  <p className="text-white/60 text-sm">Progress</p>
+                  <p className="text-2xl font-bold text-white">
+                    {total > 0 ? `${position}/${total}` : '0'} <span className="text-lg text-green-400">{sentCount > 0 ? `✓ ${sentCount} sent` : ''}</span>
+                  </p>
                 </div>
-
-                {mode === 'whatsapp' ? (
-                  <>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Default Country Code</label>
-                      <input
-                        type="text"
-                        value={countryCode}
-                        onChange={(e) => setCountryCode(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                        placeholder="+91"
-                      />
-                      <p className="text-xs text-gray-500 mt-1">Used for rows without a country code column</p>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                      <textarea
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg h-24"
-                      />
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                      <input
-                        type="text"
-                        value={emailSubject}
-                        onChange={(e) => setEmailSubject(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Body</label>
-                      <textarea
-                        value={emailBody}
-                        onChange={(e) => setEmailBody(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg h-24"
-                      />
-                    </div>
-                  </>
+                {total > 0 && (
+                  <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-green-500 to-cyan-500 transition-all duration-300"
+                      style={{ width: `${(sentCount / total) * 100}%` }}
+                    ></div>
+                  </div>
                 )}
               </div>
+            </div>
 
-              {current && (
-                <div className={`mb-6 p-4 rounded-lg ${current.isSent ? 'bg-green-50 border border-green-200' : 'bg-gray-50 border border-gray-200'}`}>
-                  <p className="text-sm font-medium text-gray-900 mb-1">
-                    {current.kind === 'whatsapp' ? `📱 ${current.normalized}` : `📧 ${current.email}`}
-                    {current.isSent && <span className="ml-2 text-green-600 font-semibold">✓ Sent</span>}
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    Row {current.rowNum} · {current.sheetName}
-                  </p>
+            {/* Settings Grid */}
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-white/80 mb-2">Send Via</label>
+                <div className="flex gap-3">
+                  {['whatsapp', 'email'].map(opt => (
+                    <button
+                      key={opt}
+                      onClick={() => setMode(opt as SendMode)}
+                      className={`flex-1 px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
+                        mode === opt
+                          ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
+                          : 'bg-white/10 border border-white/20 text-white/60 hover:bg-white/20'
+                      }`}
+                    >
+                      {opt === 'whatsapp' ? '💬 WhatsApp' : '📧 Email'}
+                    </button>
+                  ))}
                 </div>
+              </div>
+
+              {mode === 'whatsapp' ? (
+                <>
+                  <div>
+                    <label className="block text-sm font-medium text-white/80 mb-2">Default Country Code</label>
+                    <input
+                      type="text"
+                      value={countryCode}
+                      onChange={(e) => setCountryCode(e.target.value)}
+                      className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all"
+                      placeholder="+91"
+                    />
+                    <p className="text-xs text-white/50 mt-1">Fallback for rows without country code</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-white/80 mb-2">Message</label>
+                    <textarea
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all h-24 resize-none"
+                      placeholder="Type your message here..."
+                    />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">Subject</label>
+                    <input
+                      type="text"
+                      value={emailSubject}
+                      onChange={(e) => setEmailSubject(e.target.value)}
+                      className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all"
+                      placeholder="Email subject..."
+                    />
+                  </div>
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-white/80 mb-2">Message Body</label>
+                    <textarea
+                      value={emailBody}
+                      onChange={(e) => setEmailBody(e.target.value)}
+                      className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all h-24 resize-none"
+                      placeholder="Email body..."
+                    />
+                  </div>
+                </>
               )}
+            </div>
 
-              <div className="flex gap-3 mb-6">
-                <button
-                  onClick={mode === 'whatsapp' ? openWhatsApp : openGmailCompose}
-                  disabled={!current}
-                  className="flex-1 bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50"
-                >
-                  {mode === 'whatsapp' ? 'Open WhatsApp' : 'Open Gmail'}
-                </button>
-                <button
-                  onClick={nextRecipient}
-                  disabled={currentIndex >= recipients.length - 1}
-                  className="flex-1 bg-cyan-600 text-white py-2 rounded-lg font-medium hover:bg-cyan-700 disabled:opacity-50"
-                >
-                  Next
-                </button>
+            {/* Current Contact Card */}
+            {current && (
+              <div className={`mb-8 p-6 rounded-lg backdrop-blur border transition-all duration-200 ${
+                current.isSent
+                  ? 'bg-green-500/10 border-green-500/50'
+                  : 'bg-blue-500/10 border-blue-500/50'
+              }`}>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-3xl">{current.kind === 'whatsapp' ? '📱' : '📧'}</div>
+                  {current.isSent && <div className="text-green-400 font-semibold">✓ Already Sent</div>}
+                </div>
+                <p className="text-white text-lg font-medium mb-1">
+                  {current.kind === 'whatsapp' ? current.normalized : current.email}
+                </p>
+                <p className="text-white/60 text-sm">Row {current.rowNum} • {current.sheetName}</p>
               </div>
+            )}
 
-              <div className="flex gap-2">
-                <input
-                  type="number"
-                  min="1"
-                  max={total}
-                  value={goToInput}
-                  onChange={(e) => setGoToInput(e.target.value)}
-                  placeholder="Go to #"
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg"
-                />
-                <button
-                  onClick={goTo}
-                  className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
-                >
-                  Go
-                </button>
+            {/* Action Buttons */}
+            <div className="space-y-3 mb-8">
+              <button
+                onClick={mode === 'whatsapp' ? openWhatsApp : openGmailCompose}
+                disabled={!current}
+                className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-4 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
+              >
+                {mode === 'whatsapp' ? '📤 Open WhatsApp' : '📤 Open Gmail'} {current?.isSent ? '(Already Sent)' : ''}
+              </button>
+
+              <button
+                onClick={nextRecipient}
+                disabled={currentIndex >= recipients.length - 1}
+                className="w-full bg-white/10 hover:bg-white/20 border border-white/20 text-white py-3 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                ⬇️ Next Contact
+              </button>
+            </div>
+
+            {/* Go To Input */}
+            <div className="flex gap-2 mb-6">
+              <input
+                type="number"
+                min="1"
+                max={total}
+                value={goToInput}
+                onChange={(e) => setGoToInput(e.target.value)}
+                placeholder="Jump to contact #"
+                className="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all"
+              />
+              <button
+                onClick={goTo}
+                className="px-6 py-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-lg font-medium transition-all"
+              >
+                Go
+              </button>
+            </div>
+
+            {isSaving && (
+              <div className="text-center text-white/50 text-sm flex items-center justify-center gap-2">
+                <span className="inline-block w-3 h-3 bg-white/50 rounded-full animate-pulse"></span>
+                Saving session...
               </div>
-
-              {isSaving && <p className="text-xs text-gray-500 text-center mt-4">Saving...</p>}
-            </>
-          )}
-        </div>
+            )}
+          </>
+        )}
       </div>
+
+      <style jsx>{`
+        @keyframes blob {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+      `}</style>
 
       {columnConfirmModal.open && columnConfirmModal.data && (
         <ColumnConfirmationModal
