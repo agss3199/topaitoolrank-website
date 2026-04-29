@@ -501,21 +501,22 @@ a {
   color: var(--primary-color);
   font-weight: 850;
   font-size: 0.9rem;
+  z-index: 10;
 }
 
 .chip-one {
   top: 76px;
-  left: 8px;
+  right: 180px;
 }
 
 .chip-two {
-  right: 6px;
+  right: 12px;
   top: 164px;
 }
 
 .chip-three {
   bottom: 72px;
-  left: 34px;
+  right: 120px;
 }
 
 .credibility-strip {

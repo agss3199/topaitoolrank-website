@@ -16,7 +16,8 @@
       "Bash(grep -n \"^[^}]*{[^}]*$\" css/style.css)",
       "Bash(npx html-validate:*)",
       "Bash(npx --yes html-validate index.html)",
-      "Bash(git commit -m 'fix: resolve 24 HTML validation errors:*)"
+      "Bash(git commit -m 'fix: resolve 24 HTML validation errors:*)",
+      "Bash(git commit -m 'fix: reposition floating chips to prevent text overlap:*)"
     ]
   }
 }
