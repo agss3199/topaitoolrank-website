@@ -315,8 +315,7 @@ export default function WASenderPage() {
   const nextRecipient = useCallback(() => {
     setCurrentIndex(prev => clamp(prev + 1, 0, recipients.length - 1));
     setGoToInput('');
-    saveSession(sheets, mode, countryCode, message, currentIndex + 1);
-  }, [current, recipients.length, openWhatsApp, openGmailCompose, sheets, mode, countryCode, message, currentIndex, saveSession]);
+  }, [recipients.length]);
 
   const goTo = useCallback(() => {
     const n = parseInt(goToInput, 10);
@@ -326,8 +325,7 @@ export default function WASenderPage() {
     }
     setCurrentIndex(n - 1);
     setGoToInput('');
-    saveSession(sheets, mode, countryCode, message, n - 1);
-  }, [goToInput, recipients.length, sheets, mode, countryCode, message, saveSession]);
+  }, [goToInput, recipients.length]);
 
   const total = recipients.length;
   const position = total > 0 ? currentIndex + 1 : 0;
