@@ -11,7 +11,12 @@
       "Bash(git commit -m 'feat: replace Formspree with free EmailJS integration:*)",
       "Bash(git push:*)",
       "Bash(git pull:*)",
-      "Bash(git commit -m 'feat: switch to Discord webhook for contact form \\(no email/signup needed\\):*)"
+      "Bash(git commit -m 'feat: switch to Discord webhook for contact form \\(no email/signup needed\\):*)",
+      "Bash(node -e \"const fs = require\\('fs'\\); try { JSON.parse\\(fs.readFileSync\\('index.html', 'utf8'\\)\\); } catch\\(e\\) { console.log\\('HTML parse error'\\); }\")",
+      "Bash(grep -n \"^[^}]*{[^}]*$\" css/style.css)",
+      "Bash(npx html-validate:*)",
+      "Bash(npx --yes html-validate index.html)",
+      "Bash(git commit -m 'fix: resolve 24 HTML validation errors:*)"
     ]
   }
 }
