@@ -543,14 +543,14 @@ export default function WASenderPage() {
   if (!session) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 px-4 sm:px-6">
+    <div className="min-h-screen w-full bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 flex flex-col items-center justify-start px-4 sm:px-6">
       {/* Background animations */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto py-12 flex flex-col items-center">
+      <div className="relative z-10 w-full max-w-6xl py-12 flex flex-col items-center">
         {/* Header - Centered */}
         <div className="text-center mb-12 w-full">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 mb-4 shadow-lg shadow-blue-500/50">
@@ -589,7 +589,7 @@ export default function WASenderPage() {
         )}
 
         {/* File Upload - Centered */}
-        <div className="mb-12 w-full max-w-2xl mx-auto">
+        <div className="mb-12 w-full max-w-2xl">
           <label className="block text-sm font-semibold text-white/70 mb-4 uppercase tracking-wider text-center">
             📊 Step 1: Upload Your Data
           </label>
@@ -614,7 +614,7 @@ export default function WASenderPage() {
         </div>
 
         {sheets.length > 0 && (
-          <div className="w-full max-w-4xl mx-auto">
+          <div className="w-full max-w-4xl">
             {/* Stats Bar - Centered */}
             <div className="mb-12 p-6 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/30 rounded-2xl backdrop-blur">
               <div className="space-y-4">
@@ -758,7 +758,7 @@ export default function WASenderPage() {
             </div>
 
             {/* Go To Input - Centered */}
-            <div className="flex gap-3 mb-8 max-w-md mx-auto">
+            <div className="flex gap-3 mb-8 max-w-md">
               <input
                 type="number"
                 min="1"
