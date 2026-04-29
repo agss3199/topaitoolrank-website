@@ -59,15 +59,20 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in-up');
+            entry.target.classList.add('visible');
             observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-// Observe all fade-in-up elements
-document.querySelectorAll('.fade-in-up').forEach(el => {
-    el.style.opacity = '0';
+// Observe all reveal elements
+document.querySelectorAll('.reveal').forEach(el => {
+    observer.observe(el);
+});
+
+// Also observe section headings and content for animation
+document.querySelectorAll('section h2, section p, .service-card, .why-item').forEach(el => {
+    el.classList.add('reveal');
     observer.observe(el);
 });
 
