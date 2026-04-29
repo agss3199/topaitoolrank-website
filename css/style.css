@@ -291,17 +291,12 @@ a {
 .hero h1 {
   max-width: 760px;
   font-size: clamp(3rem, 6.4vw, 6.5rem);
-  line-height: 0.95;
+  line-height: 1.1;
   letter-spacing: -0.075em;
   color: var(--dark-text);
   margin-bottom: 24px;
-}
-
-.hero h1::first-line {
-  background: linear-gradient(135deg, #08111f, #2563eb 62%, #06b6d4);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  position: relative;
+  z-index: 5;
 }
 
 .hero-subtitle {
