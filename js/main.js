@@ -77,13 +77,16 @@ const formStatus = document.getElementById('formStatus');
 const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1498899447621484695/XHuvCQ3ekVJxPDnQlZtz8VKE8ebj4appxuVQQeTaLyv1Xkepg18nckK1S7EJ-n1H43rM';
 
 if (contactForm) {
+    console.log('✓ Form element found, attaching submit handler');
     contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            console.log('✓ Form submitted, preventing default');
 
             // Get form values
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const message = document.getElementById('message').value.trim();
+            console.log('Form values:', { name, email, messageLength: message.length });
 
             // Validate form
             if (!name || !email || !message) {
@@ -140,6 +143,10 @@ if (contactForm) {
                 };
 
                 // Send to Discord webhook
+                console.log('Sending to Discord webhook...');
+                console.log('Webhook URL:', DISCORD_WEBHOOK_URL.substring(0, 50) + '...');
+                console.log('Message payload:', JSON.stringify(discordMessage, null, 2));
+
                 const response = await fetch(DISCORD_WEBHOOK_URL, {
                     method: 'POST',
                     headers: {
@@ -147,6 +154,8 @@ if (contactForm) {
                     },
                     body: JSON.stringify(discordMessage)
                 });
+
+                console.log('Discord response status:', response.status, response.statusText);
 
                 if (response.ok) {
                     formStatus.textContent = '✓ Message sent successfully! We\'ll get back to you soon.';
@@ -166,10 +175,12 @@ if (contactForm) {
                 }
             } catch (error) {
                 console.error('Form submission error:', error);
-                formStatus.textContent = '❌ Error sending message. Please try again or email contact@topaitoolrank.com';
+                console.error('Error stack:', error.stack);
+                formStatus.textContent = '❌ Error sending message. Please check browser console (F12) for details and try again.';
                 formStatus.style.color = 'var(--accent-color)';
                 // DO NOT reset form on error - keep user's message so they can retry
             } finally {
+                console.log('Form submission handler complete');
                 submitBtn.textContent = 'Send Message';
                 submitBtn.disabled = false;
             }
