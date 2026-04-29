@@ -41,7 +41,8 @@
       "Bash(echo \"Dev server started, PID: $!\")",
       "Bash(netstat -tuln)",
       "Bash(pkill -f \"next dev\")",
-      "Bash(pkill -9 -f \"node\")"
+      "Bash(pkill -9 -f \"node\")",
+      "Bash(grep -A 5 \"relative z-10\" .next/static/chunks/app/auth/login/page*.js)"
     ]
   }
 }
