@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   try {
-    const { userId, sheet_data, send_mode, country_code, message_template, current_sheet_name, current_index, sent_status } = await req.json();
+    const { userId, sheet_data, send_mode, country_code, message_template, email_subject, email_body, current_sheet_name, current_index, sent_status } = await req.json();
 
     if (!userId) {
       return NextResponse.json({ error: 'User ID required' }, { status: 400 });
@@ -37,6 +37,8 @@ export async function POST(req: NextRequest) {
           send_mode,
           country_code,
           message_template,
+          email_subject,
+          email_body,
           current_sheet_name,
           current_index,
           sent_status: sent_status || {},
@@ -58,6 +60,8 @@ export async function POST(req: NextRequest) {
           send_mode,
           country_code,
           message_template,
+          email_subject,
+          email_body,
           current_sheet_name,
           current_index,
           sent_status: sent_status || {},

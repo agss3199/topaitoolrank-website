@@ -300,6 +300,8 @@ export default function WASenderPage() {
         setMode(s.send_mode || 'whatsapp');
         setCountryCode(s.country_code || '+91');
         setMessage(s.message_template || '');
+        setEmailSubject(s.email_subject || '');
+        setEmailBody(s.email_body || '');
         setCurrentIndex(s.current_index || 0);
         setSentStatus(s.sent_status || {});
       }
@@ -309,7 +311,7 @@ export default function WASenderPage() {
   };
 
   const saveSession = useCallback(
-    async (newSheets: SheetConfig[], newMode: SendMode, newCountryCode: string, newMessage: string, newIndex: number, newSentStatus: Record<string, boolean>) => {
+    async (newSheets: SheetConfig[], newMode: SendMode, newCountryCode: string, newMessage: string, newEmailSubject: string, newEmailBody: string, newIndex: number, newSentStatus: Record<string, boolean>) => {
       if (!session?.userId || isSaving) return;
 
       setIsSaving(true);
@@ -323,6 +325,8 @@ export default function WASenderPage() {
             send_mode: newMode,
             country_code: newCountryCode,
             message_template: newMessage,
+            email_subject: newEmailSubject,
+            email_body: newEmailBody,
             current_sheet_name: newSheets.length > 0 ? newSheets[0].name : '',
             current_index: newIndex,
             sent_status: newSentStatus,
@@ -428,7 +432,7 @@ export default function WASenderPage() {
       setCurrentIndex(0);
       setSentStatus({});
       setGoToInput('');
-      saveSession(parsed, mode, countryCode, message, 0, {});
+      saveSession(parsed, mode, countryCode, message, emailSubject, emailBody, 0, {});
 
       setColumnConfirmModal({ open: false, data: null });
 
@@ -438,7 +442,7 @@ export default function WASenderPage() {
         kind: 'success',
       });
     },
-    [columnConfirmModal.data, mode, countryCode, message, saveSession]
+    [columnConfirmModal.data, mode, countryCode, message, emailSubject, emailBody, saveSession]
   );
 
   const recipients = useMemo<RecipientEntry[]>(() => {
@@ -501,8 +505,8 @@ export default function WASenderPage() {
     window.open(`https://wa.me/${current.normalized}?text=${encoded}`, '_blank');
     // Mark as sent
     setSentStatus(prev => ({ ...prev, [key]: true }));
-    saveSession(sheets, mode, countryCode, message, currentIndex, { ...sentStatus, [key]: true });
-  }, [current, message, sheets, mode, countryCode, currentIndex, sentStatus, saveSession]);
+    saveSession(sheets, mode, countryCode, message, emailSubject, emailBody, currentIndex, { ...sentStatus, [key]: true });
+  }, [current, message, emailSubject, emailBody, sheets, mode, countryCode, currentIndex, sentStatus, saveSession]);
 
   const openGmailCompose = useCallback(() => {
     if (!current || current.kind !== 'email') return;
@@ -512,7 +516,7 @@ export default function WASenderPage() {
     window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${current.email}&su=${subject}&body=${body}`, '_blank');
     // Mark as sent
     setSentStatus(prev => ({ ...prev, [key]: true }));
-    saveSession(sheets, mode, countryCode, message, currentIndex, { ...sentStatus, [key]: true });
+    saveSession(sheets, mode, countryCode, message, emailSubject, emailBody, currentIndex, { ...sentStatus, [key]: true });
   }, [current, emailSubject, emailBody, sheets, mode, countryCode, message, currentIndex, sentStatus, saveSession]);
 
   const nextRecipient = useCallback(() => {
@@ -534,10 +538,11 @@ export default function WASenderPage() {
   const position = total > 0 ? currentIndex + 1 : 0;
   const sentCount = Object.values(sentStatus).filter(Boolean).length;
 
-  // Auto-save on state changes
+  // Auto-save on state changes (debounced via dependency array to avoid infinite loops)
   useEffect(() => {
-    saveSession(sheets, mode, countryCode, message, currentIndex, sentStatus);
-  }, [mode, countryCode, message, currentIndex]);
+    if (sheets.length === 0) return; // Don't auto-save if no sheets loaded
+    saveSession(sheets, mode, countryCode, message, emailSubject, emailBody, currentIndex, sentStatus);
+  }, [sheets, mode, countryCode, message, emailSubject, emailBody, currentIndex, sentStatus]);
 
   if (loading) return <div className="text-center p-8">Loading...</div>;
   if (!session) return null;
