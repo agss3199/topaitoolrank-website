@@ -56,7 +56,7 @@ export default function LoginPage() {
       {/* Grid pattern background */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.02)_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none"></div>
 
-      <div className="relative z-10 w-full max-w-md mx-auto">
+      <div className="relative z-10 max-w-md mx-auto">
         {/* Top accent bar */}
         <div className="absolute -top-12 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
 

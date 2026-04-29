@@ -550,7 +550,7 @@ export default function WASenderPage() {
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
       </div>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto py-12 flex flex-col items-center">
+      <div className="relative z-10 max-w-6xl mx-auto py-12 flex flex-col items-center">
         {/* Header - Centered */}
         <div className="text-center mb-12 w-full">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 mb-4 shadow-lg shadow-blue-500/50">
@@ -574,7 +574,7 @@ export default function WASenderPage() {
 
         {/* Notifications */}
         {notice && (
-          <div className={`mb-6 p-4 rounded-lg backdrop-blur border transition-all duration-300 ${
+          <div className={`mb-6 p-4 rounded-lg backdrop-blur border transition-all duration-300 max-w-4xl mx-auto ${
             notice.kind === 'error'
               ? 'bg-red-500/20 border-red-500/50 text-red-200'
               : notice.kind === 'success'
@@ -589,7 +589,7 @@ export default function WASenderPage() {
         )}
 
         {/* File Upload - Centered */}
-        <div className="mb-12 w-full max-w-2xl mx-auto">
+        <div className="mb-12 max-w-2xl mx-auto">
           <label className="block text-sm font-semibold text-white/70 mb-4 uppercase tracking-wider text-center">
             📊 Step 1: Upload Your Data
           </label>
@@ -614,7 +614,7 @@ export default function WASenderPage() {
         </div>
 
         {sheets.length > 0 && (
-          <div className="w-full max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             {/* Stats Bar - Centered */}
             <div className="mb-12 p-6 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/30 rounded-2xl backdrop-blur">
               <div className="space-y-4">
