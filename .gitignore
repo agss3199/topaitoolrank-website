@@ -69,3 +69,4 @@ secrets/
 
 .vercel
 .env*.local
+node_modules/
