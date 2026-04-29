@@ -14,6 +14,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid User ID' }, { status: 400 });
     }
 
+    // Verify user is authenticated in Supabase
+    const { data: { user: authUser }, error: authError } = await supabaseAdmin.auth.admin.getUserById(userId);
+
+    if (authError || !authUser) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     // Check if session exists
     const { data: existingSession } = await supabaseAdmin
       .from('wa_sender_sessions')

@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
   try {
+    // Get userId from URL params (client sends it)
     const userId = req.nextUrl.searchParams.get('userId');
 
     if (!userId) {
@@ -11,6 +12,13 @@ export async function GET(req: NextRequest) {
 
     if (typeof userId !== 'string' || userId.length < 10) {
       return NextResponse.json({ error: 'Invalid User ID' }, { status: 400 });
+    }
+
+    // Verify user is authenticated in Supabase
+    const { data: { user: authUser }, error: authError } = await supabaseAdmin.auth.admin.getUserById(userId);
+
+    if (authError || !authUser) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const { data: session, error } = await supabaseAdmin
