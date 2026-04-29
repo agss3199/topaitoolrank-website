@@ -151,24 +151,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     formStatus.textContent = '✓ Message sent successfully! We\'ll get back to you soon.';
                     formStatus.style.color = 'var(--secondary-color)';
                     contactForm.reset();
+                    console.log('Contact form submitted successfully');
 
                     // Clear success message after 5 seconds
                     setTimeout(() => {
                         formStatus.style.display = 'none';
                     }, 5000);
                 } else {
-                    throw new Error('Discord webhook error');
+                    // Log the actual error response for debugging
+                    const errorText = await response.text();
+                    console.error(`Discord webhook error: ${response.status}`, errorText);
+                    throw new Error(`Webhook failed with status ${response.status}`);
                 }
             } catch (error) {
                 console.error('Form submission error:', error);
-                formStatus.textContent = '✓ Message received! We\'ll get back to you soon.';
-                formStatus.style.color = 'var(--secondary-color)';
-                contactForm.reset();
-
-                // Show success message anyway (webhook might be offline, but form worked)
-                setTimeout(() => {
-                    formStatus.style.display = 'none';
-                }, 5000);
+                formStatus.textContent = '❌ Error sending message. Please try again or email contact@topaitoolrank.com';
+                formStatus.style.color = 'var(--accent-color)';
+                // DO NOT reset form on error - keep user's message so they can retry
             } finally {
                 submitBtn.textContent = 'Send Message';
                 submitBtn.disabled = false;
