@@ -44,11 +44,7 @@ export default function TermsPage() {
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="javascript:void(0)"
-                    className="coming-soon"
-                    onClick={() => alert("Voice Rating is coming soon!")}
-                  >
+                  <a href="#coming-soon" className="coming-soon">
                     Voice Rating (Coming Soon)
                   </a>
                 </li>
