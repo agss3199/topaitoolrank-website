@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import React from "react";
+import "./globals.css"; // WA Sender tool styles (isolated)
 
 export const metadata: Metadata = {
   title: "WA Sender - Top AI Tool Rank",
