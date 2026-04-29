@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const formStatus = document.getElementById('formStatus');
 
     // Replace with your Discord webhook URL
-    const DISCORD_WEBHOOK_URL = 'YOUR_DISCORD_WEBHOOK_URL';
+    const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1498899447621484695/XHuvCQ3ekVJxPDnQlZtz8VKE8ebj4appxuVQQeTaLyv1Xkepg18nckK1S7EJ-n1H43rM';
 
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
