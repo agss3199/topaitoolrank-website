@@ -1,37 +1,6 @@
-// Mobile Menu Toggle
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
-const navLinks = document.querySelectorAll('.nav-link');
-const navItemDropdown = document.querySelector('.nav-item-dropdown');
-
-// Toggle hamburger menu
-if (hamburger) {
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        hamburger.classList.toggle('active');
-    });
-}
-
-// Close menu when a link is clicked
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        hamburger?.classList.remove('active');
-    });
-});
-
-// Handle dropdown menu on mobile
-if (navItemDropdown) {
-    const dropdownToggle = navItemDropdown.querySelector('.nav-link');
-    if (window.innerWidth <= 768) {
-        dropdownToggle.addEventListener('click', (e) => {
-            if (e.target.textContent.includes('Tools')) {
-                e.preventDefault();
-                navItemDropdown.classList.toggle('active');
-            }
-        });
-    }
-}
+// NOTE: Hamburger menu and reveal animations are already handled by
+// the inline script in index.html. This file contains form handling
+// and additional scroll event listeners.
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
