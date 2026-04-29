@@ -29,7 +29,8 @@
       "Bash(cp -r app/globals.css \"C:\\\\Users\\\\MONICA\\\\Desktop\\\\Abhishek_Softwares_All_old\\\\Top_AI_Tool_Rank\\\\app\\\\tools\\\\wa-sender\\\\globals.css\")",
       "Bash(vercel:*)",
       "Bash(git clone:*)",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "Bash(git commit -m 'feat: add Supabase auth + persistent storage with sheet data bug fix:*)"
     ]
   }
 }
