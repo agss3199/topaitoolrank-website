@@ -776,15 +776,14 @@ export default function WASenderPage() {
               </button>
             </div>
 
-              {isSaving && (
-                <div className="text-center text-white/50 text-sm flex items-center justify-center gap-2">
-                  <span className="inline-block w-3 h-3 bg-white/50 rounded-full animate-pulse"></span>
-                  Saving session...
-                </div>
-              )}
-            </>
-          )}
+            {isSaving && (
+              <div className="text-center text-white/50 text-sm flex items-center justify-center gap-2">
+                <span className="inline-block w-3 h-3 bg-white/50 rounded-full animate-pulse"></span>
+                Saving session...
+              </div>
+            )}
           </div>
+        )}
       </div>
 
       <style jsx>{`
