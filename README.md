@@ -1,53 +1,62 @@
-# Kailash COC Claude (Python)
+# Top AI Tool Rank — Website + Tools Platform
 
-<p align="center">
-  <img src="https://img.shields.io/badge/platform-Claude%20Code-7C3AED.svg" alt="Claude Code">
-  <img src="https://img.shields.io/badge/architecture-COC%205--Layer-blue.svg" alt="COC 5-Layer">
-  <img src="https://img.shields.io/badge/license-Apache%202.0-blue.svg" alt="Apache 2.0">
-</p>
+**Production-ready Next.js 16 website with isolated tools system.**
 
-<p align="center">
-  <strong>Cognitive Orchestration for Codegen (COC)</strong><br>
-  A five-layer cognitive architecture for <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a> that replaces unstructured vibe coding with institutionally aware, self-enforcing AI code generation.
-</p>
+Hosted on Vercel. Live at: https://topaitoolrank.com
 
----
+## Overview
 
-> "The problem with vibe coding is not the AI model. It's the absence of institutional knowledge in the coding loop."
+Single-page marketing website + modular tools platform.
 
-Vibe coding fails because AI forgets your conventions (amnesia), drifts across patterns (convention drift), has never seen your frameworks (framework ignorance), degrades over sessions (quality erosion), and generates security vulnerabilities faster than humans can review (security blindness). COC solves all five by encoding institutional knowledge directly into the AI's operating environment.
+- **Marketing Site:** Homepage, services, contact form, blog, legal pages  
+- **Tools Platform:** WA Sender (fully functional) + framework for adding more tools
+- **Theme:** Light (blue/cyan accents), responsive, modern
+- **Performance:** Optimized for Lighthouse (90+ performance, 95+ SEO)
 
----
+## Quick Start
 
-## The Five Layers
+```bash
+# Install dependencies
+npm install
 
-```
-Your Natural Language Request
-         |
-  1. Intent       30 Agents          Who should handle this?
-         |
-  2. Context      28 Skills          What does the AI need to know?
-         |
-  3. Guardrails   9 Rules + 9 Hooks  What must the AI never do?
-         |
-  4. Instructions CLAUDE.md + 20 Cmds What should the AI prioritize?
-         |
-  5. Learning     Observe -> Evolve  How does the system improve?
-         |
-  Production-Ready Code
+# Create .env
+cp .env.example .env
+# Update DISCORD_WEBHOOK_URL with your webhook URL
+
+# Run dev server
+npm run dev
+# Open http://localhost:3000
 ```
 
-### Layer 1: Intent -- 30 Specialized Agents
+## Project Structure
 
-Each agent is a Markdown file in `.claude/agents/` with a defined role, tools, and model tier. Agents span the full development lifecycle:
+```
+app/
+├── page.tsx                    # Homepage
+├── api/discord/route.ts        # Webhook handler
+├── blogs/, privacy-policy/, terms/
+└── tools/
+    ├── layout.tsx
+    └── wa-sender/              # Fully functional tool
+        ├── page.tsx
+        ├── globals.css
+        └── layout.tsx
 
-**Analysis** `deep-analyst` `requirements-analyst` `sdk-navigator` `framework-advisor`
-**Planning** `todo-manager` `gh-manager` `intermediate-reviewer`
-**Implementation** `tdd-implementer` `pattern-expert` `dataflow-specialist` `nexus-specialist` `kaizen-specialist` `mcp-specialist` `gold-standards-validator`
-**Testing** `testing-specialist` `documentation-validator`
-**Deployment** `deployment-specialist`
-**Release** `git-release-specialist` `security-reviewer`
-**Frontend** `flutter-specialist` `react-specialist` `ai-ux-designer` `uiux-designer`
+public/
+├── css/style.css               # Light theme
+└── js/main.js                  # Form handling
+```
+
+**Key Design:** Tools in `app/tools/{name}/` stay isolated — no file mixing when adding new tools.
+
+## What's Included
+
+✅ **Homepage** — Light theme, 3D animation, services, contact form  
+✅ **WA Sender Tool** — Upload files, send via WhatsApp/Email  
+✅ **Contact Form** → Discord webhook (server-side, secure)  
+✅ **Tools Framework** — Add new tools in `app/tools/{name}/`  
+✅ **SEO** — Sitemap, robots.txt, meta tags, JSON-LD  
+✅ **Production Ready** — TypeScript, Next.js 16, Vercel-configured
 **Standards** `care-expert` `eatp-expert` `coc-expert`
 
 Analysis agents run on Opus (deep reasoning). Review agents run on Sonnet (fast, cost-efficient).

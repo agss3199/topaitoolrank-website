@@ -1,0 +1,23 @@
+# WA Sender Tool
+
+## Overview
+A practical communication tool for WhatsApp and Email campaigns.
+- Upload CSV/Excel files
+- Batch send messages via WhatsApp or Email
+- Track progress and statistics
+
+## Files
+- `page.tsx` - Main tool component (WA Sender interface)
+- `globals.css` - Tool-specific Tailwind styles
+- `layout.tsx` - Tool page layout
+
+## Dependencies
+- `xlsx` - Excel file parsing
+
+## Note
+This tool is completely isolated. To add a new tool:
+1. Create `app/tools/new-tool/` folder
+2. Add `page.tsx`, `layout.tsx`, and `globals.css` (if using Tailwind)
+3. Update the navbar and sitemap to include the new tool route
+
+Do NOT mix tool files with main site files.

@@ -35,15 +35,12 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Discord Webhook Contact Form Integration
+// Discord API Route Contact Form Integration
 // NOTE: This runs after DOMContentLoaded has already fired (script loaded at end of body)
 // so we don't wrap in DOMContentLoaded event listener
 const contactForm = document.getElementById('contactForm');
 const submitBtn = document.getElementById('submitBtn');
 const formStatus = document.getElementById('formStatus');
-
-// Replace with your Discord webhook URL
-const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1498899447621484695/XHuvCQ3ekVJxPDnQlZtz8VKE8ebj4appxuVQQeTaLyv1Xkepg18nckK1S7EJ-n1H43rM';
 
 if (contactForm) {
     console.log('✓ Form element found, attaching submit handler');
@@ -82,49 +79,23 @@ if (contactForm) {
             formStatus.style.color = 'var(--muted-text)';
 
             try {
-                // Create Discord embed message
-                const discordMessage = {
-                    embeds: [{
-                        title: '📬 New Contact Form Submission',
-                        color: 0x0066ff,
-                        fields: [
-                            {
-                                name: '👤 Name',
-                                value: name,
-                                inline: false
-                            },
-                            {
-                                name: '📧 Email',
-                                value: email,
-                                inline: false
-                            },
-                            {
-                                name: '💬 Message',
-                                value: message,
-                                inline: false
-                            }
-                        ],
-                        footer: {
-                            text: 'From: topaitoolrank.com'
-                        },
-                        timestamp: new Date().toISOString()
-                    }]
-                };
+                // Send to Discord API route (server-side)
+                console.log('Sending to /api/discord...');
 
-                // Send to Discord webhook
-                console.log('Sending to Discord webhook...');
-                console.log('Webhook URL:', DISCORD_WEBHOOK_URL.substring(0, 50) + '...');
-                console.log('Message payload:', JSON.stringify(discordMessage, null, 2));
-
-                const response = await fetch(DISCORD_WEBHOOK_URL, {
+                const response = await fetch('/api/discord', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(discordMessage)
+                    body: JSON.stringify({
+                        type: 'contact',
+                        name: name,
+                        email: email,
+                        message: message
+                    })
                 });
 
-                console.log('Discord response status:', response.status, response.statusText);
+                console.log('Discord API response status:', response.status, response.statusText);
 
                 if (response.ok) {
                     formStatus.textContent = '✓ Message sent successfully! We\'ll get back to you soon.';
@@ -139,8 +110,8 @@ if (contactForm) {
                 } else {
                     // Log the actual error response for debugging
                     const errorText = await response.text();
-                    console.error(`Discord webhook error: ${response.status}`, errorText);
-                    throw new Error(`Webhook failed with status ${response.status}`);
+                    console.error(`Discord API error: ${response.status}`, errorText);
+                    throw new Error(`Request failed with status ${response.status}`);
                 }
             } catch (error) {
                 console.error('Form submission error:', error);

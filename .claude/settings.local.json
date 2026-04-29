@@ -20,7 +20,13 @@
       "Bash(git commit -m 'fix: reposition floating chips to prevent text overlap:*)",
       "Bash(git commit -m 'fix: remove floating chips and reposition hero orb to eliminate overlap:*)",
       "Bash(git commit -m 'fix: remove gradient overlay from h1 and increase line height:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(node -c js/main.js)",
+      "Bash(mkdir -p public)",
+      "Bash(mv css:*)",
+      "Bash(mv js:*)",
+      "Bash(cp -r app/page.tsx \"C:\\\\Users\\\\MONICA\\\\Desktop\\\\Abhishek_Softwares_All_old\\\\Top_AI_Tool_Rank\\\\app\\\\tools\\\\wa-sender\\\\page.tsx\")",
+      "Bash(cp -r app/globals.css \"C:\\\\Users\\\\MONICA\\\\Desktop\\\\Abhishek_Softwares_All_old\\\\Top_AI_Tool_Rank\\\\app\\\\tools\\\\wa-sender\\\\globals.css\")"
     ]
   }
 }
