@@ -550,21 +550,25 @@ export default function WASenderPage() {
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto py-8">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-4xl font-bold text-white mb-1">WA Sender</h1>
-            <p className="text-white/60">Bulk messaging from Excel</p>
+      <div className="relative z-10 max-w-6xl mx-auto py-12 flex flex-col items-center">
+        {/* Header - Centered */}
+        <div className="text-center mb-12 w-full">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 mb-4 shadow-lg shadow-blue-500/50">
+            <span className="text-4xl">💬</span>
           </div>
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+            WA Sender
+          </h1>
+          <p className="text-white/50 text-lg mb-6">Bulk messaging made simple</p>
+
           <button
             onClick={() => {
               localStorage.clear();
               router.push('/auth/login');
             }}
-            className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white/80 hover:text-white transition-all duration-200"
+            className="inline-block px-6 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white/80 hover:text-white transition-all duration-200 text-sm font-medium"
           >
-            Logout
+            ← Sign Out
           </button>
         </div>
 
@@ -584,9 +588,11 @@ export default function WASenderPage() {
           </div>
         )}
 
-        {/* File Upload */}
-        <div className="mb-8">
-          <label className="block text-sm font-medium text-white/80 mb-3">Upload Excel File</label>
+        {/* File Upload - Centered */}
+        <div className="mb-12 w-full max-w-2xl mx-auto">
+          <label className="block text-sm font-semibold text-white/70 mb-4 uppercase tracking-wider text-center">
+            📊 Step 1: Upload Your Data
+          </label>
           <input
             ref={fileInputRef}
             type="file"
@@ -598,49 +604,60 @@ export default function WASenderPage() {
           />
           <label
             htmlFor="file-upload"
-            className="block border-2 border-dashed border-blue-500/50 hover:border-blue-500 rounded-xl p-12 text-center cursor-pointer hover:bg-blue-500/5 transition-all duration-200 group"
+            className="block border-2 border-dashed border-blue-500/40 hover:border-blue-500/80 rounded-2xl p-16 text-center cursor-pointer hover:bg-blue-500/10 transition-all duration-300 group bg-white/[0.02]"
           >
-            <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">📁</div>
-            <p className="text-white font-medium mb-1">Drop your Excel file here</p>
-            <p className="text-white/50 text-sm">or click to select (.xlsx, .xls)</p>
+            <div className="text-6xl mb-4 group-hover:scale-125 group-hover:-translate-y-2 transition-all duration-300">📁</div>
+            <p className="text-white font-semibold mb-2 text-lg">Drop your Excel file here</p>
+            <p className="text-white/50 text-sm">or click to select — .xlsx, .xls, .csv</p>
+            <p className="text-white/30 text-xs mt-3">Max 50MB • Phone and Email columns auto-detected</p>
           </label>
         </div>
 
         {sheets.length > 0 && (
-          <>
-            {/* Stats Bar */}
-            <div className="mb-8 p-4 bg-white/10 border border-white/20 rounded-lg backdrop-blur">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-white/60 text-sm">Progress</p>
-                  <p className="text-2xl font-bold text-white">
-                    {total > 0 ? `${position}/${total}` : '0'} <span className="text-lg text-green-400">{sentCount > 0 ? `✓ ${sentCount} sent` : ''}</span>
-                  </p>
-                </div>
-                {total > 0 && (
-                  <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-green-500 to-cyan-500 transition-all duration-300"
-                      style={{ width: `${(sentCount / total) * 100}%` }}
-                    ></div>
+          <div className="w-full max-w-4xl mx-auto">
+            {/* Stats Bar - Centered */}
+            <div className="mb-12 p-6 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/30 rounded-2xl backdrop-blur">
+              <div className="space-y-4">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+                  <div className="text-center sm:text-left">
+                    <p className="text-white/60 text-sm font-medium uppercase tracking-wider mb-1">Progress</p>
+                    <p className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                      {total > 0 ? `${position}/${total}` : '0'}
+                    </p>
+                    {sentCount > 0 && (
+                      <p className="text-green-400 font-semibold text-lg mt-1">✓ {sentCount} sent</p>
+                    )}
                   </div>
-                )}
+                  {total > 0 && (
+                    <div className="w-full sm:w-48">
+                      <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-gradient-to-r from-green-500 to-cyan-500 transition-all duration-500 rounded-full"
+                          style={{ width: `${(sentCount / total) * 100}%` }}
+                        ></div>
+                      </div>
+                      <p className="text-white/50 text-xs mt-2 text-center">{Math.round((sentCount / total) * 100)}% complete</p>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
-            {/* Settings Grid */}
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-white/80 mb-2">Send Via</label>
+            {/* Settings Grid - Centered */}
+            <div className="grid grid-cols-1 gap-8 mb-12">
+              <div>
+                <label className="block text-sm font-semibold text-white/70 mb-4 uppercase tracking-wider">
+                  📤 Step 2: Choose Your Channel
+                </label>
                 <div className="flex gap-3">
                   {['whatsapp', 'email'].map(opt => (
                     <button
                       key={opt}
                       onClick={() => setMode(opt as SendMode)}
-                      className={`flex-1 px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
+                      className={`flex-1 px-6 py-4 rounded-xl font-semibold transition-all duration-300 text-center ${
                         mode === opt
-                          ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
-                          : 'bg-white/10 border border-white/20 text-white/60 hover:bg-white/20'
+                          ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg shadow-blue-500/30'
+                          : 'bg-white/10 border border-white/20 text-white/60 hover:bg-white/15 hover:border-white/30'
                       }`}
                     >
                       {opt === 'whatsapp' ? '💬 WhatsApp' : '📧 Email'}
@@ -651,116 +668,123 @@ export default function WASenderPage() {
 
               {mode === 'whatsapp' ? (
                 <>
-                  <div>
-                    <label className="block text-sm font-medium text-white/80 mb-2">Default Country Code</label>
+                  <div className="bg-white/[0.03] p-6 rounded-2xl border border-white/10">
+                    <label className="block text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Default Country Code</label>
                     <input
                       type="text"
                       value={countryCode}
                       onChange={(e) => setCountryCode(e.target.value)}
-                      className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-blue-400/50 focus:bg-white/15 focus:shadow-lg focus:shadow-blue-500/20 transition-all"
                       placeholder="+91"
                     />
-                    <p className="text-xs text-white/50 mt-1">Fallback for rows without country code</p>
+                    <p className="text-xs text-white/50 mt-2">Used for contacts without country code</p>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-white/80 mb-2">Message</label>
+                  <div className="bg-white/[0.03] p-6 rounded-2xl border border-white/10">
+                    <label className="block text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Your Message</label>
                     <textarea
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all h-24 resize-none"
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-blue-400/50 focus:bg-white/15 focus:shadow-lg focus:shadow-blue-500/20 transition-all h-28 resize-none"
                       placeholder="Type your message here..."
                     />
+                    <p className="text-xs text-white/50 mt-2">{message.length} characters</p>
                   </div>
                 </>
               ) : (
                 <>
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-white/80 mb-2">Subject</label>
+                  <div className="bg-white/[0.03] p-6 rounded-2xl border border-white/10">
+                    <label className="block text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Email Subject</label>
                     <input
                       type="text"
                       value={emailSubject}
                       onChange={(e) => setEmailSubject(e.target.value)}
-                      className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all"
-                      placeholder="Email subject..."
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-blue-400/50 focus:bg-white/15 focus:shadow-lg focus:shadow-blue-500/20 transition-all"
+                      placeholder="Your email subject..."
                     />
                   </div>
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-white/80 mb-2">Message Body</label>
+                  <div className="bg-white/[0.03] p-6 rounded-2xl border border-white/10">
+                    <label className="block text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Email Body</label>
                     <textarea
                       value={emailBody}
                       onChange={(e) => setEmailBody(e.target.value)}
-                      className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all h-24 resize-none"
-                      placeholder="Email body..."
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-blue-400/50 focus:bg-white/15 focus:shadow-lg focus:shadow-blue-500/20 transition-all h-28 resize-none"
+                      placeholder="Your email body..."
                     />
+                    <p className="text-xs text-white/50 mt-2">{emailBody.length} characters</p>
                   </div>
                 </>
               )}
             </div>
 
-            {/* Current Contact Card */}
+            {/* Current Contact Card - Centered */}
             {current && (
-              <div className={`mb-8 p-6 rounded-lg backdrop-blur border transition-all duration-200 ${
+              <div className={`mb-12 p-8 rounded-2xl backdrop-blur border transition-all duration-300 text-center ${
                 current.isSent
-                  ? 'bg-green-500/10 border-green-500/50'
-                  : 'bg-blue-500/10 border-blue-500/50'
+                  ? 'bg-gradient-to-br from-green-500/20 to-emerald-500/20 border-green-500/40'
+                  : 'bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border-blue-500/40'
               }`}>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="text-3xl">{current.kind === 'whatsapp' ? '📱' : '📧'}</div>
-                  {current.isSent && <div className="text-green-400 font-semibold">✓ Already Sent</div>}
+                <div className="flex justify-center mb-4">
+                  <div className="text-6xl">{current.kind === 'whatsapp' ? '📱' : '📧'}</div>
                 </div>
-                <p className="text-white text-lg font-medium mb-1">
+                {current.isSent && (
+                  <div className="inline-block px-3 py-1 bg-green-500/20 border border-green-500/40 rounded-full mb-4">
+                    <div className="text-green-400 font-semibold text-sm">✓ Already sent</div>
+                  </div>
+                )}
+                <p className="text-white text-2xl font-semibold mb-2 break-all">
                   {current.kind === 'whatsapp' ? current.normalized : current.email}
                 </p>
-                <p className="text-white/60 text-sm">Row {current.rowNum} • {current.sheetName}</p>
+                <p className="text-white/60 text-sm">Row {current.rowNum} • <span className="font-medium">{current.sheetName}</span></p>
               </div>
             )}
 
-            {/* Action Buttons */}
+            {/* Action Buttons - Centered */}
             <div className="space-y-3 mb-8">
               <button
                 onClick={mode === 'whatsapp' ? openWhatsApp : openGmailCompose}
                 disabled={!current}
-                className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-4 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
+                className="w-full bg-gradient-to-r from-blue-500 via-blue-500 to-cyan-500 text-white font-semibold py-4 px-6 rounded-xl hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none transition-all duration-300 flex items-center justify-center gap-2 text-lg"
               >
-                {mode === 'whatsapp' ? '📤 Open WhatsApp' : '📤 Open Gmail'} {current?.isSent ? '(Already Sent)' : ''}
+                {mode === 'whatsapp' ? '📤 Open WhatsApp' : '📤 Open Gmail'}
               </button>
 
               <button
                 onClick={nextRecipient}
                 disabled={currentIndex >= recipients.length - 1}
-                className="w-full bg-white/10 hover:bg-white/20 border border-white/20 text-white py-3 rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold py-3 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:border-white/40"
               >
                 ⬇️ Next Contact
               </button>
             </div>
 
-            {/* Go To Input */}
-            <div className="flex gap-2 mb-6">
+            {/* Go To Input - Centered */}
+            <div className="flex gap-3 mb-8 max-w-md mx-auto">
               <input
                 type="number"
                 min="1"
                 max={total}
                 value={goToInput}
                 onChange={(e) => setGoToInput(e.target.value)}
-                placeholder="Jump to contact #"
-                className="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all"
+                placeholder="Jump to #..."
+                className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-blue-400/50 focus:bg-white/15 focus:shadow-lg focus:shadow-blue-500/20 transition-all text-center"
               />
               <button
                 onClick={goTo}
-                className="px-6 py-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-lg font-medium transition-all"
+                className="px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-xl font-medium transition-all hover:border-white/40"
               >
-                Go
+                Jump
               </button>
             </div>
 
-            {isSaving && (
-              <div className="text-center text-white/50 text-sm flex items-center justify-center gap-2">
-                <span className="inline-block w-3 h-3 bg-white/50 rounded-full animate-pulse"></span>
-                Saving session...
-              </div>
-            )}
-          </>
-        )}
+              {isSaving && (
+                <div className="text-center text-white/50 text-sm flex items-center justify-center gap-2">
+                  <span className="inline-block w-3 h-3 bg-white/50 rounded-full animate-pulse"></span>
+                  Saving session...
+                </div>
+              )}
+            </>
+          )}
+          </div>
       </div>
 
       <style jsx>{`
