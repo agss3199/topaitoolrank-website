@@ -294,6 +294,13 @@ export default function WASenderPage() {
     try {
       const res = await fetch(`/api/sheets/load?userId=${session!.userId}`);
       const data = await res.json();
+
+      if (!res.ok) {
+        console.warn('Load session failed:', data.error);
+        // Silently fail - start with empty state
+        return;
+      }
+
       if (data.ok && data.session) {
         const s = data.session;
         setSheets(s.sheet_data || []);
@@ -306,7 +313,8 @@ export default function WASenderPage() {
         setSentStatus(s.sent_status || {});
       }
     } catch (err) {
-      console.error('Failed to load session:', err);
+      console.error('Load session exception:', err);
+      // Silently fail - start with empty state
     }
   };
 
@@ -316,7 +324,7 @@ export default function WASenderPage() {
 
       setIsSaving(true);
       try {
-        await fetch('/api/sheets/save', {
+        const res = await fetch('/api/sheets/save', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -332,8 +340,22 @@ export default function WASenderPage() {
             sent_status: newSentStatus,
           }),
         });
+
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({ error: 'Unknown error' }));
+          setNotice({
+            text: `Save failed: ${errorData.error || 'Unknown error'}`,
+            kind: 'error',
+          });
+          console.error('Save session failed:', errorData);
+        }
       } catch (err) {
-        console.error('Failed to save session:', err);
+        const errorMsg = err instanceof Error ? err.message : String(err);
+        setNotice({
+          text: `Failed to save session: ${errorMsg}`,
+          kind: 'error',
+        });
+        console.error('Save session error:', err);
       } finally {
         setIsSaving(false);
       }

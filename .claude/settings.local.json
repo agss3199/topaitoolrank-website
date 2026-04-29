@@ -44,7 +44,10 @@
       "Bash(pkill -9 -f \"node\")",
       "Bash(grep -A 5 \"relative z-10\" .next/static/chunks/app/auth/login/page*.js)",
       "WebFetch(domain:topaitoolrank.com)",
-      "Bash(git commit -m 'fix: install and configure Tailwind CSS with @tailwindcss/postcss for Next.js 16:*)"
+      "Bash(git commit -m 'fix: install and configure Tailwind CSS with @tailwindcss/postcss for Next.js 16:*)",
+      "Bash(git commit:*)",
+      "Bash(bash /tmp/security_audit.sh)",
+      "Bash(bash /tmp/detailed_audit.sh)"
     ]
   }
 }

@@ -1,6 +1,11 @@
 import { supabaseAdmin } from '@/lib/supabase';
 import { NextRequest, NextResponse } from 'next/server';
 
+function isValidUUID(uuid: string): boolean {
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  return uuidRegex.test(uuid);
+}
+
 export async function GET(req: NextRequest) {
   try {
     // Get userId from URL params (client sends it)
@@ -10,8 +15,8 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'User ID required' }, { status: 400 });
     }
 
-    if (typeof userId !== 'string' || userId.length < 10) {
-      return NextResponse.json({ error: 'Invalid User ID' }, { status: 400 });
+    if (typeof userId !== 'string' || !isValidUUID(userId)) {
+      return NextResponse.json({ error: 'Invalid User ID format' }, { status: 400 });
     }
 
     // Verify user is authenticated in Supabase
