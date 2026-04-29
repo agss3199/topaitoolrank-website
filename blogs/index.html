@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Top AI Tool Rank</title>
+    <meta name="description" content="Read our latest articles about custom software development, AI integration, web apps, mobile development, and digital transformation strategies.">
+    <link rel="canonical" href="https://topaitoolrank.com/blogs/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://topaitoolrank.com/blogs/">
+    <meta property="og:title" content="Blog - Top AI Tool Rank">
+    <meta property="og:description" content="Read our latest articles about custom software development, AI integration, web apps, mobile development, and digital transformation strategies.">
+    <meta property="og:image" content="https://topaitoolrank.com/assets/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://topaitoolrank.com/blogs/">
+    <meta property="twitter:title" content="Blog - Top AI Tool Rank">
+    <meta property="twitter:description" content="Read our latest articles about custom software development, AI integration, web apps, mobile development, and digital transformation strategies.">
+    <meta property="twitter:image" content="https://topaitoolrank.com/assets/og-image.png">
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "Top AI Tool Rank Blog",
+        "url": "https://topaitoolrank.com/blogs",
+        "description": "Articles about custom software development, AI integration, and digital transformation",
+        "author": {
+            "@type": "Organization",
+            "name": "Top AI Tool Rank",
+            "url": "https://topaitoolrank.com"
+        }
+    }
+    </script>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
+
+    <style>
+        .coming-soon-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            margin-top: 70px;
+        }
+
+        .coming-soon-content {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .coming-soon-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .coming-soon-content p {
+            font-size: 1.2rem;
+            color: var(--muted-text);
+            margin-bottom: 2rem;
+        }
+
+        .coming-soon-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .subscribe-form {
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .subscribe-form input {
+            flex: 1;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            color: var(--light-text);
+            font-family: inherit;
+        }
+
+        .subscribe-form input::placeholder {
+            color: var(--muted-text);
+        }
+
+        .subscribe-form input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.2);
+        }
+
+        .subscribe-form button {
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-bg);
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .subscribe-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="/">Top AI Tool Rank</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/#home" class="nav-link">Home</a></li>
+                <li><a href="/#services" class="nav-link">Services</a></li>
+                <li class="nav-item-dropdown">
+                    <a href="/#tools" class="nav-link">Tools</a>
+                    <ul class="dropdown">
+                        <li><a href="https://whatsapp-sender.vercel.app" target="_blank" rel="noopener">WhatsApp Sender</a></li>
+                        <li><a href="javascript:void(0)" class="coming-soon" onclick="alert('This feature is coming soon!')">Voice Rating (Coming Soon)</a></li>
+                    </ul>
+                </li>
+                <li><a href="/blogs/" class="nav-link">Blogs</a></li>
+                <li><a href="/#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Coming Soon Section -->
+    <section class="coming-soon-section">
+        <div class="coming-soon-content">
+            <div class="coming-soon-icon">📝</div>
+            <h1>Blog Coming Soon</h1>
+            <p>We're working on some amazing content about custom software development, AI integration, and digital transformation.</p>
+            <p style="color: var(--muted-text); font-size: 1rem; margin-bottom: 2rem;">Subscribe to be notified when we publish our first article.</p>
+
+            <form class="subscribe-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Notify Me</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="margin-top: 4rem;">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Top AI Tool Rank</h4>
+                    <p>Building custom software solutions for businesses worldwide.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/#services">Services</a></li>
+                        <li><a href="/#tools">Tools</a></li>
+                        <li><a href="/blogs/">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: <a href="mailto:contact@topaitoolrank.com">contact@topaitoolrank.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Top AI Tool Rank. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

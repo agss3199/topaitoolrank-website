@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(awk '{print length, $0}')",
+      "Bash(git init:*)",
+      "Bash(git config:*)",
+      "Bash(gh auth:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m 'feat: launch topaitoolrank.com website with 3D hero animation:*)"
+    ]
+  }
+}
