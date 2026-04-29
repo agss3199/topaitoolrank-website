@@ -37,7 +37,11 @@
       "Bash(git commit -m 'fix: resolve '\\\\''next'\\\\'' button not advancing to next number:*)",
       "Bash(ls -la /c/Users/MONICA/Desktop/Abhishek_Softwares_All_old/Top_AI_Tool_Rank/*.ts /c/Users/MONICA/Desktop/Abhishek_Softwares_All_old/Top_AI_Tool_Rank/*.tsx)",
       "Bash(git commit -m ':*)",
-      "Bash(git commit -m 'security: add server-side user authentication to API endpoints:*)"
+      "Bash(git commit -m 'security: add server-side user authentication to API endpoints:*)",
+      "Bash(echo \"Dev server started, PID: $!\")",
+      "Bash(netstat -tuln)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -9 -f \"node\")"
     ]
   }
 }

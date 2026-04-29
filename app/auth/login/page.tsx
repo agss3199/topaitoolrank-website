@@ -53,7 +53,7 @@ export default function LoginPage() {
         <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
       </div>
 
-      <div className="relative z-10 w-full max-w-md">
+      <div className="relative z-10 w-full max-w-md mx-auto px-4">
         <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-8 hover:border-white/40 transition-all duration-300">
           {/* Header */}
           <div className="mb-8 text-center">
