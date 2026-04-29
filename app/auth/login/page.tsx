@@ -53,13 +53,13 @@ export default function LoginPage() {
         {/* Instructions Section */}
         <div className="mb-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
           <h2 className="text-sm font-semibold text-blue-900 mb-3">How to Use:</h2>
-          <ol className="text-xs text-gray-700 space-y-2">
-            <li><strong>1. Prepare Excel file:</strong> Include a column with phone numbers or emails. Headers like "Phone", "Mobile", "Number", "Email" are auto-detected.</li>
-            <li><strong>2. Upload file:</strong> After login, click the upload area and select your .xlsx or .xls file.</li>
-            <li><strong>3. Verify columns:</strong> Confirm which column has phone/email numbers. You can override if needed.</li>
-            <li><strong>4. Set country code:</strong> Choose the default country code (e.g., +91 for India). Row-specific codes in Excel will override this.</li>
-            <li><strong>5. Write message:</strong> Enter your WhatsApp message or email subject/body.</li>
-            <li><strong>6. Send:</strong> Click "Open WhatsApp" or "Open Gmail" for each contact. Already-sent contacts are skipped automatically.</li>
+          <ol className="text-xs text-gray-700 space-y-2 list-decimal list-inside">
+            <li><strong>Prepare Excel file:</strong> Include a column with phone numbers or emails. Headers like "Phone", "Mobile", "Number", "Email" are auto-detected.</li>
+            <li><strong>Upload file:</strong> After login, click the upload area and select your .xlsx or .xls file.</li>
+            <li><strong>Verify columns:</strong> Confirm which column has phone/email numbers. You can override if needed.</li>
+            <li><strong>Set country code:</strong> Choose the default country code (e.g., +91 for India). Row-specific codes in Excel will override this.</li>
+            <li><strong>Write message:</strong> Enter your WhatsApp message or email subject/body.</li>
+            <li><strong>Send:</strong> Click "Open WhatsApp" or "Open Gmail" for each contact. Already-sent contacts are skipped automatically.</li>
           </ol>
         </div>
 
