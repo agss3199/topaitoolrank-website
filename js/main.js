@@ -50,31 +50,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Scroll animations - reveal elements when scrolled into view
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-// Observe all reveal elements
-document.querySelectorAll('.reveal').forEach(el => {
-    observer.observe(el);
-});
-
-// Also observe section headings and content for animation
-document.querySelectorAll('section h2, section p, .service-card, .why-item').forEach(el => {
-    el.classList.add('reveal');
-    observer.observe(el);
-});
+// Scroll animations are handled by inline script in index.html
+// (IntersectionObserver observes .reveal elements and adds .visible class on scroll)
+// This keeps animation logic centralized and avoids duplicate observers
 
 // Navbar background on scroll
 const navbar = document.querySelector('.navbar');
