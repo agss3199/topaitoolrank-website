@@ -113,10 +113,25 @@ a {
   transform: translateY(-1px);
 }
 
+.nav-item-dropdown {
+  position: relative;
+}
+
 .nav-item-dropdown > .nav-link::after {
   content: "⌄";
   margin-left: 7px;
   font-size: 0.8rem;
+}
+
+/* Bridge between nav item and dropdown to prevent hover loss */
+.nav-item-dropdown::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 14px;
+  pointer-events: auto;
 }
 
 .dropdown {
