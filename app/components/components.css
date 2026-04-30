@@ -1,0 +1,74 @@
+/* ============================================================
+   Shared Component Styles
+   Global keyframes and utilities used across all components
+   ============================================================ */
+
+/* ============================================================
+   Shared Keyframes (used by Button, Badge, Modal, etc.)
+   ============================================================ */
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-stepped {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes error-slide {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   Global Focus Styles (reset per component)
+   Components provide their own focus-visible outline styles
+   to avoid browser defaults conflicting with design system
+   ============================================================ */
+
+/* No global focus outline — each component specifies its own */
