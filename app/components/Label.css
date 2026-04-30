@@ -1,0 +1,26 @@
+/* ============================================================
+   Label Component Styles
+   All styling uses design tokens from app/globals.css
+   ============================================================ */
+
+.label {
+  display: block;
+  color: var(--color-text-headline);
+  font-weight: 500;
+  font-size: var(--font-size-button);
+  line-height: var(--line-height-body);
+  margin-bottom: var(--spacing-sm);
+  user-select: none;
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+.label:hover {
+  color: var(--color-accent);
+}
+
+.label-required {
+  color: var(--color-error);
+  margin-left: 2px;
+  font-weight: 700;
+}

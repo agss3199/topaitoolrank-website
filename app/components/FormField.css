@@ -1,0 +1,69 @@
+/* ============================================================
+   FormField Component Styles
+   Combines Label + Input + error message with proper spacing
+   ============================================================ */
+
+.form-field {
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================
+   Hint Text (optional help text)
+   ============================================================ */
+
+.form-field-hint {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-gray-500);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: 400;
+}
+
+/* ============================================================
+   Error Message Spacing
+   ============================================================ */
+
+.form-field-error {
+  display: block;
+  margin-top: var(--spacing-xs);
+  color: var(--color-error);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: 500;
+  animation: form-field-error-slide 0.2s ease-out;
+}
+
+@keyframes form-field-error-slide {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   Spacing Between FormFields
+   ============================================================ */
+
+.form-field + .form-field {
+  margin-top: var(--spacing-lg);
+}
+
+/* ============================================================
+   Accessibility: Reduced Motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .form-field-error {
+    animation: none;
+  }
+}

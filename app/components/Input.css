@@ -1,0 +1,224 @@
+/* ============================================================
+   Input Component Styles
+   All styling uses design tokens from app/globals.css
+   ============================================================ */
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ============================================================
+   Label Styling
+   ============================================================ */
+
+.input-label {
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text-headline);
+  font-weight: 500;
+  font-size: var(--font-size-button);
+  user-select: none;
+}
+
+.input-required {
+  color: var(--color-error);
+  margin-left: 2px;
+  font-weight: 700;
+}
+
+/* ============================================================
+   Input Container (wrapper for input + password toggle)
+   ============================================================ */
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* ============================================================
+   Input Base Styling
+   ============================================================ */
+
+.input {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-md);
+  background-color: var(--color-white);
+  color: var(--color-text-headline);
+  font-family: inherit;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  transition: var(--transition);
+  -webkit-tap-highlight-color: transparent;
+
+  /* Remove browser default input styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* ============================================================
+   Input States: Focus
+   ============================================================ */
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent);
+  background-color: var(--color-white);
+}
+
+.input:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 0;
+}
+
+/* ============================================================
+   Input States: Hover
+   ============================================================ */
+
+.input:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-gray-500);
+}
+
+/* ============================================================
+   Input States: Disabled
+   ============================================================ */
+
+.input:disabled {
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-500);
+  cursor: not-allowed;
+  opacity: 0.6;
+  border-color: var(--color-gray-300);
+}
+
+/* ============================================================
+   Input States: Error
+   ============================================================ */
+
+.input--error {
+  border-color: var(--color-error);
+  background-color: rgba(239, 68, 68, 0.05);
+}
+
+.input--error:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 2px var(--color-error);
+}
+
+.input--error:focus-visible {
+  outline-color: var(--color-error);
+}
+
+/* ============================================================
+   Password Toggle Button
+   ============================================================ */
+
+.input-toggle-password {
+  position: absolute;
+  right: var(--spacing-md);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gray-500);
+  transition: color var(--transition);
+  -webkit-tap-highlight-color: transparent;
+
+  /* Ensure button doesn't interfere with input interaction */
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.input-toggle-password:hover {
+  color: var(--color-text-headline);
+}
+
+.input-toggle-password:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.input-toggle-password:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   Password Toggle Icon
+   ============================================================ */
+
+.input-toggle-icon {
+  width: 20px;
+  height: 20px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Add padding-right to input when password toggle is visible */
+.input-container:has(.input-toggle-password) .input {
+  padding-right: calc(var(--spacing-md) + 40px);
+}
+
+/* ============================================================
+   Error Message
+   ============================================================ */
+
+.input-error {
+  display: block;
+  margin-top: var(--spacing-xs);
+  color: var(--color-error);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: 500;
+}
+
+/* ============================================================
+   Placeholder Styling
+   ============================================================ */
+
+.input::placeholder {
+  color: var(--color-gray-500);
+  opacity: 1;
+}
+
+/* ============================================================
+   Accessibility: Reduced Motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .input {
+    transition: none;
+  }
+
+  .input-toggle-password {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   Auto-fill Styling (for password managers)
+   ============================================================ */
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--color-white) inset !important;
+  box-shadow: 0 0 0 30px var(--color-white) inset !important;
+}
+
+.input:-webkit-autofill {
+  -webkit-text-fill-color: var(--color-text-headline) !important;
+  caret-color: var(--color-accent) !important;
+}
