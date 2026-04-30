@@ -90,7 +90,7 @@ a {
   min-height: 44px;
   padding: 0 16px;
   border-radius: 999px;
-  color: #1e293b;
+  color: var(--color-gray-800);
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 650;
@@ -103,13 +103,13 @@ a {
 }
 
 .nav-pill {
-  color: #ffffff;
+  color: var(--color-white);
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   box-shadow: 0 12px 32px rgba(37, 99, 235, 0.24);
 }
 
 .nav-pill:hover {
-  color: #ffffff;
+  color: var(--color-white);
   transform: translateY(-1px);
 }
 
@@ -161,7 +161,7 @@ a {
   display: block;
   padding: 11px 12px;
   border-radius: 12px;
-  color: #1e293b;
+  color: var(--color-gray-800);
   text-decoration: none;
   font-size: 0.92rem;
   font-weight: 650;
@@ -240,7 +240,7 @@ a {
 .pulse-dot {
   width: 9px;
   height: 9px;
-  background: #22c55e;
+  background: var(--color-success);
   border-radius: 999px;
   box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.12);
 }
@@ -286,7 +286,7 @@ a {
 }
 
 .cta-button.primary {
-  color: #ffffff;
+  color: var(--color-white);
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   box-shadow: 0 18px 42px rgba(37, 99, 235, 0.25);
 }
@@ -305,7 +305,7 @@ a {
 
 .cta-button.secondary:hover {
   transform: translateY(-3px);
-  background: #ffffff;
+  background: var(--color-white);
 }
 
 .hero-proof {
@@ -415,7 +415,7 @@ a {
 .core-center {
   width: 78px;
   height: 78px;
-  background: radial-gradient(circle at 35% 25%, #ffffff, #06b6d4 35%, #2563eb 76%);
+  background: radial-gradient(circle at 35% 25%, var(--color-white), var(--color-gradient-cyan) 35%, var(--color-gradient-blue) 76%);
   box-shadow:
     0 0 0 18px rgba(37, 99, 235, 0.08),
     0 0 60px rgba(37, 99, 235, 0.35);
@@ -481,7 +481,7 @@ a {
   text-align: center;
   padding: 18px;
   border-radius: 18px;
-  background: linear-gradient(180deg, #ffffff, #f4f9ff);
+  background: linear-gradient(180deg, var(--color-white), var(--color-bg-gradient-light));
   border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
@@ -534,7 +534,7 @@ a {
 
 .services,
 .why-us {
-  background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+  background: linear-gradient(180deg, var(--color-white) 0%, var(--color-bg-gradient-lighter) 100%);
 }
 
 .services-grid,
@@ -598,7 +598,7 @@ a {
   place-items: center;
   margin-bottom: 28px;
   border-radius: 16px;
-  color: #ffffff;
+  color: var(--color-white);
   font-weight: 900;
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   box-shadow: 0 14px 30px rgba(37, 99, 235, 0.2);
@@ -629,7 +629,7 @@ a {
   background:
     radial-gradient(circle at 15% 20%, rgba(37, 99, 235, 0.12), transparent 28%),
     radial-gradient(circle at 85% 70%, rgba(37, 99, 235, 0.1), transparent 30%),
-    #f8fbff;
+    var(--color-bg-gradient-lightest);
 }
 
 .tools-grid {
@@ -651,7 +651,7 @@ a {
   padding: 7px 11px;
   border-radius: 999px;
   background: rgba(34, 197, 94, 0.11);
-  color: #16a34a;
+  color: var(--color-success);
   font-weight: 900;
   font-size: 0.75rem;
   margin-bottom: 20px;
@@ -686,7 +686,7 @@ a {
 }
 
 .process {
-  background: #ffffff;
+  background: var(--color-white);
 }
 
 .process-grid {
@@ -715,7 +715,7 @@ a {
   height: 44px;
   margin-bottom: 20px;
   border-radius: 999px;
-  color: #ffffff;
+  color: var(--color-white);
   font-weight: 900;
   background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
 }
@@ -723,7 +723,7 @@ a {
 .contact {
   background:
     linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(6, 182, 212, 0.08)),
-    #ffffff;
+    var(--color-white);
 }
 
 .contact-grid {
@@ -766,7 +766,7 @@ a {
   padding: 17px 18px;
   border: 1px solid rgba(37, 99, 235, 0.16);
   border-radius: 18px;
-  background: #ffffff;
+  background: var(--color-white);
   color: var(--dark-text);
   font: inherit;
   transition: var(--transition);
@@ -791,8 +791,8 @@ a {
 
 .footer {
   padding: 70px 0 24px;
-  background: #07111f;
-  color: #dbeafe;
+  background: var(--color-footer-bg);
+  color: var(--color-footer-text);
 }
 
 .footer-content {
@@ -803,7 +803,7 @@ a {
 
 .footer h4 {
   margin-bottom: 14px;
-  color: #ffffff;
+  color: var(--color-white);
 }
 
 .footer p,
@@ -813,7 +813,7 @@ a {
 }
 
 .footer a:hover {
-  color: #ffffff;
+  color: var(--color-white);
 }
 
 .footer ul {
@@ -906,7 +906,7 @@ a {
     align-items: stretch;
     gap: 8px;
     padding: 16px;
-    background: #ffffff;
+    background: var(--color-white);
     border: 1px solid var(--border-color);
     border-radius: 24px;
     box-shadow: var(--shadow-soft);

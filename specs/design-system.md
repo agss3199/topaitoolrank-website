@@ -1,201 +1,213 @@
 # Design System Specification
 
-## Color Palette
+**Authority**: This specification defines the complete design language for all pages on topaitoolrank.com. All visual design decisions must conform to this spec.
 
-### Primary Colors
-- **Black (Primary Text):** `#0f1419` or `#000000` (use #000 for true black)
-- **White (Background):** `#ffffff` or `#fafbfc` (off-white for subtle depth)
-- **Gray (Secondary Text):** `#64748b` (body text, muted captions)
+---
 
-### Accent Color
-- **Neon Lime:** `#d4ff00` (primary interaction color)
-  - Usage: CTA buttons, key highlights, hover states, accent text
-  - Contrast ratio on black: 19.3:1 (WCAG AAA)
-  - Contrast ratio on white: 5.2:1 (WCAG AA)
+## 1. Color System
+
+### Primary Palette
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `--color-accent` | #3b82f6 | Primary action color |
+| `--color-accent-hover` | #1e40af | Darker shade for hover |
+| `--color-black` | #0f1419 | Text, borders |
+| `--color-white` | #ffffff | Background, text on dark |
+
+### Gray Scale
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `--color-gray-100` | #f1f5f9 | Light backgrounds |
+| `--color-gray-200` | #e2e8f0 | Subtle dividers |
+| `--color-gray-300` | #cbd5e1 | Medium borders |
+| `--color-gray-500` | #64748b | Secondary text |
+| `--color-gray-800` | #1e293b | Dark text |
+| `--color-gray-900` | #0f172a | Very dark text |
 
 ### Semantic Colors
-- **Success:** `#10b981` (for valid states, positive feedback)
-- **Warning:** `#f59e0b` (for caution, alerts)
-- **Error:** `#ef4444` (for errors, validation failures)
-- **Info:** `#3b82f6` (for informational messages)
 
-### Backgrounds
-- **Light Background:** `#ffffff` or `#f8fafc`
-- **Dark Background:** `#0f1419` (only for hero section or sections with dark overlay)
-- **Accent Background:** `#d4ff00` (high-contrast sections, minimal use)
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `--color-success` | #22c55e | Success states |
+| `--color-warning` | #eab308 | Warning states |
+| `--color-error` | #ef4444 | Error states |
+| `--color-info` | #3b82f6 | Informational |
 
----
+### Constraints
 
-## Typography
-
-### Font Families
-- **Headlines (H1-H3):** `system-ui, -apple-system, sans-serif`
-  - Fallback: `Segoe UI, Roboto, sans-serif`
-  - Weight: 700, 800, or 900 (bold, confident)
-  
-- **Body Text (P, span, labels):** `system-ui, -apple-system, sans-serif`
-  - Fallback: `Segoe UI, Roboto, sans-serif`
-  - Weight: 400 or 500 (regular, readable)
-
-### Font Sizes (Responsive)
-
-#### Desktop (1024px+)
-| Element | Size | Line Height | Weight |
-|---------|------|-------------|--------|
-| H1 (Hero) | 180px | 1.05 | 900 |
-| H2 (Section) | 56px | 1.2 | 800 |
-| H3 (Subsection) | 36px | 1.3 | 700 |
-| Body (P) | 18px | 1.6 | 400 |
-| Small (caption, meta) | 14px | 1.5 | 400 |
-| Button text | 16px | 1.5 | 600 |
-
-#### Tablet (768px - 1023px)
-- H1: 120px
-- H2: 40px
-- H3: 28px
-- Body: 16px
-- Small: 14px
-
-#### Mobile (< 768px)
-- H1: 48px
-- H2: 32px
-- H3: 24px
-- Body: 16px
-- Small: 14px
-
-### Letter Spacing
-- Headlines: `-0.03em` (tighter for confidence)
-- Body: `0em` (normal)
-- All Caps: `0.05em` (wider for clarity)
-
-### Line Height (Vertical Rhythm)
-- Headlines: 1.05 - 1.2 (tight, dramatic)
-- Body: 1.6 (generous for readability)
-- Small: 1.5 (balanced)
+- **MUST NOT use hardcoded colors** outside CSS variables
+- Every color references `var(--color-*)`
 
 ---
 
-## Spacing System (8px Base)
+## 2. Typography System
 
-| Unit | Value | Use Cases |
-|------|-------|-----------|
-| xs | 4px | Micro-spaces (between icons and text) |
-| sm | 8px | Padding inside buttons, small gaps |
-| md | 16px | Component padding, minor sections |
-| lg | 24px | Section padding, spacing between items |
-| xl | 40px | Section spacing, major gaps |
-| 2xl | 60px | Hero padding, between sections |
-| 3xl | 80px | Section top/bottom padding |
-| 4xl | 120px | Full section spacing, hero offset |
+### Font Family
 
-### Standard Padding/Margin
-- Button: `12px 24px` (sm + md)
-- Card: `24px` (lg)
-- Section: `60px 0` (2xl; desktop), `40px 0` (xl; tablet), `32px 0` (lg; mobile)
-- Container: `40px` sides (md + lg; responsive)
+System fonts only: `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
 
----
+**Rationale**: No web fonts for Core Web Vitals performance
 
-## Border Radius
+### Font Sizes (Responsive via clamp())
 
-| Variant | Value | Use Cases |
-|---------|-------|-----------|
-| None | 0px | Edges, borders |
-| sm | 8px | Small buttons, small badges |
-| md | 12px | Input fields, cards |
-| lg | 16px | Medium components |
-| xl | 24px | Large cards, major components |
-| full | 999px | Buttons, pills, rounded elements |
+| Token | Desktop | Mobile | Usage |
+|-------|---------|--------|-------|
+| `--font-size-h1` | 180px | 48px | Page headings |
+| `--font-size-h2` | 56px | 32px | Section headings |
+| `--font-size-h3` | 36px | 24px | Subsection headings |
+| `--font-size-body` | 18px | 16px | Body text |
+| `--font-size-small` | 14px | 14px | Captions |
+| `--font-size-button` | 16px | 16px | Buttons |
 
----
+### Font Weights
 
-## Shadows
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--font-weight-headline` | 800 | Headings |
+| `--font-weight-button` | 600 | Buttons |
 
-- **None:** No shadow (use borders for definition)
-- **Soft (hover):** `0 4px 12px rgba(0, 0, 0, 0.08)`
-- **Card:** `0 10px 25px rgba(0, 0, 0, 0.1)`
-- **Lift (active):** `0 20px 40px rgba(0, 0, 0, 0.15)`
+### Line Heights
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--line-height-headline` | 1.05 | Headings |
+| `--line-height-body` | 1.6 | Body text |
+| `--line-height-small` | 1.5 | Small text |
 
 ---
 
-## Component Specifications
+## 3. Spacing System (8px Grid)
+
+All spacing must be multiples of 8px.
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--spacing-xs` | 4px | Minimal |
+| `--spacing-sm` | 8px | Tight |
+| `--spacing-md` | 16px | Default |
+| `--spacing-lg` | 24px | Section padding |
+| `--spacing-xl` | 40px | Large gaps |
+| `--spacing-2xl` | 60px | Hero margins |
+| `--spacing-3xl` | 80px | Page sections |
+| `--spacing-4xl` | 120px | Major breaks |
+
+---
+
+## 4. Elevation & Shadows
+
+| Token | CSS Value | Usage |
+|-------|-----------|-------|
+| `--shadow-soft` | 0 4px 12px rgba(0,0,0,0.08) | Cards |
+| `--shadow-card` | 0 10px 25px rgba(0,0,0,0.1) | Modals |
+| `--shadow-lift` | 0 20px 40px rgba(0,0,0,0.15) | Floating |
+
+---
+
+## 5. Border Radius
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--radius-sm` | 4px | Small corners |
+| `--radius-md` | 8px | Buttons, inputs |
+| `--radius-lg` | 12px | Cards, dropdowns |
+| `--radius-xl` | 16px | Large cards |
+| `--radius-full` | 9999px | Pills |
+
+---
+
+## 6. Animations & Transitions
+
+```css
+--transition: all 0.3s ease;
+```
+
+**Rule**: All animations must respect `prefers-reduced-motion` preference.
+
+---
+
+## 7. Components
 
 ### Buttons
 
-**Primary (CTA):**
-- Background: Neon lime (`#d4ff00`)
-- Text: Black (`#000000`)
-- Padding: `12px 24px`
-- Border radius: 8px
-- Font weight: 600
-- Font size: 16px
-- Border: None
-- Hover: Darken background to `#b8e600`, add soft shadow
-- Active: Darken to `#9fd400`, add lift shadow
+- **Primary**: Blue (#3b82f6) background, white text
+- **Secondary**: Transparent, blue border and text
+- **Padding**: 12px × 16px
+- **Border radius**: 8px
+- **Focus**: 2px solid outline, 2px offset
+- **Hover**: Darker blue (#1e40af)
 
-**Secondary:**
-- Background: `#f0f1f3` (light gray)
-- Text: Black (`#0f1419`)
-- Padding: `12px 24px`
-- Border radius: 8px
-- Border: 1px solid `#d1d5db`
-- Hover: Background to `#e5e7eb`, add soft shadow
-- Active: Background to `#d1d5db`
+### Forms
 
-**Text (Link):**
-- Background: transparent
-- Text: Neon lime (`#d4ff00`)
-- Underline: None (default)
-- Hover: Underline appears, text remains lime
-- Active: Darker lime
+- **Input padding**: 12px 16px
+- **Border**: 1px solid gray-300
+- **Focus**: Blue outline
+- **Error**: Red border with light red background
+- **Label**: 500 weight, headline color
 
-### Input Fields
-- Background: `#ffffff` or `#f8fafc`
-- Border: 1px solid `#d1d5db`
-- Border radius: 8px
-- Padding: `12px 16px`
-- Font size: 16px
-- Focus: Border color to neon lime, soft shadow
-- Disabled: Background `#f3f4f6`, text `#9ca3af`
+### Navigation
+
+- **Position**: Fixed, top 18px
+- **Background**: White 82% with 18px blur
+- **Border radius**: 999px (full pill)
+- **Dropdown**: Below nav item with CSS bridge
 
 ### Cards
-- Background: `#ffffff`
-- Border: 1px solid `#e5e7eb`
-- Border radius: 12px
-- Padding: `24px`
-- Shadow: Soft
-- Hover: Shadow lift, subtle scale (1.02)
+
+- **Background**: White
+- **Border**: 1px gray-200
+- **Padding**: 24px
+- **Shadow**: soft
+- **Radius**: 12px
+- **Hover**: Darker border, card shadow
+
+### Modals
+
+- **Padding**: 40px
+- **Shadow**: card
+- **Radius**: 12px
+- **Z-index**: 2000
+- **Overlay**: Semi-transparent dark
 
 ---
 
-## States
+## 8. Accessibility
 
-### Hover
-- Background lightens (if solid color) or adds soft shadow
-- Text may change color to accent
-- Cursor changes to pointer (for interactive elements)
+### WCAG 2.1 Level AAA
 
-### Focus
-- Outline: 2px solid neon lime, offset 2px
-- Or: Colored border (on form inputs)
-- Must be visible for accessibility (WCAG AAA)
-
-### Active/Pressed
-- Background darkens or becomes accent color
-- May include scale transform (0.98)
-- Shadow deepens
-
-### Disabled
-- Opacity: 50%
-- Cursor: `not-allowed`
-- No hover effects
+- **Text contrast**: Minimum 7:1
+- **Focus**: Always visible (2px outline)
+- **HTML**: Semantic structure
+- **ARIA**: Labels on custom elements
+- **Keyboard**: All interactive elements
+- **Motion**: Respects prefers-reduced-motion
 
 ---
 
-## Dark Mode (Optional Future)
+## 9. Responsive Breakpoints
 
-If dark mode is added:
-- Background: `#0f1419` or `#1a1f2e`
-- Text: `#ffffff`
-- Neon lime: Remains `#d4ff00` (already high contrast on dark)
-- Cards: `#1f2335` with 1px border `#404854`
+| Breakpoint | Width |
+|-----------|-------|
+| Mobile | 320px |
+| Tablet | 768px |
+| Desktop | 1024px |
+| Wide | 1440px |
+
+**Mobile-first** approach: base on 320px, enhance upward.
+
+---
+
+## 10. Performance Targets
+
+| Metric | Target |
+|--------|--------|
+| **LCP** | ≤ 2.2s |
+| **INP** | < 50ms |
+| **CLS** | < 0.05 |
+
+**Requirements**:
+- No web fonts
+- Image optimization
+- 500ms debounce on inputs
+- System fonts only

@@ -1,31 +1,47 @@
-# Homepage Redesign Specifications Index
+# Specifications Index
 
-| File | Domain | Description |
-|------|--------|-------------|
-| [design-system.md](./design-system.md) | Design | Typography, color system, spacing, component specs |
-| [layout-specs.md](./layout-specs.md) | Layout | Hero, sections, asymmetric grid, responsive breakpoints |
-| [interactions.md](./interactions.md) | Interactions | Hover states, scroll reveals, micro-interactions |
-| [performance-requirements.md](./performance-requirements.md) | Performance | Core Web Vitals targets, asset optimization, load time |
-| [accessibility.md](./accessibility.md) | Accessibility | WCAG 2.1 AA compliance, contrast, keyboard nav, motion |
+This directory contains the authority specifications for all domain areas of topaitoolrank.com. Each spec file is detailed enough to be the complete reference for implementation and review.
 
 ---
 
-## Overview
+## Design & Visual
 
-The homepage redesign transforms topaitoolrank.com from a commodity aesthetic (particles, orbs, safe colors) to a Bold & Minimal design (large typography, neon lime accent, asymmetric layout) that creates high recall and differentiates from competitors.
-
-**Design Direction:** Option A - Brutalist Tech (confidence through restraint)
-**Accent Color:** Neon Lime (#d4ff00)
-**Key Change:** Remove particle canvas, add bold typography and color confidence
-**Performance Impact:** +2.5% improvement (removes particles)
-**Accessibility Impact:** WCAG AAA (up from AA)
+- [design-system.md](design-system.md) — Complete visual language, colors, typography, spacing, components, accessibility, responsive design, performance targets
 
 ---
 
-## Design Principles
+## Usage
 
-1. **Confidence through restraint** — No particles or glows; let typography and color do the work
-2. **Novelty** — Asymmetric offsets and large text differentiate from competitors
-3. **Purpose-driven motion** — Only animate when it adds semantic information (scroll reveals)
-4. **Typography as design** — Text size hierarchy creates rhythm; large headlines command attention
-5. **High contrast** — Monochrome + neon lime ensures visibility and memorability
+When implementing a feature:
+
+1. Find the relevant spec file in this index
+2. Read it thoroughly — it is the authority on what to build
+3. Verify your implementation matches every detail
+4. If the spec needs updating after implementation, update it in the same commit and document the deviation
+
+When reviewing code:
+
+1. Identify which spec(s) apply
+2. Check implementation against spec requirements line by line
+3. Flag any deviations (with rationale if documented)
+4. Ask: "Does the implementation match the spec?"
+
+---
+
+## Modification Protocol
+
+**Update specs immediately when implementation reveals gaps.** Per `rules/specs-authority.md` § "Specs are documents written to solve problems", not blueprints written and locked. If a spec doesn't cover a case you encountered during implementation, update the spec in the same commit and explain the change in the commit body.
+
+Example:
+
+```
+feat(design): modernize auth pages to match branding
+
+Updated button specs to include loading state styling.
+Loading buttons use gray-300 background with spinner overlay.
+Implemented per spec §7 Components with new loading variant.
+Updated design-system.md to document the variant.
+
+Commit: 6e8a7b4
+```
+

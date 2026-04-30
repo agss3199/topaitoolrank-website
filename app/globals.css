@@ -32,11 +32,24 @@
   /* Background colors */
   --color-bg-light: #fafafa;
   --color-bg-dark: #0f1419;
+  --color-bg-gradient-light: #f4f9ff;
+  --color-bg-gradient-lighter: #f7fbff;
+  --color-bg-gradient-lightest: #f8fbff;
+
+  /* Gradient accent colors */
+  --color-gradient-cyan: #06b6d4;
+  --color-gradient-blue: #2563eb;
+  --color-gradient-light-blue: #dbeafe;
 
   /* Text colors */
   --color-text-headline: #0f1419;
   --color-text-body: #334155;
   --color-text-muted: #64748b;
+  --color-text-light: #dbeafe;
+
+  /* Footer colors */
+  --color-footer-bg: #07111f;
+  --color-footer-text: #dbeafe;
 
   /* Border */
   --color-border: #e2e8f0;
@@ -54,10 +67,11 @@
   --border-color: var(--color-border);
 
   /* ---- Todo 002: Typography Scale ---- */
-  --font-size-h1: 180px;
-  --font-size-h2: 56px;
-  --font-size-h3: 36px;
-  --font-size-body: 18px;
+  /* Responsive font sizes using clamp() for automatic scaling across breakpoints */
+  --font-size-h1: clamp(48px, 11.25vw, 180px);
+  --font-size-h2: clamp(32px, 5vw, 56px);
+  --font-size-h3: clamp(24px, 3.75vw, 36px);
+  --font-size-body: clamp(16px, 1.125vw, 18px);
   --font-size-small: 14px;
   --font-size-button: 16px;
 
@@ -99,24 +113,9 @@
   --transition: all 0.3s ease;
 }
 
-/* ---- Tablet responsive typography ---- */
-@media (max-width: 1024px) {
-  :root {
-    --font-size-h1: 120px;
-    --font-size-h2: 40px;
-    --font-size-h3: 28px;
-  }
-}
-
-/* ---- Mobile responsive typography ---- */
-@media (max-width: 640px) {
-  :root {
-    --font-size-h1: 48px;
-    --font-size-h2: 32px;
-    --font-size-h3: 24px;
-    --font-size-body: 16px;
-  }
-}
+/* ---- Responsive typography handled via clamp() ---- */
+/* Font sizes scale automatically based on viewport width between min and max values.
+   No media queries needed — clamp() provides smooth scaling across all devices. */
 
 /* =============================================================
    Base Resets
