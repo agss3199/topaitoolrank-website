@@ -1,0 +1,65 @@
+/* ============================================================
+   Card Component Styles
+   All styling uses design tokens from app/globals.css
+   ============================================================ */
+
+.card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition);
+}
+
+/* ============================================================
+   Padding Variants
+   ============================================================ */
+
+.card--padding-sm {
+  padding: var(--spacing-sm);
+}
+
+.card--padding-md {
+  padding: var(--spacing-lg);
+}
+
+.card--padding-lg {
+  padding: var(--spacing-xl);
+}
+
+/* ============================================================
+   Hover State
+   ============================================================ */
+
+.card--hover {
+  cursor: pointer;
+  user-select: none;
+}
+
+.card--hover:hover {
+  border-color: var(--color-gray-300);
+  box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
+}
+
+.card--hover:active {
+  transform: translateY(0);
+}
+
+/* ============================================================
+   Accessibility: Reduced Motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+
+  .card--hover:hover {
+    transform: none;
+  }
+
+  .card--hover:active {
+    transform: none;
+  }
+}
