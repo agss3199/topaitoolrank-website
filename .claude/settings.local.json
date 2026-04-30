@@ -57,7 +57,8 @@
       "Bash(npm test:*)",
       "Bash(ls:*)",
       "Bash(find .next/static -name \"*.css\" -exec wc -c {} +)",
-      "Bash(find .next/static -name \"*.js\" -exec wc -c {} +)"
+      "Bash(find .next/static -name \"*.js\" -exec wc -c {} +)",
+      "Bash(npx playwright:*)"
     ]
   }
 }

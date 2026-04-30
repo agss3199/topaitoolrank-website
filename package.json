@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:e2e": "npx playwright test",
+    "test:e2e:chromium": "npx playwright test --project=chromium-desktop",
+    "test:e2e:update-snapshots": "npx playwright test --update-snapshots"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.38.0",
@@ -18,6 +21,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4.2.4",
     "@types/node": "^20.10.0",
     "@types/react": "^19.0.0",
