@@ -47,7 +47,13 @@
       "Bash(git commit -m 'fix: install and configure Tailwind CSS with @tailwindcss/postcss for Next.js 16:*)",
       "Bash(git commit:*)",
       "Bash(bash /tmp/security_audit.sh)",
-      "Bash(bash /tmp/detailed_audit.sh)"
+      "Bash(bash /tmp/detailed_audit.sh)",
+      "Bash(jq '.projects[] | select\\(.name==\"topaitoolrank-website\"\\) | .id' -r)",
+      "Bash(python3 -c \"import sys, json; projects = json.load\\(sys.stdin\\)['projects']; web = [p for p in projects if 'topaitoolrank-website' in p['name']]; print\\(web[0]['id'] if web else 'NOT_FOUND'\\)\")",
+      "Bash(npm ls:*)",
+      "Bash(ls tests/)",
+      "Bash(npx vitest:*)",
+      "Bash(npx next:*)"
     ]
   }
 }

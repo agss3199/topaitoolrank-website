@@ -1,8 +1,5 @@
 # Project Skills
 
-No project-specific skills. All skills have been moved to numbered directories:
+## WA Sender Tool
 
-- Trust-plane store backends → `skills/26-eatp-reference/eatp-store-backends.md`
-- Trust-plane security patterns → `skills/26-eatp-reference/eatp-trust-plane-security.md`
-- Trust-plane enterprise features → `skills/26-eatp-reference/eatp-trust-plane-enterprise.md`
-
+- **[wa-sender-patterns](./wa-sender-patterns.md)** — Full-stack state persistence for bulk messaging. Three-layer model: React auto-save → Next.js API validation → Supabase PostgreSQL. Includes patterns for exhaustive useEffect dependencies, session restoration on mount, UUID validation, input length constraints, structured error logging, and idempotent PostgreSQL migrations (DROP POLICY IF EXISTS, ADD COLUMN IF NOT EXISTS). Production-validated (red team convergence: 0 critical, 0 high findings).

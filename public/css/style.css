@@ -1,20 +1,8 @@
-:root {
-  --primary-color: #2563eb;
-  --secondary-color: #06b6d4;
-  --accent-color: #7c3aed;
-  --dark-text: #08111f;
-  --body-text: #334155;
-  --muted-text: #64748b;
-  --light-bg: #f8fbff;
-  --white: #ffffff;
-  --soft-blue: #eef6ff;
-  --border-color: rgba(37, 99, 235, 0.14);
-  --shadow-soft: 0 20px 70px rgba(15, 23, 42, 0.08);
-  --shadow-card: 0 18px 45px rgba(37, 99, 235, 0.12);
-  --radius: 24px;
-  --radius-sm: 16px;
-  --transition: all 0.3s ease;
-}
+/* =============================================================
+   Design System variables are defined in app/globals.css.
+   This file inherits them via the cascade.
+   Legacy aliases below for backward compatibility only.
+   ============================================================= */
 
 * {
   margin: 0;
@@ -197,15 +185,7 @@ a {
   padding: 150px 0 90px;
   display: flex;
   align-items: center;
-  overflow: hidden;
-}
-
-#canvas-3d {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
+  overflow-x: hidden;
 }
 
 .hero::after {
@@ -243,8 +223,8 @@ a {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 64px;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
   align-items: center;
 }
 
@@ -368,6 +348,8 @@ a {
   display: grid;
   place-items: center;
   perspective: 1000px;
+  margin-bottom: -120px;
+  z-index: 2;
 }
 
 .ai-card {
@@ -489,8 +471,8 @@ a {
 }
 
 .credibility-strip {
-  padding: 30px 0;
-  background: #ffffff;
+  padding: 144px 0 24px;
+  background: var(--color-bg-light, #fafafa);
   border-top: 1px solid rgba(37, 99, 235, 0.08);
   border-bottom: 1px solid rgba(37, 99, 235, 0.08);
 }
@@ -565,7 +547,11 @@ a {
 .reasons-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
+  gap: 24px;
+}
+
+.service-card-offset {
+  transform: translateY(40px);
 }
 
 .service-card,
@@ -706,6 +692,19 @@ a {
   gap: 18px;
 }
 
+.process-step::after {
+  content: "";
+  position: absolute;
+  top: 50px;
+  right: -12px;
+  width: 24px;
+  border-top: 2px solid rgba(37, 99, 235, 0.2);
+}
+
+.process-step:last-child::after {
+  display: none;
+}
+
 .process-step span {
   display: inline-grid;
   place-items: center;
@@ -767,14 +766,13 @@ a {
   background: #ffffff;
   color: var(--dark-text);
   font: inherit;
-  outline: none;
   transition: var(--transition);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.09);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(212, 255, 0, 0.25);
 }
 
 .contact-form .cta-button {
@@ -831,7 +829,7 @@ a {
   color: rgba(219, 234, 254, 0.62);
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1023px) {
   .hero-grid,
   .contact-grid {
     grid-template-columns: 1fr;
@@ -843,6 +841,11 @@ a {
 
   .hero-visual {
     min-height: 460px;
+    margin-bottom: -60px;
+  }
+
+  .service-card-offset {
+    transform: none;
   }
 
   .services-grid,
@@ -852,12 +855,16 @@ a {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .process-step::after {
+    display: none;
+  }
+
   .footer-content {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 780px) {
+@media (max-width: 767px) {
   .navbar {
     top: 10px;
   }
@@ -928,6 +935,10 @@ a {
     grid-template-columns: 1fr;
   }
 
+  .hero-visual {
+    margin-bottom: 0;
+  }
+
   .hero h1 {
     font-size: clamp(2.6rem, 13vw, 4.4rem);
   }
@@ -938,6 +949,10 @@ a {
 
   .cta-button {
     width: 100%;
+  }
+
+  .credibility-strip {
+    padding-top: 24px;
   }
 }
 
@@ -989,4 +1004,178 @@ a {
     width: 105px;
     height: 105px;
   }
+}
+
+/* =============================================================
+   Todo 005: Button Component Styles
+   ============================================================= */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: var(--color-accent);
+  color: var(--color-black);
+  border: none;
+  border-radius: 8px;
+  font-size: var(--font-size-button);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  line-height: 1.5;
+}
+
+.btn-primary:hover {
+  background: var(--color-accent);
+  filter: brightness(0.9);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.btn-primary:disabled,
+.btn-primary[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: var(--color-gray-100);
+  color: var(--color-black);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: var(--font-size-button);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  line-height: 1.5;
+}
+
+.btn-secondary:hover {
+  background: var(--color-gray-200);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.btn-secondary:disabled,
+.btn-secondary[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-text {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--color-accent);
+  border: none;
+  border-radius: 8px;
+  font-size: var(--font-size-button);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.btn-text:hover {
+  text-decoration: underline;
+}
+
+.btn-text:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.btn-text:disabled,
+.btn-text[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =============================================================
+   Todo 006: Input/Form Field Component Styles
+   ============================================================= */
+
+.form-input {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 16px;
+  background: var(--color-white);
+  color: var(--color-text-headline);
+  border: 1px solid var(--color-gray-300);
+  border-radius: 8px;
+  font-size: var(--font-size-body);
+  font-family: inherit;
+  transition: var(--transition);
+  line-height: 1.5;
+}
+
+.form-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(212, 255, 0, 0.25);
+}
+
+.form-input.error,
+.form-input-error {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.form-input:disabled {
+  background: var(--color-gray-100);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+textarea.form-input {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  color: var(--color-text-headline);
+}
+
+.form-error-message {
+  margin-top: 4px;
+  font-size: var(--font-size-small);
+  color: var(--color-error);
+}
+
+/* =============================================================
+   Todo 007: Card Component Styles
+   ============================================================= */
+
+.card {
+  background: var(--color-white);
+  padding: var(--spacing-lg);
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lift);
+  transform: scale(1.02);
 }

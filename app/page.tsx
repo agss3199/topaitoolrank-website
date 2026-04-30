@@ -3,10 +3,8 @@
 import { useEffect, useRef } from "react";
 
 export default function HomePage() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
   const navMenuRef = useRef<HTMLUListElement>(null);
-  const particlesRef = useRef<any[]>([]);
 
   useEffect(() => {
     // Hamburger menu toggle
@@ -41,99 +39,6 @@ export default function HomePage() {
     );
 
     revealItems.forEach((item) => revealObserver.observe(item));
-
-    // Canvas particle animation
-    const canvas = canvasRef.current;
-    if (canvas) {
-      const ctx = canvas.getContext("2d");
-      if (ctx) {
-        const resizeCanvas = () => {
-          canvas.width = window.innerWidth;
-          const heroSection = document.querySelector(".hero");
-          if (heroSection) {
-            canvas.height = heroSection.clientHeight;
-          }
-          createParticles();
-        };
-
-        const createParticles = () => {
-          particlesRef.current = [];
-          const count = Math.min(
-            90,
-            Math.floor(window.innerWidth / 18)
-          );
-
-          for (let i = 0; i < count; i++) {
-            particlesRef.current.push({
-              x: Math.random() * canvas.width,
-              y: Math.random() * canvas.height,
-              z: Math.random() * 2 + 0.5,
-              vx: (Math.random() - 0.5) * 0.35,
-              vy: (Math.random() - 0.5) * 0.35,
-              radius: Math.random() * 2 + 1,
-            });
-          }
-        };
-
-        const drawParticles = () => {
-          if (!ctx) return;
-
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-          const gradient = ctx.createLinearGradient(
-            0,
-            0,
-            canvas.width,
-            canvas.height
-          );
-          gradient.addColorStop(0, "rgba(40, 120, 255, 0.12)");
-          gradient.addColorStop(1, "rgba(0, 210, 255, 0.08)");
-          ctx.fillStyle = gradient;
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-          particlesRef.current.forEach((p, i) => {
-            p.x += p.vx * p.z;
-            p.y += p.vy * p.z;
-
-            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius * p.z, 0, Math.PI * 2);
-            ctx.fillStyle = "rgba(35, 112, 255, 0.35)";
-            ctx.fill();
-
-            for (let j = i + 1; j < particlesRef.current.length; j++) {
-              const q = particlesRef.current[j];
-              const dx = p.x - q.x;
-              const dy = p.y - q.y;
-              const distance = Math.sqrt(dx * dx + dy * dy);
-
-              if (distance < 130) {
-                ctx.beginPath();
-                ctx.moveTo(p.x, p.y);
-                ctx.lineTo(q.x, q.y);
-                ctx.strokeStyle = `rgba(14, 165, 233, ${
-                  0.16 * (1 - distance / 130)
-                })`;
-                ctx.lineWidth = 1;
-                ctx.stroke();
-              }
-            }
-          });
-
-          requestAnimationFrame(drawParticles);
-        };
-
-        window.addEventListener("resize", resizeCanvas);
-        resizeCanvas();
-        drawParticles();
-
-        return () => {
-          window.removeEventListener("resize", resizeCanvas);
-        };
-      }
-    }
   }, []);
 
   return (
@@ -206,8 +111,6 @@ export default function HomePage() {
 
       <main>
         <section id="home" className="hero">
-          <canvas id="canvas-3d" ref={canvasRef}></canvas>
-
           <div className="hero-orb hero-orb-one"></div>
           <div className="hero-orb hero-orb-two"></div>
 
@@ -342,7 +245,7 @@ export default function HomePage() {
                 </p>
               </article>
 
-              <article className="service-card reveal delay-2">
+              <article className="service-card service-card-offset reveal delay-2">
                 <div className="service-icon">03</div>
                 <h3>MVP &amp; Product Builds</h3>
                 <p>

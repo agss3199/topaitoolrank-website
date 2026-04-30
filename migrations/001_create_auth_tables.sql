@@ -28,30 +28,36 @@ ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.wa_sender_sessions ENABLE ROW LEVEL SECURITY;
 
 -- RLS Policies for users table
+DROP POLICY IF EXISTS "Users can read their own user record" ON public.users;
 CREATE POLICY "Users can read their own user record"
 ON public.users FOR SELECT USING (auth.uid() = id);
 
+DROP POLICY IF EXISTS "Users can update their own user record" ON public.users;
 CREATE POLICY "Users can update their own user record"
 ON public.users FOR UPDATE USING (auth.uid() = id);
 
 -- RLS Policies for wa_sender_sessions table
+DROP POLICY IF EXISTS "Users can read their own sessions" ON public.wa_sender_sessions;
 CREATE POLICY "Users can read their own sessions"
 ON public.wa_sender_sessions FOR SELECT USING (auth.uid() = user_id);
 
+DROP POLICY IF EXISTS "Users can create their own sessions" ON public.wa_sender_sessions;
 CREATE POLICY "Users can create their own sessions"
 ON public.wa_sender_sessions FOR INSERT WITH CHECK (auth.uid() = user_id);
 
+DROP POLICY IF EXISTS "Users can update their own sessions" ON public.wa_sender_sessions;
 CREATE POLICY "Users can update their own sessions"
 ON public.wa_sender_sessions FOR UPDATE USING (auth.uid() = user_id);
 
+DROP POLICY IF EXISTS "Users can delete their own sessions" ON public.wa_sender_sessions;
 CREATE POLICY "Users can delete their own sessions"
 ON public.wa_sender_sessions FOR DELETE USING (auth.uid() = user_id);
 
 -- Create indexes for performance
-CREATE INDEX idx_users_email ON public.users(email);
-CREATE INDEX idx_users_requires_approval ON public.users(requires_approval);
-CREATE INDEX idx_wa_sender_sessions_user_id ON public.wa_sender_sessions(user_id);
-CREATE INDEX idx_wa_sender_sessions_updated_at ON public.wa_sender_sessions(updated_at DESC);
+CREATE INDEX IF NOT EXISTS idx_users_email ON public.users(email);
+CREATE INDEX IF NOT EXISTS idx_users_requires_approval ON public.users(requires_approval);
+CREATE INDEX IF NOT EXISTS idx_wa_sender_sessions_user_id ON public.wa_sender_sessions(user_id);
+CREATE INDEX IF NOT EXISTS idx_wa_sender_sessions_updated_at ON public.wa_sender_sessions(updated_at DESC);
 
 -- Function to auto-insert user into public.users when auth.users is created
 CREATE OR REPLACE FUNCTION public.handle_new_user()

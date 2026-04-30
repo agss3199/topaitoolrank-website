@@ -2,23 +2,123 @@
 @tailwind components;
 @tailwind utilities;
 
+/* =============================================================
+   Design System Foundation (Todos 001-003, 008-009)
+   All tokens defined here as CSS variables.
+   ============================================================= */
+
 :root {
-  --primary-color: #2563eb;
-  --secondary-color: #06b6d4;
-  --accent-color: #7c3aed;
-  --dark-text: #08111f;
-  --body-text: #334155;
-  --muted-text: #64748b;
-  --light-bg: #f8fbff;
-  --white: #ffffff;
-  --soft-blue: #eef6ff;
-  --border-color: rgba(37, 99, 235, 0.14);
-  --shadow-soft: 0 20px 70px rgba(15, 23, 42, 0.08);
-  --shadow-card: 0 18px 45px rgba(37, 99, 235, 0.12);
-  --radius: 24px;
-  --radius-sm: 16px;
+  /* ---- Todo 001: Color Palette ---- */
+  --color-accent: #d4ff00;
+  --color-black: #0f1419;
+  --color-white: #ffffff;
+
+  /* Gray scale */
+  --color-gray-100: #f1f5f9;
+  --color-gray-200: #e2e8f0;
+  --color-gray-300: #cbd5e1;
+  --color-gray-500: #64748b;
+  --color-gray-800: #1e293b;
+  --color-gray-900: #0f172a;
+
+  /* Semantic colors */
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  /* Background colors */
+  --color-bg-light: #fafafa;
+  --color-bg-dark: #0f1419;
+
+  /* Text colors */
+  --color-text-headline: #0f1419;
+  --color-text-body: #334155;
+  --color-text-muted: #64748b;
+
+  /* Border */
+  --color-border: #e2e8f0;
+
+  /* Legacy aliases (for existing components until migrated) */
+  --primary-color: var(--color-accent);
+  --secondary-color: var(--color-gray-500);
+  --accent-color: var(--color-accent);
+  --dark-text: var(--color-text-headline);
+  --body-text: var(--color-text-body);
+  --muted-text: var(--color-text-muted);
+  --light-bg: var(--color-bg-light);
+  --white: var(--color-white);
+  --soft-blue: var(--color-gray-100);
+  --border-color: var(--color-border);
+
+  /* ---- Todo 002: Typography Scale ---- */
+  --font-size-h1: 180px;
+  --font-size-h2: 56px;
+  --font-size-h3: 36px;
+  --font-size-body: 18px;
+  --font-size-small: 14px;
+  --font-size-button: 16px;
+
+  --line-height-body: 1.6;
+  --line-height-small: 1.5;
+  --line-height-headline: 1.05;
+
+  --font-weight-button: 600;
+  --font-weight-headline: 800;
+
+  --letter-spacing-headline: -0.03em;
+  --letter-spacing-body: 0;
+
+  /* ---- Todo 003: Spacing System (8px base) ---- */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 40px;
+  --spacing-2xl: 60px;
+  --spacing-3xl: 80px;
+  --spacing-4xl: 120px;
+
+  /* ---- Todo 009: Shadow/Elevation System ---- */
+  --shadow-none: none;
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --shadow-lift: 0 20px 40px rgba(0, 0, 0, 0.15);
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+  --radius: var(--radius-lg);
+
+  /* Transition */
   --transition: all 0.3s ease;
 }
+
+/* ---- Tablet responsive typography ---- */
+@media (max-width: 1024px) {
+  :root {
+    --font-size-h1: 120px;
+    --font-size-h2: 40px;
+    --font-size-h3: 28px;
+  }
+}
+
+/* ---- Mobile responsive typography ---- */
+@media (max-width: 640px) {
+  :root {
+    --font-size-h1: 48px;
+    --font-size-h2: 32px;
+    --font-size-h3: 24px;
+    --font-size-body: 16px;
+  }
+}
+
+/* =============================================================
+   Base Resets
+   ============================================================= */
 
 * {
   margin: 0;
@@ -30,11 +130,11 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Body styles removed to allow individual pages to control backgrounds */
 body {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: var(--dark-text);
-  line-height: 1.6;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--color-text-headline);
+  line-height: var(--line-height-body);
+  font-size: var(--font-size-body);
   overflow-x: hidden;
 }
 
@@ -42,6 +142,19 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/* =============================================================
+   Todo 008: Focus Indicator Styles
+   ============================================================= */
+
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* =============================================================
+   Reduced Motion
+   ============================================================= */
 
 @media (prefers-reduced-motion: reduce) {
   * {
