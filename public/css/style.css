@@ -12,6 +12,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 /* NOTE: body styles removed - let individual pages control background */
@@ -23,6 +24,8 @@ a {
 
 .container {
   width: min(1180px, calc(100% - 40px));
+  max-width: 1180px;
+  padding: 0 40px;
   margin: 0 auto;
 }
 
@@ -551,7 +554,7 @@ a {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 0 0, rgba(6, 182, 212, 0.16), transparent 35%);
+  background: radial-gradient(circle at 0 0, rgba(37, 99, 235, 0.16), transparent 35%);
   opacity: 0;
   transition: var(--transition);
 }
@@ -609,8 +612,8 @@ a {
 
 .tools {
   background:
-    radial-gradient(circle at 15% 20%, rgba(6, 182, 212, 0.12), transparent 28%),
-    radial-gradient(circle at 85% 70%, rgba(124, 58, 237, 0.1), transparent 30%),
+    radial-gradient(circle at 15% 20%, rgba(37, 99, 235, 0.12), transparent 28%),
+    radial-gradient(circle at 85% 70%, rgba(37, 99, 235, 0.1), transparent 30%),
     #f8fbff;
 }
 
@@ -850,6 +853,10 @@ a {
 }
 
 @media (max-width: 767px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
   .navbar {
     top: 10px;
   }
@@ -943,7 +950,7 @@ a {
 
 @media (max-width: 560px) {
   .container {
-    width: min(100% - 28px, 1180px);
+    padding: 0 14px;
   }
 
   .services-grid,
@@ -1117,7 +1124,7 @@ a {
 
 .form-input.error,
 .form-input-error {
-  border-color: var(--color-error);
+  border-color: var(--color-error); /* resolves to border #ef4444 */
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
 }
 
@@ -1223,5 +1230,36 @@ textarea.form-input {
   .tool-link:hover {
     text-decoration: underline;
     text-decoration-color: var(--color-accent);
+  }
+}
+
+/* =============================================================
+   Button interaction states
+   ============================================================= */
+
+.cta-button,
+.btn-primary,
+.btn-secondary {
+  transition: all 0.3s ease;
+}
+
+.cta-button:active,
+.btn-primary:active,
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+
+/* =============================================================
+   Reduced motion preference
+   ============================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

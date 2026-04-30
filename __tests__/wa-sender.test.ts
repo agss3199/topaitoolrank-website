@@ -4,6 +4,8 @@
  * Tests for state persistence, file upload, message templates, and error handling.
  */
 
+import { describe, test, expect } from 'vitest';
+
 describe('WA Sender Tool - API Endpoints', () => {
   describe('POST /api/sheets/save', () => {
     describe('Input Validation', () => {
