@@ -31,6 +31,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="/css/animations.css" />
       </head>
       <body>
+        <a href="#main" className="skip-to-content">Skip to main content</a>
         {children}
 
         {/* Main JS for form handling, nav, animations */}

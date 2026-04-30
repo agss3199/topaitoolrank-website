@@ -15,6 +15,9 @@ export default function HomePage() {
       hamburger.addEventListener("click", () => {
         hamburger.classList.toggle("active");
         navMenu.classList.toggle("active");
+        const isExpanded = hamburger.classList.contains("active");
+        hamburger.setAttribute("aria-expanded", String(isExpanded));
+        hamburger.setAttribute("aria-label", isExpanded ? "Close menu" : "Open menu");
       });
 
       document.querySelectorAll(".nav-link").forEach((link) => {
@@ -43,7 +46,7 @@ export default function HomePage() {
 
   return (
     <>
-      <nav className="navbar">
+      <nav className="navbar" aria-label="Main navigation">
         <div className="container nav-container">
           <div className="logo">
             <a href="#home">Top AI Tool Rank</a>
@@ -101,6 +104,8 @@ export default function HomePage() {
             id="hamburger"
             ref={hamburgerRef}
             aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="navMenu"
           >
             <span></span>
             <span></span>
@@ -109,7 +114,7 @@ export default function HomePage() {
         </div>
       </nav>
 
-      <main>
+      <main id="main">
         <section id="home" className="hero">
           <div className="container hero-grid">
             <div className="hero-content reveal">
@@ -298,6 +303,7 @@ export default function HomePage() {
                 <a
                   href="javascript:void(0)"
                   className="tool-link disabled"
+                  aria-disabled="true"
                   onClick={() => alert("Voice Rating is coming soon!")}
                 >
                   Coming Soon
@@ -420,41 +426,47 @@ export default function HomePage() {
               </div>
             </div>
 
-            <form className="contact-form reveal delay-1" id="contactForm">
+            <form className="contact-form reveal delay-1" id="contactForm" aria-label="Contact form">
               <div className="form-group">
+                <label htmlFor="name" className="form-label sr-only">Your Name</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
                   placeholder="Your Name"
                   required
+                  aria-required="true"
                 />
               </div>
 
               <div className="form-group">
+                <label htmlFor="email" className="form-label sr-only">Your Email</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   placeholder="Your Email"
                   required
+                  aria-required="true"
                 />
               </div>
 
               <div className="form-group">
+                <label htmlFor="message" className="form-label sr-only">Your Message</label>
                 <textarea
                   id="message"
                   name="message"
                   placeholder="Tell me what you want to build"
                   rows={5}
                   required
+                  aria-required="true"
                 ></textarea>
               </div>
 
               <button type="submit" className="cta-button primary" id="submitBtn">
                 Send Message
               </button>
-              <p id="formStatus"></p>
+              <p id="formStatus" aria-live="polite"></p>
             </form>
           </div>
         </section>
