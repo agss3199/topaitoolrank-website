@@ -73,16 +73,27 @@ export async function POST(req: NextRequest) {
     if (current_index !== undefined) updateFields.current_index = current_index;
     if (sent_status !== undefined) updateFields.sent_status = sent_status;
 
-    // Issue 3: Use upsert instead of select+update (one query instead of two)
-    const { error } = await supabaseAdmin
+    // Issue 3: Try insert first, on conflict update instead of two queries
+    // First, try to insert; if row exists, update it
+    const { error: insertError } = await supabaseAdmin
       .from('wa_sender_sessions')
-      .upsert(
+      .insert(
         {
           user_id: userId,
           ...updateFields,
-        },
-        { onConflict: 'user_id' }
+        }
       );
+
+    // If insert failed due to duplicate key, update instead
+    let error = insertError;
+    if (insertError?.code === '23505') {
+      // Unique constraint violation - row exists, update it
+      const { error: updateError } = await supabaseAdmin
+        .from('wa_sender_sessions')
+        .update(updateFields)
+        .eq('user_id', userId);
+      error = updateError;
+    }
 
     if (error) {
       console.error('[wa-sender] save.upsert_error', {

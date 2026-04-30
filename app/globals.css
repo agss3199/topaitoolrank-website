@@ -9,7 +9,7 @@
 
 :root {
   /* ---- Todo 001: Color Palette ---- */
-  --color-accent: #d4ff00;
+  --color-accent: #3b82f6;
   --color-black: #0f1419;
   --color-white: #ffffff;
 
@@ -21,7 +21,7 @@
   --color-gray-800: #1e293b;
   --color-gray-900: #0f172a;
 
-  --color-accent-hover: #b8e600;
+  --color-accent-hover: #1e40af;
 
   /* Semantic colors */
   --color-success: #22c55e;
