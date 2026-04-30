@@ -111,9 +111,6 @@ export default function HomePage() {
 
       <main>
         <section id="home" className="hero">
-          <div className="hero-orb hero-orb-one"></div>
-          <div className="hero-orb hero-orb-two"></div>
-
           <div className="container hero-grid">
             <div className="hero-content reveal">
               <div className="eyebrow">
