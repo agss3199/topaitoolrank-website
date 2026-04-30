@@ -5,3 +5,4 @@ export { Label, type LabelProps } from './Label';
 export { FormField, type FormFieldProps } from './FormField';
 export { Card, type CardProps } from './Card';
 export { Modal, type ModalProps } from './Modal';
+export { Badge, type BadgeProps } from './Badge';

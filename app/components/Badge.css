@@ -1,0 +1,133 @@
+/* ============================================================
+   Badge Component Styles
+   All styling uses design tokens from app/globals.css
+   ============================================================ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  line-height: var(--line-height-small);
+  user-select: none;
+}
+
+/* ============================================================
+   Variant: Success / Sent (Green)
+   ============================================================ */
+
+.badge--success {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+/* ============================================================
+   Variant: Error / Failed (Red)
+   ============================================================ */
+
+.badge--error {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--color-error);
+}
+
+/* ============================================================
+   Variant: Warning / Pending (Yellow)
+   ============================================================ */
+
+.badge--warning {
+  background-color: rgba(234, 179, 8, 0.1);
+  color: #ca8a04;
+}
+
+/* ============================================================
+   Variant: Info (Blue)
+   ============================================================ */
+
+.badge--info {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: var(--color-accent);
+}
+
+/* ============================================================
+   Variant: Neutral / Unsent (Gray)
+   ============================================================ */
+
+.badge--neutral {
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-500);
+}
+
+/* ============================================================
+   Badge Icons
+   ============================================================ */
+
+.badge-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.badge-circle {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   Pending Spinner
+   ============================================================ */
+
+.badge-spinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+  animation: badge-spin 0.6s linear infinite;
+}
+
+@keyframes badge-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================
+   Accessibility: Reduced Motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-spinner {
+    animation: badge-spin-stepped 0.6s steps(4, end) infinite;
+  }
+}
+
+@keyframes badge-spin-stepped {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
