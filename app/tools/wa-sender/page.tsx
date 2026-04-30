@@ -9,12 +9,12 @@ type SendMode = 'whatsapp' | 'email';
 
 interface SheetConfig {
   name: string;
-  rows: Record<string, unknown>[];
   headers: string[];
   phoneCol: string;
   emailCol: string;
-  countryCodeCol?: string;
   enabled: boolean;
+  // Extracted contact list (phone numbers or emails) - NOT raw rows
+  contacts: string[];
 }
 
 interface PhoneEntry {
@@ -38,37 +38,6 @@ interface EmailEntry {
 
 type RecipientEntry = PhoneEntry | EmailEntry;
 type Notice = { text: string; kind: 'error' | 'success' | 'info' };
-
-function detectCountryCodeColumn(data: Record<string, unknown>[]): string | null {
-  if (!data.length) return null;
-  const headers = Object.keys(data[0]);
-  const sample = data.slice(0, Math.min(30, data.length));
-  let bestCol: string | null = null;
-  let bestScore = 0;
-  for (const header of headers) {
-    let score = 0;
-    const h = header.toLowerCase();
-    if (/country|code|cc|country_code|country code|dial/.test(h)) score += 15;
-    for (const row of sample) {
-      const val = String(row[header] ?? '').trim();
-      if (/^\+?\d{1,3}$/.test(val)) score += 1;
-    }
-    if (score > bestScore) {
-      bestScore = score;
-      bestCol = header;
-    }
-  }
-  return bestScore > 0 ? bestCol : null;
-}
-
-function normalizeCountryCode(raw: unknown): string | null {
-  if (raw === null || raw === undefined) return null;
-  const str = String(raw).trim();
-  if (!str) return null;
-  const cc = str.replace(/\D/g, '');
-  if (!cc || cc.length < 1 || cc.length > 3) return null;
-  return cc;
-}
 
 function normalizePhone(raw: unknown, countryCode: string): string | null {
   if (raw === null || raw === undefined) return null;
@@ -144,10 +113,9 @@ interface ColumnConfirmModal {
   open: boolean;
   detectedPhoneCol: string | null;
   detectedEmailCol: string | null;
-  detectedCountryCodeCol: string | null;
   allHeaders: string[];
   mode: SendMode;
-  onConfirm: (phoneCol: string, emailCol: string, ccCol: string | null) => void;
+  onConfirm: (phoneCol: string, emailCol: string) => void;
   onCancel: () => void;
 }
 
@@ -155,15 +123,13 @@ function ColumnConfirmationModal({
   open,
   detectedPhoneCol,
   detectedEmailCol,
-  detectedCountryCodeCol,
   allHeaders,
   mode,
   onConfirm,
   onCancel,
-}: ColumnConfirmModal & { mode: SendMode; onConfirm: (p: string, e: string, c: string | null) => void; onCancel: () => void }) {
+}: ColumnConfirmModal & { mode: SendMode; onConfirm: (p: string, e: string) => void; onCancel: () => void }) {
   const [selectedPhone, setSelectedPhone] = useState(detectedPhoneCol || '');
   const [selectedEmail, setSelectedEmail] = useState(detectedEmailCol || '');
-  const [selectedCC, setSelectedCC] = useState(detectedCountryCodeCol || '');
 
   if (!open) return null;
 
@@ -212,24 +178,6 @@ function ColumnConfirmationModal({
             </div>
           )}
 
-          {mode === 'whatsapp' && (
-            <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">🌐 Country Code Column <span className="text-white/40 font-normal">(optional)</span></label>
-              <select
-                value={selectedCC}
-                onChange={(e) => setSelectedCC(e.target.value)}
-                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all"
-              >
-                <option value="">Use default for all rows</option>
-                {allHeaders.map(h => (
-                  <option key={h} value={h}>{h}</option>
-                ))}
-              </select>
-              {detectedCountryCodeCol && (
-                <p className="text-xs text-blue-300 mt-2">✨ Auto-detected: <span className="font-semibold">{detectedCountryCodeCol}</span></p>
-              )}
-            </div>
-          )}
         </div>
 
         <div className="flex gap-3 mt-8">
@@ -243,8 +191,7 @@ function ColumnConfirmationModal({
             onClick={() => {
               const phoneCol = mode === 'whatsapp' ? (selectedPhone || detectedPhoneCol || '') : '';
               const emailCol = mode === 'email' ? (selectedEmail || detectedEmailCol || '') : '';
-              const ccCol = mode === 'whatsapp' ? (selectedCC || detectedCountryCodeCol || null) : null;
-              onConfirm(phoneCol, emailCol, ccCol);
+              onConfirm(phoneCol, emailCol);
             }}
             disabled={mode === 'whatsapp' ? !selectedPhone && !detectedPhoneCol : !selectedEmail && !detectedEmailCol}
             className="flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:shadow-lg hover:shadow-blue-500/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium"
@@ -303,7 +250,12 @@ export default function WASenderPage() {
 
       if (data.ok && data.session) {
         const s = data.session;
-        setSheets(s.sheet_data || []);
+        // Backward compat: old sessions have `rows` instead of `contacts`
+        const sheetData = (s.sheet_data || []).map((sh: Record<string, unknown>) => ({
+          ...sh,
+          contacts: sh.contacts || [],
+        }));
+        setSheets(sheetData);
         setMode(s.send_mode || 'whatsapp');
         setCountryCode(s.country_code || '+91');
         setMessage(s.message_template || '');
@@ -324,21 +276,34 @@ export default function WASenderPage() {
 
       setIsSaving(true);
       try {
+        const payload = JSON.stringify({
+          userId: session.userId,
+          sheet_data: newSheets,
+          send_mode: newMode,
+          country_code: newCountryCode,
+          message_template: newMessage,
+          email_subject: newEmailSubject,
+          email_body: newEmailBody,
+          current_sheet_name: newSheets.length > 0 ? newSheets[0].name : '',
+          current_index: newIndex,
+          sent_status: newSentStatus,
+        });
+
+        // Issue 2: Payload size check -- warn if > 4MB
+        const payloadSizeBytes = new Blob([payload]).size;
+        if (payloadSizeBytes > 4 * 1024 * 1024) {
+          setNotice({
+            text: `Payload too large (${(payloadSizeBytes / (1024 * 1024)).toFixed(1)}MB). Try a smaller file or fewer contacts.`,
+            kind: 'error',
+          });
+          setIsSaving(false);
+          return;
+        }
+
         const res = await fetch('/api/sheets/save', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            userId: session.userId,
-            sheet_data: newSheets,
-            send_mode: newMode,
-            country_code: newCountryCode,
-            message_template: newMessage,
-            email_subject: newEmailSubject,
-            email_body: newEmailBody,
-            current_sheet_name: newSheets.length > 0 ? newSheets[0].name : '',
-            current_index: newIndex,
-            sent_status: newSentStatus,
-          }),
+          body: payload,
         });
 
         if (!res.ok) {
@@ -398,7 +363,6 @@ export default function WASenderPage() {
           const headers = Object.keys(rows[0]);
           const detectedPhoneCol = detectPhoneColumn(rows) || headers[0];
           const detectedEmailCol = detectEmailColumn(rows) || headers[0];
-          const detectedCountryCodeCol = detectCountryCodeColumn(rows);
 
           // Show confirmation modal
           setColumnConfirmModal({
@@ -408,7 +372,6 @@ export default function WASenderPage() {
               headers,
               detectedPhoneCol,
               detectedEmailCol,
-              detectedCountryCodeCol,
               workbook,
               fileName: file.name,
             },
@@ -429,8 +392,9 @@ export default function WASenderPage() {
   );
 
   const handleColumnConfirm = useCallback(
-    (phoneCol: string, emailCol: string, ccCol: string | null) => {
-      const { rows, headers, workbook } = columnConfirmModal.data;
+    (phoneCol: string, emailCol: string) => {
+      const { headers, workbook } = columnConfirmModal.data;
+      const cc = countryCode.replace(/\D/g, '');
 
       const parsed: SheetConfig[] = workbook.SheetNames.map((name: string) => {
         const ws = workbook.Sheets[name];
@@ -439,14 +403,25 @@ export default function WASenderPage() {
           raw: false,
         });
 
+        // Extract only the contact list -- NOT raw rows (Issue 2: payload reduction)
+        const contacts: string[] = [];
+        for (const row of sheetRows) {
+          if (mode === 'whatsapp' && phoneCol) {
+            const normalized = normalizePhone(row[phoneCol], cc);
+            if (normalized) contacts.push(normalized);
+          } else if (mode === 'email' && emailCol) {
+            const email = normalizeEmail(row[emailCol]);
+            if (email) contacts.push(email);
+          }
+        }
+
         return {
           name,
-          rows: sheetRows,
           headers: Object.keys(sheetRows[0] || {}),
           phoneCol,
           emailCol,
-          countryCodeCol: ccCol,
           enabled: sheetRows.length > 0,
+          contacts,
         };
       });
 
@@ -458,9 +433,9 @@ export default function WASenderPage() {
 
       setColumnConfirmModal({ open: false, data: null });
 
-      const totalRows = parsed.reduce((s, sh) => s + sh.rows.length, 0);
+      const totalContacts = parsed.reduce((s, sh) => s + sh.contacts.length, 0);
       setNotice({
-        text: `${parsed.length} sheet${parsed.length > 1 ? 's' : ''} loaded — ${totalRows} total rows`,
+        text: `${parsed.length} sheet${parsed.length > 1 ? 's' : ''} loaded — ${totalContacts} contacts extracted`,
         kind: 'success',
       });
     },
@@ -471,46 +446,31 @@ export default function WASenderPage() {
     const result: RecipientEntry[] = [];
 
     for (const sheet of sheets) {
-      if (!sheet.enabled || !sheet.rows.length) continue;
+      if (!sheet.enabled || !sheet.contacts.length) continue;
 
-      if (mode === 'whatsapp') {
-        if (!sheet.phoneCol) continue;
-        for (let i = 0; i < sheet.rows.length; i++) {
-          const key = `${sheet.name}-${i}`;
-          const rowCountryCode = sheet.countryCodeCol
-            ? normalizeCountryCode(sheet.rows[i][sheet.countryCodeCol])
-            : null;
-          const effectiveCC = rowCountryCode || countryCode.replace(/\D/g, '');
-          const raw = String(sheet.rows[i][sheet.phoneCol] ?? '');
-          const normalized = normalizePhone(sheet.rows[i][sheet.phoneCol], effectiveCC);
-          if (normalized) {
-            result.push({
-              kind: 'whatsapp',
-              rowNum: i + 1,
-              raw,
-              normalized,
-              sheetName: sheet.name,
-              countryCode: effectiveCC,
-              isSent: !!sentStatus[key],
-            });
-          }
-        }
-      } else {
-        if (!sheet.emailCol) continue;
-        for (let i = 0; i < sheet.rows.length; i++) {
-          const key = `${sheet.name}-${i}`;
-          const raw = String(sheet.rows[i][sheet.emailCol] ?? '');
-          const email = normalizeEmail(sheet.rows[i][sheet.emailCol]);
-          if (email) {
-            result.push({
-              kind: 'email',
-              rowNum: i + 1,
-              raw,
-              email,
-              sheetName: sheet.name,
-              isSent: !!sentStatus[key],
-            });
-          }
+      for (let i = 0; i < sheet.contacts.length; i++) {
+        const key = `${sheet.name}-${i}`;
+        const contact = sheet.contacts[i];
+
+        if (mode === 'whatsapp') {
+          result.push({
+            kind: 'whatsapp',
+            rowNum: i + 1,
+            raw: contact,
+            normalized: contact,
+            sheetName: sheet.name,
+            countryCode: countryCode.replace(/\D/g, ''),
+            isSent: !!sentStatus[key],
+          });
+        } else {
+          result.push({
+            kind: 'email',
+            rowNum: i + 1,
+            raw: contact,
+            email: contact,
+            sheetName: sheet.name,
+            isSent: !!sentStatus[key],
+          });
         }
       }
     }
@@ -560,10 +520,13 @@ export default function WASenderPage() {
   const position = total > 0 ? currentIndex + 1 : 0;
   const sentCount = Object.values(sentStatus).filter(Boolean).length;
 
-  // Auto-save on state changes (debounced via dependency array to avoid infinite loops)
+  // Auto-save on state changes with 500ms debounce (Issue 3: reduce update latency)
   useEffect(() => {
-    if (sheets.length === 0) return; // Don't auto-save if no sheets loaded
-    saveSession(sheets, mode, countryCode, message, emailSubject, emailBody, currentIndex, sentStatus);
+    if (sheets.length === 0) return;
+    const timer = setTimeout(() => {
+      saveSession(sheets, mode, countryCode, message, emailSubject, emailBody, currentIndex, sentStatus);
+    }, 500);
+    return () => clearTimeout(timer);
   }, [sheets, mode, countryCode, message, emailSubject, emailBody, currentIndex, sentStatus]);
 
   if (loading) return <div className="text-center p-8">Loading...</div>;
@@ -832,7 +795,6 @@ export default function WASenderPage() {
           open={columnConfirmModal.open}
           detectedPhoneCol={columnConfirmModal.data.detectedPhoneCol}
           detectedEmailCol={columnConfirmModal.data.detectedEmailCol}
-          detectedCountryCodeCol={columnConfirmModal.data.detectedCountryCodeCol}
           allHeaders={columnConfirmModal.data.headers}
           mode={mode}
           onConfirm={handleColumnConfirm}

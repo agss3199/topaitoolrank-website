@@ -61,73 +61,40 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Check if session exists
-    const { data: existingSession } = await supabaseAdmin
+    // Build delta payload -- only include fields that were provided (Issue 3: delta updates)
+    const updateFields: Record<string, unknown> = { updated_at: new Date().toISOString() };
+    if (sheet_data !== undefined) updateFields.sheet_data = sheet_data;
+    if (send_mode !== undefined) updateFields.send_mode = send_mode;
+    if (country_code !== undefined) updateFields.country_code = country_code;
+    if (message_template !== undefined) updateFields.message_template = message_template;
+    if (email_subject !== undefined) updateFields.email_subject = email_subject;
+    if (email_body !== undefined) updateFields.email_body = email_body;
+    if (current_sheet_name !== undefined) updateFields.current_sheet_name = current_sheet_name;
+    if (current_index !== undefined) updateFields.current_index = current_index;
+    if (sent_status !== undefined) updateFields.sent_status = sent_status;
+
+    // Issue 3: Use upsert instead of select+update (one query instead of two)
+    const { error } = await supabaseAdmin
       .from('wa_sender_sessions')
-      .select('id')
-      .eq('user_id', userId)
-      .single();
-
-    if (existingSession) {
-      // Update existing session
-      const { error } = await supabaseAdmin
-        .from('wa_sender_sessions')
-        .update({
-          sheet_data,
-          send_mode,
-          country_code,
-          message_template,
-          email_subject,
-          email_body,
-          current_sheet_name,
-          current_index,
-          sent_status: sent_status || {},
-          updated_at: new Date().toISOString(),
-        })
-        .eq('user_id', userId);
-
-      if (error) {
-        // Log with request context for debugging
-        console.error('[wa-sender] save.update_error', {
-          userId: userId.substring(0, 8),
-          errorCode: error.code,
-          errorMessage: error.message,
-          timestamp: new Date().toISOString(),
-        });
-        return NextResponse.json(
-          { error: 'Failed to save session: ' + (error.message || 'Unknown error') },
-          { status: 500 }
-        );
-      }
-    } else {
-      // Create new session
-      const { error } = await supabaseAdmin
-        .from('wa_sender_sessions')
-        .insert({
+      .upsert(
+        {
           user_id: userId,
-          sheet_data,
-          send_mode,
-          country_code,
-          message_template,
-          email_subject,
-          email_body,
-          current_sheet_name,
-          current_index,
-          sent_status: sent_status || {},
-        });
+          ...updateFields,
+        },
+        { onConflict: 'user_id' }
+      );
 
-      if (error) {
-        console.error('[wa-sender] save.insert_error', {
-          userId: userId.substring(0, 8),
-          errorCode: error.code,
-          errorMessage: error.message,
-          timestamp: new Date().toISOString(),
-        });
-        return NextResponse.json(
-          { error: 'Failed to create session: ' + (error.message || 'Unknown error') },
-          { status: 500 }
-        );
-      }
+    if (error) {
+      console.error('[wa-sender] save.upsert_error', {
+        userId: userId.substring(0, 8),
+        errorCode: error.code,
+        errorMessage: error.message,
+        timestamp: new Date().toISOString(),
+      });
+      return NextResponse.json(
+        { error: 'Failed to save session: ' + (error.message || 'Unknown error') },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ ok: true });
