@@ -69,7 +69,7 @@ function normalizeEmail(raw: unknown): string | null {
 function detectPhoneColumn(data: Record<string, unknown>[]): string | null {
   if (!data.length) return null;
   const headers = Object.keys(data[0]);
-  const sample = data.slice(0, Math.min(30, data.length));
+  const sample = data.slice(0, Math.min(10, data.length));
   let bestCol: string | null = null;
   let bestScore = 0;
   for (const header of headers) {
@@ -91,7 +91,7 @@ function detectPhoneColumn(data: Record<string, unknown>[]): string | null {
 function detectEmailColumn(data: Record<string, unknown>[]): string | null {
   if (!data.length) return null;
   const headers = Object.keys(data[0]);
-  const sample = data.slice(0, Math.min(30, data.length));
+  const sample = data.slice(0, Math.min(10, data.length));
   let bestCol: string | null = null;
   let bestScore = 0;
   for (const header of headers) {
@@ -411,6 +411,8 @@ export default function WASenderPage() {
 
             const firstSheetName = workbook.SheetNames[0];
             const ws = workbook.Sheets[firstSheetName];
+
+            // Parse only the first sheet for the modal (faster)
             const rows = XLSX.utils.sheet_to_json<Record<string, unknown>>(ws, {
               defval: '',
               raw: false,
@@ -439,7 +441,7 @@ export default function WASenderPage() {
             });
 
             setIsLoading(false);
-          } catch {
+          } catch (err) {
             setNotice({ text: 'Could not parse the file. Please upload a valid .xlsx or .xls.', kind: 'error' });
             setIsLoading(false);
           } finally {

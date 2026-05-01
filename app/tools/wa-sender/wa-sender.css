@@ -360,9 +360,25 @@
    ============================================================ */
 
 .wa-content {
+  width: 100%;
+  /* Mobile/tablet: centered layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   max-width: 640px;
   margin: 0 auto;
-  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  /* Desktop: override mobile centering, use flex fill */
+  .wa-content {
+    display: block;
+    align-items: auto;
+    max-width: none;
+    margin: 0;
+    width: auto;
+    flex: 1;
+  }
 }
 
 /* ============================================================
@@ -730,13 +746,6 @@
     flex-shrink: 0;
     position: sticky;
     top: 700px;
-  }
-
-  .wa-content {
-    flex: 1;
-    min-width: 0;
-    max-width: none;
-    margin: 0;
   }
 
   button, .wa-button {
