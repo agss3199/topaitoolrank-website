@@ -1,0 +1,789 @@
+/* ============================================================
+   WA Sender Page Styles
+   Uses design system tokens from app/globals.css
+   Dark theme page with component library integration
+   ============================================================ */
+
+/* ============================================================
+   Page Layout
+   ============================================================ */
+
+.wa-page {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, var(--color-gray-900), #1e1b4b, var(--color-gray-900));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--spacing-md) var(--spacing-lg);
+  position: relative;
+}
+
+.wa-loading {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: var(--color-text-muted);
+}
+
+/* ============================================================
+   Background Effects
+   ============================================================ */
+
+.wa-bg-effects {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wa-bg-blob {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+  filter: blur(64px);
+  opacity: 0.1;
+  animation: wa-blob 7s infinite;
+}
+
+.wa-bg-blob--blue {
+  top: -160px;
+  right: -160px;
+  background-color: var(--color-accent);
+}
+
+.wa-bg-blob--purple {
+  bottom: -160px;
+  left: -160px;
+  background-color: #a855f7;
+  animation-delay: 2s;
+}
+
+@keyframes wa-blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-bg-blob {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   Container
+   ============================================================ */
+
+.wa-container {
+  position: relative;
+  z-index: 10;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--spacing-3xl) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ============================================================
+   Header
+   ============================================================ */
+
+.wa-header {
+  text-align: center;
+  margin-bottom: var(--spacing-3xl);
+  width: 100%;
+}
+
+.wa-header-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-gradient-cyan));
+  margin-bottom: var(--spacing-md);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+}
+
+.wa-header-emoji {
+  font-size: 2.5rem;
+}
+
+.wa-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: var(--font-weight-headline);
+  background: linear-gradient(90deg, var(--color-accent), var(--color-gradient-cyan));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: var(--spacing-sm);
+}
+
+.wa-subtitle {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-body);
+  margin-bottom: var(--spacing-lg);
+}
+
+.wa-signout-btn {
+  color: var(--color-text-muted) !important;
+}
+
+.wa-signout-btn:hover {
+  color: var(--color-white) !important;
+}
+
+/* ============================================================
+   Notifications
+   ============================================================ */
+
+.wa-notice {
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(8px);
+  border: 1px solid;
+  transition: var(--transition);
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+}
+
+.wa-notice--error {
+  background-color: rgba(239, 68, 68, 0.15);
+  border-color: var(--color-error);
+  color: #fca5a5;
+}
+
+.wa-notice--success {
+  background-color: rgba(34, 197, 94, 0.15);
+  border-color: var(--color-success);
+  color: #86efac;
+}
+
+.wa-notice--info {
+  background-color: rgba(59, 130, 246, 0.15);
+  border-color: var(--color-info);
+  color: var(--color-text-light);
+}
+
+.wa-notice-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-small);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.wa-notice--error .wa-notice-icon {
+  background-color: var(--color-error);
+  color: var(--color-white);
+}
+
+.wa-notice--success .wa-notice-icon {
+  background-color: var(--color-success);
+  color: var(--color-white);
+}
+
+.wa-notice--info .wa-notice-icon {
+  background-color: var(--color-info);
+  color: var(--color-white);
+}
+
+.wa-notice-text {
+  flex: 1;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-body);
+}
+
+/* ============================================================
+   Labels & Form Elements (dark theme overrides)
+   ============================================================ */
+
+.wa-step-label {
+  display: block;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-button);
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.wa-label {
+  display: block;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-button);
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wa-hint {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+  margin-top: var(--spacing-xs);
+}
+
+.wa-hint-bold {
+  font-weight: var(--font-weight-button);
+}
+
+/* Dark theme input overrides — applied to .input inside .wa-page */
+.wa-page .input {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--color-white);
+  border-radius: var(--radius-lg);
+}
+
+.wa-page .input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.wa-page .input:focus {
+  border-color: var(--color-accent);
+  background-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+.wa-page .input:hover:not(:disabled):not(:focus) {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.wa-textarea {
+  height: 112px;
+  resize: none;
+  font-family: inherit;
+  line-height: var(--line-height-body);
+}
+
+.wa-select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--spacing-md) center;
+  padding-right: calc(var(--spacing-md) + 20px);
+}
+
+.wa-select option {
+  background-color: var(--color-gray-900);
+  color: var(--color-white);
+}
+
+/* ============================================================
+   File Upload
+   ============================================================ */
+
+.wa-upload-section {
+  margin-bottom: var(--spacing-3xl);
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wa-file-input {
+  display: none;
+}
+
+.wa-upload-dropzone {
+  display: block;
+  border: 2px dashed var(--color-accent);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2xl);
+  text-align: center;
+  cursor: pointer;
+  background-color: rgba(59, 130, 246, 0.02);
+  transition: var(--transition);
+}
+
+.wa-upload-dropzone:hover {
+  border-color: var(--color-accent);
+  background-color: rgba(59, 130, 246, 0.08);
+}
+
+.wa-upload-icon {
+  font-size: 3.5rem;
+  margin-bottom: var(--spacing-md);
+  transition: var(--transition);
+}
+
+.wa-upload-dropzone:hover .wa-upload-icon {
+  transform: scale(1.15) translateY(-4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-upload-dropzone,
+  .wa-upload-icon {
+    transition: none;
+  }
+  .wa-upload-dropzone:hover .wa-upload-icon {
+    transform: none;
+  }
+}
+
+.wa-upload-title {
+  color: var(--color-white);
+  font-weight: var(--font-weight-button);
+  font-size: var(--font-size-body);
+  margin-bottom: var(--spacing-sm);
+}
+
+.wa-upload-desc {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+}
+
+.wa-upload-note {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: var(--font-size-small);
+  margin-top: var(--spacing-sm);
+}
+
+/* ============================================================
+   Content Area
+   ============================================================ */
+
+.wa-content {
+  max-width: 640px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ============================================================
+   Stats Bar
+   ============================================================ */
+
+.wa-stats-bar {
+  margin-bottom: var(--spacing-3xl);
+  padding: var(--spacing-lg);
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.08), rgba(6, 182, 212, 0.08));
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(8px);
+}
+
+.wa-stats-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 640px) {
+  .wa-stats-row {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.wa-stats-info {
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .wa-stats-info {
+    text-align: left;
+  }
+}
+
+.wa-stats-label {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-xs);
+}
+
+.wa-stats-value {
+  font-size: 2.25rem;
+  font-weight: var(--font-weight-headline);
+  background: linear-gradient(90deg, var(--color-accent), var(--color-gradient-cyan));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ============================================================
+   Progress Bar
+   ============================================================ */
+
+.wa-progress-container {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .wa-progress-container {
+    width: 192px;
+  }
+}
+
+.wa-progress-track {
+  width: 100%;
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.wa-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-success), var(--color-gradient-cyan));
+  transition: width 0.5s ease;
+  border-radius: var(--radius-full);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-progress-fill {
+    transition: none;
+  }
+}
+
+.wa-progress-label {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+  margin-top: var(--spacing-xs);
+  text-align: center;
+}
+
+/* ============================================================
+   Settings / Form Cards
+   ============================================================ */
+
+.wa-settings {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-3xl);
+}
+
+.wa-mode-toggle {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.wa-mode-btn {
+  flex: 1;
+}
+
+.wa-card {
+  background-color: rgba(255, 255, 255, 0.02);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================================
+   Contact Card
+   ============================================================ */
+
+.wa-contact-card {
+  margin-bottom: var(--spacing-3xl);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(6, 182, 212, 0.15));
+  text-align: center;
+  transition: var(--transition);
+}
+
+.wa-contact-card--sent {
+  border-color: rgba(34, 197, 94, 0.35);
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(16, 185, 129, 0.15));
+}
+
+.wa-contact-icon {
+  font-size: 3.5rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.wa-contact-badge {
+  margin-bottom: var(--spacing-md);
+}
+
+.wa-contact-value {
+  color: var(--color-white);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-button);
+  margin-bottom: var(--spacing-sm);
+  word-break: break-all;
+}
+
+.wa-contact-meta {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+}
+
+/* ============================================================
+   Action Buttons
+   ============================================================ */
+
+.wa-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xl);
+}
+
+.wa-action-primary {
+  width: 100%;
+}
+
+.wa-action-secondary {
+  width: 100%;
+}
+
+/* ============================================================
+   Go To Input
+   ============================================================ */
+
+.wa-goto {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xl);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wa-goto-input {
+  flex: 1;
+  text-align: center;
+}
+
+/* Remove spinner arrows from number input */
+.wa-goto-input::-webkit-outer-spin-button,
+.wa-goto-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.wa-goto-input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* ============================================================
+   Saving Indicator
+   ============================================================ */
+
+.wa-saving {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.wa-saving-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-text-muted);
+  border-radius: var(--radius-full);
+  animation: wa-pulse 1.5s infinite;
+}
+
+@keyframes wa-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-saving-dot {
+    animation: none;
+    opacity: 0.7;
+  }
+}
+
+/* ============================================================
+   Modal Overrides
+   ============================================================ */
+
+.wa-modal-footer {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: flex-end;
+}
+
+.wa-modal-description {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+  margin-bottom: var(--spacing-lg);
+}
+
+.wa-modal-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.wa-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 767px) {
+  .wa-page {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .wa-container {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .wa-header {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .wa-upload-dropzone {
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+
+  .wa-stats-bar {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .wa-settings {
+    margin-bottom: var(--spacing-xl);
+    gap: var(--spacing-md);
+  }
+
+  .wa-contact-card {
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-lg);
+  }
+}
+
+/* ============================================================
+   Tablet (768px - 1023px): Single column layout
+   ============================================================ */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .wa-page {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .wa-container {
+    max-width: 720px;
+  }
+
+  button, .wa-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ============================================================
+   Desktop (1024px+): Two-column layout with sidebar
+   ============================================================ */
+
+@media (min-width: 1024px) {
+  .wa-container {
+    max-width: 1200px;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--spacing-3xl);
+  }
+
+  .wa-header {
+    position: sticky;
+    top: var(--spacing-lg);
+    width: 300px;
+    flex-shrink: 0;
+    text-align: left;
+    margin-bottom: 0;
+  }
+
+  .wa-upload-section {
+    width: 300px;
+    margin-bottom: 0;
+    position: sticky;
+    top: 400px;
+    flex-shrink: 0;
+  }
+
+  .wa-settings {
+    width: 300px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 700px;
+  }
+
+  .wa-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  button, .wa-button {
+    min-height: 40px;
+  }
+}
+
+/* ============================================================
+   Large Desktop (1440px+): Max-width constraint for readability
+   ============================================================ */
+
+@media (min-width: 1440px) {
+  .wa-page {
+    max-width: 1440px;
+  }
+
+  .wa-container {
+    max-width: 1200px;
+  }
+}
+
+/* ============================================================
+   Small Mobile (320px): Prevent horizontal scroll
+   ============================================================ */
+
+@media (max-width: 320px) {
+  .wa-page {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .wa-header-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .wa-header-emoji {
+    font-size: 1.5rem;
+  }
+
+  .wa-title {
+    font-size: 1.5rem;
+  }
+
+  .wa-upload-dropzone {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+
+  button, .wa-button {
+    min-height: 44px;
+    font-size: var(--font-size-small);
+  }
+}

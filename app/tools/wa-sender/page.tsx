@@ -4,6 +4,10 @@ import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import * as XLSX from 'xlsx';
 import { useAuth } from '@/lib/useAuth';
+import { Button } from '@/app/components/Button';
+import { Modal } from '@/app/components/Modal';
+import { Badge } from '@/app/components/Badge';
+import './wa-sender.css';
 
 type SendMode = 'whatsapp' | 'email';
 
@@ -13,7 +17,6 @@ interface SheetConfig {
   phoneCol: string;
   emailCol: string;
   enabled: boolean;
-  // Extracted contact list (phone numbers or emails) - NOT raw rows
   contacts: string[];
 }
 
@@ -109,7 +112,7 @@ function detectEmailColumn(data: Record<string, unknown>[]): string | null {
 
 const clamp = (n: number, lo: number, hi: number) => Math.min(Math.max(n, lo), hi);
 
-interface ColumnConfirmModal {
+interface ColumnConfirmModalProps {
   open: boolean;
   detectedPhoneCol: string | null;
   detectedEmailCol: string | null;
@@ -127,80 +130,96 @@ function ColumnConfirmationModal({
   mode,
   onConfirm,
   onCancel,
-}: ColumnConfirmModal & { mode: SendMode; onConfirm: (p: string, e: string) => void; onCancel: () => void }) {
+}: ColumnConfirmModalProps) {
   const [selectedPhone, setSelectedPhone] = useState(detectedPhoneCol || '');
   const [selectedEmail, setSelectedEmail] = useState(detectedEmailCol || '');
 
   if (!open) return null;
 
+  const isConfirmDisabled = mode === 'whatsapp'
+    ? !selectedPhone && !detectedPhoneCol
+    : !selectedEmail && !detectedEmailCol;
+
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur flex items-center justify-center p-4 z-50">
-      <div className="bg-gradient-to-br from-slate-900 to-slate-800 border border-white/20 rounded-2xl shadow-2xl max-w-md w-full p-8">
-        <h2 className="text-2xl font-bold text-white mb-2">Column Detection</h2>
-        <p className="text-white/60 text-sm mb-6">Confirm which columns contain your data:</p>
-
-        <div className="space-y-5">
-          {mode === 'whatsapp' && (
-            <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">📱 Phone Number Column</label>
-              <select
-                value={selectedPhone}
-                onChange={(e) => setSelectedPhone(e.target.value)}
-                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all"
-              >
-                <option value="">Select column...</option>
-                {allHeaders.map(h => (
-                  <option key={h} value={h}>{h}</option>
-                ))}
-              </select>
-              {detectedPhoneCol && (
-                <p className="text-xs text-blue-300 mt-2">✨ Auto-detected: <span className="font-semibold">{detectedPhoneCol}</span></p>
-              )}
-            </div>
-          )}
-
-          {mode === 'email' && (
-            <div>
-              <label className="block text-sm font-medium text-white/80 mb-2">📧 Email Column</label>
-              <select
-                value={selectedEmail}
-                onChange={(e) => setSelectedEmail(e.target.value)}
-                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-500/50 focus:bg-white/20 transition-all"
-              >
-                <option value="">Select column...</option>
-                {allHeaders.map(h => (
-                  <option key={h} value={h}>{h}</option>
-                ))}
-              </select>
-              {detectedEmailCol && (
-                <p className="text-xs text-blue-300 mt-2">✨ Auto-detected: <span className="font-semibold">{detectedEmailCol}</span></p>
-              )}
-            </div>
-          )}
-
-        </div>
-
-        <div className="flex gap-3 mt-8">
-          <button
+    <Modal
+      open={open}
+      onClose={onCancel}
+      title="Column Detection"
+      maxWidth={480}
+      footer={
+        <div className="wa-modal-footer">
+          <Button
+            variant="secondary"
             onClick={onCancel}
-            className="flex-1 px-4 py-2 border border-white/20 rounded-lg text-white/80 hover:bg-white/10 hover:text-white transition-all"
+            aria-label="Cancel column selection"
           >
             Cancel
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="primary"
             onClick={() => {
               const phoneCol = mode === 'whatsapp' ? (selectedPhone || detectedPhoneCol || '') : '';
               const emailCol = mode === 'email' ? (selectedEmail || detectedEmailCol || '') : '';
               onConfirm(phoneCol, emailCol);
             }}
-            disabled={mode === 'whatsapp' ? !selectedPhone && !detectedPhoneCol : !selectedEmail && !detectedEmailCol}
-            className="flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:shadow-lg hover:shadow-blue-500/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium"
+            disabled={isConfirmDisabled}
+            aria-label="Confirm column selection"
           >
             Confirm
-          </button>
+          </Button>
         </div>
+      }
+    >
+      <p className="wa-modal-description">Confirm which columns contain your data:</p>
+
+      <div className="wa-modal-fields">
+        {mode === 'whatsapp' && (
+          <div className="wa-form-group">
+            <label htmlFor="phone-col-select" className="wa-label">
+              Phone Number Column
+            </label>
+            <select
+              id="phone-col-select"
+              value={selectedPhone}
+              onChange={(e) => setSelectedPhone(e.target.value)}
+              className="input wa-select"
+              aria-label="Select phone number column"
+            >
+              <option value="">Select column...</option>
+              {allHeaders.map(h => (
+                <option key={h} value={h}>{h}</option>
+              ))}
+            </select>
+            {detectedPhoneCol && (
+              <p className="wa-hint">Auto-detected: <span className="wa-hint-bold">{detectedPhoneCol}</span></p>
+            )}
+          </div>
+        )}
+
+        {mode === 'email' && (
+          <div className="wa-form-group">
+            <label htmlFor="email-col-select" className="wa-label">
+              Email Column
+            </label>
+            <select
+              id="email-col-select"
+              value={selectedEmail}
+              onChange={(e) => setSelectedEmail(e.target.value)}
+              className="input wa-select"
+              aria-label="Select email column"
+            >
+              <option value="">Select column...</option>
+              {allHeaders.map(h => (
+                <option key={h} value={h}>{h}</option>
+              ))}
+            </select>
+            {detectedEmailCol && (
+              <p className="wa-hint">Auto-detected: <span className="wa-hint-bold">{detectedEmailCol}</span></p>
+            )}
+          </div>
+        )}
       </div>
-    </div>
+    </Modal>
   );
 }
 
@@ -221,7 +240,17 @@ export default function WASenderPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [sentStatus, setSentStatus] = useState<Record<string, boolean>>({});
-  const [columnConfirmModal, setColumnConfirmModal] = useState({ open: false, data: null as any });
+  const [columnConfirmModal, setColumnConfirmModal] = useState<{
+    open: boolean;
+    data: {
+      rows: Record<string, unknown>[];
+      headers: string[];
+      detectedPhoneCol: string | null;
+      detectedEmailCol: string | null;
+      workbook: XLSX.WorkBook;
+      fileName: string;
+    } | null;
+  }>({ open: false, data: null });
 
   // Auth check
   useEffect(() => {
@@ -244,13 +273,11 @@ export default function WASenderPage() {
 
       if (!res.ok) {
         console.warn('Load session failed:', data.error);
-        // Silently fail - start with empty state
         return;
       }
 
       if (data.ok && data.session) {
         const s = data.session;
-        // Backward compat: old sessions have `rows` instead of `contacts`
         const sheetData = (s.sheet_data || []).map((sh: Record<string, unknown>) => ({
           ...sh,
           contacts: sh.contacts || [],
@@ -266,7 +293,6 @@ export default function WASenderPage() {
       }
     } catch (err) {
       console.error('Load session exception:', err);
-      // Silently fail - start with empty state
     }
   };
 
@@ -289,7 +315,6 @@ export default function WASenderPage() {
           sent_status: newSentStatus,
         });
 
-        // Issue 2: Payload size check -- warn if > 4MB
         const payloadSizeBytes = new Blob([payload]).size;
         if (payloadSizeBytes > 4 * 1024 * 1024) {
           setNotice({
@@ -364,7 +389,6 @@ export default function WASenderPage() {
           const detectedPhoneCol = detectPhoneColumn(rows) || headers[0];
           const detectedEmailCol = detectEmailColumn(rows) || headers[0];
 
-          // Show confirmation modal
           setColumnConfirmModal({
             open: true,
             data: {
@@ -393,7 +417,7 @@ export default function WASenderPage() {
 
   const handleColumnConfirm = useCallback(
     (phoneCol: string, emailCol: string) => {
-      const { headers, workbook } = columnConfirmModal.data;
+      const { workbook } = columnConfirmModal.data!;
       const cc = countryCode.replace(/\D/g, '');
 
       const parsed: SheetConfig[] = workbook.SheetNames.map((name: string) => {
@@ -403,7 +427,6 @@ export default function WASenderPage() {
           raw: false,
         });
 
-        // Extract only the contact list -- NOT raw rows (Issue 2: payload reduction)
         const contacts: string[] = [];
         for (const row of sheetRows) {
           if (mode === 'whatsapp' && phoneCol) {
@@ -449,8 +472,8 @@ export default function WASenderPage() {
       if (!sheet.enabled || !sheet.contacts.length) continue;
 
       for (let i = 0; i < sheet.contacts.length; i++) {
-        const key = `${sheet.name}-${i}`;
         const contact = sheet.contacts[i];
+        const key = `${sheet.name}-${i}`;
 
         if (mode === 'whatsapp') {
           result.push({
@@ -485,7 +508,6 @@ export default function WASenderPage() {
     const key = `${current.sheetName}-${current.rowNum - 1}`;
     const encoded = encodeURIComponent(message.trim());
     window.open(`https://wa.me/${current.normalized}?text=${encoded}`, '_blank');
-    // Mark as sent
     setSentStatus(prev => ({ ...prev, [key]: true }));
     saveSession(sheets, mode, countryCode, message, emailSubject, emailBody, currentIndex, { ...sentStatus, [key]: true });
   }, [current, message, emailSubject, emailBody, sheets, mode, countryCode, currentIndex, sentStatus, saveSession]);
@@ -496,7 +518,6 @@ export default function WASenderPage() {
     const subject = encodeURIComponent(emailSubject.trim());
     const body = encodeURIComponent(emailBody.trim());
     window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${current.email}&su=${subject}&body=${body}`, '_blank');
-    // Mark as sent
     setSentStatus(prev => ({ ...prev, [key]: true }));
     saveSession(sheets, mode, countryCode, message, emailSubject, emailBody, currentIndex, { ...sentStatus, [key]: true });
   }, [current, emailSubject, emailBody, sheets, mode, countryCode, message, currentIndex, sentStatus, saveSession]);
@@ -520,7 +541,7 @@ export default function WASenderPage() {
   const position = total > 0 ? currentIndex + 1 : 0;
   const sentCount = Object.values(sentStatus).filter(Boolean).length;
 
-  // Auto-save on state changes with 500ms debounce (Issue 3: reduce update latency)
+  // Auto-save with 500ms debounce
   useEffect(() => {
     if (sheets.length === 0) return;
     const timer = setTimeout(() => {
@@ -529,59 +550,54 @@ export default function WASenderPage() {
     return () => clearTimeout(timer);
   }, [sheets, mode, countryCode, message, emailSubject, emailBody, currentIndex, sentStatus]);
 
-  if (loading) return <div className="text-center p-8">Loading...</div>;
+  if (loading) return <div className="wa-loading">Loading...</div>;
   if (!session) return null;
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 flex flex-col items-center justify-start px-4 sm:px-6">
+    <div className="wa-page">
       {/* Background animations */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+      <div className="wa-bg-effects">
+        <div className="wa-bg-blob wa-bg-blob--blue" />
+        <div className="wa-bg-blob wa-bg-blob--purple" />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto py-12 flex flex-col items-center">
-        {/* Header - Centered */}
-        <div className="text-center mb-12 w-full">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 mb-4 shadow-lg shadow-blue-500/50">
-            <span className="text-4xl">💬</span>
+      <div className="wa-container">
+        {/* Header */}
+        <div className="wa-header">
+          <div className="wa-header-icon">
+            <span className="wa-header-emoji">💬</span>
           </div>
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-2">
-            WA Sender
-          </h1>
-          <p className="text-white/50 text-lg mb-6">Bulk messaging made simple</p>
+          <h1 className="wa-title">WA Sender</h1>
+          <p className="wa-subtitle">Bulk messaging made simple</p>
 
-          <button
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={() => {
               localStorage.clear();
               router.push('/auth/login');
             }}
-            className="inline-block px-6 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white/80 hover:text-white transition-all duration-200 text-sm font-medium"
+            aria-label="Sign out and return to login"
+            className="wa-signout-btn"
           >
-            ← Sign Out
-          </button>
+            Sign Out
+          </Button>
         </div>
 
         {/* Notifications */}
         {notice && (
-          <div className={`mb-6 p-4 rounded-lg backdrop-blur border transition-all duration-300 max-w-4xl mx-auto ${
-            notice.kind === 'error'
-              ? 'bg-red-500/20 border-red-500/50 text-red-200'
-              : notice.kind === 'success'
-              ? 'bg-green-500/20 border-green-500/50 text-green-200'
-              : 'bg-blue-500/20 border-blue-500/50 text-blue-200'
-          }`}>
-            <div className="flex items-start gap-3">
-              <span className="text-lg">{notice.kind === 'error' ? '⚠️' : notice.kind === 'success' ? '✅' : 'ℹ️'}</span>
-              <span className="flex-1">{notice.text}</span>
-            </div>
+          <div className={`wa-notice wa-notice--${notice.kind}`} role="alert">
+            <span className="wa-notice-icon">
+              {notice.kind === 'error' ? '!' : notice.kind === 'success' ? '✓' : 'i'}
+            </span>
+            <span className="wa-notice-text">{notice.text}</span>
           </div>
         )}
 
-        {/* File Upload - Centered */}
-        <div className="mb-12 max-w-2xl mx-auto">
-          <label className="block text-sm font-semibold text-white/70 mb-4 uppercase tracking-wider text-center">
-            📊 Step 1: Upload Your Data
+        {/* File Upload */}
+        <div className="wa-upload-section">
+          <label className="wa-step-label">
+            Step 1: Upload Your Data
           </label>
           <input
             ref={fileInputRef}
@@ -590,205 +606,224 @@ export default function WASenderPage() {
             accept=".xlsx,.xls"
             onChange={handleFileUpload}
             disabled={isLoading}
-            className="hidden"
+            className="wa-file-input"
+            aria-label="Upload Excel file with contacts"
           />
           <label
             htmlFor="file-upload"
-            className="block border-2 border-dashed border-blue-500/40 hover:border-blue-500/80 rounded-2xl p-16 text-center cursor-pointer hover:bg-blue-500/10 transition-all duration-300 group bg-white/[0.02]"
+            className="wa-upload-dropzone"
           >
-            <div className="text-6xl mb-4 group-hover:scale-125 group-hover:-translate-y-2 transition-all duration-300">📁</div>
-            <p className="text-white font-semibold mb-2 text-lg">Drop your Excel file here</p>
-            <p className="text-white/50 text-sm">or click to select — .xlsx, .xls, .csv</p>
-            <p className="text-white/30 text-xs mt-3">Max 50MB • Phone and Email columns auto-detected</p>
+            <div className="wa-upload-icon">📁</div>
+            <p className="wa-upload-title">Drop your Excel file here</p>
+            <p className="wa-upload-desc">or click to select — .xlsx, .xls, .csv</p>
+            <p className="wa-upload-note">Max 50MB - Phone and Email columns auto-detected</p>
           </label>
         </div>
 
         {sheets.length > 0 && (
-          <div className="max-w-4xl mx-auto">
-            {/* Stats Bar - Centered */}
-            <div className="mb-12 p-6 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/30 rounded-2xl backdrop-blur">
-              <div className="space-y-4">
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-                  <div className="text-center sm:text-left">
-                    <p className="text-white/60 text-sm font-medium uppercase tracking-wider mb-1">Progress</p>
-                    <p className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                      {total > 0 ? `${position}/${total}` : '0'}
-                    </p>
-                    {sentCount > 0 && (
-                      <p className="text-green-400 font-semibold text-lg mt-1">✓ {sentCount} sent</p>
-                    )}
-                  </div>
-                  {total > 0 && (
-                    <div className="w-full sm:w-48">
-                      <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-gradient-to-r from-green-500 to-cyan-500 transition-all duration-500 rounded-full"
-                          style={{ width: `${(sentCount / total) * 100}%` }}
-                        ></div>
-                      </div>
-                      <p className="text-white/50 text-xs mt-2 text-center">{Math.round((sentCount / total) * 100)}% complete</p>
-                    </div>
+          <div className="wa-content">
+            {/* Stats Bar */}
+            <div className="wa-stats-bar">
+              <div className="wa-stats-row">
+                <div className="wa-stats-info">
+                  <p className="wa-stats-label">Progress</p>
+                  <p className="wa-stats-value">
+                    {total > 0 ? `${position}/${total}` : '0'}
+                  </p>
+                  {sentCount > 0 && (
+                    <Badge variant="sent">{sentCount} sent</Badge>
                   )}
                 </div>
+                {total > 0 && (
+                  <div className="wa-progress-container">
+                    <div className="wa-progress-track">
+                      <div
+                        className="wa-progress-fill"
+                        style={{ width: `${(sentCount / total) * 100}%` }}
+                      />
+                    </div>
+                    <p className="wa-progress-label">{Math.round((sentCount / total) * 100)}% complete</p>
+                  </div>
+                )}
               </div>
             </div>
 
-            {/* Settings Grid - Centered */}
-            <div className="grid grid-cols-1 gap-8 mb-12">
+            {/* Settings */}
+            <div className="wa-settings">
               <div>
-                <label className="block text-sm font-semibold text-white/70 mb-4 uppercase tracking-wider">
-                  📤 Step 2: Choose Your Channel
+                <label className="wa-step-label">
+                  Step 2: Choose Your Channel
                 </label>
-                <div className="flex gap-3">
-                  {['whatsapp', 'email'].map(opt => (
-                    <button
-                      key={opt}
-                      onClick={() => setMode(opt as SendMode)}
-                      className={`flex-1 px-6 py-4 rounded-xl font-semibold transition-all duration-300 text-center ${
-                        mode === opt
-                          ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg shadow-blue-500/30'
-                          : 'bg-white/10 border border-white/20 text-white/60 hover:bg-white/15 hover:border-white/30'
-                      }`}
-                    >
-                      {opt === 'whatsapp' ? '💬 WhatsApp' : '📧 Email'}
-                    </button>
-                  ))}
+                <div className="wa-mode-toggle">
+                  <Button
+                    variant={mode === 'whatsapp' ? 'primary' : 'secondary'}
+                    size="lg"
+                    onClick={() => setMode('whatsapp')}
+                    aria-label="Send via WhatsApp"
+                    aria-pressed={mode === 'whatsapp'}
+                    className="wa-mode-btn"
+                  >
+                    WhatsApp
+                  </Button>
+                  <Button
+                    variant={mode === 'email' ? 'primary' : 'secondary'}
+                    size="lg"
+                    onClick={() => setMode('email')}
+                    aria-label="Send via Email"
+                    aria-pressed={mode === 'email'}
+                    className="wa-mode-btn"
+                  >
+                    Email
+                  </Button>
                 </div>
               </div>
 
               {mode === 'whatsapp' ? (
                 <>
-                  <div className="bg-white/[0.03] p-6 rounded-2xl border border-white/10">
-                    <label className="block text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Default Country Code</label>
+                  <div className="wa-card">
+                    <label htmlFor="country-code" className="wa-label">
+                      Default Country Code
+                    </label>
                     <input
+                      id="country-code"
+                      name="country-code"
                       type="text"
                       value={countryCode}
                       onChange={(e) => setCountryCode(e.target.value)}
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-blue-400/50 focus:bg-white/15 focus:shadow-lg focus:shadow-blue-500/20 transition-all"
+                      className="input"
                       placeholder="+91"
+                      aria-label="Default country code for phone numbers"
                     />
-                    <p className="text-xs text-white/50 mt-2">Used for contacts without country code</p>
+                    <p className="wa-hint">Used for contacts without country code</p>
                   </div>
-                  <div className="bg-white/[0.03] p-6 rounded-2xl border border-white/10">
-                    <label className="block text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Your Message</label>
+                  <div className="wa-card">
+                    <label htmlFor="wa-message" className="wa-label">
+                      Your Message
+                    </label>
                     <textarea
+                      id="wa-message"
+                      name="wa-message"
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-blue-400/50 focus:bg-white/15 focus:shadow-lg focus:shadow-blue-500/20 transition-all h-28 resize-none"
+                      className="input wa-textarea"
                       placeholder="Type your message here..."
+                      aria-label="WhatsApp message template"
                     />
-                    <p className="text-xs text-white/50 mt-2">{message.length} characters</p>
+                    <p className="wa-hint">{message.length} characters</p>
                   </div>
                 </>
               ) : (
                 <>
-                  <div className="bg-white/[0.03] p-6 rounded-2xl border border-white/10">
-                    <label className="block text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Email Subject</label>
+                  <div className="wa-card">
+                    <label htmlFor="email-subject" className="wa-label">
+                      Email Subject
+                    </label>
                     <input
+                      id="email-subject"
+                      name="email-subject"
                       type="text"
                       value={emailSubject}
                       onChange={(e) => setEmailSubject(e.target.value)}
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-blue-400/50 focus:bg-white/15 focus:shadow-lg focus:shadow-blue-500/20 transition-all"
+                      className="input"
                       placeholder="Your email subject..."
+                      aria-label="Email subject line"
                     />
                   </div>
-                  <div className="bg-white/[0.03] p-6 rounded-2xl border border-white/10">
-                    <label className="block text-sm font-semibold text-white/70 mb-3 uppercase tracking-wider">Email Body</label>
+                  <div className="wa-card">
+                    <label htmlFor="email-body" className="wa-label">
+                      Email Body
+                    </label>
                     <textarea
+                      id="email-body"
+                      name="email-body"
                       value={emailBody}
                       onChange={(e) => setEmailBody(e.target.value)}
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-blue-400/50 focus:bg-white/15 focus:shadow-lg focus:shadow-blue-500/20 transition-all h-28 resize-none"
+                      className="input wa-textarea"
                       placeholder="Your email body..."
+                      aria-label="Email body content"
                     />
-                    <p className="text-xs text-white/50 mt-2">{emailBody.length} characters</p>
+                    <p className="wa-hint">{emailBody.length} characters</p>
                   </div>
                 </>
               )}
             </div>
 
-            {/* Current Contact Card - Centered */}
+            {/* Current Contact Card */}
             {current && (
-              <div className={`mb-12 p-8 rounded-2xl backdrop-blur border transition-all duration-300 text-center ${
-                current.isSent
-                  ? 'bg-gradient-to-br from-green-500/20 to-emerald-500/20 border-green-500/40'
-                  : 'bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border-blue-500/40'
-              }`}>
-                <div className="flex justify-center mb-4">
-                  <div className="text-6xl">{current.kind === 'whatsapp' ? '📱' : '📧'}</div>
+              <div className={`wa-contact-card ${current.isSent ? 'wa-contact-card--sent' : ''}`}>
+                <div className="wa-contact-icon">
+                  {current.kind === 'whatsapp' ? '📱' : '📧'}
                 </div>
                 {current.isSent && (
-                  <div className="inline-block px-3 py-1 bg-green-500/20 border border-green-500/40 rounded-full mb-4">
-                    <div className="text-green-400 font-semibold text-sm">✓ Already sent</div>
-                  </div>
+                  <Badge variant="sent" className="wa-contact-badge">Already sent</Badge>
                 )}
-                <p className="text-white text-2xl font-semibold mb-2 break-all">
+                <p className="wa-contact-value">
                   {current.kind === 'whatsapp' ? current.normalized : current.email}
                 </p>
-                <p className="text-white/60 text-sm">Row {current.rowNum} • <span className="font-medium">{current.sheetName}</span></p>
+                <p className="wa-contact-meta">
+                  Row {current.rowNum} - {current.sheetName}
+                </p>
               </div>
             )}
 
-            {/* Action Buttons - Centered */}
-            <div className="space-y-3 mb-8">
-              <button
+            {/* Action Buttons */}
+            <div className="wa-actions">
+              <Button
+                variant="primary"
+                size="lg"
                 onClick={mode === 'whatsapp' ? openWhatsApp : openGmailCompose}
                 disabled={!current}
-                className="w-full bg-gradient-to-r from-blue-500 via-blue-500 to-cyan-500 text-white font-semibold py-4 px-6 rounded-xl hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none transition-all duration-300 flex items-center justify-center gap-2 text-lg"
+                aria-label={mode === 'whatsapp' ? 'Open WhatsApp for current contact' : 'Open Gmail for current contact'}
+                className="wa-action-primary"
               >
-                {mode === 'whatsapp' ? '📤 Open WhatsApp' : '📤 Open Gmail'}
-              </button>
+                {mode === 'whatsapp' ? 'Open WhatsApp' : 'Open Gmail'}
+              </Button>
 
-              <button
+              <Button
+                variant="secondary"
+                size="md"
                 onClick={nextRecipient}
                 disabled={currentIndex >= recipients.length - 1}
-                className="w-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold py-3 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:border-white/40"
+                aria-label="Go to next contact"
+                className="wa-action-secondary"
               >
-                ⬇️ Next Contact
-              </button>
+                Next Contact
+              </Button>
             </div>
 
-            {/* Go To Input - Centered */}
-            <div className="flex gap-3 mb-8 max-w-md mx-auto">
+            {/* Go To Input */}
+            <div className="wa-goto">
               <input
+                id="goto-input"
+                name="goto-input"
                 type="number"
-                min="1"
+                min={1}
                 max={total}
                 value={goToInput}
                 onChange={(e) => setGoToInput(e.target.value)}
                 placeholder="Jump to #..."
-                className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-blue-400/50 focus:bg-white/15 focus:shadow-lg focus:shadow-blue-500/20 transition-all text-center"
+                className="input wa-goto-input"
+                aria-label={`Jump to contact number, 1 to ${total}`}
               />
-              <button
+              <Button
+                variant="secondary"
+                size="md"
                 onClick={goTo}
-                className="px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-xl font-medium transition-all hover:border-white/40"
+                aria-label="Jump to specified contact number"
               >
                 Jump
-              </button>
+              </Button>
             </div>
 
             {isSaving && (
-              <div className="text-center text-white/50 text-sm flex items-center justify-center gap-2">
-                <span className="inline-block w-3 h-3 bg-white/50 rounded-full animate-pulse"></span>
+              <div className="wa-saving" role="status" aria-live="polite">
+                <span className="wa-saving-dot" />
                 Saving session...
               </div>
             )}
           </div>
         )}
       </div>
-
-      <style jsx>{`
-        @keyframes blob {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-        }
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-      `}</style>
 
       {columnConfirmModal.open && columnConfirmModal.data && (
         <ColumnConfirmationModal
