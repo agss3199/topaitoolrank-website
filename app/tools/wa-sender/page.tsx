@@ -505,6 +505,51 @@ export default function WASenderPage() {
     [columnConfirmModal.data, mode, countryCode, message, emailSubject, emailBody, saveSession]
   );
 
+  // Export sheets with sent status column
+  const handleExportWithStatus = useCallback(() => {
+    if (sheets.length === 0) {
+      setNotice({ text: 'No sheets to export', kind: 'error' });
+      return;
+    }
+
+    try {
+      const workbook = XLSX.utils.book_new();
+
+      for (const sheet of sheets) {
+        // Reconstruct rows with sent status column
+        const exportRows: Record<string, unknown>[] = sheet.contacts.map((contact, idx) => {
+          const key = `${sheet.name}-${idx}`;
+          const isSent = !!sentStatus[key];
+          return {
+            [sheet.phoneCol || 'Phone']: contact,
+            'Sent': isSent ? '✓' : '',
+          };
+        });
+
+        // Create worksheet and add to workbook
+        const ws = XLSX.utils.json_to_sheet(exportRows, {
+          header: [sheet.phoneCol || 'Phone', 'Sent'],
+        });
+        XLSX.utils.book_append_sheet(workbook, ws, sheet.name);
+      }
+
+      // Download the file
+      const filename = `wa-sender-export-${new Date().toISOString().slice(0, 10)}.xlsx`;
+      XLSX.writeFile(workbook, filename);
+
+      setNotice({
+        text: `Exported ${sheets.length} sheet${sheets.length > 1 ? 's' : ''} with send status`,
+        kind: 'success',
+      });
+    } catch (error) {
+      console.error('Export failed:', error);
+      setNotice({
+        text: 'Export failed. Please try again.',
+        kind: 'error',
+      });
+    }
+  }, [sheets, sentStatus]);
+
   const recipients = useMemo<RecipientEntry[]>(() => {
     const result: RecipientEntry[] = [];
 
@@ -828,6 +873,17 @@ export default function WASenderPage() {
                 className="wa-action-secondary"
               >
                 Next Contact
+              </Button>
+
+              <Button
+                variant="secondary"
+                size="md"
+                onClick={handleExportWithStatus}
+                disabled={sheets.length === 0}
+                aria-label="Export sheets with sent status column"
+                className="wa-action-secondary"
+              >
+                📥 Export with Status
               </Button>
             </div>
 

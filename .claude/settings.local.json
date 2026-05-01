@@ -65,7 +65,8 @@
       "Bash(grep -r \"#[0-9a-fA-F]\\\\{3,6\\\\}\" app/ --include=\"*.tsx\" --include=\"*.css\")",
       "Bash(grep -rn \"#[0-9a-fA-F]\\\\{3,6\\\\}\" app/ --include=\"*.tsx\" --include=\"*.css\")",
       "Bash(wc:*)",
-      "Bash(grep -c \"^---\" \"C:\\\\Users\\\\MONICA\\\\Desktop\\\\Abhishek_Softwares_All_old\\\\Top_AI_Tool_Rank\\\\workspaces\\\\page-modernization\\\\journal\"/*.md)"
+      "Bash(grep -c \"^---\" \"C:\\\\Users\\\\MONICA\\\\Desktop\\\\Abhishek_Softwares_All_old\\\\Top_AI_Tool_Rank\\\\workspaces\\\\page-modernization\\\\journal\"/*.md)",
+      "Bash(grep -E \"\\\\.\\(tsx?|jsx?|css\\)$\")"
     ]
   }
 }

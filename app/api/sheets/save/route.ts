@@ -37,6 +37,17 @@ function validateInputs(
 
 export async function POST(req: NextRequest) {
   try {
+    // Validate payload size before reading body (spec: payload-size-guard.md)
+    const contentLength = req.headers.get('content-length');
+    const maxSize = 4 * 1024 * 1024; // 4MB for sheet uploads
+
+    if (contentLength && parseInt(contentLength) > maxSize) {
+      return NextResponse.json(
+        { error: `Sheet upload exceeds ${maxSize / 1024 / 1024}MB limit. Try splitting into smaller files.` },
+        { status: 413 }
+      );
+    }
+
     const { userId, sheet_data, send_mode, country_code, message_template, email_subject, email_body, current_sheet_name, current_index, sent_status } = await req.json();
 
     if (!userId) {
