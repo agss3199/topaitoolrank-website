@@ -267,33 +267,64 @@ export default function WASenderPage() {
   }, [session?.userId]);
 
   const loadSessionFromSupabase = async () => {
+    const userId = session!.userId;
+    const localStorageKey = `wa-sender-session-${userId}`;
+
     try {
-      const res = await fetch(`/api/sheets/load?userId=${session!.userId}`);
+      const res = await fetch(`/api/sheets/load?userId=${userId}`);
       const data = await res.json();
 
       if (!res.ok) {
         console.warn('Load session failed:', data.error);
+        // Try localStorage fallback
+        const cached = localStorage.getItem(localStorageKey);
+        if (cached) {
+          try {
+            const parsed = JSON.parse(cached);
+            applySessionData(parsed);
+          } catch (e) {
+            console.warn('Failed to parse cached session:', e);
+          }
+        }
         return;
       }
 
       if (data.ok && data.session) {
-        const s = data.session;
-        const sheetData = (s.sheet_data || []).map((sh: Record<string, unknown>) => ({
-          ...sh,
-          contacts: sh.contacts || [],
-        }));
-        setSheets(sheetData);
-        setMode(s.send_mode || 'whatsapp');
-        setCountryCode(s.country_code || '+91');
-        setMessage(s.message_template || '');
-        setEmailSubject(s.email_subject || '');
-        setEmailBody(s.email_body || '');
-        setCurrentIndex(s.current_index || 0);
-        setSentStatus(s.sent_status || {});
+        applySessionData(data.session);
+        // Cache to localStorage for offline access
+        localStorage.setItem(localStorageKey, JSON.stringify(data.session));
       }
     } catch (err) {
       console.error('Load session exception:', err);
+      // Try localStorage fallback on network error
+      const cached = localStorage.getItem(localStorageKey);
+      if (cached) {
+        try {
+          const parsed = JSON.parse(cached);
+          applySessionData(parsed);
+        } catch (e) {
+          console.warn('Failed to parse cached session:', e);
+        }
+      }
     }
+  };
+
+  const applySessionData = (s: Record<string, unknown>) => {
+    const sheetData = ((s.sheet_data as unknown[]) || []).map((sh: unknown) => {
+      const shObj = sh as Record<string, unknown>;
+      return {
+        ...shObj,
+        contacts: shObj.contacts || [],
+      } as SheetConfig;
+    });
+    setSheets(sheetData);
+    setMode((s.send_mode || 'whatsapp') as SendMode);
+    setCountryCode((s.country_code || '+91') as string);
+    setMessage((s.message_template || '') as string);
+    setEmailSubject((s.email_subject || '') as string);
+    setEmailBody((s.email_body || '') as string);
+    setCurrentIndex((s.current_index || 0) as number);
+    setSentStatus((s.sent_status || {}) as Record<string, boolean>);
   };
 
   const saveSession = useCallback(
@@ -301,19 +332,30 @@ export default function WASenderPage() {
       if (!session?.userId || isSaving) return;
 
       setIsSaving(true);
+
+      const sessionData = {
+        userId: session.userId,
+        sheet_data: newSheets,
+        send_mode: newMode,
+        country_code: newCountryCode,
+        message_template: newMessage,
+        email_subject: newEmailSubject,
+        email_body: newEmailBody,
+        current_sheet_name: newSheets.length > 0 ? newSheets[0].name : '',
+        current_index: newIndex,
+        sent_status: newSentStatus,
+      };
+
+      // Save to localStorage immediately for offline access and refresh persistence
+      const localStorageKey = `wa-sender-session-${session.userId}`;
       try {
-        const payload = JSON.stringify({
-          userId: session.userId,
-          sheet_data: newSheets,
-          send_mode: newMode,
-          country_code: newCountryCode,
-          message_template: newMessage,
-          email_subject: newEmailSubject,
-          email_body: newEmailBody,
-          current_sheet_name: newSheets.length > 0 ? newSheets[0].name : '',
-          current_index: newIndex,
-          sent_status: newSentStatus,
-        });
+        localStorage.setItem(localStorageKey, JSON.stringify(sessionData));
+      } catch (err) {
+        console.warn('Failed to save session to localStorage:', err);
+      }
+
+      try {
+        const payload = JSON.stringify(sessionData);
 
         const payloadSizeBytes = new Blob([payload]).size;
         if (payloadSizeBytes > 4 * 1024 * 1024) {
@@ -333,19 +375,12 @@ export default function WASenderPage() {
 
         if (!res.ok) {
           const errorData = await res.json().catch(() => ({ error: 'Unknown error' }));
-          setNotice({
-            text: `Save failed: ${errorData.error || 'Unknown error'}`,
-            kind: 'error',
-          });
           console.error('Save session failed:', errorData);
+          // Still continue - localStorage has the data
         }
       } catch (err) {
-        const errorMsg = err instanceof Error ? err.message : String(err);
-        setNotice({
-          text: `Failed to save session: ${errorMsg}`,
-          kind: 'error',
-        });
         console.error('Save session error:', err);
+        // Still continue - localStorage has the data
       } finally {
         setIsSaving(false);
       }
@@ -363,51 +398,54 @@ export default function WASenderPage() {
 
       const reader = new FileReader();
       reader.onload = (evt) => {
-        try {
-          const workbook = XLSX.read(evt.target?.result, { type: 'binary' });
+        // Move heavy parsing to a setTimeout to prevent UI blocking
+        setTimeout(() => {
+          try {
+            const workbook = XLSX.read(evt.target?.result, { type: 'binary' });
 
-          if (!workbook.SheetNames.length) {
-            setNotice({ text: 'The workbook contains no sheets.', kind: 'error' });
+            if (!workbook.SheetNames.length) {
+              setNotice({ text: 'The workbook contains no sheets.', kind: 'error' });
+              setIsLoading(false);
+              return;
+            }
+
+            const firstSheetName = workbook.SheetNames[0];
+            const ws = workbook.Sheets[firstSheetName];
+            const rows = XLSX.utils.sheet_to_json<Record<string, unknown>>(ws, {
+              defval: '',
+              raw: false,
+            });
+
+            if (rows.length === 0) {
+              setNotice({ text: 'All sheets appear to be empty.', kind: 'error' });
+              setIsLoading(false);
+              return;
+            }
+
+            const headers = Object.keys(rows[0]);
+            const detectedPhoneCol = detectPhoneColumn(rows) || headers[0];
+            const detectedEmailCol = detectEmailColumn(rows) || headers[0];
+
+            setColumnConfirmModal({
+              open: true,
+              data: {
+                rows,
+                headers,
+                detectedPhoneCol,
+                detectedEmailCol,
+                workbook,
+                fileName: file.name,
+              },
+            });
+
             setIsLoading(false);
-            return;
-          }
-
-          const firstSheetName = workbook.SheetNames[0];
-          const ws = workbook.Sheets[firstSheetName];
-          const rows = XLSX.utils.sheet_to_json<Record<string, unknown>>(ws, {
-            defval: '',
-            raw: false,
-          });
-
-          if (rows.length === 0) {
-            setNotice({ text: 'All sheets appear to be empty.', kind: 'error' });
+          } catch {
+            setNotice({ text: 'Could not parse the file. Please upload a valid .xlsx or .xls.', kind: 'error' });
             setIsLoading(false);
-            return;
+          } finally {
+            if (fileInputRef.current) fileInputRef.current.value = '';
           }
-
-          const headers = Object.keys(rows[0]);
-          const detectedPhoneCol = detectPhoneColumn(rows) || headers[0];
-          const detectedEmailCol = detectEmailColumn(rows) || headers[0];
-
-          setColumnConfirmModal({
-            open: true,
-            data: {
-              rows,
-              headers,
-              detectedPhoneCol,
-              detectedEmailCol,
-              workbook,
-              fileName: file.name,
-            },
-          });
-
-          setIsLoading(false);
-        } catch {
-          setNotice({ text: 'Could not parse the file. Please upload a valid .xlsx or .xls.', kind: 'error' });
-          setIsLoading(false);
-        } finally {
-          if (fileInputRef.current) fileInputRef.current.value = '';
-        }
+        }, 0);
       };
 
       reader.readAsBinaryString(file);

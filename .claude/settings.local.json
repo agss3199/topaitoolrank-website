@@ -59,7 +59,13 @@
       "Bash(find .next/static -name \"*.css\" -exec wc -c {} +)",
       "Bash(find .next/static -name \"*.js\" -exec wc -c {} +)",
       "Bash(npx playwright:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(mkdir -p workspaces/page-modernization/todos/completed)",
+      "Bash(mv workspaces/page-modernization/todos/active/001-foundation-css-verification.md workspaces/page-modernization/todos/completed/)",
+      "Bash(grep -r \"#[0-9a-fA-F]\\\\{3,6\\\\}\" app/ --include=\"*.tsx\" --include=\"*.css\")",
+      "Bash(grep -rn \"#[0-9a-fA-F]\\\\{3,6\\\\}\" app/ --include=\"*.tsx\" --include=\"*.css\")",
+      "Bash(wc:*)",
+      "Bash(grep -c \"^---\" \"C:\\\\Users\\\\MONICA\\\\Desktop\\\\Abhishek_Softwares_All_old\\\\Top_AI_Tool_Rank\\\\workspaces\\\\page-modernization\\\\journal\"/*.md)"
     ]
   }
 }

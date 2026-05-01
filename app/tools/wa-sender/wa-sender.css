@@ -735,6 +735,8 @@
   .wa-content {
     flex: 1;
     min-width: 0;
+    max-width: none;
+    margin: 0;
   }
 
   button, .wa-button {
