@@ -1,0 +1,21 @@
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent-primary),
+    var(--color-accent-secondary, var(--color-accent-primary))
+  );
+  width: 0%;
+  z-index: 100;
+  transition: width 0.1s ease-out;
+  box-shadow: 0 0 10px rgba(var(--color-accent-primary-rgb, 59 130 246), 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress-bar {
+    transition: none;
+  }
+}

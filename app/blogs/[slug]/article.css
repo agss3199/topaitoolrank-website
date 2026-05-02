@@ -1,0 +1,120 @@
+.article-page {
+  position: relative;
+  min-height: 100vh;
+}
+
+.article-not-found {
+  max-width: 72ch;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  text-align: center;
+}
+
+.article-not-found h1 {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  color: var(--color-text-headline);
+  margin-bottom: var(--spacing-lg);
+}
+
+.article-not-found p {
+  font-size: 1.0625rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* Two-column layout: TOC sidebar + article content */
+.article-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--spacing-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+.article-sidebar {
+  /* TOC is sticky and sticky-positioned inside */
+  min-width: 0;
+  position: relative;
+}
+
+.article-content {
+  min-width: 0;
+  /* Prose typography handled by .article-prose inside ArticleBody */
+}
+
+/* Share buttons container */
+.article-share {
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Desktop: two-column layout visible */
+@media (min-width: 1025px) {
+  .article-layout {
+    grid-template-columns: 240px 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  .article-sidebar {
+    /* TOC visible and sticky */
+  }
+}
+
+/* Tablet: reduce sidebar width, keep two columns */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .article-layout {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .article-sidebar {
+    /* TOC becomes mobile toggle */
+    display: none;
+  }
+}
+
+/* Mobile: single column, full width */
+@media (max-width: 768px) {
+  .article-layout {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .article-sidebar {
+    display: none;
+  }
+
+  .article-content {
+    width: 100%;
+  }
+
+  .article-share {
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+  }
+}
+
+/* Prose typography setup (shared with .article-prose from ArticleBody.css) */
+.article-content .article-prose {
+  max-width: 72ch;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Ensure article content doesn't overflow on small screens */
+@media (max-width: 640px) {
+  .article-page {
+    padding: 0;
+  }
+
+  .article-content {
+    width: 100%;
+  }
+
+  .article-not-found {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+}

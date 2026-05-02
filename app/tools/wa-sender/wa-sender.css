@@ -370,12 +370,13 @@ body {
 
 /* ============================================================
    Content Area
+   Mobile/Tablet: Centered single column (default)
+   Desktop: Main content area (controlled by .wa-container layout)
    ============================================================ */
 
 .wa-content {
   width: 100%;
   min-width: 0;
-  /* Mobile/tablet: centered layout */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -385,10 +386,11 @@ body {
 }
 
 @media (min-width: 1024px) {
-  /* Desktop: override mobile centering, use flex fill */
+  /* Desktop: flex layout inside .wa-container allows sidebar + content */
   .wa-content {
-    display: block;
-    align-items: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
     max-width: none;
     margin: 0;
     width: auto;
@@ -750,39 +752,59 @@ body {
 }
 
 /* ============================================================
-   Desktop (1024px+): Two-column layout with sidebar
+   Desktop (1024px+): Enhanced centered layout
+   CRITICAL: Keep flex-direction: column for proper modal centering
+   Sidebar elements styled inline, not repositioned with flex-direction: row
    ============================================================ */
 
 @media (min-width: 1024px) {
   .wa-container {
-    max-width: 1200px;
-    flex-direction: row;
-    align-items: flex-start;
+    max-width: 1100px;
+    flex-direction: column;
+    align-items: center;
     gap: var(--spacing-3xl);
+    padding: var(--spacing-3xl) 0;
   }
 
+  /* Desktop: Header stays at top */
   .wa-header {
-    position: sticky;
-    top: var(--spacing-lg);
-    width: 300px;
-    flex-shrink: 0;
-    text-align: left;
+    width: 100%;
+    text-align: center;
     margin-bottom: 0;
   }
 
+  /* Desktop: Upload section centered and constrained */
   .wa-upload-section {
-    width: 300px;
+    width: 100%;
+    max-width: 800px;
     margin-bottom: 0;
-    position: sticky;
-    top: 400px;
-    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: auto;
   }
 
+  /* Desktop: Settings displayed as cards in a grid */
   .wa-settings {
-    width: 300px;
-    flex-shrink: 0;
-    position: sticky;
-    top: 700px;
+    width: 100%;
+    max-width: 800px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    margin-bottom: 0;
+  }
+
+  .wa-settings > div {
+    grid-column: auto;
+  }
+
+  .wa-settings > div:first-child {
+    grid-column: 1 / -1;
+  }
+
+  /* Desktop: Content area - full width, properly constrained */
+  .wa-content {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
   }
 
   button, .wa-button {
@@ -837,7 +859,8 @@ body {
 }
 
 /* ============================================================
-   Print Styles — prevent misleading layouts on Ctrl+P
+   Print Styles — Reset to single-column for printing
+   Matches paper width (8.5" @ 96dpi ≈ 816px, constrained to 640px for readability)
    ============================================================ */
 
 @media print {
@@ -846,13 +869,17 @@ body {
     color: black !important;
     width: 100%;
     max-width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   .wa-page {
-    max-width: 760px;
-    padding: 24px;
+    display: block;
+    max-width: 640px;
+    padding: var(--spacing-xl);
     background: white !important;
     min-height: auto;
+    margin: 0 auto;
   }
 
   .wa-bg-effects {
@@ -860,32 +887,26 @@ body {
   }
 
   .wa-container {
-    max-width: 760px;
+    display: block;
+    max-width: 100%;
     padding: 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
 
+  .wa-header,
+  .wa-upload-section,
+  .wa-settings,
   .wa-content {
-    max-width: 760px;
-  }
-
-  .wa-header {
-    position: static;
-    width: auto;
-    text-align: left;
-    margin-bottom: 24px;
-  }
-
-  .wa-upload-section {
-    position: static;
-    width: auto;
-    margin-bottom: 24px;
-    max-width: 100%;
-  }
-
-  .wa-settings {
-    position: static;
-    width: auto;
-    max-width: 100%;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    margin-bottom: var(--spacing-xl) !important;
+    padding: 0 !important;
+    flex-shrink: 1 !important;
+    grid-column: auto !important;
+    grid-row: auto !important;
   }
 
   button,
@@ -896,7 +917,21 @@ body {
 
   .wa-notice,
   .wa-progress-container,
+  .wa-progress-fill,
   .wa-saving {
     display: none !important;
+  }
+
+  /* Ensure modal is not printed */
+  .modal {
+    display: none !important;
+  }
+
+  /* Print-friendly text styling */
+  .wa-page .input,
+  .wa-page textarea {
+    background: white !important;
+    border: 1px solid black !important;
+    color: black !important;
   }
 }

@@ -1,0 +1,107 @@
+.article-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.article-header-hero {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--color-bg-light);
+  margin-bottom: var(--spacing-xl);
+}
+
+.article-header-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.article-header-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+  width: 100%;
+}
+
+.article-header-meta {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.article-header-title {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  color: var(--color-text-headline);
+  line-height: 1.2;
+  margin: 0 0 var(--spacing-xl);
+}
+
+.article-header-author-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.article-header-author-name {
+  font-weight: 600;
+  color: var(--color-text-headline);
+  font-size: 0.9375rem;
+}
+
+.article-header-author-role {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+.article-header-author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.article-header-separator {
+  color: var(--color-border);
+}
+
+.article-header-meta-info {
+  display: flex;
+  gap: var(--spacing-sm);
+  color: var(--color-text-secondary);
+  font-size: 0.8125rem;
+}
+
+.article-header-date,
+.article-header-reading-time {
+  color: var(--color-text-secondary);
+}
+
+.article-header-tags {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+@media (max-width: 768px) {
+  .article-header-hero {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .article-header-container {
+    padding: 0 var(--spacing-md);
+  }
+
+  .article-header-title {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .article-header-author-row {
+    margin-bottom: var(--spacing-md);
+  }
+}

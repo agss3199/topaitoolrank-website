@@ -4,6 +4,7 @@ import "./globals.css";
 import "./components/components.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://topaitoolrank.com'),
   title: "Top AI Tool Rank",
   description:
     "Building custom software solutions for businesses worldwide.",
@@ -26,8 +27,6 @@ export default function RootLayout({
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Top AI Tool Rank</title>
-        <meta name="description" content="Building custom software solutions for businesses worldwide." />
         <link rel="preload" href="/css/style.css" as="style" />
         <link rel="preload" href="/css/animations.css" as="style" />
       </head>

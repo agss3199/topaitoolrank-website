@@ -4,6 +4,20 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
+
+  // Image optimization for blog hero images and content
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+    minimumCacheTTL: 86400, // 24 hours
+  },
+
+  // Headers and caching
   headers: async () => {
     return [
       {
@@ -14,9 +28,30 @@ const nextConfig: NextConfig = {
             value: "public, max-age=86400, immutable"
           }
         ]
+      },
+      {
+        source: "/blogs/:slug",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=3600, s-maxage=86400"
+          }
+        ]
+      },
+      {
+        source: "/blogs",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=60, s-maxage=3600"
+          }
+        ]
       }
     ];
-  }
+  },
+
+  // Optimize bundle
+  productionBrowserSourceMaps: false,
 };
 
 export default nextConfig;

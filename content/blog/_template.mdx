@@ -1,0 +1,97 @@
+---
+title: "Your Article Title Here (50-60 chars, keyword first)"
+slug: "url-safe-slug-here"
+description: "Meta description 155-160 chars. Include primary keyword, benefit statement, and compelling reason to click. Keep it punchy and action-oriented."
+excerpt: "2-3 sentence summary that appears on the blog listing page. Capture the essence of your article and make readers want to learn more."
+publishedAt: "2026-05-02"
+updatedAt: "2026-05-02"
+category: "AI Tools"
+tags:
+  - "primary keyword"
+  - "secondary keyword"
+  - "tertiary keyword"
+pillar: "ai-integration"
+heroImage: "/blog/images/slug-here.jpg"
+heroImageAlt: "Descriptive alt text 8-12 words explaining what the image shows"
+heroImageWidth: 1200
+heroImageHeight: 630
+author:
+  name: "Abhishek"
+  role: "AI Tool Researcher"
+  avatar: "/blog/author/abhishek.jpg"
+featured: false
+status: "draft"
+readingTime: 8
+wordCount: 2200
+---
+
+## Introduction
+
+Start with a compelling hook that captures the reader's attention. This should be 2-3 sentences that make clear why they should keep reading. What problem does this article solve? What will they learn?
+
+Replace this entire template with your article content from ChatGPT. Paste the ChatGPT response directly below this section.
+
+### Structure Tips
+
+- **H2 headings** for major sections
+- **H3 headings** for subsections
+- Use **bold** for key terms
+- Use `code blocks` for technical terms or commands
+- Create unordered lists for multiple points:
+  - Bullet one
+  - Bullet two
+  - Bullet three
+
+## Key Section
+
+Write naturally. The goal is to provide real value to readers. Each section should build on the previous one, creating a cohesive narrative.
+
+### Subsection
+
+Details and examples go here. Make sure to explain complex concepts in simple terms.
+
+## Another Section
+
+More content. Remember to include practical examples or actionable takeaways.
+
+## Conclusion
+
+Summarize the key points. Tell readers what they should do next or what they've learned. End with a call-to-action or a thought-provoking question.
+
+---
+
+## Publishing Workflow
+
+1. **Copy this file**: `cp _template.mdx my-article-slug.mdx`
+2. **Edit the frontmatter** — Update all metadata fields. Ensure:
+   - `slug` matches the filename (without .mdx)
+   - `heroImage` points to a real file in `/public/blog/images/`
+   - All tags are lowercase and relevant
+   - `status: "published"` to include in the site (use `"draft"` to hide)
+3. **Paste article content** — Replace template sections with your ChatGPT output
+4. **Add hero image** — Place a 1200×630px image in `/public/blog/images/{slug}.jpg`
+5. **Commit and push** — `git add . && git commit -m "feat(blog): add {title}" && git push`
+6. **Vercel auto-deploys** — Article goes live in ~90 seconds
+
+## Frontmatter Reference
+
+| Field | Type | Required | Notes |
+|---|---|---|---|
+| title | string | ✓ | 50-60 chars, keyword-forward |
+| slug | string | ✓ | URL-safe, matches filename |
+| description | string | ✓ | 155-160 chars, meta description |
+| excerpt | string | ✓ | 2-3 sentences for listing page |
+| publishedAt | ISO date | ✓ | When article went live |
+| updatedAt | ISO date | ✓ | Last update (use publishedAt if new) |
+| category | string | ✓ | Displayed as badge (e.g., "AI Tools") |
+| tags | string[] | ✓ | 3-5 lowercase tags for search |
+| pillar | string | ✓ | Content cluster (e.g., "ai-integration") |
+| heroImage | path | ✓ | Relative path in `/public/` |
+| heroImageAlt | string | ✓ | Alt text (8-12 words, descriptive) |
+| heroImageWidth | number | ✓ | 1200 for most images |
+| heroImageHeight | number | ✓ | 630 for most images |
+| author | object | ✓ | name, role, avatar |
+| featured | boolean | ✗ | Highlight on homepage (default: false) |
+| status | "published" \| "draft" | ✓ | Drafts hidden from site |
+| readingTime | number | ✓ | Estimated minutes (200 words/min average) |
+| wordCount | number | ✓ | Approximate total words |
