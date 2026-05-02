@@ -66,7 +66,18 @@
       "Bash(grep -rn \"#[0-9a-fA-F]\\\\{3,6\\\\}\" app/ --include=\"*.tsx\" --include=\"*.css\")",
       "Bash(wc:*)",
       "Bash(grep -c \"^---\" \"C:\\\\Users\\\\MONICA\\\\Desktop\\\\Abhishek_Softwares_All_old\\\\Top_AI_Tool_Rank\\\\workspaces\\\\page-modernization\\\\journal\"/*.md)",
-      "Bash(grep -E \"\\\\.\\(tsx?|jsx?|css\\)$\")"
+      "Bash(grep -E \"\\\\.\\(tsx?|jsx?|css\\)$\")",
+      "Bash(xargs grep:*)",
+      "Bash(grep -n \"\\\\.modal\\\\|\\\\.modal-overlay\\\\|\\\\.modal-content\" app/app/components/*.css app/globals.css app/app/globals.css)",
+      "Bash(node:*)",
+      "Bash(npm list:*)",
+      "Bash(cat)",
+      "Bash(bash /tmp/validate_blog.sh)",
+      "Bash(bash /tmp/validate_articles.sh)",
+      "Bash(python3:*)",
+      "Bash(grep:*)",
+      "Bash(mv chatgpt-vs-claude-comparison.jpg chatgpt-vs-claude.jpg)",
+      "Bash(mv custom-software-development-ai.jpg custom-software-development.jpg)"
     ]
   }
 }
