@@ -25,18 +25,18 @@ Production-ready patterns for publishing blog articles on Top AI Tool Rank. Arti
 
 Every article requires YAML frontmatter with these fields:
 
-| Field | Length | Example |
-|-------|--------|---------|
-| `title` | 50-60 chars | "AI Integration: Transform Your Business in 2026" |
-| `slug` | URL-safe | "ai-integration-guide" |
-| `description` | 155-160 chars | "Complete guide to integrating AI tools... maximize ROI..." |
-| `excerpt` | 2-3 sentences | "Discover how to strategically integrate AI..." |
-| `status` | "published"/"draft" | "published" (only for public articles) |
-| `category` | Single value | "AI Tools" |
-| `tags` | 3-5 lowercase | ["ai integration", "business automation"] |
-| `pillar` | Content cluster | "ai-integration" |
-| `heroImage` | Path | "/blog/images/slug.jpg" (1200×630px) |
-| `featured` | Boolean | false (or true for homepage) |
+| Field | Length | Example | CRITICAL |
+|-------|--------|---------|----------|
+| `title` | 50-60 chars | "AI Integration: Transform Your Business in 2026" | ✅ |
+| `slug` | URL-safe | "ai-integration-guide" | ✅ |
+| `description` | 155-160 chars | "Complete guide to integrating AI tools... maximize ROI..." | ✅ |
+| `excerpt` | 2-3 sentences | "Discover how to strategically integrate AI..." | ✅ |
+| `status` | "published"/"draft" | "published" (only for public articles) | ✅ |
+| `category` | Single value | "AI Tools" | ✅ |
+| `tags` | 3-5 lowercase | ["ai integration", "business automation"] | ✅ |
+| `pillar` | Content cluster | "ai-integration" | ✅ |
+| `heroImage` | Path (MUST exist) | "/blog/images/slug.jpg" (1200×630px JPEG, file at `public/blog/images/slug.jpg`) | ✅✅ |
+| `featured` | Boolean | false (or true for homepage) | |
 
 **Critical rule:** `status: "published"` ONLY for public articles; use `"draft"` for templates.
 
@@ -105,6 +105,7 @@ All include 3+ benchmarks/frameworks, real numbers, concrete examples.
 - **[seo-checklist](./seo-checklist.md)** — Title/description optimization, heading hierarchy, structured data, OG tags
 - **[aeo-patterns](./aeo-patterns.md)** — Structured data for LLMs, decision frameworks, citation-friendly content
 - **[content-quality](./content-quality.md)** — Authenticity, value delivery, article structure patterns
+- **[image-requirements](./image-requirements.md)** — Hero image specs (1200×630px), directory structure, validation checklist
 
 ## References
 

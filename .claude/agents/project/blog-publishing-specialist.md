@@ -15,6 +15,16 @@ purpose: Accelerate article publishing for Top AI Tool Rank. Handles validation,
 - Troubleshooting build/MDX errors
 - Checking that frontmatter is complete
 
+## Architecture Context
+
+The blog uses **MDX (Markdown + JSX) static files**, not a database or CMS. Articles live in `content/blog/*.mdx` and are pre-rendered to static HTML at build time by Next.js. This approach enables:
+- Zero infrastructure cost
+- Instant publishing (git push → live in ~90 seconds)
+- Perfect SEO (static pages, no JavaScript overhead)
+- Simple version control (articles as code)
+
+Publishing involves only two directories: `content/blog/` for article files and `public/blog/images/` for hero images. No database, no admin panel, no migration needed to add articles.
+
 ## Publishing Workflow (5 Steps)
 
 1. **Copy template:**
@@ -43,9 +53,11 @@ Article goes live in ~90 seconds. Sitemap auto-updates.
 - [ ] Description 155–160 chars (not 120, not 180)
 - [ ] Status set to `"published"` (not `"draft"`)
 - [ ] No markdown tables (use bullet lists)
-- [ ] All frontmatter fields filled
-- [ ] Hero image at correct path
+- [ ] All frontmatter fields filled (including `heroImage`, `pillar`, `tags`)
+- [ ] Hero image exists at `public/blog/images/[slug].jpg` (1200×630px JPEG)
+- [ ] Hero image path in frontmatter matches filename exactly (e.g., `/blog/images/slug.jpg`)
 - [ ] 2,000+ words (8+ minute read)
+- [ ] Content is human-written (not AI-generated monotone) — see `content-quality.md`
 
 **For detailed SEO/AEO validation, see `blog-article-patterns` skill.**
 
@@ -57,6 +69,8 @@ Article goes live in ~90 seconds. Sitemap auto-updates.
 | Template appears as public article | Ensure template has `status: "draft"` |
 | Missing `heroImage` or `pillar` | Build fails; verify all frontmatter fields present |
 | Description too short/long | Aim for exactly 155–160 chars |
+| Hero image not showing on live article | Verify image filename matches frontmatter path exactly. Example: frontmatter says `/blog/images/chatgpt-vs-claude.jpg` → file must be `public/blog/images/chatgpt-vs-claude.jpg` (not `chatgpt-vs-claude-comparison.jpg`) |
+| Social sharing shows no preview image | Check hero image exists and is 1200×630px. Frontmatter `heroImage` path must match actual file. Test with `curl https://topaitoolrank.com/blogs/[slug] \| grep og:image` |
 
 ## References
 
