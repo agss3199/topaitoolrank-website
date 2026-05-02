@@ -7,6 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
     "test:e2e": "npx playwright test",
     "test:e2e:chromium": "npx playwright test --project=chromium-desktop",
     "test:e2e:update-snapshots": "npx playwright test --update-snapshots"
@@ -14,6 +17,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.105.1",
     "gray-matter": "^4.0.3",
+    "jsonwebtoken": "^9.0.0",
     "next": "^16.0.0",
     "next-auth": "^4.24.0",
     "next-mdx-remote": "^6.0.0",
@@ -29,6 +33,7 @@
   "devDependencies": {
     "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4.2.4",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^20.10.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",

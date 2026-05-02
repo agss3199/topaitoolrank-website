@@ -1,0 +1,19 @@
+/* =============================================================
+   Blog Context Styles
+   Scoped to .blog-context wrapper
+   Typography and spacing for blog/article pages
+   ============================================================= */
+
+.blog-context {
+  --blog-font-body: "Georgia", "Times New Roman", serif;
+  --blog-font-heading: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --blog-max-width: 1200px;
+  --blog-line-height: 1.7;
+  --blog-text-color: var(--color-text-body, #334155);
+  --blog-heading-color: var(--color-text-headline, #0f1419);
+}
+
+.blog-context {
+  min-height: 100vh;
+  background-color: var(--color-bg-light, #fafafa);
+}

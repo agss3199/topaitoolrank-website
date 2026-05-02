@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import "./(marketing)/styles.css";
 
 export default function HomePage() {
   const hamburgerRef = useRef<HTMLButtonElement>(null);
@@ -45,7 +46,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <>
+    <div className="marketing-context">
       <nav className="navbar" aria-label="Main navigation">
         <div className="container nav-container">
           <div className="logo">
@@ -526,6 +527,6 @@ export default function HomePage() {
           <p>&copy; 2026 Top AI Tool Rank. All rights reserved.</p>
         </div>
       </footer>
-    </>
+    </div>
   );
 }

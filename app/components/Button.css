@@ -75,7 +75,7 @@
 }
 
 .btn--danger:hover:not(:disabled) {
-  background-color: #dc2626;
+  background-color: var(--color-error-hover, #dc2626);
   box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
   transform: translateY(-2px);
 }

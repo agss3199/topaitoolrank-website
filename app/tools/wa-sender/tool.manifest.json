@@ -1,0 +1,55 @@
+{
+  "id": "wa-sender",
+  "name": "WhatsApp Sender",
+  "version": "1.0.0",
+  "description": "Send bulk WhatsApp messages with templates and automation.",
+  "icon": "/tools/wa-sender/icon.svg",
+  "route": "/tools/wa-sender",
+  "auth_required": true,
+  "scope": [
+    "wa-sender:read",
+    "wa-sender:write"
+  ],
+  "navigation": [
+    {
+      "label": "Dashboard",
+      "href": "/tools/wa-sender",
+      "icon": "dashboard"
+    },
+    {
+      "label": "Messages",
+      "href": "/tools/wa-sender/messages",
+      "icon": "mail"
+    },
+    {
+      "label": "Templates",
+      "href": "/tools/wa-sender/templates",
+      "icon": "template"
+    },
+    {
+      "label": "Settings",
+      "href": "/tools/wa-sender/settings",
+      "icon": "settings"
+    }
+  ],
+  "database_tables": [
+    "wa_sender_messages",
+    "wa_sender_templates",
+    "wa_sender_conversations",
+    "wa_sender_contacts"
+  ],
+  "api_endpoints": [
+    "/api/wa-sender/messages",
+    "/api/wa-sender/templates",
+    "/api/wa-sender/conversations"
+  ],
+  "environment_variables": [
+    "WHATSAPP_API_KEY",
+    "WHATSAPP_BUSINESS_ACCOUNT_ID"
+  ],
+  "deployment": {
+    "independent": true,
+    "can_deploy_without_core": true,
+    "requires_migration": true
+  }
+}
