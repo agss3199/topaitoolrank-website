@@ -79,7 +79,10 @@
       "Bash(mv chatgpt-vs-claude-comparison.jpg chatgpt-vs-claude.jpg)",
       "Bash(mv custom-software-development-ai.jpg custom-software-development.jpg)",
       "Bash(awk '{print $9, $5}')",
-      "Bash(xargs -I {} basename {})"
+      "Bash(xargs -I {} basename {})",
+      "Bash(cd \"C:\\\\\\\\Users\\\\\\\\MONICA\\\\\\\\Desktop\\\\\\\\Abhishek_Softwares_All_old\\\\\\\\Top_AI_Tool_Rank\")",
+      "Bash(find \"C:\\\\\\\\Users\\\\\\\\MONICA\\\\\\\\Desktop\\\\\\\\Abhishek_Softwares_All_old\\\\\\\\Top_AI_Tool_Rank\\\\\\\\app\" -type d -name \"marketing\" -o -type d -name \"blog\" -o -type d -name \"tools\")",
+      "Bash(npm i:*)"
     ]
   }
 }
