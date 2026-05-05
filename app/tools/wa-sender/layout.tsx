@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import React from "react";
 import "../../globals.css";
+import WASenderLayoutClient from "./layout-client";
 
 export const metadata: Metadata = {
   title: "WA Sender - Top AI Tool Rank",
@@ -16,5 +17,5 @@ export default function WASenderLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return <WASenderLayoutClient>{children}</WASenderLayoutClient>;
 }

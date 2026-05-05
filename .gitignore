@@ -71,3 +71,6 @@ secrets/
 .env*.local
 node_modules/
 .next/
+
+# Generated build artifacts (not committed)
+public/search-index.json

@@ -4,7 +4,7 @@
  */
 
 import { MetadataRoute } from 'next';
-import { getAllPosts } from '@/app/lib/blog';
+import { getAllPosts, slugifyTag } from '@/app/lib/blog';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://topaitoolrank.com';
@@ -35,8 +35,53 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${baseUrl}/blogs/${post.slug}`,
     lastModified: new Date(post.updatedAt || post.publishedAt),
     changeFrequency: 'weekly' as const,
-    priority: 0.8,
+    priority: 0.9,
   }));
+
+  // Blog tag index pages
+  const tagUrls: MetadataRoute.Sitemap = (() => {
+    const tagsWithDates = new Map<string, number>();
+
+    posts.forEach((post) => {
+      post.tags?.forEach((tag) => {
+        const slug = slugifyTag(tag);
+        const postDate = new Date(post.publishedAt).getTime();
+        const currentMax = tagsWithDates.get(slug) || 0;
+        if (postDate > currentMax) {
+          tagsWithDates.set(slug, postDate);
+        }
+      });
+    });
+
+    return Array.from(tagsWithDates.entries()).map(([slug, timestamp]) => ({
+      url: `${baseUrl}/blogs/tag/${slug}`,
+      lastModified: new Date(timestamp),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    }));
+  })();
+
+  // Blog category index pages
+  const categoryUrls: MetadataRoute.Sitemap = (() => {
+    const categoriesWithDates = new Map<string, number>();
+
+    posts.forEach((post) => {
+      if (post.category) {
+        const postDate = new Date(post.publishedAt).getTime();
+        const currentMax = categoriesWithDates.get(post.category) || 0;
+        if (postDate > currentMax) {
+          categoriesWithDates.set(post.category, postDate);
+        }
+      }
+    });
+
+    return Array.from(categoriesWithDates.entries()).map(([category, timestamp]) => ({
+      url: `${baseUrl}/blogs/category/${encodeURIComponent(category)}`,
+      lastModified: new Date(timestamp),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    }));
+  })();
 
   // Tool pages
   const toolPages: MetadataRoute.Sitemap = [
@@ -81,6 +126,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Combine all entries — order matters for clarity (core → blog → articles → tools → legal → auth)
-  return [...corePages, ...blogPages, ...articleUrls, ...toolPages, ...legalPages, ...authPages];
+  // Combine all entries — order matters for clarity (core → blog → articles → tags → categories → tools → legal → auth)
+  return [...corePages, ...blogPages, ...articleUrls, ...tagUrls, ...categoryUrls, ...toolPages, ...legalPages, ...authPages];
 }

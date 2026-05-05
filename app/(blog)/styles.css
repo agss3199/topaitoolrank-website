@@ -17,3 +17,22 @@
   min-height: 100vh;
   background-color: var(--color-bg-light, #fafafa);
 }
+
+.blog-header {
+  background-color: white;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 16px 20px;
+  max-width: var(--blog-max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.blog-header-search {
+  display: flex;
+  justify-content: center;
+}
+
+.blog-header-search .blog-search {
+  width: 100%;
+  max-width: 500px;
+}

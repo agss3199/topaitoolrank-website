@@ -4,9 +4,27 @@ This directory contains the authority specifications for all domain areas of top
 
 ---
 
-## Design & Visual
+## Track A: WA Sender Enhancement (Phase 2)
 
-- [design-system.md](design-system.md) — Complete visual language, colors, typography, spacing, components, accessibility, responsive design, performance targets
+| File | Domain | Purpose |
+|------|--------|---------|
+| [`wa-sender-core.md`](wa-sender-core.md) | Architecture | ToolShell integration, sub-routes, state management, backwards compatibility |
+| [`wa-sender-templates.md`](wa-sender-templates.md) | Message Templates | CRUD API, template schema, variable substitution, storage contracts |
+| [`wa-sender-contacts.md`](wa-sender-contacts.md) | Contact Management | Import/deduplicate, persistent storage, export with metadata |
+| [`wa-sender-history.md`](wa-sender-history.md) | Send History | Message log schema, analytics, filtering/pagination, status tracking |
+
+## Track B: Blog Scalability (Phase 2)
+
+| File | Domain | Purpose |
+|------|--------|---------|
+| [`blog-indexing.md`](blog-indexing.md) | Discovery & SEO | Tag/category routes, RSS feed, search index generation, sitemap |
+
+## Core Infrastructure
+
+| File | Domain | Purpose |
+|------|--------|---------|
+| [`database-schema.md`](database-schema.md) | Data Model | All tables (Phase 1 + new Phase 2), RLS policies, indexes, migrations |
+| [`design-system.md`](design-system.md) | Visual Design | Colors, typography, spacing, components, accessibility, responsive layout |
 
 ---
 
