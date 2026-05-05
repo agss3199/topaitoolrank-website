@@ -11,9 +11,13 @@ import { WASenderTemplate } from '@/app/lib/types/wa-sender';
 import { substituteVariables } from '@/app/lib/templates';
 import './wa-sender.css';
 
-// Lazy-load TemplateModal since it's only used when user clicks button
+// Lazy-load TemplateModal and ContactModal since they're only used when user clicks button
 const TemplateModal = lazy(() =>
   import('@/app/components/TemplateModal').then((m) => ({ default: m.TemplateModal }))
+);
+
+const ContactModal = lazy(() =>
+  import('@/app/components/ContactModal').then((m) => ({ default: m.ContactModal }))
 );
 
 type SendMode = 'whatsapp' | 'email';
@@ -242,6 +246,8 @@ export default function WASenderPage() {
   const [emailBody, setEmailBody] = useState<string>('');
   const [showTemplateModal, setShowTemplateModal] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState<any>(null);
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [selectedContacts, setSelectedContacts] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [notice, setNotice] = useState<Notice | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -397,6 +403,29 @@ export default function WASenderPage() {
     [session?.userId, isSaving]
   );
 
+  const handleContactsSelect = useCallback(
+    (contacts: any[]) => {
+      setSelectedContacts(contacts);
+      // Populate recipients from selected contacts
+      const newSheets: SheetConfig[] = [{
+        name: 'Selected Contacts',
+        headers: ['name', 'phone', 'email', 'company'],
+        phoneCol: 'phone',
+        emailCol: 'email',
+        enabled: true,
+        contacts: contacts.map(c => mode === 'whatsapp' ? c.phone : c.email).filter(Boolean),
+      }];
+      setSheets(newSheets);
+      setCurrentIndex(0);
+      setSentStatus({});
+      setNotice({
+        text: `${contacts.length} contact${contacts.length > 1 ? 's' : ''} selected`,
+        kind: 'success',
+      });
+    },
+    [mode]
+  );
+
   const handleFileUpload = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
@@ -404,6 +433,7 @@ export default function WASenderPage() {
 
       setIsLoading(true);
       setNotice(null);
+      setSelectedContacts([]);
 
       const reader = new FileReader();
       reader.onload = (evt) => {
@@ -719,9 +749,46 @@ export default function WASenderPage() {
 
         {/* File Upload */}
         <div className="wa-upload-section">
-          <label className="wa-step-label">
-            Step 1: Upload Your Data
-          </label>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+            <label className="wa-step-label">
+              Step 1: Upload Your Data
+            </label>
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => setShowContactModal(true)}
+                aria-label="Select contacts from your library"
+              >
+                Select Contacts
+              </Button>
+              {selectedContacts.length > 0 && (
+                <>
+                  <Badge>{selectedContacts.length} selected</Badge>
+                  <button
+                    onClick={() => {
+                      setSelectedContacts([]);
+                      setSheets([]);
+                      setCurrentIndex(0);
+                      setSentStatus({});
+                    }}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#dc3545',
+                      cursor: 'pointer',
+                      fontSize: '0.875rem',
+                      padding: '0.25rem 0.5rem',
+                      textDecoration: 'underline',
+                    }}
+                    aria-label="Clear selected contacts"
+                  >
+                    Clear
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
           <input
             ref={fileInputRef}
             type="file"
@@ -1001,6 +1068,16 @@ export default function WASenderPage() {
               setSelectedTemplate(template);
               setMessage(template.content);
             }}
+          />
+        </Suspense>
+      )}
+
+      {showContactModal && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <ContactModal
+            open={showContactModal}
+            onClose={() => setShowContactModal(false)}
+            onSelect={handleContactsSelect}
           />
         </Suspense>
       )}
