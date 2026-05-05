@@ -1,9 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifyTokenFromRequest } from '@/app/lib/api-auth';
+import { verifyTokenFromRequest, extractToken } from '@/app/lib/api-auth';
+import { createAuthenticatedClient } from '@/app/lib/db/client';
+import * as db from '@/app/lib/db/wa-sender';
+import * as XLSX from 'xlsx';
 
 /**
  * GET /api/wa-sender/contacts
  * Fetch paginated contacts for the authenticated user
+ *
+ * Query params:
+ * - page: Page number (default: 1)
+ * - limit: Items per page (default: 50, max: 500)
+ * - search: Search term (matches name, phone, email, company)
+ *
+ * Response: { contacts, total, page, limit }
  */
 export async function GET(req: NextRequest) {
   const payload = verifyTokenFromRequest(req);
@@ -11,27 +21,33 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  // Query parameters for pagination
-  const page = parseInt(req.nextUrl.searchParams.get('page') || '1');
-  const limit = parseInt(req.nextUrl.searchParams.get('limit') || '50');
+  try {
+    const token = extractToken(req);
+    if (!token) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
 
-  // Stub: return empty paginated response for now
-  // Full implementation in todo 40
-  return NextResponse.json(
-    {
-      contacts: [],
-      total: 0,
-      page,
-      limit,
-    },
-    { status: 200 }
-  );
+    const client = createAuthenticatedClient(token);
+    const page = parseInt(req.nextUrl.searchParams.get('page') || '1');
+    const limit = parseInt(req.nextUrl.searchParams.get('limit') || '50');
+    const search = req.nextUrl.searchParams.get('search') || undefined;
+
+    const result = await db.getContacts(client, { page, limit, search });
+
+    return NextResponse.json(result, { status: 200 });
+  } catch (error) {
+    console.error('[GET /api/wa-sender/contacts]', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch contacts' },
+      { status: 500 }
+    );
+  }
 }
 
 /**
- * POST /api/wa-sender/contacts
- * Create or upsert a contact
- * Not yet implemented (todo 40)
+ * POST /api/wa-sender/contacts/import
+ * Import contacts from Excel file
+ * Not implemented in this route (use /import/route.ts instead)
  */
 export async function POST(req: NextRequest) {
   const payload = verifyTokenFromRequest(req);
@@ -40,7 +56,7 @@ export async function POST(req: NextRequest) {
   }
 
   return NextResponse.json(
-    { error: 'Not implemented yet. Coming in Phase 2.' },
-    { status: 501 }
+    { error: 'Use POST /api/wa-sender/contacts/import for file uploads' },
+    { status: 400 }
   );
 }

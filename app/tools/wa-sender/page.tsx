@@ -1,13 +1,20 @@
 'use client';
 
-import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
+import { useState, useRef, useCallback, useEffect, useMemo, lazy, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import * as XLSX from 'xlsx';
 import { useAuth } from '@/lib/useAuth';
 import { Button } from '@/app/components/Button';
 import { Modal } from '@/app/components/Modal';
 import { Badge } from '@/app/components/Badge';
+import { WASenderTemplate } from '@/app/lib/types/wa-sender';
+import { substituteVariables } from '@/app/lib/templates';
 import './wa-sender.css';
+
+// Lazy-load TemplateModal since it's only used when user clicks button
+const TemplateModal = lazy(() =>
+  import('@/app/components/TemplateModal').then((m) => ({ default: m.TemplateModal }))
+);
 
 type SendMode = 'whatsapp' | 'email';
 
@@ -233,6 +240,8 @@ export default function WASenderPage() {
   const [message, setMessage] = useState<string>('');
   const [emailSubject, setEmailSubject] = useState<string>('');
   const [emailBody, setEmailBody] = useState<string>('');
+  const [showTemplateModal, setShowTemplateModal] = useState(false);
+  const [selectedTemplate, setSelectedTemplate] = useState<any>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [notice, setNotice] = useState<Notice | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -591,21 +600,50 @@ export default function WASenderPage() {
   const openWhatsApp = useCallback(() => {
     if (!current || current.kind !== 'whatsapp') return;
     const key = `${current.sheetName}-${current.rowNum - 1}`;
-    const encoded = encodeURIComponent(message.trim());
+
+    // Substitute variables if a template is selected
+    let finalMessage = message.trim();
+    if (selectedTemplate) {
+      // For now, use available data: phone number
+      const contactData = {
+        phone: current.raw,
+        name: '',
+        email: '',
+        company: '',
+      };
+      finalMessage = substituteVariables(finalMessage, contactData);
+    }
+
+    const encoded = encodeURIComponent(finalMessage);
     window.open(`https://wa.me/${current.normalized}?text=${encoded}`, '_blank');
     setSentStatus(prev => ({ ...prev, [key]: true }));
     saveSession(sheets, mode, countryCode, message, emailSubject, emailBody, currentIndex, { ...sentStatus, [key]: true });
-  }, [current, message, emailSubject, emailBody, sheets, mode, countryCode, currentIndex, sentStatus, saveSession]);
+  }, [current, message, emailSubject, emailBody, sheets, mode, countryCode, currentIndex, sentStatus, saveSession, selectedTemplate]);
 
   const openGmailCompose = useCallback(() => {
     if (!current || current.kind !== 'email') return;
     const key = `${current.sheetName}-${current.rowNum - 1}`;
-    const subject = encodeURIComponent(emailSubject.trim());
-    const body = encodeURIComponent(emailBody.trim());
+
+    // Substitute variables in subject and body if a template is selected
+    let finalSubject = emailSubject.trim();
+    let finalBody = emailBody.trim();
+    if (selectedTemplate) {
+      const contactData = {
+        email: current.email,
+        phone: '',
+        name: '',
+        company: '',
+      };
+      finalSubject = substituteVariables(finalSubject, contactData);
+      finalBody = substituteVariables(finalBody, contactData);
+    }
+
+    const subject = encodeURIComponent(finalSubject);
+    const body = encodeURIComponent(finalBody);
     window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${current.email}&su=${subject}&body=${body}`, '_blank');
     setSentStatus(prev => ({ ...prev, [key]: true }));
     saveSession(sheets, mode, countryCode, message, emailSubject, emailBody, currentIndex, { ...sentStatus, [key]: true });
-  }, [current, emailSubject, emailBody, sheets, mode, countryCode, message, currentIndex, sentStatus, saveSession]);
+  }, [current, emailSubject, emailBody, sheets, mode, countryCode, message, currentIndex, sentStatus, saveSession, selectedTemplate]);
 
   const nextRecipient = useCallback(() => {
     setCurrentIndex(prev => clamp(prev + 1, 0, recipients.length - 1));
@@ -782,9 +820,18 @@ export default function WASenderPage() {
                     <p className="wa-hint">Used for contacts without country code</p>
                   </div>
                   <div className="wa-card">
-                    <label htmlFor="wa-message" className="wa-label">
-                      Your Message
-                    </label>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                      <label htmlFor="wa-message" className="wa-label">
+                        Your Message
+                      </label>
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        onClick={() => setShowTemplateModal(true)}
+                      >
+                        Select Template
+                      </Button>
+                    </div>
                     <textarea
                       id="wa-message"
                       name="wa-message"
@@ -794,6 +841,18 @@ export default function WASenderPage() {
                       placeholder="Type your message here..."
                       aria-label="WhatsApp message template"
                     />
+                    {selectedTemplate && (
+                      <div style={{ marginTop: '0.5rem', padding: '0.5rem 0.75rem', backgroundColor: '#f0fdf4', borderRadius: '0.375rem', fontSize: '0.875rem', color: '#166534', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span>Using template: <strong>{selectedTemplate.name}</strong></span>
+                        <button
+                          onClick={() => setSelectedTemplate(null)}
+                          style={{ background: 'none', border: 'none', color: '#166534', cursor: 'pointer', fontSize: '1.25rem', padding: '0' }}
+                          aria-label="Deselect template"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    )}
                     <p className="wa-hint">{message.length} characters</p>
                   </div>
                 </>
@@ -931,6 +990,19 @@ export default function WASenderPage() {
           onConfirm={handleColumnConfirm}
           onCancel={() => setColumnConfirmModal({ open: false, data: null })}
         />
+      )}
+
+      {showTemplateModal && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <TemplateModal
+            open={showTemplateModal}
+            onClose={() => setShowTemplateModal(false)}
+            onSelect={(template: WASenderTemplate) => {
+              setSelectedTemplate(template);
+              setMessage(template.content);
+            }}
+          />
+        </Suspense>
       )}
     </div>
   );
