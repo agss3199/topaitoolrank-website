@@ -9,6 +9,7 @@ import { Modal } from '@/app/components/Modal';
 import { Badge } from '@/app/components/Badge';
 import { WASenderTemplate } from '@/app/lib/types/wa-sender';
 import { substituteVariables } from '@/app/lib/templates';
+import { useWASender } from '@/app/tools/wa-sender/context';
 import './wa-sender.css';
 
 // Lazy-load TemplateModal and ContactModal since they're only used when user clicks button
@@ -237,6 +238,10 @@ function ColumnConfirmationModal({
 export default function WASenderPage() {
   const router = useRouter();
   const { session, loading } = useAuth();
+  const ctx = useWASender();
+
+  // Get file/columns/numbers/recipients from context for persistence across navigation
+  const { file, setFile, columns, setColumns, numbers, setNumbers, recipients: contextRecipients, setRecipients } = ctx;
 
   const [mode, setMode] = useState<SendMode>('whatsapp');
   const [sheets, setSheets] = useState<SheetConfig[]>([]);
