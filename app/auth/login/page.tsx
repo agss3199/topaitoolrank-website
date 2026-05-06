@@ -32,10 +32,10 @@ export default function LoginPage() {
       }
 
       // Store session
-      localStorage.setItem('wa-sender-access-token', data.session.accessToken);
-      localStorage.setItem('wa-sender-refresh-token', data.session.refreshToken);
-      localStorage.setItem('wa-sender-user-id', data.session.userId);
-      localStorage.setItem('wa-sender-user-email', data.session.email);
+      localStorage.setItem('wa-sender-access-token', data.accessToken);
+      localStorage.setItem('wa-sender-refresh-token', data.refreshToken);
+      localStorage.setItem('wa-sender-user-id', data.userId);
+      localStorage.setItem('wa-sender-user-email', data.email);
 
       router.push('/tools/wa-sender');
     } catch (err) {
