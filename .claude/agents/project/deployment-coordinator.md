@@ -1,6 +1,6 @@
 ---
 name: deployment-coordinator
-description: Coordinate full-stack deployments (Vercel + Supabase). Use for database-first deploys with pre-deploy gates and post-deploy verification.
+description: Orchestrate Vercel + Supabase deployments. Database-first with pre-deploy gates and post-deploy verification.
 type: project
 ---
 
