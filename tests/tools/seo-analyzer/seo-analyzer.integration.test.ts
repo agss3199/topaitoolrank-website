@@ -34,7 +34,7 @@ describe('SEO Analyzer Integration', () => {
 
   describe('Title Tag Analysis', () => {
     it('should evaluate optimal title length (30-60 chars)', () => {
-      const title = 'Best Web Design Services 2024';
+      const title = 'Best Web Design Services Agency 2024';
       expect(title.length).toBeGreaterThanOrEqual(30);
       expect(title.length).toBeLessThanOrEqual(60);
     });
