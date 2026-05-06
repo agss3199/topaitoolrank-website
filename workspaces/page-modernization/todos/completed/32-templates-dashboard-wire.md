@@ -1,119 +1,68 @@
-# 32-templates-dashboard-wire — COMPLETED
+# 32-templates-dashboard-wire
 
-**Completion Date:** 2026-05-05  
-**Status:** ✅ Template selection and variable substitution wired into Dashboard
+**Implements**: specs/wa-sender-templates.md § Template Selection in Dashboard, § Variable Substitution  
+**Depends On**: 31-templates-ui-build (templates API fully functional), 12-wa-sender-subroutes (Dashboard uses context), 10-wa-sender-context (selectedTemplate state declared)  
+**Capacity**: ~150 LOC load-bearing logic / 4 invariants (template selection populates Dashboard message field, variable substitution is case-sensitive, missing variables left as-is, selectedTemplate stored in context) / 3 call-graph hops (Dashboard button → modal → fetch templates → select → context update → Dashboard field update) / Wires the template selection modal into the Dashboard send workflow: "Select Template" button, template list modal, selection populates message content, and variable substitution during send.  
+**Status**: ACTIVE
 
-## Summary
+## Context
 
-Connected Templates feature to the Dashboard send workflow. Users can now:
+The Templates feature (todo 31) allows managing templates in isolation. This todo connects it to the send workflow: the user is in the Dashboard, clicks "Select Template," picks from a modal, and the selected template's content populates the message textarea. Variables like `{name}` are then substituted per-recipient at send time.
 
-1. Click "Select Template" button in Dashboard
-2. Choose a template from modal (fetched from `/api/wa-sender/templates`)
-3. Message textarea populates with template content
-4. Selected template indicator shows below textarea ("Using template: [name]" with X to deselect)
-5. When sending, variables like `{name}` are substituted before generating WhatsApp/Gmail links
+This is the BUILD+WIRE pattern: todo 31 built the Templates UI; this todo wires it to the Dashboard.
 
-## Implementation Details
+## Scope
 
-### Files Created
+**DO:**
+- Add "Select Template" button to the Dashboard message compose section
+- Create `app/components/TemplateModal.tsx` — a lazily-loaded modal showing a simplified template list (name, category, first 100 chars of content) with click-to-select
+- On template selection: populate the Dashboard's message textarea with the template content; store the selected template in `context.selectedTemplate`
+- Implement `substituteVariables(template: string, contactData: Record<string, string>): string` in `app/lib/templates.ts`
+  - Case-sensitive replacement: `{Name}` ≠ `{name}`
+  - Missing variable: leave placeholder as-is (`{promo_code}` stays if contact has no `promo_code`)
+  - Source: both standard fields (name, phone, email, company) and `custom_fields` JSONB
+- Call `substituteVariables` during the send loop in Dashboard (per recipient, before generating the WhatsApp/Gmail link)
+- Show which template is currently selected below the message textarea ("Using template: [name]" with an X to deselect)
 
-**Created:**
-- `app/components/TemplateModal.tsx` — Lazily-loaded modal showing template list
-  - Fetches templates on open from `/api/wa-sender/templates`
-  - Shows name, category, first 100 chars of content
-  - Click to select and populate message field
-  - Loading state while fetching
-  - Error handling
+**DO NOT:**
+- Re-implement the full template list (reuse the templates API — `GET /api/wa-sender/templates`)
+- Do substitution server-side — it is explicitly client-side per the spec ("Substitution is done client-side before sending (no secrets passed to API)")
+- Add template editing to the modal — selection only; full editing stays at `/tools/wa-sender/templates`
+
+## Deliverables
+
+**Create:**
+- `app/components/TemplateModal.tsx` — simplified template selector modal
+
+**Modify:**
+- `app/tools/wa-sender/page.tsx` (Dashboard) — add "Select Template" button, selected template indicator, wire substitution into send loop
+- `app/lib/templates.ts` — add `substituteVariables()` function
+- `app/tools/wa-sender/context.ts` — ensure `selectedTemplate` and `setSelectedTemplate` are properly typed (was placeholder in todo 10)
 
 **Tests:**
-- `__tests__/lib/templates-substitute.test.ts` — 11 tests for variable substitution
-  - Case-sensitive replacement
-  - Missing variables left as-is
-  - Custom fields flattening
-  - Multiple variable instances
-  - Real-world template examples
+- `__tests__/wa-sender-templates-dashboard-wire.test.ts`
 
-### Files Modified
+## Testing
 
-**Modified:**
-- `app/tools/wa-sender/page.tsx` (Dashboard)
-  - Imported TemplateModal (lazily via `React.lazy`)
-  - Added state: `showTemplateModal`, `selectedTemplate`
-  - Added "Select Template" button next to message textarea
-  - Added selected template indicator below textarea with deselect button
-  - Integrated `substituteVariables` into `openWhatsApp` callback
-  - Integrated `substituteVariables` into `openGmailCompose` callback
-  - Updated dependencies arrays to include `selectedTemplate`
+**Unit tests (Tier 1):**
+- `test_substitute_variables_replaces_known_variables` — `substituteVariables("Hi {name}", { name: "Alice" })` returns `"Hi Alice"`
+- `test_substitute_variables_is_case_sensitive` — `substituteVariables("Hi {Name}", { name: "Alice" })` returns `"Hi {Name}"` (no replacement — `Name` ≠ `name`)
+- `test_substitute_variables_leaves_unknown_placeholder` — `substituteVariables("Code: {promo_code}", { name: "Alice" })` returns `"Code: {promo_code}"`
+- `test_substitute_variables_uses_custom_fields` — contact with `custom_fields: { tier: "Premium" }`; `substituteVariables("{tier}", contact)` returns `"Premium"`
+- `test_select_template_populates_message_field` — click "Select Template", select a template from modal; Dashboard message textarea contains template content
+- `test_selected_template_shown_below_textarea` — after selection, "Using template: [name]" text visible
+- `test_deselect_template_clears_indicator` — click X on selected template indicator; indicator disappears; context.selectedTemplate is null
+- `test_send_calls_substitute_variables_per_recipient` — mock 2 contacts; verify substituteVariables called twice during send, with different contact data each time
 
-- `app/lib/templates.ts`
-  - Added `substituteVariables(template: string, contact: Record<string, unknown>): string`
-  - Handles case-sensitive replacement
-  - Flattens `custom_fields` into contact data
-  - Returns placeholders as-is for missing variables
+**Manual checks:**
+- Click "Select Template" in Dashboard; template modal appears with template list
+- Click a template; modal closes, message textarea populated with template content
+- Have contacts with `{name}` variable; send — verify each WhatsApp link has the name substituted
+- Template with `{promo_code}` on contacts without that field — placeholder stays in message
 
-## Variable Substitution Implementation
+## Implementation Notes
 
-**Function signature:**
-```typescript
-export function substituteVariables(
-  template: string,
-  contact: Record<string, unknown>
-): string
-```
-
-**Rules:**
-- Case-sensitive: `{Name}` ≠ `{name}`
-- Missing variables left as-is: `{unknown}` stays in output
-- Flattens contact data: combines standard fields + `custom_fields` JSONB
-- Regex replacement: `/{([a-zA-Z_][a-zA-Z0-9_]*)}/g`
-
-**Test Coverage:**
-- ✅ Basic substitution
-- ✅ Case sensitivity
-- ✅ Unknown variables
-- ✅ Custom fields flattening
-- ✅ Multiple instances
-- ✅ All standard fields (name, phone, email, company)
-- ✅ Null/undefined handling
-- ✅ Real-world templates
-
-## Limitations & Future Work
-
-**Current implementation:**
-- Variable substitution uses basic contact data (name, phone, email, company) + custom_fields
-- When sending, only phone/email is available from the recipient entry
-- No access to full contact record in send loop (would require data model enhancement)
-
-**Future enhancement (Todo 40+):**
-- When Contacts API is built, will have full contact records with all custom fields
-- Can then enable full variable substitution with rich contact data
-
-## Build & Tests
-
-✅ TypeScript build passes
-✅ 11 substitution unit tests passing
-✅ 28 API tests still passing
-✅ All imports resolve correctly
-
-## Verification Against Spec
-
-**From specs/wa-sender-templates.md § Variable Substitution:**
-✅ Variables are case-sensitive
-✅ Missing variables left as-is
-✅ Extra variables in contact data ignored
-✅ Substitution is client-side before sending
-✅ Implementation matches regex pattern: `/\{([a-zA-Z_][a-zA-Z0-9_]*)\}/g`
-
-**From todo 32 § Deliverables:**
-✅ `app/components/TemplateModal.tsx` created
-✅ Dashboard wired with "Select Template" button
-✅ Template selection populates message field
-✅ `substituteVariables()` implemented
-✅ Substitution called during send loop (WhatsApp + Email)
-✅ Selected template shown below textarea with deselect
-
-## Status
-
-Ready for production. Templates are now seamlessly integrated into the Dashboard send workflow. Users can select a template and it auto-populates the message, with variables ready for substitution at send time.
-
-Next unblocked todos: 40 (Contacts API), 50 (History API), 41 (Contacts List), 51 (History Page)
+- `TemplateModal` must lazy-load with `React.lazy()` or use `dynamic()` from Next.js — it is only needed when user clicks the button, so it should not be in the initial bundle.
+- The modal fetches from `GET /api/wa-sender/templates` on open — not pre-fetched. Show a loading spinner inside the modal while fetching.
+- `substituteVariables` must handle `custom_fields` JSONB by flattening the object: `{ name: contact.name, phone: contact.phone, email: contact.email, company: contact.company, ...contact.custom_fields }`. This gives template access to all fields without distinguishing standard from custom.
+- The "Using template: [name]" indicator must survive sub-route navigation and return — it reads from `context.selectedTemplate` which is preserved in the context provider.
