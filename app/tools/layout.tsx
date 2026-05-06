@@ -1,5 +1,4 @@
 import React from "react";
-import "../(tools)/styles.css";
 
 export default function ToolsLayout({
   children,

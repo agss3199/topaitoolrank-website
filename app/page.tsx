@@ -71,17 +71,53 @@ export default function HomePage() {
               </a>
               <ul className="dropdown">
                 <li>
-                  <a href="/tools/wa-sender" rel="noopener">
-                    WA Sender
+                  <a href="/tools/whatsapp-message-formatter" rel="noopener">
+                    WhatsApp Message Formatter
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="javascript:void(0)"
-                    className="coming-soon"
-                    onClick={() => alert("Voice Rating is coming soon!")}
-                  >
-                    Voice Rating
+                  <a href="/tools/whatsapp-link-generator" rel="noopener">
+                    WhatsApp Link Generator
+                  </a>
+                </li>
+                <li>
+                  <a href="/tools/word-counter" rel="noopener">
+                    Word Counter
+                  </a>
+                </li>
+                <li>
+                  <a href="/tools/ai-prompt-generator" rel="noopener">
+                    AI Prompt Generator
+                  </a>
+                </li>
+                <li>
+                  <a href="/tools/email-subject-tester" rel="noopener">
+                    Email Subject Tester
+                  </a>
+                </li>
+                <li>
+                  <a href="/tools/utm-link-builder" rel="noopener">
+                    UTM Link Builder
+                  </a>
+                </li>
+                <li>
+                  <a href="/tools/json-formatter" rel="noopener">
+                    JSON Formatter
+                  </a>
+                </li>
+                <li>
+                  <a href="/tools/invoice-generator" rel="noopener">
+                    Invoice Generator
+                  </a>
+                </li>
+                <li>
+                  <a href="/tools/seo-analyzer" rel="noopener">
+                    SEO Analyzer
+                  </a>
+                </li>
+                <li>
+                  <a href="/tools/wa-sender" rel="noopener">
+                    WA Sender
                   </a>
                 </li>
               </ul>
@@ -281,33 +317,110 @@ export default function HomePage() {
               <article className="tool-card reveal">
                 <div>
                   <span className="tool-badge">Live</span>
-                  <h3>WA Sender</h3>
-                  <p>
-                    A practical communication tool designed to make outreach and
-                    WhatsApp-based workflows easier.
-                  </p>
+                  <h3>WhatsApp Message Formatter</h3>
+                  <p>Transform markdown into WhatsApp-formatted text with bold, italic, and code styling.</p>
                 </div>
-                <a href="/tools/wa-sender" className="tool-link">
+                <a href="/tools/whatsapp-message-formatter" className="tool-link">
                   Try Tool →
                 </a>
               </article>
 
               <article className="tool-card reveal delay-1">
                 <div>
-                  <span className="tool-badge muted">Coming Soon</span>
-                  <h3>Voice Rating</h3>
-                  <p>
-                    An upcoming AI-assisted tool for collecting and analyzing
-                    voice-based feedback.
-                  </p>
+                  <span className="tool-badge">Live</span>
+                  <h3>WhatsApp Link Generator</h3>
+                  <p>Generate direct WhatsApp chat links and QR codes for quick messaging without saving contacts.</p>
                 </div>
-                <a
-                  href="javascript:void(0)"
-                  className="tool-link disabled"
-                  aria-disabled="true"
-                  onClick={() => alert("Voice Rating is coming soon!")}
-                >
-                  Coming Soon
+                <a href="/tools/whatsapp-link-generator" className="tool-link">
+                  Try Tool →
+                </a>
+              </article>
+
+              <article className="tool-card reveal delay-2">
+                <div>
+                  <span className="tool-badge">Live</span>
+                  <h3>Word Counter</h3>
+                  <p>Real-time word, character, and sentence counting with readability metrics for any text.</p>
+                </div>
+                <a href="/tools/word-counter" className="tool-link">
+                  Try Tool →
+                </a>
+              </article>
+
+              <article className="tool-card reveal delay-3">
+                <div>
+                  <span className="tool-badge">Live</span>
+                  <h3>AI Prompt Generator</h3>
+                  <p>Create structured, effective prompts for AI models with business use case templates.</p>
+                </div>
+                <a href="/tools/ai-prompt-generator" className="tool-link">
+                  Try Tool →
+                </a>
+              </article>
+
+              <article className="tool-card reveal delay-1">
+                <div>
+                  <span className="tool-badge">Live</span>
+                  <h3>Email Subject Tester</h3>
+                  <p>A/B test email subject lines with scoring and improvement suggestions for higher open rates.</p>
+                </div>
+                <a href="/tools/email-subject-tester" className="tool-link">
+                  Try Tool →
+                </a>
+              </article>
+
+              <article className="tool-card reveal delay-2">
+                <div>
+                  <span className="tool-badge">Live</span>
+                  <h3>UTM Link Builder</h3>
+                  <p>Build and track campaign URLs with automatic UTM parameter generation for analytics.</p>
+                </div>
+                <a href="/tools/utm-link-builder" className="tool-link">
+                  Try Tool →
+                </a>
+              </article>
+
+              <article className="tool-card reveal delay-3">
+                <div>
+                  <span className="tool-badge">Live</span>
+                  <h3>JSON Formatter</h3>
+                  <p>Format, validate, and beautify JSON with error detection and inline previews.</p>
+                </div>
+                <a href="/tools/json-formatter" className="tool-link">
+                  Try Tool →
+                </a>
+              </article>
+
+              <article className="tool-card reveal delay-1">
+                <div>
+                  <span className="tool-badge">Live</span>
+                  <h3>Invoice Generator</h3>
+                  <p>Create professional invoices instantly with customizable templates and PDF download.</p>
+                </div>
+                <a href="/tools/invoice-generator" className="tool-link">
+                  Try Tool →
+                </a>
+              </article>
+
+              <article className="tool-card reveal delay-2">
+                <div>
+                  <span className="tool-badge">Live</span>
+                  <h3>SEO Analyzer</h3>
+                  <p>Analyze any webpage for SEO optimization opportunities and meta tag compliance.</p>
+                </div>
+                <a href="/tools/seo-analyzer" className="tool-link">
+                  Try Tool →
+                </a>
+              </article>
+
+              <article className="tool-card reveal delay-3">
+                <div>
+                  <span className="tool-badge">Live</span>
+                  <h3>WA Sender</h3>
+                  <p>A practical communication tool designed to make outreach and WhatsApp-based workflows easier.</p>
+                </div>
+                <a href="/tools/wa-sender" className="tool-link">
+                  Try Tool →
                 </a>
               </article>
             </div>
