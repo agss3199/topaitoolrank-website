@@ -653,6 +653,18 @@ export default function WASenderPage() {
     window.open(`https://wa.me/${current.normalized}?text=${encoded}`, '_blank');
     setSentStatus(prev => ({ ...prev, [key]: true }));
     saveSession(sheets, mode, countryCode, message, emailSubject, emailBody, currentIndex, { ...sentStatus, [key]: true });
+
+    // Fire-and-forget: log message to history (non-blocking)
+    fetch('/api/wa-sender/messages', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        recipient_phone: current.normalized,
+        content: finalMessage,
+        template_id: selectedTemplate?.id || null,
+        channel: 'whatsapp',
+      }),
+    }).catch(err => console.error('Failed to log message:', err));
   }, [current, message, emailSubject, emailBody, sheets, mode, countryCode, currentIndex, sentStatus, saveSession, selectedTemplate]);
 
   const openGmailCompose = useCallback(() => {
@@ -678,6 +690,20 @@ export default function WASenderPage() {
     window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${current.email}&su=${subject}&body=${body}`, '_blank');
     setSentStatus(prev => ({ ...prev, [key]: true }));
     saveSession(sheets, mode, countryCode, message, emailSubject, emailBody, currentIndex, { ...sentStatus, [key]: true });
+
+    // Fire-and-forget: log message to history (non-blocking)
+    // Combine subject and body for the message content
+    const emailContent = `Subject: ${finalSubject}\n\n${finalBody}`;
+    fetch('/api/wa-sender/messages', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        recipient_email: current.email,
+        content: emailContent,
+        template_id: selectedTemplate?.id || null,
+        channel: 'email',
+      }),
+    }).catch(err => console.error('Failed to log message:', err));
   }, [current, emailSubject, emailBody, sheets, mode, countryCode, message, currentIndex, sentStatus, saveSession, selectedTemplate]);
 
   const nextRecipient = useCallback(() => {
