@@ -83,7 +83,15 @@
       "Bash(cd \"C:\\\\\\\\Users\\\\\\\\MONICA\\\\\\\\Desktop\\\\\\\\Abhishek_Softwares_All_old\\\\\\\\Top_AI_Tool_Rank\")",
       "Bash(find \"C:\\\\\\\\Users\\\\\\\\MONICA\\\\\\\\Desktop\\\\\\\\Abhishek_Softwares_All_old\\\\\\\\Top_AI_Tool_Rank\\\\\\\\app\" -type d -name \"marketing\" -o -type d -name \"blog\" -o -type d -name \"tools\")",
       "Bash(npm i:*)",
-      "Bash(awk '{print $6,$7,$8,$9}')"
+      "Bash(awk '{print $6,$7,$8,$9}')",
+      "Bash(chmod +x /tmp/round2_validation.sh)",
+      "Bash(bash /tmp/round2_validation.sh)",
+      "Bash(tee /tmp/vercel-deploy.log)",
+      "Bash(chmod +x /tmp/verify_deployment.sh)",
+      "Bash(/tmp/verify_deployment.sh)",
+      "Bash(chmod +x /tmp/test_auth_flow.sh)",
+      "Bash(/tmp/test_auth_flow.sh)",
+      "Bash(git:*)"
     ]
   }
 }
