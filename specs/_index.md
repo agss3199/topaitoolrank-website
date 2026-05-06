@@ -19,6 +19,12 @@ This directory contains the authority specifications for all domain areas of top
 |------|--------|---------|
 | [`blog-indexing.md`](blog-indexing.md) | Discovery & SEO | Tag/category routes, RSS feed, search index generation, sitemap |
 
+## Track C: Micro-SaaS Tools (Phase 3)
+
+| File | Domain | Purpose |
+|------|--------|---------|
+| [`micro-saas-tools.md`](micro-saas-tools.md) | Standalone Tools | 10 isolated utility tools for organic traffic, zero shared resources, Wave 1/2/3 build plan |
+
 ## Core Infrastructure
 
 | File | Domain | Purpose |
