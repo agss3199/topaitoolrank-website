@@ -15,6 +15,7 @@ import {
   UTM_PRESETS,
   type UTMParams,
 } from "./lib/utm-builder";
+import { copyToClipboard, downloadAsFile, saveTolocalStorage, loadFromlocalStorage } from "./lib/utils";
 
 const LOCALSTORAGE_KEY = "ulb-params";
 
@@ -29,10 +30,11 @@ export default function UTMLinkBuilderPage() {
   });
 
   const [generatedURL, setGeneratedURL] = useState("");
+  const [copyMessage, setCopyMessage] = useState("");
 
   // Load from localStorage on mount
   useEffect(() => {
-    const saved = localStorage.getItem(LOCALSTORAGE_KEY);
+    const saved = loadFromlocalStorage(LOCALSTORAGE_KEY);
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
@@ -45,8 +47,32 @@ export default function UTMLinkBuilderPage() {
 
   // Save to localStorage when params change
   useEffect(() => {
-    localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(params));
+    saveTolocalStorage(LOCALSTORAGE_KEY, JSON.stringify(params));
   }, [params]);
+
+  const handleCopyURL = async () => {
+    const success = await copyToClipboard(generatedURL);
+    if (success) {
+      setCopyMessage("✓ Link copied!");
+      setTimeout(() => setCopyMessage(""), 2000);
+    }
+  };
+
+  const handleDownloadCSV = () => {
+    const csv = `UTM Link Export
+URL: ${params.url}
+utm_source: ${params.source}
+utm_medium: ${params.medium}
+utm_campaign: ${params.campaign}
+${params.content ? `utm_content: ${params.content}\n` : ""}${params.term ? `utm_term: ${params.term}\n` : ""}
+Generated Link:
+${generatedURL}
+
+Generated on: ${new Date().toLocaleString()}
+Source: topaitoolrank.com UTM Link Builder`;
+
+    downloadAsFile(csv, `utm-link-${Date.now()}.txt`);
+  };
 
   // Validate and generate URL
   const validation = useMemo(() => validateUTMParams(params), [params]);
@@ -294,6 +320,28 @@ export default function UTMLinkBuilderPage() {
                 )}
               </div>
             </section>
+
+            {/* Actions */}
+            <div className={styles["utm-link-builder__actions"]}>
+              <button
+                className={styles["utm-link-builder__button"]}
+                onClick={handleCopyURL}
+              >
+                📋 Copy Link
+              </button>
+              <button
+                className={styles["utm-link-builder__button"]}
+                onClick={handleDownloadCSV}
+              >
+                ⬇️ Download
+              </button>
+            </div>
+
+            {copyMessage && (
+              <div className={styles["utm-link-builder__copy-message"]}>
+                {copyMessage}
+              </div>
+            )}
           </>
         )}
       </main>
