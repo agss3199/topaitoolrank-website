@@ -48,7 +48,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen w-full bg-white flex flex-col lg:flex-row">
       {/* Left Column: Brand Messaging (Desktop only) */}
-      <div className="hidden lg:flex lg:w-1/2 lg:flex-col lg:items-center lg:justify-center lg:px-12 lg:py-12 bg-var(--color-bg-light)">
+      <div className="hidden lg:flex lg:w-1/2 lg:flex-col lg:items-center lg:justify-center lg:px-12 lg:py-12" style={{ backgroundColor: 'var(--color-bg-light)' }}>
         <div className="max-w-md">
           <h1
             className="text-[var(--font-size-h2)] font-[var(--font-weight-headline)] text-[var(--color-black)] mb-6 leading-[var(--line-height-headline)]"

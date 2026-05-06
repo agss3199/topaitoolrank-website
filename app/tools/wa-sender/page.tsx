@@ -272,10 +272,15 @@ export default function WASenderPage() {
     } | null;
   }>({ open: false, data: null });
 
-  // Auth check
+  // Auth check — check localStorage as fallback for race condition where
+  // useAuth hasn't finished reading localStorage yet but tokens exist
   useEffect(() => {
     if (!loading && !session) {
-      router.push('/auth/login');
+      const token = localStorage.getItem('wa-sender-access-token');
+      if (!token) {
+        router.push('/auth/login');
+      }
+      // If token exists, useAuth is still loading it — don't redirect
     }
   }, [session, loading, router]);
 
