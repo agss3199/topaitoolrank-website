@@ -1,19 +1,28 @@
 "use client";
 
 /**
- * WhatsApp Message Formatter — BUILD Phase (todo 101)
+ * WhatsApp Message Formatter — BUILD + WIRE Phases (todos 101-102)
  *
  * Converts markdown-style formatting to WhatsApp formatting:
  * **bold** → *bold*
  * _italic_ → _italic_
  * `code` → ```code```
  * ~~strikethrough~~ → ~~strikethrough~~
+ *
+ * WIRE additions (todo 102):
+ * - localStorage persistence (load/save draft)
+ * - Copy to clipboard button
+ * - Download as file button
  */
 
 import { useState, useEffect } from "react";
 import styles from "./styles.css";
 import { markdownToWhatsApp, MARKDOWN_SYNTAX_HINTS } from "./lib/markdown-to-whatsapp";
+import { downloadAsFile, copyToClipboard, loadFromlocalStorage, saveTolocalStorage } from "./lib/utils";
 import Preview from "./components/Preview";
+
+const LOCALSTORAGE_KEY = "wam-draft";
+const LOCALSTORAGE_FORMATTED_KEY = "wam-formatted";
 
 export default function WAMFormatterPage() {
   const [input, setInput] = useState("");
@@ -28,12 +37,30 @@ export default function WAMFormatterPage() {
       monospace: 0,
     },
   });
+  const [copyMessage, setCopyMessage] = useState("");
+
+  // Load draft from localStorage on mount
+  useEffect(() => {
+    const saved = loadFromlocalStorage(LOCALSTORAGE_KEY);
+    if (saved) {
+      setInput(saved);
+    }
+  }, []);
+
+  // Save draft to localStorage when input changes
+  useEffect(() => {
+    if (input.trim()) {
+      saveTolocalStorage(LOCALSTORAGE_KEY, input);
+    }
+  }, [input]);
 
   // Process markdown to WhatsApp formatting in real-time
   useEffect(() => {
     if (input.trim()) {
       const converted = markdownToWhatsApp(input);
       setResult(converted);
+      // Also save formatted version for download
+      saveTolocalStorage(LOCALSTORAGE_FORMATTED_KEY, converted.formatted);
     } else {
       setResult({
         formatted: "",
@@ -48,6 +75,25 @@ export default function WAMFormatterPage() {
       });
     }
   }, [input]);
+
+  // Handle copy to clipboard
+  const handleCopy = async () => {
+    if (!result.formatted) return;
+    const success = await copyToClipboard(result.formatted);
+    if (success) {
+      setCopyMessage("✓ Copied to clipboard!");
+      setTimeout(() => setCopyMessage(""), 3000);
+    } else {
+      setCopyMessage("✗ Copy failed");
+      setTimeout(() => setCopyMessage(""), 3000);
+    }
+  };
+
+  // Handle download
+  const handleDownload = () => {
+    if (!result.formatted) return;
+    downloadAsFile(result.formatted, "whatsapp-message.txt");
+  };
 
   const isEmptyInput = !input || input.trim().length === 0;
 
@@ -100,6 +146,12 @@ export default function WAMFormatterPage() {
             placeholder={`Example:\n\n**Hello** _world_!\n\n\`code example\`\n\n~~strikethrough~~`}
           />
 
+          {copyMessage && (
+            <div className={styles["whatsapp-message-formatter__status--success"]}>
+              {copyMessage}
+            </div>
+          )}
+
           <div className={styles["whatsapp-message-formatter__button-group"]}>
             <button
               className={styles["whatsapp-message-formatter__button"]}
@@ -113,7 +165,12 @@ export default function WAMFormatterPage() {
         </div>
 
         {/* Preview section */}
-        <Preview result={result} isEmptyInput={isEmptyInput} />
+        <Preview
+          result={result}
+          isEmptyInput={isEmptyInput}
+          onCopy={handleCopy}
+          onDownload={handleDownload}
+        />
       </main>
 
       <footer className={styles["whatsapp-message-formatter__footer"]}>

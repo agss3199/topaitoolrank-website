@@ -2,6 +2,7 @@
  * Preview Component — WhatsApp Message Formatter
  *
  * Displays the formatted output and statistics
+ * Includes copy and download buttons
  */
 
 import styles from "../styles.css";
@@ -10,9 +11,11 @@ import { ConversionResult } from "../lib/markdown-to-whatsapp";
 interface PreviewProps {
   result: ConversionResult;
   isEmptyInput: boolean;
+  onCopy?: () => void;
+  onDownload?: () => void;
 }
 
-export default function Preview({ result, isEmptyInput }: PreviewProps) {
+export default function Preview({ result, isEmptyInput, onCopy, onDownload }: PreviewProps) {
   const { formatted, patterns } = result;
   const totalPatterns =
     patterns.bold +
@@ -100,8 +103,26 @@ export default function Preview({ result, isEmptyInput }: PreviewProps) {
                 </div>
               </div>
             )}
-          </div>
-        </>
+
+            <div className={styles["whatsapp-message-formatter__button-group"]}>
+              <button
+                className={styles["whatsapp-message-formatter__button"]}
+                onClick={onCopy}
+                disabled={isEmptyInput}
+                title="Copy formatted message to clipboard"
+              >
+                📋 Copy
+              </button>
+              <button
+                className={styles["whatsapp-message-formatter__button"]}
+                onClick={onDownload}
+                disabled={isEmptyInput}
+                title="Download formatted message as text file"
+              >
+                ⬇️ Download
+              </button>
+            </div>
+          </>
       )}
     </div>
   );
