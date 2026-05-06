@@ -1,5 +1,4 @@
 "use client";
-export const dynamic = 'force-dynamic';
 
 /**
  * AI Prompt Generator for Business - Main Page
