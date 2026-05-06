@@ -837,25 +837,75 @@ export default function WASenderPage() {
               )}
             </div>
           </div>
-          <input
-            ref={fileInputRef}
-            type="file"
-            id="file-upload"
-            accept=".xlsx,.xls"
-            onChange={handleFileUpload}
-            disabled={isLoading}
-            className="wa-file-input"
-            aria-label="Upload Excel file with contacts"
-          />
-          <label
-            htmlFor="file-upload"
-            className="wa-upload-dropzone"
-          >
-            <div className="wa-upload-icon">📁</div>
-            <p className="wa-upload-title">Drop your Excel file here</p>
-            <p className="wa-upload-desc">or click to select — .xlsx, .xls, .csv</p>
-            <p className="wa-upload-note">Max 50MB - Phone and Email columns auto-detected</p>
-          </label>
+
+          {/* Show loaded sheet names when sheets exist */}
+          {sheets.length > 0 && (
+            <div style={{
+              padding: '0.75rem 1rem',
+              backgroundColor: 'var(--color-bg-gradient-lighter)',
+              borderLeft: '4px solid var(--color-accent)',
+              borderRadius: '0.375rem',
+              marginBottom: '1rem',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
+              <div>
+                <p style={{ margin: '0 0 0.25rem 0', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-text-muted)' }}>
+                  Loaded Sheets
+                </p>
+                <p style={{ margin: 0, fontSize: '1rem', fontWeight: 500, color: 'var(--color-text-headline)' }}>
+                  {sheets.map(s => s.name).join(', ')}
+                </p>
+              </div>
+              <button
+                onClick={() => {
+                  setSheets([]);
+                  setCurrentIndex(0);
+                  setSentStatus({});
+                  setSelectedContacts([]);
+                }}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#dc3545',
+                  cursor: 'pointer',
+                  fontSize: '0.875rem',
+                  padding: '0.5rem 0.75rem',
+                  textDecoration: 'underline',
+                  whiteSpace: 'nowrap',
+                }}
+                aria-label="Delete loaded sheet and allow re-upload"
+              >
+                Delete Sheet
+              </button>
+            </div>
+          )}
+
+          {/* Only show upload UI when no sheets are loaded */}
+          {sheets.length === 0 && (
+            <>
+              <input
+                ref={fileInputRef}
+                type="file"
+                id="file-upload"
+                accept=".xlsx,.xls"
+                onChange={handleFileUpload}
+                disabled={isLoading}
+                className="wa-file-input"
+                aria-label="Upload Excel file with contacts"
+              />
+              <label
+                htmlFor="file-upload"
+                className="wa-upload-dropzone"
+              >
+                <div className="wa-upload-icon">📁</div>
+                <p className="wa-upload-title">Drop your Excel file here</p>
+                <p className="wa-upload-desc">or click to select — .xlsx, .xls, .csv</p>
+                <p className="wa-upload-note">Max 50MB - Phone and Email columns auto-detected</p>
+              </label>
+            </>
+          )}
         </div>
 
         {sheets.length > 0 && (
