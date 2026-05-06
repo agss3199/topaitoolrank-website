@@ -1,0 +1,35 @@
+# Session Notes — 2026-05-06
+
+## Where we are
+
+Completed BUILD+WIRE phases for 10 micro-SaaS tools across 3 waves. JSON Formatter has comprehensive TEST suite (90+ tests). 6 tools ready for WIRE testing, 9 tools ready for TEST implementation. All tools isolated with unique localStorage keys, namespace-scoped CSS, and zero shared imports. Ready to continue with BNG WIRE/TEST, then remaining tool TEST phases, integration testing, and deployment.
+
+## Read first
+
+1. `app/tools/` — 10 complete tool directories with lib/, page.tsx, styles.css
+2. `tests/tools/json-formatter/` — 90+ test examples (json-utils.test.ts + integration tests) to replicate for other tools
+3. `workspaces/page-modernization/.session-notes` — prior Wave context
+4. `CLAUDE.md` — tool isolation constraints and autonomous execution model
+
+## In-flight state
+
+- Business Name Generator: BUILD complete, needs WIRE (copy/download/export) and TEST
+- Invoice Generator: BUILD+WIRE complete, needs TEST
+- SEO Analyzer: BUILD+WIRE complete, needs TEST
+- All Wave 1-2 tools: BUILD+WIRE complete, need TEST phases
+- gitignore: Updated to allow `app/tools/*/lib/` directories (committed)
+- 16 lib files: All tool utilities committed
+
+**Next immediate steps:**
+1. Business Name Generator: Add WIRE phase (copy/download handlers)
+2. All tools: Create TEST phases (80-100 tests per tool, unit + integration)
+3. Integration testing: Cross-tool isolation, responsive behavior
+4. Accessibility: WCAG 2.1 AA audit
+5. Performance: Lighthouse optimization
+6. Deployment: robots.txt, sitemap.xml
+
+## Traps
+
+- Business Name Generator calls `/api/business-names` (not implemented) — needs backend or mock
+- SEO Analyzer calls `/api/seo-analyze` (not implemented) — needs backend or mock
+- All endpoints should be mocked in TEST phase if backends don't exist
