@@ -1,5 +1,6 @@
 import { describe, test, expect, beforeEach, beforeAll, vi } from 'vitest';
 import { NextRequest } from 'next/server';
+import { loadEnvConfig } from '@next/env';
 import { GET as templatesGet, POST as templatesPost } from '@/app/api/wa-sender/templates/route';
 import { GET as contactsGet, POST as contactsPost } from '@/app/api/wa-sender/contacts/route';
 import { GET as messagesGet, POST as messagesPost } from '@/app/api/wa-sender/messages/route';
@@ -7,8 +8,11 @@ import { POST as contactsImportPost } from '@/app/api/wa-sender/contacts/import/
 import { GET as contactsExportGet } from '@/app/api/wa-sender/contacts/export/route';
 import { createAccessToken } from '@/app/lib/jwt';
 
+// Load .env variables into process.env
+loadEnvConfig(process.cwd());
+
 // Test setup: ensure JWT_SECRET is set before tests run
-const JWT_SECRET = 'your-secret-key-here-change-in-production-at-least-32-bytes';
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-here-change-in-production-at-least-32-bytes';
 const TEST_USER_ID = 'test-user-123';
 const TEST_TOOL_ID = 'wa-sender';
 
@@ -18,12 +22,13 @@ beforeAll(() => {
 });
 
 /**
- * Create a mock NextRequest with optional authorization token
+ * Create a mock NextRequest with optional authorization token and body
  */
 function createMockRequest(
   method: string = 'GET',
   url: string = 'http://localhost:3000/api/wa-sender/templates',
-  token?: string
+  token?: string,
+  body?: Record<string, unknown>
 ): NextRequest {
   const headers = new Headers();
   headers.set('content-type', 'application/json');
@@ -35,6 +40,7 @@ function createMockRequest(
   return new NextRequest(url, {
     method,
     headers,
+    body: body ? JSON.stringify(body) : undefined,
   });
 }
 
@@ -69,7 +75,7 @@ describe('API Routes Stubs', () => {
       expect(data.templates).toEqual([]);
     });
 
-    test('POST /api/wa-sender/templates returns 501 when authenticated', async () => {
+    test('POST /api/wa-sender/templates returns 400 without body', async () => {
       const req = createMockRequest(
         'POST',
         'http://localhost:3000/api/wa-sender/templates',
@@ -77,9 +83,28 @@ describe('API Routes Stubs', () => {
       );
       const response = await templatesPost(req);
 
-      expect(response.status).toBe(501);
+      expect(response.status).toBe(400);
       const data = await response.json();
-      expect(data.error).toContain('Not implemented');
+      expect(data.error).toBeDefined();
+    });
+
+    test('POST /api/wa-sender/templates returns 201 with valid body', async () => {
+      const req = createMockRequest(
+        'POST',
+        'http://localhost:3000/api/wa-sender/templates',
+        validToken,
+        {
+          name: 'Test Template',
+          content: 'Hello {name}, welcome!',
+          category: 'greeting',
+        }
+      );
+      const response = await templatesPost(req);
+
+      expect(response.status).toBe(201);
+      const data = await response.json();
+      expect(data.id).toBeDefined();
+      expect(data.name).toBe('Test Template');
     });
 
     test('POST /api/wa-sender/templates returns 401 without auth', async () => {
