@@ -32,6 +32,10 @@
   /* Background colors */
   --color-bg-light: #fafafa;
   --color-bg-dark: #0f1419;
+  --color-bg-default: #f5f5f5;
+  --color-bg-surface: #ffffff;
+  --color-bg-hover: rgba(0, 0, 0, 0.05);
+  --color-accent-subtle: rgba(59, 130, 246, 0.1);
   --color-bg-gradient-light: #f4f9ff;
   --color-bg-gradient-lighter: #f7fbff;
   --color-bg-gradient-lightest: #f8fbff;

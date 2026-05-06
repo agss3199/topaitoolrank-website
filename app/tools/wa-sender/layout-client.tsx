@@ -7,6 +7,17 @@ import { ToolShell, ToolShellNavItem } from '@/app/components/ToolShell';
 import { WASenderProvider } from '@/app/tools/wa-sender/context';
 import manifest from './tool.manifest.json';
 
+// Map icon names from manifest to emoji icons
+const iconMap: Record<string, string> = {
+  dashboard: '📊',
+  mail: '📧',
+  template: '📝',
+  settings: '⚙️',
+  messages: '💬',
+  contacts: '👥',
+  history: '📜',
+};
+
 export default function WASenderLayoutClient({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -29,11 +40,11 @@ export default function WASenderLayoutClient({ children }: { children: React.Rea
     return null;
   }
 
-  // Convert manifest navigation to ToolShellNavItem format
+  // Convert manifest navigation to ToolShellNavItem format with emoji icons
   const navigationItems: ToolShellNavItem[] = (manifest.navigation || []).map((item: any) => ({
     label: item.label,
     href: item.href,
-    icon: item.icon || undefined,
+    icon: item.icon ? iconMap[item.icon] || item.icon : undefined,
   }));
 
   return (

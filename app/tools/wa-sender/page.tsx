@@ -318,6 +318,18 @@ export default function WASenderPage() {
         applySessionData(data.session);
         // Cache to localStorage for offline access
         localStorage.setItem(localStorageKey, JSON.stringify(data.session));
+      } else if (data.ok && !data.session) {
+        // Supabase has no session for this user (new user or not yet saved)
+        // Try localStorage as fallback (debounce might still be in flight)
+        const cached = localStorage.getItem(localStorageKey);
+        if (cached) {
+          try {
+            const parsed = JSON.parse(cached);
+            applySessionData(parsed);
+          } catch (e) {
+            console.warn('Failed to parse cached session:', e);
+          }
+        }
       }
     } catch (err) {
       console.error('Load session exception:', err);
