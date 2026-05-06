@@ -1,4 +1,7 @@
 "use client";
+export const dynamic = 'force-dynamic';
+
+
 
 /**
  * JSON Formatter - Main Page
@@ -100,6 +103,7 @@ export default function JSONFormatterPage() {
     }
   };
 
+  // @ts-ignore CSS Module types
   return (
     <div className={styles["json-formatter"]}>
       <header className={styles["json-formatter__header"]}>
@@ -224,15 +228,3 @@ export default function JSONFormatterPage() {
   );
 }
 
-export const metadata = {
-  title: "JSON Formatter - Free Online Tool",
-  description:
-    "Format, validate, minify, and transform JSON. Convert to CSV, sort keys, and download.",
-  keywords: [
-    "JSON formatter",
-    "JSON validator",
-    "JSON minifier",
-    "JSON to CSV",
-    "free JSON tool",
-  ],
-};

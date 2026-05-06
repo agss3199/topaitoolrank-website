@@ -122,7 +122,8 @@ export default function Preview({ result, isEmptyInput, onCopy, onDownload }: Pr
                 ⬇️ Download
               </button>
             </div>
-          </>
+          </div>
+        </>
       )}
     </div>
   );

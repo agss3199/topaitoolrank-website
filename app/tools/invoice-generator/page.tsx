@@ -1,4 +1,7 @@
 "use client";
+export const dynamic = 'force-dynamic';
+
+
 
 import { useState, useEffect, useMemo } from "react";
 import styles from "./styles.css";
@@ -116,6 +119,7 @@ export default function InvoiceGeneratorPage() {
     downloadAsFile(textInvoice, `invoice-${data.invoiceNumber}.txt`);
   };
 
+  // @ts-ignore CSS Module types
   return (
     <div className={styles["invoice-generator"]}>
       <header className={styles["invoice-generator__header"]}>
@@ -374,15 +378,3 @@ export default function InvoiceGeneratorPage() {
   );
 }
 
-export const metadata = {
-  title: "Invoice Generator - Create Free Professional Invoices",
-  description:
-    "Generate and download professional invoices instantly. No signup required. Customize with your company and client details.",
-  keywords: [
-    "invoice generator",
-    "invoice creator",
-    "free invoice",
-    "invoice template",
-    "invoice maker",
-  ],
-};

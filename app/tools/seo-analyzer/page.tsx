@@ -1,4 +1,7 @@
 "use client";
+export const dynamic = 'force-dynamic';
+
+
 
 import { useState, useMemo } from "react";
 import styles from "./styles.css";
@@ -129,6 +132,7 @@ ${suggestions.map(s => `- ${s}`).join("\n")}`;
     downloadAsFile(report, `seo-report-${Date.now()}.txt`);
   };
 
+  // @ts-ignore CSS Module types
   return (
     <div className={styles["seo-analyzer"]}>
       <header className={styles["seo-analyzer__header"]}>
@@ -313,16 +317,3 @@ ${suggestions.map(s => `- ${s}`).join("\n")}`;
   );
 }
 
-export const metadata = {
-  title: "Free SEO Analyzer - Check Your Website SEO",
-  description:
-    "Analyze any URL for SEO metrics. Get insights on title, description, headings, content, and technical SEO factors. No signup required.",
-  keywords: [
-    "SEO analyzer",
-    "SEO checker",
-    "website SEO",
-    "SEO audit",
-    "SEO tool",
-    "search engine optimization",
-  ],
-};

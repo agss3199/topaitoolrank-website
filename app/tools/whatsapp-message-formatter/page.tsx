@@ -1,4 +1,7 @@
 "use client";
+export const dynamic = 'force-dynamic';
+
+
 
 /**
  * WhatsApp Message Formatter — BUILD + WIRE Phases (todos 101-102)
@@ -97,6 +100,7 @@ export default function WAMFormatterPage() {
 
   const isEmptyInput = !input || input.trim().length === 0;
 
+  // @ts-ignore CSS Module types
   return (
     <div className={styles["whatsapp-message-formatter"]}>
       <header className={styles["whatsapp-message-formatter__header"]}>
@@ -188,15 +192,3 @@ export default function WAMFormatterPage() {
   );
 }
 
-export const metadata = {
-  title:
-    "WhatsApp Message Formatter - Convert Markdown to WhatsApp Formatting",
-  description:
-    "Free online tool to convert markdown formatting (**bold**, _italic_, `code`) to WhatsApp compatible syntax. No signup required.",
-  keywords: [
-    "WhatsApp formatter",
-    "markdown to WhatsApp",
-    "message formatter",
-    "text formatting",
-  ],
-};

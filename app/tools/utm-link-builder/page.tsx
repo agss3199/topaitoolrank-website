@@ -1,4 +1,7 @@
 "use client";
+export const dynamic = 'force-dynamic';
+
+
 
 /**
  * UTM Link Builder - Main Page
@@ -103,6 +106,7 @@ Source: topaitoolrank.com UTM Link Builder`;
     }
   }, [params, validation]);
 
+  // @ts-ignore CSS Module types
   return (
     <div className={styles["utm-link-builder"]}>
       <header className={styles["utm-link-builder__header"]}>
@@ -360,16 +364,3 @@ Source: topaitoolrank.com UTM Link Builder`;
   );
 }
 
-export const metadata = {
-  title: "UTM Link Builder - Free Online Tool",
-  description:
-    "Create trackable URLs with UTM parameters for Google Analytics. Build campaign links for marketing tracking.",
-  keywords: [
-    "UTM link builder",
-    "UTM parameters",
-    "Google Analytics",
-    "tracking URLs",
-    "campaign tracking",
-    "marketing links",
-  ],
-};

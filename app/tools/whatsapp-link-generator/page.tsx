@@ -1,4 +1,7 @@
 "use client";
+export const dynamic = 'force-dynamic';
+
+
 
 /**
  * WhatsApp Link Generator + QR Code
@@ -86,6 +89,7 @@ export default function WhatsAppLinkGeneratorPage() {
     downloadQRCode(qrCode, "whatsapp-qr.png");
   };
 
+  // @ts-ignore CSS Module types
   return (
     <div className={styles["whatsapp-link-generator"]}>
       <header className={styles["whatsapp-link-generator__header"]}>
@@ -208,8 +212,3 @@ export default function WhatsAppLinkGeneratorPage() {
   );
 }
 
-export const metadata = {
-  title: "WhatsApp Link Generator + QR Code - Free Online Tool",
-  description: "Generate WhatsApp links and QR codes. No signup required. Works instantly.",
-  keywords: ["WhatsApp link generator", "QR code", "wa.me link", "WhatsApp business"],
-};

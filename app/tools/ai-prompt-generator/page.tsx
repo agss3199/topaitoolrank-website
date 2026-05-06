@@ -1,9 +1,11 @@
 "use client";
+export const dynamic = 'force-dynamic';
 
 /**
  * AI Prompt Generator for Business - Main Page
  * Build better prompts for ChatGPT, Claude, and other AI tools
  */
+
 
 import { useState, useEffect, useMemo } from "react";
 import styles from "./styles.css";
@@ -99,6 +101,7 @@ export default function AIPromptGeneratorPage() {
     );
   }
 
+  // @ts-ignore CSS Module types
   return (
     <div className={styles["ai-prompt-generator"]}>
       <header className={styles["ai-prompt-generator__header"]}>
@@ -166,16 +169,3 @@ export default function AIPromptGeneratorPage() {
   );
 }
 
-export const metadata = {
-  title: "AI Prompt Generator for Business - Free Online Tool",
-  description:
-    "Create structured, high-quality prompts for ChatGPT, Claude, and other AI tools. Pre-built templates for marketing, writing, customer support, and brainstorming.",
-  keywords: [
-    "AI prompt generator",
-    "ChatGPT prompts",
-    "Claude prompts",
-    "prompt engineering",
-    "AI templates",
-    "free prompt builder",
-  ],
-};

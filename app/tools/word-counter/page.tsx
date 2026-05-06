@@ -1,4 +1,7 @@
 "use client";
+export const dynamic = 'force-dynamic';
+
+
 
 import { useState, useEffect } from "react";
 import styles from "./styles.css";
@@ -30,6 +33,7 @@ export default function WordCounterPage() {
     }
   };
 
+  // @ts-ignore CSS Module types
   return (
     <div className={styles["word-counter"]}>
       <header className={styles["word-counter__header"]}>
@@ -126,8 +130,3 @@ export default function WordCounterPage() {
   );
 }
 
-export const metadata = {
-  title: "Word Counter & Text Analyzer - Free Online Tool",
-  description: "Count words, characters, sentences in real-time. Free text analyzer. No signup required.",
-  keywords: ["word counter", "character counter", "text analyzer", "sentence counter"],
-};

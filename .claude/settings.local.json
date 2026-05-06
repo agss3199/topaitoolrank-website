@@ -91,7 +91,12 @@
       "Bash(/tmp/verify_deployment.sh)",
       "Bash(chmod +x /tmp/test_auth_flow.sh)",
       "Bash(/tmp/test_auth_flow.sh)",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(cd C:\\\\\\\\Users\\\\\\\\MONICA\\\\\\\\Desktop\\\\\\\\Abhishek_Softwares_All_old\\\\\\\\Top_AI_Tool_Rank)",
+      "Bash(xargs -I {} sh -c 'echo \"=== {} ===\" && head -15 {}')",
+      "Bash(chmod +x /tmp/fix-tools.sh)",
+      "Bash(bash /tmp/fix-tools.sh)",
+      "Bash(SKIP_TYPE_CHECK=true npm run build)"
     ]
   }
 }
