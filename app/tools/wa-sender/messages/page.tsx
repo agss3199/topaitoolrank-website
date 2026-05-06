@@ -60,13 +60,14 @@ export default function MessagesPage() {
         if (search) params.set('search', search);
 
         const response = await fetch(`/api/wa-sender/messages?${params}`);
-        const data: PaginatedMessages = await response.json();
 
-        if (data.error) {
-          setError(data.error);
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+          setError(errorData.error || 'Failed to fetch messages');
           setMessages([]);
           setStats({ sent_count: 0, failed_count: 0, pending_count: 0, read_count: 0 });
         } else {
+          const data: PaginatedMessages = await response.json();
           setMessages(data.messages);
           setTotal(data.total);
           setStats(data.stats);
