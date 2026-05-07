@@ -115,7 +115,9 @@
       "Bash(xargs kill:*)",
       "Bash(kill -9 13296)",
       "Bash(awk '{print $9, \"-\", $5}')",
-      "Bash(head -1 */page.tsx)"
+      "Bash(head -1 */page.tsx)",
+      "Bash(find content/articles -name \"*.md\" -type f -exec wc -w {} +)",
+      "Bash(awk '{print $2\": \"$1\" words\"}')"
     ]
   }
 }

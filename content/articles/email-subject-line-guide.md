@@ -43,4 +43,36 @@ One often-overlooked aspect is mobile preview text. As mentioned, different emai
 
 Building a library of tested subject lines that work for your audience gives you templates for future campaigns. You might discover that your audience loves subject lines formatted as questions. Or that they respond well to specific types of numbers. Or that they prefer casual tone over professional tone. These insights become your competitive advantage.
 
+## Advanced Subject Line Strategies
+
+Once you master the basics, there are more advanced strategies that can further improve your open rates. Segmentation allows you to send different subject lines to different groups within your list. You might test one subject line on your most engaged subscribers and another on less engaged ones. Over time, you'll discover that different segments respond to different approaches. Your VIP customers might respond better to exclusivity messages while price-conscious customers respond better to discount messages.
+
+Personalization goes beyond using someone's first name. You can personalize based on purchase history, browsing behavior, or engagement level. A subject line that references a product they've shown interest in outperforms a generic subject line. "We found something you'll love based on your browsing" outperforms "Check out our new arrivals." The specificity makes it feel relevant rather than like spam.
+
+Sending time optimization works hand-in-hand with subject line optimization. The perfect subject line sent at the wrong time gets worse results than a mediocre subject line sent at the perfect time. Many email platforms allow you to test send times and see when your audience is most likely to open emails. A common insight is that emails sent on Tuesday and Wednesday morning get better open rates than emails sent on weekends.
+
+Re-engagement campaigns target inactive subscribers who haven't opened emails in a while. These campaigns use special subject lines designed to remind people why they subscribed in the first place. "We miss you" or "Here's what's been happening" can reactivate subscribers who've fallen dormant. If they continue to ignore these emails, it's time to remove them from your list.
+
+List cleaning directly impacts your open rate metrics. Many marketers focus so heavily on the open rate percentage that they forget the denominator includes bounces and spam complaints. A large, unengaged list with a two percent open rate is worse than a small, engaged list with a twenty percent open rate. Regularly removing inactive subscribers improves your overall metrics and sender reputation.
+
+## Email Client Considerations
+
+Understanding email client quirks helps you create better subject lines. Gmail uses a special feature called "preheader text" that displays next to the subject line. If you don't intentionally set this preheader, Gmail shows the first visible text from your email body. Smart marketers craft a sentence specifically for this preheader that complements their subject line.
+
+Outlook handles subject lines and display slightly differently than Gmail. HTML rendering might be different. Image display might be different. Subject line length might display differently. If your audience uses primarily Outlook, you might want to test with Outlook specifically. Apple Mail, Yahoo Mail, and other clients all have their own quirks.
+
+Dark mode is becoming increasingly common, and it affects how subject lines appear. If your subject line uses a light color in dark mode, it becomes invisible or hard to read. Most email platforms automatically handle this, but it's worth knowing about when crafting your subject line design choices.
+
+Emoji rendering is inconsistent across email clients. An emoji that looks perfect in your email program might render completely differently in the recipient's inbox. Some clients don't support emojis at all. Testing with different email clients helps you see exactly how your emoji-heavy subject line displays across the board.
+
+## Measuring What Matters
+
+Open rate is the primary metric for subject line performance, but it's not the only thing that matters. Click-through rate measures what percentage of people who opened the email clicked a link. This tells you whether your email content lives up to the promise of your subject line. If you have a high open rate but low click-through rate, your subject line might be too good—it's getting people to open based on expectations you're not meeting.
+
+Conversion rate measures what percentage of recipients actually took the action you wanted them to take. This is the metric that actually matters for your business. A subject line that gets high opens and clicks but low conversions isn't as valuable as one that gets lower opens and clicks but higher conversions.
+
+Unsubscribe rate measures what percentage of recipients remove themselves from your list after opening the email. A sharp spike in unsubscribes after a particular subject line tells you that line attracted the wrong audience or set expectations you couldn't meet.
+
+List growth measures how your audience size changes over time. Every email you send results in some unsubscribes. New signups hopefully offset those. If your unsubscribe rate is creeping up, something in your emails including the subject lines might be causing problems.
+
 Ultimately, the purpose of testing your subject lines is simple. You want more people to open your emails and engage with your content. That engagement leads to clicks, conversions, and revenue. The investment in testing subject lines, understanding how they display, and optimizing based on data pays dividends in improved email performance. Your subject line is too important to guess about. If you're tracking email campaign performance, our [UTM Link Builder](/tools/utm-link-builder) helps you create trackable links that you can include in your emails, allowing you to measure which subject lines and campaigns drive the most valuable clicks.

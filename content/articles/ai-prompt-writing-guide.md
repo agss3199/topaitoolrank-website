@@ -45,4 +45,42 @@ One powerful approach is asking the AI to ask you clarifying questions before an
 
 Building a library of effective prompts that work well for tasks you do repeatedly saves time and improves consistency. If you find a prompt structure that works well for a particular type of task, modify it slightly for future similar tasks. You're essentially training your own workflow with the AI.
 
+## Common Prompt Writing Mistakes
+
+Even experienced AI users make prompt writing mistakes that reduce output quality. One common error is assuming the AI knows the context that you know. You might work in an industry and use jargon from that industry without realizing it's not universal knowledge. When the AI produces something that misses the mark, often it's because you used industry terminology that meant something specific to you but was interpreted differently by the AI.
+
+Another mistake is asking too many things in one prompt. You might ask an AI to write copy that's both engaging and professional, includes specific keywords, uses short paragraphs, mentions specific benefits, avoids negative language, and appeals to executives. That's a lot of requirements competing with each other. Breaking it into separate prompts and building incrementally produces better results.
+
+Being too vague about constraints causes problems. If you say "write something short," the AI might write five hundred words when you need two hundred. If you say "write something casual," it might miss the mark on what casual means to you. Giving specific word counts and examples makes a huge difference.
+
+Many people fail to iterate and refine. They get a response from the AI, and if it's not perfect, they assume the AI just isn't capable. In reality, that first response is a starting point. You're supposed to refine it, ask for adjustments, and build something better. Iteration is where real quality emerges.
+
+Trusting the AI's output without fact-checking is a dangerous mistake. AI systems can generate plausible-sounding information that is completely wrong. If accuracy matters for your use case, always verify important claims independently. This is especially true for technical information, statistics, and anything that will be shared with others.
+
+## Advanced Prompt Engineering Techniques
+
+As you get more experienced with prompts, you can employ advanced techniques that produce even better results. Chain-of-thought prompting has you ask the AI to explain its reasoning step by step. This doesn't just produce better outputs. It also lets you see where the AI's logic went wrong if the output isn't quite right.
+
+Few-shot prompting provides multiple examples rather than just one. Instead of giving one example of the style you want, you give three or four. This gives the AI a better sense of the pattern you're trying to establish and produces more consistent outputs.
+
+System prompts set the overall behavior and personality of the AI for your entire conversation. You might establish at the start that you're having a conversation with an expert in your field who uses accessible language for a general audience. This frame then applies to all subsequent exchanges.
+
+Constitutional AI prompts describe principles the AI should follow. You might specify that all responses should be honest, helpful, harmless, and focus on the user's actual needs rather than trying to sell something. These principles then guide all subsequent responses.
+
+Prompt chaining breaks complex tasks into a sequence of prompts where each output feeds into the next prompt. This approach works well for things like content creation workflows where you generate an outline, then expand each section, then edit for tone, then optimize for keywords.
+
+Meta-prompting asks the AI to write better prompts. If you're struggling to get what you want from the AI, you can ask it to help you refine your prompt. The AI can suggest what additional context or specification would help produce better outputs.
+
+## Real-World Applications and Examples
+
+Different fields use AI prompts in different ways. Content creators use them to brainstorm ideas, expand outlines, optimize for SEO, and repurpose content across different formats. Each type of task requires differently structured prompts.
+
+Programmers use prompts to help debug code, explain complex concepts, generate boilerplate, and help with design decisions. These prompts typically require more specificity because code is unforgiving. A prompt that's slightly unclear about business logic produces code that doesn't work.
+
+Business professionals use prompts to draft emails, analyze documents, brainstorm strategies, and research topics. These prompts benefit from being very specific about the stakeholders involved and the decision that needs to be made.
+
+Researchers use prompts to help with literature reviews, summarize complex papers, brainstorm research directions, and explain findings to different audiences. These prompts typically require high accuracy and careful fact-checking.
+
+Teachers use prompts to create lesson plans, generate practice problems, explain concepts different ways, and create assessments. These prompts should specify grade level and learning objectives.
+
 The reality is that AI tools are as good as the prompts you give them. Spend time crafting thoughtful prompts that specify what you want, provide context, and give examples. The small extra effort in writing better prompts pays dividends in the quality of outputs. And if you're crafting prompts that are particularly long or complex, our [Word Counter](/tools/word-counter) tool helps ensure you're being clear without being unnecessarily verbose. If you use AI to generate email subject lines, our [Email Subject Tester](/tools/email-subject-tester) lets you verify how AI-generated subject lines display across different email clients before sending your campaigns.
