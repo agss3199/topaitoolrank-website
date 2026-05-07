@@ -2,8 +2,6 @@
 
 export const dynamicParams = false;
 
-'use client';
-
 import { useState, useRef, useCallback, useEffect, useMemo, lazy, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import * as XLSX from 'xlsx';
