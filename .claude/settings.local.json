@@ -101,7 +101,21 @@
       "Bash(pkill:*)",
       "Bash(mv workspaces/tool-pages-seo-optimization/todos/active/03-create-og-images.md workspaces/tool-pages-seo-optimization/todos/completed/)",
       "Bash(mv workspaces/tool-pages-seo-optimization/todos/active/04-configure-metadata.md workspaces/tool-pages-seo-optimization/todos/completed/)",
-      "Bash(mkdir -p workspaces/tool-pages-seo-optimization/todos/completed)"
+      "Bash(mkdir -p workspaces/tool-pages-seo-optimization/todos/completed)",
+      "Bash(mv workspaces/tool-pages-seo-optimization/todos/active/01-implement-header-footer.md workspaces/tool-pages-seo-optimization/todos/completed/)",
+      "Bash(mv workspaces/tool-pages-seo-optimization/todos/active/02-integrate-header-footer.md workspaces/tool-pages-seo-optimization/todos/completed/)",
+      "Bash(taskkill /PID 42768 /F)",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(taskkill /F /IM node.exe /T)",
+      "Bash(taskkill /F /IM next.exe /T)",
+      "Bash(wmic process:*)",
+      "Bash(find workspaces/*/todos/active -name \"*.md\")",
+      "Bash(taskkill /F /PID 42768)",
+      "Bash(awk '{print $2}')",
+      "Bash(xargs kill:*)",
+      "Bash(kill -9 13296)",
+      "Bash(awk '{print $9, \"-\", $5}')",
+      "Bash(head -1 */page.tsx)"
     ]
   }
 }

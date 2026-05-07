@@ -25,6 +25,7 @@ import styles from "./styles.css";
 import { markdownToWhatsApp, MARKDOWN_SYNTAX_HINTS } from "./lib/markdown-to-whatsapp";
 import { downloadAsFile, copyToClipboard, loadFromlocalStorage, saveTolocalStorage } from "./lib/utils";
 import { cls } from "../lib/css-module-safe";
+import { ArticleSection } from "../lib/ArticleSection";
 import Preview from "./components/Preview";
 
 const LOCALSTORAGE_KEY = "wam-draft";
@@ -43,6 +44,8 @@ export default function WAMFormatterPage() {
       monospace: 0,
     },
   });
+  const [articleContent, setArticleContent] = useState<string>("");
+  const [articleLoading, setArticleLoading] = useState(true);
   const [copyMessage, setCopyMessage] = useState("");
 
   // Load draft from localStorage on mount
@@ -81,6 +84,23 @@ export default function WAMFormatterPage() {
       });
     }
   }, [input]);
+  // Load article content
+  useEffect(() => {
+    const loadArticle = async () => {
+      try {
+        const res = await fetch('/api/tools/article?tool=whatsapp-message-formatter');
+        if (res.ok) {
+          const data = await res.json();
+          setArticleContent(data.content || '');
+        }
+      } catch (error) {
+        console.error('Failed to load article:', error);
+      } finally {
+        setArticleLoading(false);
+      }
+    };
+    loadArticle();
+  }, []);
 
   // Handle copy to clipboard
   const handleCopy = async () => {
@@ -193,6 +213,12 @@ export default function WAMFormatterPage() {
         </footer>
       </main>
     </div>
+    {/* Article Section */}
+      {!articleLoading && articleContent && (
+        <div className={cls(styles, "whatsapp-message-formatter__article-container")}>
+          <ArticleSection content={articleContent} />
+        </div>
+      )}
     <Footer />
     </>
   );

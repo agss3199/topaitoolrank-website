@@ -17,6 +17,7 @@ import { TEMPLATES } from "./lib/templates";
 import { buildPrompt, validateVariables, initializeVariables } from "./lib/prompt-builder";
 import { copyToClipboard, downloadAsFile, saveTolocalStorage, loadFromlocalStorage } from "./lib/utils";
 import { cls } from "../lib/css-module-safe";
+import { ArticleSection } from "../lib/ArticleSection";
 import UseCaseSelector from "./components/UseCaseSelector";
 import VariableInput from "./components/VariableInput";
 import PromptPreview from "./components/PromptPreview";
@@ -27,6 +28,8 @@ const LOCALSTORAGE_VARIABLES_PREFIX = "apg-var-";
 export default function AIPromptGeneratorPage() {
   const [selectedTemplateId, setSelectedTemplateId] = useState(TEMPLATES[0].id);
   const [variables, setVariables] = useState<Record<string, string>>({});
+  const [articleContent, setArticleContent] = useState<string>("");
+  const [articleLoading, setArticleLoading] = useState(true);
   const [copyMessage, setCopyMessage] = useState("");
 
   // Load from localStorage on mount
@@ -84,6 +87,23 @@ export default function AIPromptGeneratorPage() {
     if (!selectedTemplate) return { valid: false, errors: [] };
     return validateVariables(selectedTemplate, variables);
   }, [selectedTemplate, variables]);
+  // Load article content
+  useEffect(() => {
+    const loadArticle = async () => {
+      try {
+        const res = await fetch('/api/tools/article?tool=ai-prompt-generator');
+        if (res.ok) {
+          const data = await res.json();
+          setArticleContent(data.content || '');
+        }
+      } catch (error) {
+        console.error('Failed to load article:', error);
+      } finally {
+        setArticleLoading(false);
+      }
+    };
+    loadArticle();
+  }, []);
 
   const handleCopyPrompt = async () => {
     const success = await copyToClipboard(prompt);
@@ -172,6 +192,12 @@ export default function AIPromptGeneratorPage() {
         </footer>
       </main>
     </div>
+    {/* Article Section */}
+      {!articleLoading && articleContent && (
+        <div className={cls(styles, "ai-prompt-generator__article-container")}>
+          <ArticleSection content={articleContent} />
+        </div>
+      )}
     <Footer />
     </>
   );

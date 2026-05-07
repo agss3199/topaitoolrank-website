@@ -18,6 +18,7 @@ import { validatePhoneNumber } from "./lib/phone-validator";
 import { generateQRCode, downloadQRCode } from "./lib/qr-generator";
 import { copyToClipboard, downloadAsFile, loadFromlocalStorage, saveTolocalStorage } from "./lib/utils";
 import { cls } from "../lib/css-module-safe";
+import { ArticleSection } from "../lib/ArticleSection";
 
 const LOCALSTORAGE_PHONE_KEY = "wlg-phone";
 const LOCALSTORAGE_MESSAGE_KEY = "wlg-message";
@@ -29,6 +30,8 @@ export default function WhatsAppLinkGeneratorPage() {
   const [qrCode, setQrCode] = useState<string | null>(null);
   const [phoneError, setPhoneError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [articleContent, setArticleContent] = useState<string>("");
+  const [articleLoading, setArticleLoading] = useState(true);
   const [copyMessage, setCopyMessage] = useState("");
 
   // Load from localStorage on mount
@@ -47,6 +50,23 @@ export default function WhatsAppLinkGeneratorPage() {
   useEffect(() => {
     saveTolocalStorage(LOCALSTORAGE_MESSAGE_KEY, message);
   }, [message]);
+  // Load article content
+  useEffect(() => {
+    const loadArticle = async () => {
+      try {
+        const res = await fetch('/api/tools/article?tool=whatsapp-link-generator');
+        if (res.ok) {
+          const data = await res.json();
+          setArticleContent(data.content || '');
+        }
+      } catch (error) {
+        console.error('Failed to load article:', error);
+      } finally {
+        setArticleLoading(false);
+      }
+    };
+    loadArticle();
+  }, []);
 
   // Generate WhatsApp link
   const generateLink = async () => {
@@ -212,6 +232,12 @@ export default function WhatsAppLinkGeneratorPage() {
         </footer>
       </main>
     </div>
+    {/* Article Section */}
+      {!articleLoading && articleContent && (
+        <div className={cls(styles, "whatsapp-link-generator__article-container")}>
+          <ArticleSection content={articleContent} />
+        </div>
+      )}
     <Footer />
     </>
   );

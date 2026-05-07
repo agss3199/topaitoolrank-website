@@ -11,6 +11,7 @@ export const dynamicParams = false;
 import { useState, useEffect, useMemo } from "react";
 import Header from "../lib/Header";
 import Footer from "../lib/Footer";
+import { ArticleSection } from "../lib/ArticleSection";
 import styles from "./styles.css";
 import {
   parseJSON,
@@ -29,11 +30,31 @@ export default function JSONFormatterPage() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [outputMode, setOutputMode] = useState<"formatted" | "minified" | "sorted">("formatted");
+  const [articleContent, setArticleContent] = useState<string>("");
+  const [articleLoading, setArticleLoading] = useState(true);
 
   // Load from localStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem(LOCALSTORAGE_KEY);
     if (saved) setInput(saved);
+  }, []);
+
+  // Load article content
+  useEffect(() => {
+    const loadArticle = async () => {
+      try {
+        const res = await fetch('/api/tools/article?tool=json-formatter');
+        if (res.ok) {
+          const data = await res.json();
+          setArticleContent(data.content || '');
+        }
+      } catch (error) {
+        console.error('Failed to load article:', error);
+      } finally {
+        setArticleLoading(false);
+      }
+    };
+    loadArticle();
   }, []);
 
   // Save to localStorage on change
@@ -228,6 +249,13 @@ export default function JSONFormatterPage() {
           </p>
         </footer>
       </main>
+
+      {/* Article Section */}
+      {!articleLoading && articleContent && (
+        <div className={cls(styles, "json-formatter__article-container")}>
+          <ArticleSection content={articleContent} />
+        </div>
+      )}
     </div>
     <Footer />
     </>

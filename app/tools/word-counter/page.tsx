@@ -10,11 +10,14 @@ import styles from "./styles.css";
 import { analyzeText } from "./lib/text-analyzer";
 import { copyToClipboard, saveTolocalStorage, loadFromlocalStorage } from "./lib/utils";
 import { cls } from "../lib/css-module-safe";
+import { ArticleSection } from "../lib/ArticleSection";
 
 const LOCALSTORAGE_KEY = "wc-text";
 
 export default function WordCounterPage() {
   const [text, setText] = useState("");
+  const [articleContent, setArticleContent] = useState<string>("");
+  const [articleLoading, setArticleLoading] = useState(true);
   const [copyMessage, setCopyMessage] = useState("");
   const stats = analyzeText(text);
 
@@ -26,6 +29,23 @@ export default function WordCounterPage() {
   useEffect(() => {
     saveTolocalStorage(LOCALSTORAGE_KEY, text);
   }, [text]);
+  // Load article content
+  useEffect(() => {
+    const loadArticle = async () => {
+      try {
+        const res = await fetch('/api/tools/article?tool=word-counter');
+        if (res.ok) {
+          const data = await res.json();
+          setArticleContent(data.content || '');
+        }
+      } catch (error) {
+        console.error('Failed to load article:', error);
+      } finally {
+        setArticleLoading(false);
+      }
+    };
+    loadArticle();
+  }, []);
 
   const handleCopy = async () => {
     const summary = `Words: ${stats.words} | Characters: ${stats.characters} | Sentences: ${stats.sentences}`;
@@ -131,6 +151,12 @@ export default function WordCounterPage() {
         </footer>
       </main>
     </div>
+    {/* Article Section */}
+      {!articleLoading && articleContent && (
+        <div className={cls(styles, "word-counter__article-container")}>
+          <ArticleSection content={articleContent} />
+        </div>
+      )}
     <Footer />
     </>
   );

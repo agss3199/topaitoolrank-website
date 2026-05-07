@@ -22,6 +22,7 @@ import {
 } from "./lib/utm-builder";
 import { copyToClipboard, downloadAsFile, saveTolocalStorage, loadFromlocalStorage } from "./lib/utils";
 import { cls } from "../lib/css-module-safe";
+import { ArticleSection } from "../lib/ArticleSection";
 
 const LOCALSTORAGE_KEY = "ulb-params";
 
@@ -36,6 +37,8 @@ export default function UTMLinkBuilderPage() {
   });
 
   const [generatedURL, setGeneratedURL] = useState("");
+  const [articleContent, setArticleContent] = useState<string>("");
+  const [articleLoading, setArticleLoading] = useState(true);
   const [copyMessage, setCopyMessage] = useState("");
 
   // Load from localStorage on mount
@@ -108,6 +111,23 @@ Source: topaitoolrank.com UTM Link Builder`;
       setGeneratedURL("");
     }
   }, [params, validation]);
+  // Load article content
+  useEffect(() => {
+    const loadArticle = async () => {
+      try {
+        const res = await fetch('/api/tools/article?tool=utm-link-builder');
+        if (res.ok) {
+          const data = await res.json();
+          setArticleContent(data.content || '');
+        }
+      } catch (error) {
+        console.error('Failed to load article:', error);
+      } finally {
+        setArticleLoading(false);
+      }
+    };
+    loadArticle();
+  }, []);
 
   return (
     <>
@@ -365,6 +385,12 @@ Source: topaitoolrank.com UTM Link Builder`;
         </footer>
       </main>
     </div>
+    {/* Article Section */}
+      {!articleLoading && articleContent && (
+        <div className={cls(styles, "utm-link-builder__article-container")}>
+          <ArticleSection content={articleContent} />
+        </div>
+      )}
     <Footer />
     </>
   );

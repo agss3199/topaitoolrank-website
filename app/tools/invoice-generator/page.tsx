@@ -27,6 +27,7 @@ import {
   loadFromlocalStorage,
 } from "./lib/utils";
 import { cls } from "../lib/css-module-safe";
+import { ArticleSection } from "../lib/ArticleSection";
 
 const LOCALSTORAGE_KEY = "ig-data";
 
@@ -76,6 +77,23 @@ export default function InvoiceGeneratorPage() {
     const total = calculateTotal(subtotal, tax);
     return { subtotal, tax, total };
   }, [data.items, data.taxRate]);
+  // Load article content
+  useEffect(() => {
+    const loadArticle = async () => {
+      try {
+        const res = await fetch('/api/tools/article?tool=invoice-generator');
+        if (res.ok) {
+          const data = await res.json();
+          setArticleContent(data.content || '');
+        }
+      } catch (error) {
+        console.error('Failed to load article:', error);
+      } finally {
+        setArticleLoading(false);
+      }
+    };
+    loadArticle();
+  }, []);
 
   const handleCompanyChange = (field: keyof InvoiceData, value: string) => {
     setData(prev => ({ ...prev, [field]: value }));
@@ -379,6 +397,12 @@ export default function InvoiceGeneratorPage() {
         </footer>
       </main>
     </div>
+    {/* Article Section */}
+      {!articleLoading && articleContent && (
+        <div className={cls(styles, "invoice-generator__article-container")}>
+          <ArticleSection content={articleContent} />
+        </div>
+      )}
     <Footer />
     </>
   );

@@ -3,7 +3,7 @@
 export const dynamic = 'force-dynamic';
 export const dynamicParams = false;
 
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Header from "../lib/Header";
 import Footer from "../lib/Footer";
 import styles from "./styles.css";
@@ -18,12 +18,15 @@ import {
 } from "./lib/seo-analyzer";
 import { fetchPageMetadata, getScoreColor, getScoreLabel, copyToClipboard, downloadAsFile } from "./lib/utils";
 import { cls } from "../lib/css-module-safe";
+import { ArticleSection } from "../lib/ArticleSection";
 
 export default function SEOAnalyzerPage() {
   const [url, setUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [metrics, setMetrics] = useState<SEOMetrics | null>(null);
   const [error, setError] = useState("");
+  const [articleContent, setArticleContent] = useState<string>("");
+  const [articleLoading, setArticleLoading] = useState(true);
   const [copyMessage, setCopyMessage] = useState("");
 
   const isValidInput = useMemo(() => isValidURL(url), [url]);
@@ -31,6 +34,23 @@ export default function SEOAnalyzerPage() {
   const suggestions = useMemo(() => {
     return metrics ? getSuggestions(metrics) : [];
   }, [metrics]);
+  // Load article content
+  useEffect(() => {
+    const loadArticle = async () => {
+      try {
+        const res = await fetch('/api/tools/article?tool=seo-analyzer');
+        if (res.ok) {
+          const data = await res.json();
+          setArticleContent(data.content || '');
+        }
+      } catch (error) {
+        console.error('Failed to load article:', error);
+      } finally {
+        setArticleLoading(false);
+      }
+    };
+    loadArticle();
+  }, []);
 
   const handleAnalyze = async () => {
     if (!isValidInput) return;
@@ -318,6 +338,12 @@ ${suggestions.map(s => `- ${s}`).join("\n")}`;
         </footer>
       </main>
     </div>
+    {/* Article Section */}
+      {!articleLoading && articleContent && (
+        <div className={cls(styles, "seo-analyzer__article-container")}>
+          <ArticleSection content={articleContent} />
+        </div>
+      )}
     <Footer />
     </>
   );
