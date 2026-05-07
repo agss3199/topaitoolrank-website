@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import React from "react";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import "./components/components.css";
 
@@ -39,6 +40,9 @@ export default function RootLayout({
 
         {/* Main JS for form handling, nav, animations */}
         <script src="/js/main.js"></script>
+
+        {/* GA4 tracking — placed at end of body for async loading */}
+        <GoogleAnalytics gaId="G-D98KCREKZC" />
       </body>
     </html>
   );

@@ -22,11 +22,11 @@ describe('Todo 085-086: Performance Monitoring & Core Web Vitals Tracking', () =
     expect(layout).toMatch(/preload/);
   });
 
-  test('no hardcoded analytics keys in layout', () => {
+  test('GA4 property ID is correct in layout', () => {
     const layout = fs.readFileSync(path.join(ROOT, 'app/layout.tsx'), 'utf-8');
-    expect(layout).not.toMatch(/UA-\d+/);
-    expect(layout).not.toMatch(/G-[A-Z0-9]+/);
-    expect(layout).not.toMatch(/GTM-[A-Z0-9]+/);
+    expect(layout).toContain('G-D98KCREKZC');
+    expect(layout).not.toMatch(/UA-\d+/);  // old GA not used
+    expect(layout).not.toMatch(/GTM-[A-Z0-9]+/);  // GTM not used
   });
 });
 

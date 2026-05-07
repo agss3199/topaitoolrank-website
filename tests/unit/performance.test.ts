@@ -79,17 +79,18 @@ describe('Todo 046: SVG assets optimized', () => {
 });
 
 // ============================================================
-// No Third-Party Scripts (Performance Spec)
+// Google Analytics 4 Configuration (GA4 Spec)
 // ============================================================
 
-describe('No unnecessary third-party scripts', () => {
-  it('layout.tsx does not load Google Analytics with placeholder ID', () => {
-    // A placeholder analytics tag (G-XXXXXXXXXX) adds a blocking third-party
-    // script for zero benefit. Either use a real ID or remove entirely.
-    expect(LAYOUT_TSX).not.toMatch(/G-XXXXXXXXXX/);
+describe('Google Analytics 4 implementation', () => {
+  it('layout.tsx includes GoogleAnalytics component with correct property ID', () => {
+    // GA4 must be imported from @next/third-parties/google and use property ID G-D98KCREKZC
+    expect(LAYOUT_TSX).toContain('GoogleAnalytics');
+    expect(LAYOUT_TSX).toContain('G-D98KCREKZC');
   });
 
-  it('layout.tsx does not load googletagmanager scripts', () => {
+  it('layout.tsx does not load googletagmanager directly (uses @next/third-parties wrapper)', () => {
+    // @next/third-parties handles googletagmanager; layout should not import it directly
     expect(LAYOUT_TSX).not.toMatch(/googletagmanager\.com/);
   });
 });

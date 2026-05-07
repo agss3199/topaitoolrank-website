@@ -16,6 +16,7 @@
     "test:e2e:update-snapshots": "npx playwright test --update-snapshots"
   },
   "dependencies": {
+    "@next/third-parties": "^16.2.5",
     "@supabase/supabase-js": "^2.105.1",
     "fuse.js": "^7.3.0",
     "gray-matter": "^4.0.3",

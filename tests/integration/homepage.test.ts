@@ -258,10 +258,10 @@ describe("Milestone 7: Testing & QA - Homepage Integration", () => {
       expect(layoutFile).not.toMatch(/<link.*?rel="stylesheet"[^>]*>/);
     });
 
-    test("should have no third-party blocking scripts", () => {
-      // Google Analytics removed, no other third-party scripts
-      expect(layoutFile).not.toMatch(/google-analytics/i);
-      expect(layoutFile).not.toMatch(/gtag/i);
+    test("should have GA4 configured with GoogleAnalytics component", () => {
+      // GA4 via @next/third-parties/google with property ID G-D98KCREKZC
+      expect(layoutFile).toContain('GoogleAnalytics');
+      expect(layoutFile).toContain('G-D98KCREKZC');
     });
 
     test("should have system fonts only", () => {
