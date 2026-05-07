@@ -1,0 +1,115 @@
+.toolFooter {
+  background: #1f2937;
+  color: #d1d5db;
+  padding: 40px 16px;
+  margin-top: 80px;
+  border-top: 1px solid #374151;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+@media (max-width: 1024px) {
+  .toolFooter {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .toolFooter {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 32px 16px;
+    margin-top: 60px;
+  }
+}
+
+.toolFooterColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.toolFooterBrand {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.toolFooterLogo {
+  font-size: 28px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.toolFooterBrandText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.toolFooterBrandName {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+}
+
+.toolFooterBrandDesc {
+  font-size: 14px;
+  color: #9ca3af;
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+}
+
+.toolFooterColumnTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.toolFooterLink {
+  color: #d1d5db;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+  padding: 4px 0;
+  border-radius: 2px;
+}
+
+.toolFooterLink:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+.toolFooterLink:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.toolFooterCopyright {
+  grid-column: 1 / -1;
+  border-top: 1px solid #374151;
+  padding-top: 24px;
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.toolFooterCopyright p {
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .toolFooterCopyright {
+    grid-column: 1 / -1;
+  }
+}
