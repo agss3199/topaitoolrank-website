@@ -1,5 +1,6 @@
 "use client";
 
+nexport const dynamicParams = false;
 /**
  * AI Prompt Generator for Business - Main Page
  * Build better prompts for ChatGPT, Claude, and other AI tools

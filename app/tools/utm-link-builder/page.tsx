@@ -1,5 +1,6 @@
 "use client";
 
+nexport const dynamicParams = false;
 
 
 /**
