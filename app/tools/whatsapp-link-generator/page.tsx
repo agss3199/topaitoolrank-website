@@ -11,7 +11,6 @@ export const dynamicParams = false;
  */
 
 import { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
 import styles from "./styles.css";
 import { validatePhoneNumber } from "./lib/phone-validator";
 import { generateQRCode, downloadQRCode } from "./lib/qr-generator";
