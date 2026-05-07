@@ -1,5 +1,6 @@
 "use client";
 
+export const dynamic = 'force-dynamic';
 export const dynamicParams = false;
 
 import { useState, useRef, useCallback, useEffect, useMemo, lazy, Suspense } from 'react';

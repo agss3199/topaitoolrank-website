@@ -1,7 +1,7 @@
 "use client";
 
+export const dynamic = 'force-dynamic';
 export const dynamicParams = false;
-
 
 /**
  * WhatsApp Message Formatter — BUILD + WIRE Phases (todos 101-102)

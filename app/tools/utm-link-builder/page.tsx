@@ -1,7 +1,7 @@
 "use client";
 
+export const dynamic = 'force-dynamic';
 export const dynamicParams = false;
-
 
 /**
  * UTM Link Builder - Main Page
