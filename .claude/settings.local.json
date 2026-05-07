@@ -96,7 +96,8 @@
       "Bash(xargs -I {} sh -c 'echo \"=== {} ===\" && head -15 {}')",
       "Bash(chmod +x /tmp/fix-tools.sh)",
       "Bash(bash /tmp/fix-tools.sh)",
-      "Bash(SKIP_TYPE_CHECK=true npm run build)"
+      "Bash(SKIP_TYPE_CHECK=true npm run build)",
+      "Bash(find app/tools -name \"page.tsx\" -exec sed -i '/export const revalidate = 0;/d' {} \\\\;)"
     ]
   }
 }
