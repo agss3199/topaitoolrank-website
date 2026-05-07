@@ -24,6 +24,7 @@ import {
   saveTolocalStorage,
   loadFromlocalStorage,
 } from "./lib/utils";
+import { cls } from "../lib/css-module-safe";
 
 const LOCALSTORAGE_KEY = "ig-data";
 

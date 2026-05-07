@@ -19,6 +19,7 @@ import {
   getJSONStats,
   getComplexity,
 } from "./lib/json-utils";
+import { cls } from "../lib/css-module-safe";
 
 const LOCALSTORAGE_KEY = "jf-input";
 
