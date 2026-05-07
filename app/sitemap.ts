@@ -85,13 +85,69 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Tool pages
   const toolPages: MetadataRoute.Sitemap = [
+    // Tier 1 tools (primary SEO focus) - priority 0.8
+    {
+      url: `${baseUrl}/tools/json-formatter`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/tools/word-counter`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/tools/email-subject-tester`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    // Tier 2 tools - priority 0.7
+    {
+      url: `${baseUrl}/tools/ai-prompt-generator`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/tools/utm-link-builder`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/tools/invoice-generator`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/tools/seo-analyzer`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/tools/whatsapp-link-generator`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/tools/whatsapp-message-formatter`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    // WA-Sender tool
     {
       url: `${baseUrl}/tools/wa-sender`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     },
-    // Future tools will be added here automatically via tool registration pattern
   ];
 
   // Legal & info pages
