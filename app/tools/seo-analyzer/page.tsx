@@ -15,6 +15,7 @@ import {
   type SEOMetrics,
 } from "./lib/seo-analyzer";
 import { fetchPageMetadata, getScoreColor, getScoreLabel, copyToClipboard, downloadAsFile } from "./lib/utils";
+import { cls } from "../lib/css-module-safe";
 
 export default function SEOAnalyzerPage() {
   const [url, setUrl] = useState("");
@@ -132,100 +133,99 @@ ${suggestions.map(s => `- ${s}`).join("\n")}`;
     downloadAsFile(report, `seo-report-${Date.now()}.txt`);
   };
 
-  // @ts-ignore CSS Module types
   return (
-    <div className={styles["seo-analyzer"]}>
-      <header className={styles["seo-analyzer__header"]}>
+    <div className={cls(styles, "seo-analyzer")}>
+      <header className={cls(styles, "seo-analyzer__header")}>
         <h1>SEO Analyzer</h1>
         <p>Analyze any URL for SEO optimization opportunities</p>
       </header>
 
-      <main className={styles["seo-analyzer__main"]}>
+      <main className={cls(styles, "seo-analyzer__main")}>
         {/* Input section */}
-        <section className={styles["seo-analyzer__input-section"]}>
-          <div className={styles["seo-analyzer__input-group"]}>
+        <section className={cls(styles, "seo-analyzer__input-section")}>
+          <div className={cls(styles, "seo-analyzer__input-group")}>
             <input
               type="url"
               placeholder="Enter URL to analyze (e.g., https://example.com)"
               value={url}
               onChange={e => setUrl(e.target.value)}
               onKeyPress={e => e.key === "Enter" && isValidInput && handleAnalyze()}
-              className={styles["seo-analyzer__input"]}
+              className={cls(styles, "seo-analyzer__input")}
             />
             <button
               onClick={handleAnalyze}
               disabled={!isValidInput || isLoading}
-              className={styles["seo-analyzer__analyze-btn"]}
+              className={cls(styles, "seo-analyzer__analyze-btn")}
             >
               {isLoading ? "Analyzing..." : "Analyze"}
             </button>
           </div>
 
-          {error && <div className={styles["seo-analyzer__error"]}>{error}</div>}
+          {error && <div className={cls(styles, "seo-analyzer__error")}>{error}</div>}
         </section>
 
         {/* Results section */}
         {metrics && (
           <>
             {/* Score card */}
-            <section className={styles["seo-analyzer__score-section"]}>
+            <section className={cls(styles, "seo-analyzer__score-section")}>
               <div
-                className={styles["seo-analyzer__score-circle"]}
+                className={cls(styles, "seo-analyzer__score-circle")}
                 style={{
                   borderColor: getScoreColor(metrics.score),
                   color: getScoreColor(metrics.score),
                 }}
               >
-                <div className={styles["seo-analyzer__score-number"]}>{metrics.score}</div>
-                <div className={styles["seo-analyzer__score-label"]}>
+                <div className={cls(styles, "seo-analyzer__score-number")}>{metrics.score}</div>
+                <div className={cls(styles, "seo-analyzer__score-label")}>
                   {getScoreLabel(metrics.score)}
                 </div>
               </div>
 
-              <div className={styles["seo-analyzer__metrics-grid"]}>
-                <div className={styles["seo-analyzer__metric"]}>
-                  <span className={styles["seo-analyzer__metric-label"]}>Title</span>
+              <div className={cls(styles, "seo-analyzer__metrics-grid")}>
+                <div className={cls(styles, "seo-analyzer__metric")}>
+                  <span className={cls(styles, "seo-analyzer__metric-label")}>Title</span>
                   <span
                     className={
                       metrics.title?.optimal
-                        ? styles["seo-analyzer__metric-good"]
-                        : styles["seo-analyzer__metric-warning"]
+                        ? cls(styles, "seo-analyzer__metric-good")
+                        : cls(styles, "seo-analyzer__metric-warning")
                     }
                   >
                     {metrics.title?.optimal ? "✓" : "⚠"}
                   </span>
                 </div>
-                <div className={styles["seo-analyzer__metric"]}>
-                  <span className={styles["seo-analyzer__metric-label"]}>Description</span>
+                <div className={cls(styles, "seo-analyzer__metric")}>
+                  <span className={cls(styles, "seo-analyzer__metric-label")}>Description</span>
                   <span
                     className={
                       metrics.description?.optimal
-                        ? styles["seo-analyzer__metric-good"]
-                        : styles["seo-analyzer__metric-warning"]
+                        ? cls(styles, "seo-analyzer__metric-good")
+                        : cls(styles, "seo-analyzer__metric-warning")
                     }
                   >
                     {metrics.description?.optimal ? "✓" : "⚠"}
                   </span>
                 </div>
-                <div className={styles["seo-analyzer__metric"]}>
-                  <span className={styles["seo-analyzer__metric-label"]}>HTTPS</span>
+                <div className={cls(styles, "seo-analyzer__metric")}>
+                  <span className={cls(styles, "seo-analyzer__metric-label")}>HTTPS</span>
                   <span
                     className={
                       metrics.technical?.hasSSL
-                        ? styles["seo-analyzer__metric-good"]
-                        : styles["seo-analyzer__metric-warning"]
+                        ? cls(styles, "seo-analyzer__metric-good")
+                        : cls(styles, "seo-analyzer__metric-warning")
                     }
                   >
                     {metrics.technical?.hasSSL ? "✓" : "✕"}
                   </span>
                 </div>
-                <div className={styles["seo-analyzer__metric"]}>
-                  <span className={styles["seo-analyzer__metric-label"]}>Mobile</span>
+                <div className={cls(styles, "seo-analyzer__metric")}>
+                  <span className={cls(styles, "seo-analyzer__metric-label")}>Mobile</span>
                   <span
                     className={
                       metrics.technical?.hasMobileViewport
-                        ? styles["seo-analyzer__metric-good"]
-                        : styles["seo-analyzer__metric-warning"]
+                        ? cls(styles, "seo-analyzer__metric-good")
+                        : cls(styles, "seo-analyzer__metric-warning")
                     }
                   >
                     {metrics.technical?.hasMobileViewport ? "✓" : "✕"}
@@ -235,10 +235,10 @@ ${suggestions.map(s => `- ${s}`).join("\n")}`;
             </section>
 
             {/* Details */}
-            <section className={styles["seo-analyzer__details"]}>
-              <h2 className={styles["seo-analyzer__details-title"]}>Details</h2>
+            <section className={cls(styles, "seo-analyzer__details")}>
+              <h2 className={cls(styles, "seo-analyzer__details-title")}>Details</h2>
 
-              <div className={styles["seo-analyzer__detail-item"]}>
+              <div className={cls(styles, "seo-analyzer__detail-item")}>
                 <h3>Title Tag</h3>
                 <p>{metrics.title?.text || "Not found"}</p>
                 <small>
@@ -246,7 +246,7 @@ ${suggestions.map(s => `- ${s}`).join("\n")}`;
                 </small>
               </div>
 
-              <div className={styles["seo-analyzer__detail-item"]}>
+              <div className={cls(styles, "seo-analyzer__detail-item")}>
                 <h3>Meta Description</h3>
                 <p>{metrics.description?.text || "Not found"}</p>
                 <small>
@@ -254,7 +254,7 @@ ${suggestions.map(s => `- ${s}`).join("\n")}`;
                 </small>
               </div>
 
-              <div className={styles["seo-analyzer__detail-item"]}>
+              <div className={cls(styles, "seo-analyzer__detail-item")}>
                 <h3>Headings</h3>
                 <p>
                   H1: {metrics.headings?.h1Count} | H2: {metrics.headings?.h2Count} | H3:{" "}
@@ -262,7 +262,7 @@ ${suggestions.map(s => `- ${s}`).join("\n")}`;
                 </p>
               </div>
 
-              <div className={styles["seo-analyzer__detail-item"]}>
+              <div className={cls(styles, "seo-analyzer__detail-item")}>
                 <h3>Content</h3>
                 <p>{metrics.content?.wordCount || 0} words</p>
               </div>
@@ -270,11 +270,11 @@ ${suggestions.map(s => `- ${s}`).join("\n")}`;
 
             {/* Suggestions */}
             {suggestions.length > 0 && (
-              <section className={styles["seo-analyzer__suggestions"]}>
-                <h2 className={styles["seo-analyzer__suggestions-title"]}>
+              <section className={cls(styles, "seo-analyzer__suggestions")}>
+                <h2 className={cls(styles, "seo-analyzer__suggestions-title")}>
                   Improvement Suggestions
                 </h2>
-                <ul className={styles["seo-analyzer__suggestions-list"]}>
+                <ul className={cls(styles, "seo-analyzer__suggestions-list")}>
                   {suggestions.map((suggestion, idx) => (
                     <li key={idx}>{suggestion}</li>
                   ))}
@@ -283,31 +283,31 @@ ${suggestions.map(s => `- ${s}`).join("\n")}`;
             )}
 
             {/* Actions */}
-            <div className={styles["seo-analyzer__actions"]}>
+            <div className={cls(styles, "seo-analyzer__actions")}>
               <button
                 onClick={handleCopyReport}
-                className={styles["seo-analyzer__action-btn"]}
+                className={cls(styles, "seo-analyzer__action-btn")}
               >
                 📋 Copy Report
               </button>
               <button
                 onClick={handleDownloadReport}
-                className={styles["seo-analyzer__action-btn"]}
+                className={cls(styles, "seo-analyzer__action-btn")}
               >
                 ⬇️ Download Report
               </button>
             </div>
 
-            {copyMessage && <div className={styles["seo-analyzer__message"]}>{copyMessage}</div>}
+            {copyMessage && <div className={cls(styles, "seo-analyzer__message")}>{copyMessage}</div>}
           </>
         )}
       </main>
 
-      <footer className={styles["seo-analyzer__footer"]}>
+      <footer className={cls(styles, "seo-analyzer__footer")}>
         <p>
           <small>
             Free tool by{" "}
-            <a href="/" className={styles["seo-analyzer__link"]}>
+            <a href="/" className={cls(styles, "seo-analyzer__link")}>
               topaitoolrank.com
             </a>
           </small>

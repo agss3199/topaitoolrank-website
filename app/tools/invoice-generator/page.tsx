@@ -119,124 +119,123 @@ export default function InvoiceGeneratorPage() {
     downloadAsFile(textInvoice, `invoice-${data.invoiceNumber}.txt`);
   };
 
-  // @ts-ignore CSS Module types
   return (
-    <div className={styles["invoice-generator"]}>
-      <header className={styles["invoice-generator__header"]}>
+    <div className={cls(styles, "invoice-generator")}>
+      <header className={cls(styles, "invoice-generator__header")}>
         <h1>Invoice Generator</h1>
         <p>Create and download professional invoices</p>
       </header>
 
-      <main className={styles["invoice-generator__main"]}>
-        <div className={styles["invoice-generator__container"]}>
+      <main className={cls(styles, "invoice-generator__main")}>
+        <div className={cls(styles, "invoice-generator__container")}>
           {/* Form section */}
-          <section className={styles["invoice-generator__form-section"]}>
+          <section className={cls(styles, "invoice-generator__form-section")}>
             {/* Company Info */}
-            <fieldset className={styles["invoice-generator__fieldset"]}>
-              <legend className={styles["invoice-generator__legend"]}>Company Information</legend>
-              <div className={styles["invoice-generator__field-grid"]}>
+            <fieldset className={cls(styles, "invoice-generator__fieldset")}>
+              <legend className={cls(styles, "invoice-generator__legend")}>Company Information</legend>
+              <div className={cls(styles, "invoice-generator__field-grid")}>
                 <input
                   type="text"
                   placeholder="Company Name *"
                   value={data.companyName}
                   onChange={e => handleCompanyChange("companyName", e.target.value)}
-                  className={styles["invoice-generator__input"]}
+                  className={cls(styles, "invoice-generator__input")}
                 />
                 <input
                   type="email"
                   placeholder="Company Email *"
                   value={data.companyEmail}
                   onChange={e => handleCompanyChange("companyEmail", e.target.value)}
-                  className={styles["invoice-generator__input"]}
+                  className={cls(styles, "invoice-generator__input")}
                 />
                 <input
                   type="tel"
                   placeholder="Phone Number"
                   value={data.companyPhone}
                   onChange={e => handleCompanyChange("companyPhone", e.target.value)}
-                  className={styles["invoice-generator__input"]}
+                  className={cls(styles, "invoice-generator__input")}
                 />
                 <textarea
                   placeholder="Address"
                   value={data.companyAddress}
                   onChange={e => handleCompanyChange("companyAddress", e.target.value)}
-                  className={styles["invoice-generator__textarea"]}
+                  className={cls(styles, "invoice-generator__textarea")}
                 />
               </div>
             </fieldset>
 
             {/* Invoice Details */}
-            <fieldset className={styles["invoice-generator__fieldset"]}>
-              <legend className={styles["invoice-generator__legend"]}>Invoice Details</legend>
-              <div className={styles["invoice-generator__field-grid"]}>
+            <fieldset className={cls(styles, "invoice-generator__fieldset")}>
+              <legend className={cls(styles, "invoice-generator__legend")}>Invoice Details</legend>
+              <div className={cls(styles, "invoice-generator__field-grid")}>
                 <input
                   type="text"
                   placeholder="Invoice Number *"
                   value={data.invoiceNumber}
                   onChange={e => handleInvoiceChange("invoiceNumber", e.target.value)}
-                  className={styles["invoice-generator__input"]}
+                  className={cls(styles, "invoice-generator__input")}
                 />
                 <input
                   type="date"
                   value={data.invoiceDate}
                   onChange={e => handleInvoiceChange("invoiceDate", e.target.value)}
-                  className={styles["invoice-generator__input"]}
+                  className={cls(styles, "invoice-generator__input")}
                 />
                 <input
                   type="date"
                   value={data.dueDate}
                   onChange={e => handleInvoiceChange("dueDate", e.target.value)}
-                  className={styles["invoice-generator__input"]}
+                  className={cls(styles, "invoice-generator__input")}
                 />
               </div>
             </fieldset>
 
             {/* Client Info */}
-            <fieldset className={styles["invoice-generator__fieldset"]}>
-              <legend className={styles["invoice-generator__legend"]}>Client Information</legend>
-              <div className={styles["invoice-generator__field-grid"]}>
+            <fieldset className={cls(styles, "invoice-generator__fieldset")}>
+              <legend className={cls(styles, "invoice-generator__legend")}>Client Information</legend>
+              <div className={cls(styles, "invoice-generator__field-grid")}>
                 <input
                   type="text"
                   placeholder="Client Name *"
                   value={data.clientName}
                   onChange={e => handleClientChange("clientName", e.target.value)}
-                  className={styles["invoice-generator__input"]}
+                  className={cls(styles, "invoice-generator__input")}
                 />
                 <input
                   type="email"
                   placeholder="Client Email *"
                   value={data.clientEmail}
                   onChange={e => handleClientChange("clientEmail", e.target.value)}
-                  className={styles["invoice-generator__input"]}
+                  className={cls(styles, "invoice-generator__input")}
                 />
                 <textarea
                   placeholder="Client Address *"
                   value={data.clientAddress}
                   onChange={e => handleClientChange("clientAddress", e.target.value)}
-                  className={styles["invoice-generator__textarea"]}
+                  className={cls(styles, "invoice-generator__textarea")}
                 />
               </div>
             </fieldset>
 
             {/* Items */}
-            <fieldset className={styles["invoice-generator__fieldset"]}>
-              <legend className={styles["invoice-generator__legend"]}>Line Items</legend>
-              <div className={styles["invoice-generator__items"]}>
+            <fieldset className={cls(styles, "invoice-generator__fieldset")}>
+              <legend className={cls(styles, "invoice-generator__legend")}>Line Items</legend>
+              <div className={cls(styles, "invoice-generator__items")}>
                 {data.items.map((item, idx) => (
-                  <div key={idx} className={styles["invoice-generator__item"]}>
+                  <div key={idx} className={cls(styles, "invoice-generator__item")}>
                     <input
                       type="text"
                       placeholder="Description *"
                       value={item.description}
                       onChange={e => handleItemChange(idx, "description", e.target.value)}
-                      className={styles["invoice-generator__input"]}
+                      className={cls(styles, "invoice-generator__input")}
                     />
                     <input
                       type="number"
                       placeholder="Qty"
                       value={item.quantity}
                       onChange={e => handleItemChange(idx, "quantity", e.target.value)}
-                      className={styles["invoice-generator__input-number"]}
+                      className={cls(styles, "invoice-generator__input-number")}
                       min="0"
                     />
                     <input
@@ -244,17 +243,17 @@ export default function InvoiceGeneratorPage() {
                       placeholder="Rate"
                       value={item.rate}
                       onChange={e => handleItemChange(idx, "rate", e.target.value)}
-                      className={styles["invoice-generator__input-number"]}
+                      className={cls(styles, "invoice-generator__input-number")}
                       min="0"
                       step="0.01"
                     />
-                    <span className={styles["invoice-generator__amount"]}>
+                    <span className={cls(styles, "invoice-generator__amount")}>
                       {formatCurrency(item.quantity * item.rate)}
                     </span>
                     {data.items.length > 1 && (
                       <button
                         onClick={() => handleRemoveItem(idx)}
-                        className={styles["invoice-generator__remove-item-btn"]}
+                        className={cls(styles, "invoice-generator__remove-item-btn")}
                       >
                         Remove
                       </button>
@@ -264,22 +263,22 @@ export default function InvoiceGeneratorPage() {
               </div>
               <button
                 onClick={handleAddItem}
-                className={styles["invoice-generator__add-item-btn"]}
+                className={cls(styles, "invoice-generator__add-item-btn")}
               >
                 + Add Item
               </button>
             </fieldset>
 
             {/* Tax & Notes */}
-            <fieldset className={styles["invoice-generator__fieldset"]}>
-              <legend className={styles["invoice-generator__legend"]}>Additional</legend>
-              <div className={styles["invoice-generator__field-grid"]}>
+            <fieldset className={cls(styles, "invoice-generator__fieldset")}>
+              <legend className={cls(styles, "invoice-generator__legend")}>Additional</legend>
+              <div className={cls(styles, "invoice-generator__field-grid")}>
                 <input
                   type="number"
                   placeholder="Tax Rate (%)"
                   value={data.taxRate || ""}
                   onChange={e => handleInvoiceChange("taxRate", e.target.value || "0")}
-                  className={styles["invoice-generator__input"]}
+                  className={cls(styles, "invoice-generator__input")}
                   min="0"
                   max="100"
                   step="0.01"
@@ -289,35 +288,35 @@ export default function InvoiceGeneratorPage() {
                 placeholder="Notes (optional)"
                 value={data.notes}
                 onChange={e => handleInvoiceChange("notes", e.target.value)}
-                className={styles["invoice-generator__textarea"]}
+                className={cls(styles, "invoice-generator__textarea")}
               />
               <textarea
                 placeholder="Terms & Conditions (optional)"
                 value={data.terms}
                 onChange={e => handleInvoiceChange("terms", e.target.value)}
-                className={styles["invoice-generator__textarea"]}
+                className={cls(styles, "invoice-generator__textarea")}
               />
             </fieldset>
 
             {!validation.valid && (
-              <div className={styles["invoice-generator__errors"]}>
+              <div className={cls(styles, "invoice-generator__errors")}>
                 {validation.errors.map((error, idx) => (
                   <p key={idx}>✕ {error}</p>
                 ))}
               </div>
             )}
 
-            <div className={styles["invoice-generator__actions"]}>
+            <div className={cls(styles, "invoice-generator__actions")}>
               <button
                 onClick={() => setShowPreview(!showPreview)}
-                className={styles["invoice-generator__btn"]}
+                className={cls(styles, "invoice-generator__btn")}
                 disabled={!validation.valid}
               >
                 {showPreview ? "Hide" : "Show"} Preview
               </button>
               <button
                 onClick={handleDownloadPDF}
-                className={styles["invoice-generator__btn"]}
+                className={cls(styles, "invoice-generator__btn")}
                 disabled={!validation.valid}
               >
                 ⬇️ Download Invoice
@@ -327,10 +326,10 @@ export default function InvoiceGeneratorPage() {
 
           {/* Preview section */}
           {showPreview && validation.valid && (
-            <section className={styles["invoice-generator__preview-section"]}>
-              <h2 className={styles["invoice-generator__preview-title"]}>Preview</h2>
-              <div className={styles["invoice-generator__preview"]}>
-                <pre className={styles["invoice-generator__preview-text"]}>
+            <section className={cls(styles, "invoice-generator__preview-section")}>
+              <h2 className={cls(styles, "invoice-generator__preview-title")}>Preview</h2>
+              <div className={cls(styles, "invoice-generator__preview")}>
+                <pre className={cls(styles, "invoice-generator__preview-text")}>
                   {generateTextInvoice(data)}
                 </pre>
               </div>
@@ -340,23 +339,23 @@ export default function InvoiceGeneratorPage() {
 
         {/* Summary */}
         {validation.valid && (
-          <aside className={styles["invoice-generator__summary"]}>
+          <aside className={cls(styles, "invoice-generator__summary")}>
             <h3>Summary</h3>
-            <div className={styles["invoice-generator__summary-item"]}>
+            <div className={cls(styles, "invoice-generator__summary-item")}>
               <span>Items:</span>
               <span>{data.items.length}</span>
             </div>
-            <div className={styles["invoice-generator__summary-item"]}>
+            <div className={cls(styles, "invoice-generator__summary-item")}>
               <span>Subtotal:</span>
               <span>{formatCurrency(stats.subtotal)}</span>
             </div>
             {data.taxRate > 0 && (
-              <div className={styles["invoice-generator__summary-item"]}>
+              <div className={cls(styles, "invoice-generator__summary-item")}>
                 <span>Tax ({data.taxRate}%):</span>
                 <span>{formatCurrency(stats.tax)}</span>
               </div>
             )}
-            <div className={styles["invoice-generator__summary-total"]}>
+            <div className={cls(styles, "invoice-generator__summary-total")}>
               <span>Total:</span>
               <span>{formatCurrency(stats.total)}</span>
             </div>
@@ -364,11 +363,11 @@ export default function InvoiceGeneratorPage() {
         )}
       </main>
 
-      <footer className={styles["invoice-generator__footer"]}>
+      <footer className={cls(styles, "invoice-generator__footer")}>
         <p>
           <small>
             Free tool by{" "}
-            <a href="/" className={styles["invoice-generator__link"]}>
+            <a href="/" className={cls(styles, "invoice-generator__link")}>
               topaitoolrank.com
             </a>
           </small>

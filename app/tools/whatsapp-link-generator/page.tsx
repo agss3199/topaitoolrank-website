@@ -15,6 +15,7 @@ import styles from "./styles.css";
 import { validatePhoneNumber } from "./lib/phone-validator";
 import { generateQRCode, downloadQRCode } from "./lib/qr-generator";
 import { copyToClipboard, downloadAsFile, loadFromlocalStorage, saveTolocalStorage } from "./lib/utils";
+import { cls } from "../lib/css-module-safe";
 
 const LOCALSTORAGE_PHONE_KEY = "wlg-phone";
 const LOCALSTORAGE_MESSAGE_KEY = "wlg-message";
@@ -88,46 +89,45 @@ export default function WhatsAppLinkGeneratorPage() {
     downloadQRCode(qrCode, "whatsapp-qr.png");
   };
 
-  // @ts-ignore CSS Module types
   return (
-    <div className={styles["whatsapp-link-generator"]}>
-      <header className={styles["whatsapp-link-generator__header"]}>
+    <div className={cls(styles, "whatsapp-link-generator")}>
+      <header className={cls(styles, "whatsapp-link-generator__header")}>
         <h1>WhatsApp Link Generator + QR Code</h1>
         <p>Generate WhatsApp links and QR codes instantly</p>
       </header>
 
-      <main className={styles["whatsapp-link-generator__main"]}>
+      <main className={cls(styles, "whatsapp-link-generator__main")}>
         {/* Input section */}
-        <div className={styles["whatsapp-link-generator__section"]}>
+        <div className={cls(styles, "whatsapp-link-generator__section")}>
           <h2>Details</h2>
 
-          <div className={styles["whatsapp-link-generator__field"]}>
-            <label className={styles["whatsapp-link-generator__label"]}>
+          <div className={cls(styles, "whatsapp-link-generator__field")}>
+            <label className={cls(styles, "whatsapp-link-generator__label")}>
               Phone Number <span style={{ color: "red" }}>*</span>
             </label>
             <input
               type="tel"
-              className={styles["whatsapp-link-generator__input"]}
+              className={cls(styles, "whatsapp-link-generator__input")}
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="+1 (234) 567-8900"
             />
             {phoneError && (
-              <div className={styles["whatsapp-link-generator__error"]}>
+              <div className={cls(styles, "whatsapp-link-generator__error")}>
                 {phoneError}
               </div>
             )}
-            <small className={styles["whatsapp-link-generator__hint"]}>
+            <small className={cls(styles, "whatsapp-link-generator__hint")}>
               Include country code (e.g., +1 for US)
             </small>
           </div>
 
-          <div className={styles["whatsapp-link-generator__field"]}>
-            <label className={styles["whatsapp-link-generator__label"]}>
+          <div className={cls(styles, "whatsapp-link-generator__field")}>
+            <label className={cls(styles, "whatsapp-link-generator__label")}>
               Message (Optional)
             </label>
             <textarea
-              className={styles["whatsapp-link-generator__textarea"]}
+              className={cls(styles, "whatsapp-link-generator__textarea")}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Type a message to pre-fill the chat..."
@@ -136,7 +136,7 @@ export default function WhatsAppLinkGeneratorPage() {
           </div>
 
           <button
-            className={styles["whatsapp-link-generator__button"]}
+            className={cls(styles, "whatsapp-link-generator__button")}
             onClick={generateLink}
             disabled={!phone || loading}
           >
@@ -144,7 +144,7 @@ export default function WhatsAppLinkGeneratorPage() {
           </button>
 
           {copyMessage && (
-            <div className={styles["whatsapp-link-generator__success"]}>
+            <div className={cls(styles, "whatsapp-link-generator__success")}>
               {copyMessage}
             </div>
           )}
@@ -152,26 +152,26 @@ export default function WhatsAppLinkGeneratorPage() {
 
         {/* Output section */}
         {waLink && (
-          <div className={styles["whatsapp-link-generator__section"]}>
+          <div className={cls(styles, "whatsapp-link-generator__section")}>
             <h2>Your WhatsApp Link</h2>
 
             {qrCode && (
-              <div className={styles["whatsapp-link-generator__qr-container"]}>
+              <div className={cls(styles, "whatsapp-link-generator__qr-container")}>
                 <img
                   src={qrCode}
                   alt="WhatsApp QR Code"
-                  className={styles["whatsapp-link-generator__qr-image"]}
+                  className={cls(styles, "whatsapp-link-generator__qr-image")}
                 />
               </div>
             )}
 
-            <div className={styles["whatsapp-link-generator__link-box"]}>
+            <div className={cls(styles, "whatsapp-link-generator__link-box")}>
               <code>{waLink}</code>
             </div>
 
-            <div className={styles["whatsapp-link-generator__button-group"]}>
+            <div className={cls(styles, "whatsapp-link-generator__button-group")}>
               <button
-                className={styles["whatsapp-link-generator__button"]}
+                className={cls(styles, "whatsapp-link-generator__button")}
                 onClick={handleCopyLink}
               >
                 📋 Copy Link
@@ -180,13 +180,13 @@ export default function WhatsAppLinkGeneratorPage() {
                 href={waLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles["whatsapp-link-generator__button"]}
+                className={cls(styles, "whatsapp-link-generator__button")}
               >
                 💬 Open Chat
               </a>
               {qrCode && (
                 <button
-                  className={styles["whatsapp-link-generator__button"]}
+                  className={cls(styles, "whatsapp-link-generator__button")}
                   onClick={handleDownloadQR}
                 >
                   ⬇️ Download QR
@@ -197,11 +197,11 @@ export default function WhatsAppLinkGeneratorPage() {
         )}
       </main>
 
-      <footer className={styles["whatsapp-link-generator__footer"]}>
+      <footer className={cls(styles, "whatsapp-link-generator__footer")}>
         <p>
           <small>
             Free tool by{" "}
-            <a href="/" className={styles["whatsapp-link-generator__link"]}>
+            <a href="/" className={cls(styles, "whatsapp-link-generator__link")}>
               topaitoolrank.com
             </a>
           </small>

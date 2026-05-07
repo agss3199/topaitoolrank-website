@@ -103,55 +103,54 @@ export default function JSONFormatterPage() {
     }
   };
 
-  // @ts-ignore CSS Module types
   return (
-    <div className={styles["json-formatter"]}>
-      <header className={styles["json-formatter__header"]}>
+    <div className={cls(styles, "json-formatter")}>
+      <header className={cls(styles, "json-formatter__header")}>
         <h1>JSON Formatter</h1>
         <p>Format, validate, and transform JSON</p>
       </header>
 
-      <main className={styles["json-formatter__main"]}>
+      <main className={cls(styles, "json-formatter__main")}>
         {/* Input section */}
-        <section className={styles["json-formatter__section"]}>
-          <div className={styles["json-formatter__section-header"]}>
+        <section className={cls(styles, "json-formatter__section")}>
+          <div className={cls(styles, "json-formatter__section-header")}>
             <h2>Input JSON</h2>
             {input && (
-              <div className={styles["json-formatter__stats"]}>
+              <div className={cls(styles, "json-formatter__stats")}>
                 {validation.valid ? (
                   <>
-                    <span className={styles["json-formatter__stat"]}>
+                    <span className={cls(styles, "json-formatter__stat")}>
                       {stats.size} bytes
                     </span>
-                    <span className={styles["json-formatter__stat"]}>
+                    <span className={cls(styles, "json-formatter__stat")}>
                       {stats.keys} keys
                     </span>
-                    <span className={`${styles["json-formatter__stat"]} ${styles["json-formatter__complexity"]}`}>
+                    <span className={`${cls(styles, "json-formatter__stat")} ${cls(styles, "json-formatter__complexity")}`}>
                       {complexity}
                     </span>
                   </>
                 ) : (
-                  <span className={styles["json-formatter__error-badge"]}>Invalid</span>
+                  <span className={cls(styles, "json-formatter__error-badge")}>Invalid</span>
                 )}
               </div>
             )}
           </div>
 
           <textarea
-            className={styles["json-formatter__textarea"]}
+            className={cls(styles, "json-formatter__textarea")}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder='{"key": "value"}'
           />
 
           {!validation.valid && input && (
-            <div className={styles["json-formatter__error"]}>
+            <div className={cls(styles, "json-formatter__error")}>
               <strong>Error:</strong> {validation.error}
             </div>
           )}
 
           {validation.valid && (
-            <div className={styles["json-formatter__success"]}>
+            <div className={cls(styles, "json-formatter__success")}>
               ✓ Valid JSON
             </div>
           )}
@@ -160,21 +159,21 @@ export default function JSONFormatterPage() {
         {validation.valid && (
           <>
             {/* Output modes */}
-            <div className={styles["json-formatter__modes"]}>
+            <div className={cls(styles, "json-formatter__modes")}>
               <button
-                className={`${styles["json-formatter__mode-button"]} ${outputMode === "formatted" ? styles["json-formatter__mode-button--active"] : ""}`}
+                className={`${cls(styles, "json-formatter__mode-button")} ${outputMode === "formatted" ? cls(styles, "json-formatter__mode-button--active") : ""}`}
                 onClick={handleFormatClick}
               >
                 Format
               </button>
               <button
-                className={`${styles["json-formatter__mode-button"]} ${outputMode === "minified" ? styles["json-formatter__mode-button--active"] : ""}`}
+                className={`${cls(styles, "json-formatter__mode-button")} ${outputMode === "minified" ? cls(styles, "json-formatter__mode-button--active") : ""}`}
                 onClick={handleMinifyClick}
               >
                 Minify
               </button>
               <button
-                className={`${styles["json-formatter__mode-button"]} ${outputMode === "sorted" ? styles["json-formatter__mode-button--active"] : ""}`}
+                className={`${cls(styles, "json-formatter__mode-button")} ${outputMode === "sorted" ? cls(styles, "json-formatter__mode-button--active") : ""}`}
                 onClick={handleSortClick}
               >
                 Sort Keys
@@ -182,28 +181,28 @@ export default function JSONFormatterPage() {
             </div>
 
             {/* Output section */}
-            <section className={styles["json-formatter__section"]}>
+            <section className={cls(styles, "json-formatter__section")}>
               <h2>Output</h2>
 
-              <div className={styles["json-formatter__output-box"]}>
-                <code className={styles["json-formatter__code"]}>{output}</code>
+              <div className={cls(styles, "json-formatter__output-box")}>
+                <code className={cls(styles, "json-formatter__code")}>{output}</code>
               </div>
 
-              <div className={styles["json-formatter__action-buttons"]}>
+              <div className={cls(styles, "json-formatter__action-buttons")}>
                 <button
-                  className={styles["json-formatter__button"]}
+                  className={cls(styles, "json-formatter__button")}
                   onClick={handleCopyOutput}
                 >
                   📋 Copy
                 </button>
                 <button
-                  className={styles["json-formatter__button"]}
+                  className={cls(styles, "json-formatter__button")}
                   onClick={handleDownloadJSON}
                 >
                   ⬇️ Download JSON
                 </button>
                 <button
-                  className={styles["json-formatter__button"]}
+                  className={cls(styles, "json-formatter__button")}
                   onClick={handleCopyToCSV}
                 >
                   📊 Copy as CSV
@@ -214,11 +213,11 @@ export default function JSONFormatterPage() {
         )}
       </main>
 
-      <footer className={styles["json-formatter__footer"]}>
+      <footer className={cls(styles, "json-formatter__footer")}>
         <p>
           <small>
             Free tool by{" "}
-            <a href="/" className={styles["json-formatter__link"]}>
+            <a href="/" className={cls(styles, "json-formatter__link")}>
               topaitoolrank.com
             </a>
           </small>

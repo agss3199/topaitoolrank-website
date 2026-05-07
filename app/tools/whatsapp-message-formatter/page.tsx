@@ -22,6 +22,7 @@ import { useState, useEffect } from "react";
 import styles from "./styles.css";
 import { markdownToWhatsApp, MARKDOWN_SYNTAX_HINTS } from "./lib/markdown-to-whatsapp";
 import { downloadAsFile, copyToClipboard, loadFromlocalStorage, saveTolocalStorage } from "./lib/utils";
+import { cls } from "../lib/css-module-safe";
 import Preview from "./components/Preview";
 
 const LOCALSTORAGE_KEY = "wam-draft";
@@ -100,33 +101,32 @@ export default function WAMFormatterPage() {
 
   const isEmptyInput = !input || input.trim().length === 0;
 
-  // @ts-ignore CSS Module types
   return (
-    <div className={styles["whatsapp-message-formatter"]}>
-      <header className={styles["whatsapp-message-formatter__header"]}>
+    <div className={cls(styles, "whatsapp-message-formatter")}>
+      <header className={cls(styles, "whatsapp-message-formatter__header")}>
         <h1>WhatsApp Message Formatter</h1>
         <p>Convert markdown formatting to WhatsApp compatible syntax</p>
       </header>
 
-      <main className={styles["whatsapp-message-formatter__main"]}>
+      <main className={cls(styles, "whatsapp-message-formatter__main")}>
         {/* Input section */}
-        <div className={styles["whatsapp-message-formatter__section"]}>
+        <div className={cls(styles, "whatsapp-message-formatter__section")}>
           <h2>Markdown Input</h2>
 
           {/* Syntax hints */}
-          <div className={styles["whatsapp-message-formatter__hints"]}>
+          <div className={cls(styles, "whatsapp-message-formatter__hints")}>
             <h3>Supported Syntax</h3>
-            <ul className={styles["whatsapp-message-formatter__hint-list"]}>
+            <ul className={cls(styles, "whatsapp-message-formatter__hint-list")}>
               {MARKDOWN_SYNTAX_HINTS.map((hint) => (
                 <li
                   key={hint.markdown}
-                  className={styles["whatsapp-message-formatter__hint-item"]}
+                  className={cls(styles, "whatsapp-message-formatter__hint-item")}
                 >
-                  <span className={styles["whatsapp-message-formatter__hint-code"]}>
+                  <span className={cls(styles, "whatsapp-message-formatter__hint-code")}>
                     {hint.markdown}
                   </span>
                   <span> → </span>
-                  <span className={styles["whatsapp-message-formatter__hint-code"]}>
+                  <span className={cls(styles, "whatsapp-message-formatter__hint-code")}>
                     {hint.whatsapp}
                   </span>
                   <span> ({hint.description})</span>
@@ -137,28 +137,28 @@ export default function WAMFormatterPage() {
 
           {/* Input textarea */}
           <label
-            className={styles["whatsapp-message-formatter__label"]}
+            className={cls(styles, "whatsapp-message-formatter__label")}
             htmlFor="markdown-input"
           >
             Paste your markdown-formatted text
           </label>
           <textarea
             id="markdown-input"
-            className={styles["whatsapp-message-formatter__textarea"]}
+            className={cls(styles, "whatsapp-message-formatter__textarea")}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={`Example:\n\n**Hello** _world_!\n\n\`code example\`\n\n~~strikethrough~~`}
           />
 
           {copyMessage && (
-            <div className={styles["whatsapp-message-formatter__status--success"]}>
+            <div className={cls(styles, "whatsapp-message-formatter__status--success")}>
               {copyMessage}
             </div>
           )}
 
-          <div className={styles["whatsapp-message-formatter__button-group"]}>
+          <div className={cls(styles, "whatsapp-message-formatter__button-group")}>
             <button
-              className={styles["whatsapp-message-formatter__button"]}
+              className={cls(styles, "whatsapp-message-formatter__button")}
               onClick={() => setInput("")}
               disabled={isEmptyInput}
               title="Clear the input text"
@@ -177,11 +177,11 @@ export default function WAMFormatterPage() {
         />
       </main>
 
-      <footer className={styles["whatsapp-message-formatter__footer"]}>
+      <footer className={cls(styles, "whatsapp-message-formatter__footer")}>
         <p>
           <small>
             Free tool by{" "}
-            <a href="/" className={styles["whatsapp-message-formatter__link"]}>
+            <a href="/" className={cls(styles, "whatsapp-message-formatter__link")}>
               topaitoolrank.com
             </a>
             . No signup required.

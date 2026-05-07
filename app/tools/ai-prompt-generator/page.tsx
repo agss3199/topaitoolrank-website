@@ -14,6 +14,7 @@ import styles from "./styles.css";
 import { TEMPLATES } from "./lib/templates";
 import { buildPrompt, validateVariables, initializeVariables } from "./lib/prompt-builder";
 import { copyToClipboard, downloadAsFile, saveTolocalStorage, loadFromlocalStorage } from "./lib/utils";
+import { cls } from "../lib/css-module-safe";
 import UseCaseSelector from "./components/UseCaseSelector";
 import VariableInput from "./components/VariableInput";
 import PromptPreview from "./components/PromptPreview";
@@ -97,23 +98,22 @@ export default function AIPromptGeneratorPage() {
 
   if (!selectedTemplate) {
     return (
-      <div className={styles["ai-prompt-generator"]}>
+      <div className={cls(styles, "ai-prompt-generator")}>
         <p>Error loading template</p>
       </div>
     );
   }
 
-  // @ts-ignore CSS Module types
   return (
-    <div className={styles["ai-prompt-generator"]}>
-      <header className={styles["ai-prompt-generator__header"]}>
+    <div className={cls(styles, "ai-prompt-generator")}>
+      <header className={cls(styles, "ai-prompt-generator__header")}>
         <h1>AI Prompt Generator for Business</h1>
         <p>Build better, more structured prompts for ChatGPT, Claude, and other AI tools</p>
       </header>
 
-      <main className={styles["ai-prompt-generator__main"]}>
+      <main className={cls(styles, "ai-prompt-generator__main")}>
         {/* Left column: Use case selector and variable inputs */}
-        <aside className={styles["ai-prompt-generator__sidebar"]}>
+        <aside className={cls(styles, "ai-prompt-generator__sidebar")}>
           <UseCaseSelector
             templates={TEMPLATES}
             selected={selectedTemplateId}
@@ -129,19 +129,19 @@ export default function AIPromptGeneratorPage() {
         </aside>
 
         {/* Right column: Prompt preview and actions */}
-        <section className={styles["ai-prompt-generator__content"]}>
+        <section className={cls(styles, "ai-prompt-generator__content")}>
           <PromptPreview prompt={prompt} isValid={validation.valid} />
 
           {validation.valid && (
-            <div className={styles["ai-prompt-generator__actions"]}>
+            <div className={cls(styles, "ai-prompt-generator__actions")}>
               <button
-                className={styles["ai-prompt-generator__button"]}
+                className={cls(styles, "ai-prompt-generator__button")}
                 onClick={handleCopyPrompt}
               >
                 📋 Copy Prompt
               </button>
               <button
-                className={styles["ai-prompt-generator__button"]}
+                className={cls(styles, "ai-prompt-generator__button")}
                 onClick={handleDownloadPrompt}
               >
                 ⬇️ Download
@@ -150,18 +150,18 @@ export default function AIPromptGeneratorPage() {
           )}
 
           {copyMessage && (
-            <div className={styles["ai-prompt-generator__copy-message"]}>
+            <div className={cls(styles, "ai-prompt-generator__copy-message")}>
               {copyMessage}
             </div>
           )}
         </section>
       </main>
 
-      <footer className={styles["ai-prompt-generator__footer"]}>
+      <footer className={cls(styles, "ai-prompt-generator__footer")}>
         <p>
           <small>
             Free tool by{" "}
-            <a href="/" className={styles["ai-prompt-generator__link"]}>
+            <a href="/" className={cls(styles, "ai-prompt-generator__link")}>
               topaitoolrank.com
             </a>
           </small>
