@@ -9,6 +9,8 @@ export const dynamicParams = false;
  */
 
 import { useState, useEffect, useMemo } from "react";
+import Header from "../lib/Header";
+import Footer from "../lib/Footer";
 import styles from "./styles.css";
 import {
   validateUTMParams,
@@ -108,13 +110,15 @@ Source: topaitoolrank.com UTM Link Builder`;
   }, [params, validation]);
 
   return (
-    <div className={cls(styles, "utm-link-builder")}>
-      <header className={cls(styles, "utm-link-builder__header")}>
-        <h1>UTM Link Builder</h1>
-        <p>Create trackable URLs with UTM parameters for better analytics</p>
-      </header>
+    <>
+      <Header />
+      <div className={cls(styles, "utm-link-builder")}>
+        <header className={cls(styles, "utm-link-builder__header")}>
+          <h1>UTM Link Builder</h1>
+          <p>Create trackable URLs with UTM parameters for better analytics</p>
+        </header>
 
-      <main className={cls(styles, "utm-link-builder__main")}>
+        <main className={cls(styles, "utm-link-builder__main")}>
         {/* Input form */}
         <section className={cls(styles, "utm-link-builder__form-section")}>
           <h2 className={cls(styles, "utm-link-builder__section-title")}>Build Your UTM Link</h2>
@@ -348,19 +352,21 @@ Source: topaitoolrank.com UTM Link Builder`;
             )}
           </>
         )}
-      </main>
 
-      <footer className={cls(styles, "utm-link-builder__footer")}>
-        <p>
-          <small>
-            Free tool by{" "}
-            <a href="/" className={cls(styles, "utm-link-builder__link")}>
-              topaitoolrank.com
-            </a>
-          </small>
-        </p>
-      </footer>
+        <footer className={cls(styles, "utm-link-builder__footer")}>
+          <p>
+            <small>
+              Free tool by{" "}
+              <a href="/" className={cls(styles, "utm-link-builder__link")}>
+                topaitoolrank.com
+              </a>
+            </small>
+          </p>
+        </footer>
+      </main>
     </div>
+    <Footer />
+    </>
   );
 }
 

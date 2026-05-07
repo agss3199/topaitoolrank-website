@@ -4,6 +4,8 @@ export const dynamic = 'force-dynamic';
 export const dynamicParams = false;
 
 import { useState, useEffect, useMemo } from "react";
+import Header from "../lib/Header";
+import Footer from "../lib/Footer";
 import styles from "./styles.css";
 import {
   calculateSubtotal,
@@ -121,13 +123,15 @@ export default function InvoiceGeneratorPage() {
   };
 
   return (
-    <div className={cls(styles, "invoice-generator")}>
-      <header className={cls(styles, "invoice-generator__header")}>
-        <h1>Invoice Generator</h1>
-        <p>Create and download professional invoices</p>
-      </header>
+    <>
+      <Header />
+      <div className={cls(styles, "invoice-generator")}>
+        <header className={cls(styles, "invoice-generator__header")}>
+          <h1>Invoice Generator</h1>
+          <p>Create and download professional invoices</p>
+        </header>
 
-      <main className={cls(styles, "invoice-generator__main")}>
+        <main className={cls(styles, "invoice-generator__main")}>
         <div className={cls(styles, "invoice-generator__container")}>
           {/* Form section */}
           <section className={cls(styles, "invoice-generator__form-section")}>
@@ -362,19 +366,21 @@ export default function InvoiceGeneratorPage() {
             </div>
           </aside>
         )}
-      </main>
 
-      <footer className={cls(styles, "invoice-generator__footer")}>
-        <p>
-          <small>
-            Free tool by{" "}
-            <a href="/" className={cls(styles, "invoice-generator__link")}>
-              topaitoolrank.com
-            </a>
-          </small>
-        </p>
-      </footer>
+        <footer className={cls(styles, "invoice-generator__footer")}>
+          <p>
+            <small>
+              Free tool by{" "}
+              <a href="/" className={cls(styles, "invoice-generator__link")}>
+                topaitoolrank.com
+              </a>
+            </small>
+          </p>
+        </footer>
+      </main>
     </div>
+    <Footer />
+    </>
   );
 }
 

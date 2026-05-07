@@ -11,6 +11,8 @@ export const dynamicParams = false;
  */
 
 import { useState, useEffect } from "react";
+import Header from "../lib/Header";
+import Footer from "../lib/Footer";
 import styles from "./styles.css";
 import { validatePhoneNumber } from "./lib/phone-validator";
 import { generateQRCode, downloadQRCode } from "./lib/qr-generator";
@@ -90,13 +92,15 @@ export default function WhatsAppLinkGeneratorPage() {
   };
 
   return (
-    <div className={cls(styles, "whatsapp-link-generator")}>
-      <header className={cls(styles, "whatsapp-link-generator__header")}>
-        <h1>WhatsApp Link Generator + QR Code</h1>
-        <p>Generate WhatsApp links and QR codes instantly</p>
-      </header>
+    <>
+      <Header />
+      <div className={cls(styles, "whatsapp-link-generator")}>
+        <header className={cls(styles, "whatsapp-link-generator__header")}>
+          <h1>WhatsApp Link Generator + QR Code</h1>
+          <p>Generate WhatsApp links and QR codes instantly</p>
+        </header>
 
-      <main className={cls(styles, "whatsapp-link-generator__main")}>
+        <main className={cls(styles, "whatsapp-link-generator__main")}>
         {/* Input section */}
         <div className={cls(styles, "whatsapp-link-generator__section")}>
           <h2>Details</h2>
@@ -195,19 +199,21 @@ export default function WhatsAppLinkGeneratorPage() {
             </div>
           </div>
         )}
-      </main>
 
-      <footer className={cls(styles, "whatsapp-link-generator__footer")}>
-        <p>
-          <small>
-            Free tool by{" "}
-            <a href="/" className={cls(styles, "whatsapp-link-generator__link")}>
-              topaitoolrank.com
-            </a>
-          </small>
-        </p>
-      </footer>
+        <footer className={cls(styles, "whatsapp-link-generator__footer")}>
+          <p>
+            <small>
+              Free tool by{" "}
+              <a href="/" className={cls(styles, "whatsapp-link-generator__link")}>
+                topaitoolrank.com
+              </a>
+            </small>
+          </p>
+        </footer>
+      </main>
     </div>
+    <Footer />
+    </>
   );
 }
 

@@ -4,6 +4,8 @@ export const dynamic = 'force-dynamic';
 export const dynamicParams = false;
 
 import { useState, useMemo } from "react";
+import Header from "../lib/Header";
+import Footer from "../lib/Footer";
 import styles from "./styles.css";
 import {
   isValidURL,
@@ -134,13 +136,15 @@ ${suggestions.map(s => `- ${s}`).join("\n")}`;
   };
 
   return (
-    <div className={cls(styles, "seo-analyzer")}>
-      <header className={cls(styles, "seo-analyzer__header")}>
-        <h1>SEO Analyzer</h1>
-        <p>Analyze any URL for SEO optimization opportunities</p>
-      </header>
+    <>
+      <Header />
+      <div className={cls(styles, "seo-analyzer")}>
+        <header className={cls(styles, "seo-analyzer__header")}>
+          <h1>SEO Analyzer</h1>
+          <p>Analyze any URL for SEO optimization opportunities</p>
+        </header>
 
-      <main className={cls(styles, "seo-analyzer__main")}>
+        <main className={cls(styles, "seo-analyzer__main")}>
         {/* Input section */}
         <section className={cls(styles, "seo-analyzer__input-section")}>
           <div className={cls(styles, "seo-analyzer__input-group")}>
@@ -301,19 +305,21 @@ ${suggestions.map(s => `- ${s}`).join("\n")}`;
             {copyMessage && <div className={cls(styles, "seo-analyzer__message")}>{copyMessage}</div>}
           </>
         )}
-      </main>
 
-      <footer className={cls(styles, "seo-analyzer__footer")}>
-        <p>
-          <small>
-            Free tool by{" "}
-            <a href="/" className={cls(styles, "seo-analyzer__link")}>
-              topaitoolrank.com
-            </a>
-          </small>
-        </p>
-      </footer>
+        <footer className={cls(styles, "seo-analyzer__footer")}>
+          <p>
+            <small>
+              Free tool by{" "}
+              <a href="/" className={cls(styles, "seo-analyzer__link")}>
+                topaitoolrank.com
+              </a>
+            </small>
+          </p>
+        </footer>
+      </main>
     </div>
+    <Footer />
+    </>
   );
 }
 

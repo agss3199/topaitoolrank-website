@@ -6,6 +6,8 @@ export const dynamicParams = false;
 import { useState, useRef, useCallback, useEffect, useMemo, lazy, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import * as XLSX from 'xlsx';
+import Header from '../lib/Header';
+import Footer from '../lib/Footer';
 import { useAuth } from '@/lib/useAuth';
 import { Button } from '@/app/components/Button';
 import { Modal } from '@/app/components/Modal';
@@ -758,12 +760,14 @@ export default function WASenderPage() {
   if (!session) return null;
 
   return (
-    <div className="wa-page">
-      {/* Background animations */}
-      <div className="wa-bg-effects">
-        <div className="wa-bg-blob wa-bg-blob--blue" />
-        <div className="wa-bg-blob wa-bg-blob--purple" />
-      </div>
+    <>
+      <Header />
+      <div className="wa-page">
+        {/* Background animations */}
+        <div className="wa-bg-effects">
+          <div className="wa-bg-blob wa-bg-blob--blue" />
+          <div className="wa-bg-blob wa-bg-blob--purple" />
+        </div>
 
       <div className="wa-container">
         {/* Header */}
@@ -1183,5 +1187,7 @@ export default function WASenderPage() {
         </Suspense>
       )}
     </div>
+    <Footer />
+    </>
   );
 }

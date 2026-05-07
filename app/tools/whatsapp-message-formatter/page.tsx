@@ -19,6 +19,8 @@ export const dynamicParams = false;
  */
 
 import { useState, useEffect } from "react";
+import Header from "../lib/Header";
+import Footer from "../lib/Footer";
 import styles from "./styles.css";
 import { markdownToWhatsApp, MARKDOWN_SYNTAX_HINTS } from "./lib/markdown-to-whatsapp";
 import { downloadAsFile, copyToClipboard, loadFromlocalStorage, saveTolocalStorage } from "./lib/utils";
@@ -102,13 +104,15 @@ export default function WAMFormatterPage() {
   const isEmptyInput = !input || input.trim().length === 0;
 
   return (
-    <div className={cls(styles, "whatsapp-message-formatter")}>
-      <header className={cls(styles, "whatsapp-message-formatter__header")}>
-        <h1>WhatsApp Message Formatter</h1>
-        <p>Convert markdown formatting to WhatsApp compatible syntax</p>
-      </header>
+    <>
+      <Header />
+      <div className={cls(styles, "whatsapp-message-formatter")}>
+        <header className={cls(styles, "whatsapp-message-formatter__header")}>
+          <h1>WhatsApp Message Formatter</h1>
+          <p>Convert markdown formatting to WhatsApp compatible syntax</p>
+        </header>
 
-      <main className={cls(styles, "whatsapp-message-formatter__main")}>
+        <main className={cls(styles, "whatsapp-message-formatter__main")}>
         {/* Input section */}
         <div className={cls(styles, "whatsapp-message-formatter__section")}>
           <h2>Markdown Input</h2>
@@ -175,20 +179,22 @@ export default function WAMFormatterPage() {
           onCopy={handleCopy}
           onDownload={handleDownload}
         />
-      </main>
 
-      <footer className={cls(styles, "whatsapp-message-formatter__footer")}>
-        <p>
-          <small>
-            Free tool by{" "}
-            <a href="/" className={cls(styles, "whatsapp-message-formatter__link")}>
-              topaitoolrank.com
-            </a>
-            . No signup required.
-          </small>
-        </p>
-      </footer>
+        <footer className={cls(styles, "whatsapp-message-formatter__footer")}>
+          <p>
+            <small>
+              Free tool by{" "}
+              <a href="/" className={cls(styles, "whatsapp-message-formatter__link")}>
+                topaitoolrank.com
+              </a>
+              . No signup required.
+            </small>
+          </p>
+        </footer>
+      </main>
     </div>
+    <Footer />
+    </>
   );
 }
 

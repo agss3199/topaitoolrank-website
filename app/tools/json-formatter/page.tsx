@@ -9,6 +9,8 @@ export const dynamicParams = false;
  */
 
 import { useState, useEffect, useMemo } from "react";
+import Header from "../lib/Header";
+import Footer from "../lib/Footer";
 import styles from "./styles.css";
 import {
   parseJSON,
@@ -105,13 +107,15 @@ export default function JSONFormatterPage() {
   };
 
   return (
-    <div className={cls(styles, "json-formatter")}>
-      <header className={cls(styles, "json-formatter__header")}>
-        <h1>JSON Formatter</h1>
-        <p>Format, validate, and transform JSON</p>
-      </header>
+    <>
+      <Header />
+      <div className={cls(styles, "json-formatter")}>
+        <header className={cls(styles, "json-formatter__header")}>
+          <h1>JSON Formatter</h1>
+          <p>Format, validate, and transform JSON</p>
+        </header>
 
-      <main className={cls(styles, "json-formatter__main")}>
+        <main className={cls(styles, "json-formatter__main")}>
         {/* Input section */}
         <section className={cls(styles, "json-formatter__section")}>
           <div className={cls(styles, "json-formatter__section-header")}>
@@ -212,19 +216,21 @@ export default function JSONFormatterPage() {
             </section>
           </>
         )}
-      </main>
 
-      <footer className={cls(styles, "json-formatter__footer")}>
-        <p>
-          <small>
-            Free tool by{" "}
-            <a href="/" className={cls(styles, "json-formatter__link")}>
-              topaitoolrank.com
-            </a>
-          </small>
-        </p>
-      </footer>
+        <footer className={cls(styles, "json-formatter__footer")}>
+          <p>
+            <small>
+              Free tool by{" "}
+              <a href="/" className={cls(styles, "json-formatter__link")}>
+                topaitoolrank.com
+              </a>
+            </small>
+          </p>
+        </footer>
+      </main>
     </div>
+    <Footer />
+    </>
   );
 }
 

@@ -4,6 +4,8 @@ export const dynamic = 'force-dynamic';
 export const dynamicParams = false;
 
 import { useState, useEffect } from "react";
+import Header from "../lib/Header";
+import Footer from "../lib/Footer";
 import styles from "./styles.css";
 import { analyzeText } from "./lib/text-analyzer";
 import { copyToClipboard, saveTolocalStorage, loadFromlocalStorage } from "./lib/utils";
@@ -35,13 +37,15 @@ export default function WordCounterPage() {
   };
 
   return (
-    <div className={cls(styles, "word-counter")}>
-      <header className={cls(styles, "word-counter__header")}>
-        <h1>Word Counter & Text Analyzer</h1>
-        <p>Real-time text statistics and analysis</p>
-      </header>
+    <>
+      <Header />
+      <div className={cls(styles, "word-counter")}>
+        <header className={cls(styles, "word-counter__header")}>
+          <h1>Word Counter & Text Analyzer</h1>
+          <p>Real-time text statistics and analysis</p>
+        </header>
 
-      <main className={cls(styles, "word-counter__main")}>
+        <main className={cls(styles, "word-counter__main")}>
         <section className={cls(styles, "word-counter__section")}>
           <label className={cls(styles, "word-counter__label")}>Paste your text</label>
           <textarea
@@ -114,19 +118,21 @@ export default function WordCounterPage() {
             </>
           )}
         </section>
-      </main>
 
-      <footer className={cls(styles, "word-counter__footer")}>
-        <p>
-          <small>
-            Free tool by{" "}
-            <a href="/" className={cls(styles, "word-counter__link")}>
-              topaitoolrank.com
-            </a>
-          </small>
-        </p>
-      </footer>
+        <footer className={cls(styles, "word-counter__footer")}>
+          <p>
+            <small>
+              Free tool by{" "}
+              <a href="/" className={cls(styles, "word-counter__link")}>
+                topaitoolrank.com
+              </a>
+            </small>
+          </p>
+        </footer>
+      </main>
     </div>
+    <Footer />
+    </>
   );
 }
 

@@ -10,6 +10,8 @@ export const dynamicParams = false;
 
 
 import { useState, useEffect, useMemo } from "react";
+import Header from "../lib/Header";
+import Footer from "../lib/Footer";
 import styles from "./styles.css";
 import { TEMPLATES } from "./lib/templates";
 import { buildPrompt, validateVariables, initializeVariables } from "./lib/prompt-builder";
@@ -105,13 +107,15 @@ export default function AIPromptGeneratorPage() {
   }
 
   return (
-    <div className={cls(styles, "ai-prompt-generator")}>
-      <header className={cls(styles, "ai-prompt-generator__header")}>
-        <h1>AI Prompt Generator for Business</h1>
-        <p>Build better, more structured prompts for ChatGPT, Claude, and other AI tools</p>
-      </header>
+    <>
+      <Header />
+      <div className={cls(styles, "ai-prompt-generator")}>
+        <header className={cls(styles, "ai-prompt-generator__header")}>
+          <h1>AI Prompt Generator for Business</h1>
+          <p>Build better, more structured prompts for ChatGPT, Claude, and other AI tools</p>
+        </header>
 
-      <main className={cls(styles, "ai-prompt-generator__main")}>
+        <main className={cls(styles, "ai-prompt-generator__main")}>
         {/* Left column: Use case selector and variable inputs */}
         <aside className={cls(styles, "ai-prompt-generator__sidebar")}>
           <UseCaseSelector
@@ -155,19 +159,21 @@ export default function AIPromptGeneratorPage() {
             </div>
           )}
         </section>
-      </main>
 
-      <footer className={cls(styles, "ai-prompt-generator__footer")}>
-        <p>
-          <small>
-            Free tool by{" "}
-            <a href="/" className={cls(styles, "ai-prompt-generator__link")}>
-              topaitoolrank.com
-            </a>
-          </small>
-        </p>
-      </footer>
+        <footer className={cls(styles, "ai-prompt-generator__footer")}>
+          <p>
+            <small>
+              Free tool by{" "}
+              <a href="/" className={cls(styles, "ai-prompt-generator__link")}>
+                topaitoolrank.com
+              </a>
+            </small>
+          </p>
+        </footer>
+      </main>
     </div>
+    <Footer />
+    </>
   );
 }
 
