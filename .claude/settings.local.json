@@ -97,7 +97,11 @@
       "Bash(chmod +x /tmp/fix-tools.sh)",
       "Bash(bash /tmp/fix-tools.sh)",
       "Bash(SKIP_TYPE_CHECK=true npm run build)",
-      "Bash(find app/tools -name \"page.tsx\" -exec sed -i '/export const revalidate = 0;/d' {} \\\\;)"
+      "Bash(find app/tools -name \"page.tsx\" -exec sed -i '/export const revalidate = 0;/d' {} \\\\;)",
+      "Bash(pkill:*)",
+      "Bash(mv workspaces/tool-pages-seo-optimization/todos/active/03-create-og-images.md workspaces/tool-pages-seo-optimization/todos/completed/)",
+      "Bash(mv workspaces/tool-pages-seo-optimization/todos/active/04-configure-metadata.md workspaces/tool-pages-seo-optimization/todos/completed/)",
+      "Bash(mkdir -p workspaces/tool-pages-seo-optimization/todos/completed)"
     ]
   }
 }

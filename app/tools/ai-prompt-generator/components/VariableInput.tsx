@@ -5,6 +5,7 @@
 
 import type { Template } from "../lib/templates";
 import styles from "../styles.css";
+import { cls } from "../../lib/css-module-safe";
 
 interface Props {
   template: Template;
@@ -24,13 +25,13 @@ export default function VariableInput({
   };
 
   return (
-    <div className={styles["ai-prompt-generator__input-container"]}>
-      <h3 className={styles["ai-prompt-generator__inputs-title"]}>Fill in the Details</h3>
+    <div className={cls(styles, "ai-prompt-generator__input-container")}>
+      <h3 className={cls(styles, "ai-prompt-generator__inputs-title")}>Fill in the Details</h3>
 
-      <div className={styles["ai-prompt-generator__form"]}>
+      <div className={cls(styles, "ai-prompt-generator__form")}>
         {template.variables.map((field) => (
-          <div key={field.name} className={styles["ai-prompt-generator__field"]}>
-            <label htmlFor={field.name} className={styles["ai-prompt-generator__field-label"]}>
+          <div key={field.name} className={cls(styles, "ai-prompt-generator__field")}>
+            <label htmlFor={field.name} className={cls(styles, "ai-prompt-generator__field-label")}>
               {field.label}
             </label>
 
@@ -40,7 +41,7 @@ export default function VariableInput({
                 value={variables[field.name] || ""}
                 onChange={(e) => handleChange(field.name, e.target.value)}
                 placeholder={field.placeholder}
-                className={styles["ai-prompt-generator__textarea"]}
+                className={cls(styles, "ai-prompt-generator__textarea")}
                 rows={3}
               />
             ) : field.type === "select" ? (
@@ -48,7 +49,7 @@ export default function VariableInput({
                 id={field.name}
                 value={variables[field.name] || ""}
                 onChange={(e) => handleChange(field.name, e.target.value)}
-                className={styles["ai-prompt-generator__select"]}
+                className={cls(styles, "ai-prompt-generator__select")}
               >
                 <option value="">Select an option...</option>
                 {field.options?.map((opt) => (
@@ -64,12 +65,12 @@ export default function VariableInput({
                 value={variables[field.name] || ""}
                 onChange={(e) => handleChange(field.name, e.target.value)}
                 placeholder={field.placeholder}
-                className={styles["ai-prompt-generator__input"]}
+                className={cls(styles, "ai-prompt-generator__input")}
               />
             )}
 
             {variables[field.name] && field.type === "textarea" && (
-              <p className={styles["ai-prompt-generator__field-hint"]}>
+              <p className={cls(styles, "ai-prompt-generator__field-hint")}>
                 {variables[field.name].length} characters
               </p>
             )}
@@ -78,11 +79,11 @@ export default function VariableInput({
       </div>
 
       {!validation.valid && (
-        <div className={styles["ai-prompt-generator__validation-errors"]}>
-          <p className={styles["ai-prompt-generator__error-title"]}>Please complete the following:</p>
-          <ul className={styles["ai-prompt-generator__error-list"]}>
+        <div className={cls(styles, "ai-prompt-generator__validation-errors")}>
+          <p className={cls(styles, "ai-prompt-generator__error-title")}>Please complete the following:</p>
+          <ul className={cls(styles, "ai-prompt-generator__error-list")}>
             {validation.errors.map((error, i) => (
-              <li key={i} className={styles["ai-prompt-generator__error-item"]}>
+              <li key={i} className={cls(styles, "ai-prompt-generator__error-item")}>
                 {error}
               </li>
             ))}
@@ -91,7 +92,7 @@ export default function VariableInput({
       )}
 
       {validation.valid && (
-        <div className={styles["ai-prompt-generator__success-message"]}>
+        <div className={cls(styles, "ai-prompt-generator__success-message")}>
           ✓ All fields complete — prompt is ready to preview
         </div>
       )}

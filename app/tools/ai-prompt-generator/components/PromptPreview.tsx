@@ -6,6 +6,7 @@
 import { useMemo } from "react";
 import { getPromptStats } from "../lib/prompt-builder";
 import styles from "../styles.css";
+import { cls } from "../../lib/css-module-safe";
 
 interface Props {
   prompt: string;
@@ -20,20 +21,20 @@ export default function PromptPreview({ prompt, isValid }: Props) {
 
   return (
     <div // @ts-ignore
-      className={styles["ai-prompt-generator__preview-container"]}>
+      className={cls(styles, "ai-prompt-generator__preview-container")}>
       <div // @ts-ignore
-      className={styles["ai-prompt-generator__preview-header"]}>
+      className={cls(styles, "ai-prompt-generator__preview-header")}>
         <h3 // @ts-ignore
-      className={styles["ai-prompt-generator__preview-title"]}>Generated Prompt</h3>
+      className={cls(styles, "ai-prompt-generator__preview-title")}>Generated Prompt</h3>
         {isValid && stats && (
           <div // @ts-ignore
-      className={styles["ai-prompt-generator__preview-stats"]}>
+      className={cls(styles, "ai-prompt-generator__preview-stats")}>
             <span // @ts-ignore
-      className={styles["ai-prompt-generator__stat-badge"]}>
+      className={cls(styles, "ai-prompt-generator__stat-badge")}>
               {stats.wordCount} words
             </span>
             <span // @ts-ignore
-      className={styles["ai-prompt-generator__stat-badge"]}>
+      className={cls(styles, "ai-prompt-generator__stat-badge")}>
               {stats.estimatedReadTime} min read
             </span>
           </div>
@@ -41,13 +42,13 @@ export default function PromptPreview({ prompt, isValid }: Props) {
       </div>
 
       <div // @ts-ignore
-      className={styles["ai-prompt-generator__preview-box"]}>
+      className={cls(styles, "ai-prompt-generator__preview-box")}>
         {isValid ? (
           <p // @ts-ignore
-      className={styles["ai-prompt-generator__preview-text"]}>{prompt}</p>
+      className={cls(styles, "ai-prompt-generator__preview-text")}>{prompt}</p>
         ) : (
           <p // @ts-ignore
-      className={styles["ai-prompt-generator__preview-placeholder"]}>
+      className={cls(styles, "ai-prompt-generator__preview-placeholder")}>
             Fill in all fields above to generate your prompt
           </p>
         )}
@@ -55,9 +56,9 @@ export default function PromptPreview({ prompt, isValid }: Props) {
 
       {isValid && (
         <div // @ts-ignore
-      className={styles["ai-prompt-generator__preview-info"]}>
+      className={cls(styles, "ai-prompt-generator__preview-info")}>
           <p // @ts-ignore
-      className={styles["ai-prompt-generator__info-text"]}>
+      className={cls(styles, "ai-prompt-generator__info-text")}>
             Ready to use this prompt! Copy it in the next step or download for later.
           </p>
         </div>

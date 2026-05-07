@@ -31,13 +31,17 @@ app/tools/[tool-name]/
 ```typescript
 "use client";
 
+export const dynamic = 'force-dynamic';
+export const dynamicParams = false;
+
 import { useState } from "react";
 import styles from "./styles.css";  // MUST import own styles
+import { cls } from "../lib/css-module-safe";  // MUST use cls() for safe access
 
 export default function ToolPage() {
   // Tool implementation
   return (
-    <div className={styles["tool-container"]}>
+    <div className={cls(styles, "tool-container")}>
       {/* UI */}
     </div>
   );
@@ -50,6 +54,8 @@ export const metadata = {
   keywords: ["keyword1", "keyword2"],
 };
 ```
+
+**Critical Note**: Always use `cls(styles, "className")` instead of `styles["className"]`. See `rules/project/css-module-safety.md` for why this matters in dynamic components.
 
 ### styles.css Template
 
@@ -88,6 +94,39 @@ export const metadata = {
 - NO imports from `app/globals.css` or shared styling
 - NO shared CSS variables — define all inline
 - Use BEM namespace: `.tool__element` not `.element`
+
+### CSS Module Safety (Critical for Dynamic Components)
+
+In Next.js with `dynamic = 'force-dynamic'`, CSS Modules can be undefined at runtime. Always use the `cls()` helper:
+
+```typescript
+// app/tools/lib/css-module-safe.ts
+export function cls(
+  styles: Record<string, string> | undefined,
+  className: string
+): string {
+  if (!styles || !className) return className || '';
+  return styles[className] || className;
+}
+
+// Usage in any component (page.tsx OR components/*)
+import { cls } from "../lib/css-module-safe";
+import styles from "./styles.css";
+
+// CORRECT
+return <div className={cls(styles, "my-tool__input")} />;
+
+// WRONG — causes "Cannot read properties of undefined" error
+return <div className={styles["my-tool__input"]} />;
+```
+
+**Why this matters**: CSS Modules fail to load in dynamic client components under certain conditions. Direct access (`styles["className"]`) throws. The `cls()` helper provides a fallback to the plain className, preventing 500 errors.
+
+**MUST verify:**
+- ✓ Every tool page imports `cls` from `"../lib/css-module-safe"`
+- ✓ Every child component also uses `cls()` (child components are common failure points)
+- ✓ Zero direct `styles["className"]` access in entire tool directory
+- ✓ See `rules/project/css-module-safety.md` for full protocol
 
 ---
 
@@ -352,7 +391,8 @@ Each tool gets organic traffic from:
 
 ---
 
-**Last Updated**: 2026-05-06  
+**Last Updated**: 2026-05-07  
 **Tools Live**: 9 (WhatsApp Message Formatter, Word Counter, JSON Formatter, Email Subject Tester, AI Prompt Generator, UTM Link Builder, Invoice Generator, SEO Analyzer, WhatsApp Link Generator)  
 **Test Coverage**: 8/9 tools (89%)  
+**CSS Module Safety**: ✓ All 9 tools + 3 child components use `cls()` helper  
 

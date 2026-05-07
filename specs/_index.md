@@ -25,6 +25,17 @@ This directory contains the authority specifications for all domain areas of top
 |------|--------|---------|
 | [`micro-saas-tools.md`](micro-saas-tools.md) | Standalone Tools | 10 isolated utility tools for organic traffic, zero shared resources, Wave 1/2/3 build plan |
 
+## Track D: Tool Pages SEO Optimization (Phase 4)
+
+| File | Domain | Purpose |
+|------|--------|---------|
+| [`tool-pages-header-footer.md`](tool-pages-header-footer.md) | UI/Navigation | Shared header and footer components, navigation structure, responsive design, cross-tool linking |
+| [`tool-pages-content-articles.md`](tool-pages-content-articles.md) | Content/SEO | 2000-word article structure, quality standards, article placement, keyword strategy, human-writing guidelines |
+| [`tool-pages-seo-metadata.md`](tool-pages-seo-metadata.md) | SEO | Per-tool metadata (titles, descriptions, Open Graph), structured data, mobile optimization |
+| [`tool-pages-sitemap.md`](tool-pages-sitemap.md) | SEO Infrastructure | Sitemap completeness, tool page URLs, priority tiers, update frequency |
+| [`tool-pages-google-analytics.md`](tool-pages-google-analytics.md) | Tracking/Analytics | GA4 implementation, event tracking, page view tracking, test coordination |
+| [`tool-pages-cross-linking.md`](tool-pages-cross-linking.md) | SEO/UX | Internal linking strategy, blog-to-tool links, tool-to-tool links, natural language constraints |
+
 ## Core Infrastructure
 
 | File | Domain | Purpose |

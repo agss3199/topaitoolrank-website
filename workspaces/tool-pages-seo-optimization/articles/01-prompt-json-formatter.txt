@@ -1,0 +1,36 @@
+# Prompt 01: JSON Formatter Article
+
+Copy this entire prompt and paste into ChatGPT. Make sure to include the master prompt context above first.
+
+---
+
+Write a 2000+ word professional article about JSON Formatter for a free tools website. The article will appear on a tool page below the interactive JSON Formatter tool.
+
+**Tool Name**: JSON Formatter
+**Primary Keyword**: "JSON formatter"
+**Secondary Keywords**: "JSON beautifier", "JSON validator", "JSON minify", "JSON formatting tool"
+**Target Audience**: Developers, API integrators, anyone working with JSON data
+
+**Article Structure** (follow the master prompt):
+1. Introduction (200 words) — Hook: Working with messy JSON is frustrating. Show a real problem (copied JSON is hard to read, errors are hard to spot).
+2. How to Use (500 words) — Step-by-step walkthrough with real JSON example. Show input (messy), output (formatted), and explain why formatting matters.
+3. Features & Benefits (400 words) — Describe: beautification, validation, minification. Who benefits: backend developers, API testers, data engineers. Why better than manual formatting.
+4. Examples & Use Cases (500 words) — 3-4 scenarios: debugging API responses, formatting config files, preparing data for databases. Show concrete workflows.
+5. Tips & Best Practices (300 words) — Pro tips: validate early, use minify for production, combine with editor tools. Common mistakes: assuming copied JSON is valid.
+6. FAQs (100 words) — Q: Is my data private? Q: Can I use this offline? Q: What if my JSON is invalid?
+
+**Key Points**:
+- Keep tone conversational and authentic (like experienced developer giving advice)
+- Use real JSON examples (not "your JSON here")
+- Mention that the tool is free, no sign-up required
+- Naturally incorporate keywords (not stuffed)
+- Include practical benefits (faster debugging, cleaner code, etc.)
+- End with clear CTA (try the formatter above, follow the step-by-step guide)
+
+**Do NOT include**:
+- Flowery marketing language
+- Generic phrases like "In this article we will..."
+- Competitor comparisons
+- Any indication this is AI-written
+
+Start writing the article now.

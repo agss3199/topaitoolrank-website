@@ -1,0 +1,229 @@
+# Prompts 02-09: Tool-Specific Articles
+
+Use the master prompt context from 00-MASTER-PROMPT.md for all of these. Each prompt follows the same 2000-word structure.
+
+---
+
+## Prompt 02: Word Counter Article
+
+Write a 2000+ word article about Word Counter for a free tools website.
+
+**Tool Name**: Word Counter
+**Primary Keyword**: "word counter"
+**Secondary Keywords**: "character count", "word count tool", "text counter"
+**Target Audience**: Writers, students, content creators, marketers, translators
+
+**Unique Angle**: Help readers understand how word/character count matters for different platforms (essays, social media, emails, billing).
+
+**Hook**: "That email campaign text is 500 words? Or 150? You have no idea. Without a quick way to count, you're guessing."
+
+**Key Use Cases**:
+1. Academic student hitting essay word limits (5000-word requirement)
+2. Content marketer checking blog post length for SEO (1500-2000 words optimal)
+3. Translator billing by word count (need exact counts for invoices)
+4. Social media manager checking character limits across platforms
+
+**Tips Section**: Emphasize how word count affects Google SEO (200+ words minimal), email preview lengths, and platform-specific limits.
+
+Follow structure from master prompt. Start writing now.
+
+---
+
+## Prompt 03: Email Subject Tester Article
+
+Write a 2000+ word article about Email Subject Tester for a free tools website.
+
+**Tool Name**: Email Subject Tester
+**Primary Keyword**: "email subject tester"
+**Secondary Keywords**: "email preview", "spam word checker", "subject line optimizer"
+**Target Audience**: Email marketers, campaign managers, business owners
+
+**Unique Angle**: Subject lines are critical for open rates. Show how testing across email clients prevents cutoff and spam filters.
+
+**Hook**: "You spend 30 minutes crafting the perfect subject line. Hit send. 10% open rate. What went wrong?"
+
+**Key Use Cases**:
+1. Email marketer testing subject line across Gmail, Outlook, Apple Mail
+2. E-commerce brand preventing subject cutoff on mobile (30-50 chars visible)
+3. Newsletter creator detecting spam words that trigger filters
+4. Small business optimizing subject lines for better engagement
+
+**Features Section**: Explain the 20+ email client preview, spam word detection (ALL CAPS, too many $$$, etc.), character count and preview width.
+
+**Tips**: Test before sending campaigns, avoid ALL CAPS, check mobile preview (most emails opened on phone), A/B test subject lines with open rate data.
+
+Follow structure from master prompt. Start writing now.
+
+---
+
+## Prompt 04: AI Prompt Generator Article
+
+Write a 2000+ word article about AI Prompt Generator for a free tools website.
+
+**Tool Name**: AI Prompt Generator
+**Primary Keyword**: "AI prompt generator"
+**Secondary Keywords**: "ChatGPT prompts", "prompt engineering", "AI prompts"
+**Target Audience**: AI users, content creators, students, professionals, writers
+
+**Unique Angle**: Better prompts = better AI output. Show how structure, examples, and clear instructions improve results.
+
+**Hook**: "You ask ChatGPT a question. The answer is mediocre. You're not using the power of good prompts."
+
+**Key Use Cases**:
+1. Content creator generating blog outlines (give AI structure for better output)
+2. Student using AI to brainstorm essay ideas (provide context for better suggestions)
+3. Professional writing emails, reports (add tone and format instructions for professional output)
+4. Marketer creating ad copy (specify audience, tone, length for better results)
+
+**Features Section**: Explain what makes a good prompt (specific, includes examples, clear desired output), how the generator structures prompts, how to customize for your needs.
+
+**Tips**: Be specific (not "write a blog post" but "write 1500-word blog post about X for Y audience"), include examples of desired format, provide context (who is the audience?), iterate on prompts (AI improves with refinement).
+
+**FAQ**: Q: Can I use these prompts with other AI tools? A: Yes, these structured prompts work with ChatGPT, Claude, GPT-4, etc.
+
+Follow structure from master prompt. Start writing now.
+
+---
+
+## Prompt 05: UTM Link Builder Article
+
+Write a 2000+ word article about UTM Link Builder for a free tools website.
+
+**Tool Name**: UTM Link Builder
+**Primary Keyword**: "UTM link builder"
+**Secondary Keywords**: "UTM parameters", "campaign tracking", "Google Analytics tracking"
+**Target Audience**: Digital marketers, social media managers, campaign specialists, analytics professionals
+
+**Unique Angle**: Track where your traffic comes from. UTM parameters are the key to understanding which campaigns work.
+
+**Hook**: "You run a paid campaign, a social post, and an email campaign all pointing to the same landing page. In Google Analytics, they all show as 'direct traffic'. You have no idea which one actually converts."
+
+**Key Use Cases**:
+1. Digital marketer tracking multiple social media campaigns (Facebook, Instagram, Twitter, each gets unique UTM)
+2. Email campaign manager measuring which emails drive sales (each email variant gets unique UTM)
+3. Affiliate marketer tracking referral traffic (partner links get unique UTM source)
+4. Content marketer tracking blog promotion across channels (organic search vs paid search vs social)
+
+**Features Section**: Explain UTM parameters (source, medium, campaign, content, term), why they matter for analytics, how they appear in GA4 reports, how they prevent data loss from "direct traffic".
+
+**Tips**: Use consistent naming (utm_source=facebook not utm_source=fb), test links before sending campaigns, use descriptive campaign names, combine with GA4 conversion tracking for best insights.
+
+**FAQ**: Q: Do UTMs affect link quality or SEO? A: No, UTMs are just query parameters that help with analytics.
+
+Follow structure from master prompt. Start writing now.
+
+---
+
+## Prompt 06: Invoice Generator Article
+
+Write a 2000+ word article about Invoice Generator for a free tools website.
+
+**Tool Name**: Invoice Generator
+**Primary Keyword**: "invoice generator"
+**Secondary Keywords**: "invoice template", "freelance invoicing", "professional invoice"
+**Target Audience**: Freelancers, small business owners, contractors, consultants
+
+**Unique Angle**: Professional invoices get paid faster. Creating them shouldn't take 30 minutes.
+
+**Hook**: "You just finished a project for a client. Now you need to create an invoice. Excel? Templates? 30 minutes later you have something that looks... unprofessional."
+
+**Key Use Cases**:
+1. Freelance writer invoicing clients monthly (needs professional look for credibility)
+2. Consultant invoicing multiple clients (needs efficient workflow, custom rates)
+3. Service provider (designer, developer, coach) creating invoices for each project
+4. Small business owner issuing receipts for cash payments
+
+**Features Section**: Explain what you can customize (client info, line items, taxes, payment terms, branding), why professionalism matters (faster payments, credibility, tax documentation), how it compares to manual invoicing.
+
+**Tips**: Include payment terms (Net 15, Net 30) for clarity, invoice promptly after project completion (increases payment speed), keep copies for tax records, use sequential invoice numbers, include itemized details (what were you paid for?).
+
+**FAQ**: Q: Can I send invoices directly from the tool? A: The tool generates PDF or prints, then you send via email. Q: Is this accepted for tax purposes? A: Yes, printed invoices are valid business records.
+
+Follow structure from master prompt. Start writing now.
+
+---
+
+## Prompt 07: SEO Analyzer Article
+
+Write a 2000+ word article about SEO Analyzer for a free tools website.
+
+**Tool Name**: SEO Analyzer
+**Primary Keyword**: "SEO analyzer"
+**Secondary Keywords**: "SEO checker", "on-page SEO", "SEO scoring"
+**Target Audience**: Content creators, digital marketers, small business owners, bloggers
+
+**Unique Angle**: Improve your Google ranking by fixing on-page SEO issues. Get a score and actionable recommendations.
+
+**Hook**: "Your blog post isn't ranking on Google. You have no idea why. Maybe your title is too long? Maybe you're missing keywords?"
+
+**Key Use Cases**:
+1. Blogger checking on-page SEO before publishing (want to rank for target keywords)
+2. Content marketer optimizing existing blog posts (why aren't these ranking?)
+3. Small business owner checking website pages (want to be found on Google)
+4. Marketing agency auditing client sites (need a framework for recommendations)
+
+**Features Section**: Explain what SEO Analyzer checks (title length, keyword usage, meta description, headings structure, readability, mobile-friendliness, page speed hints), how SEO scores help prioritize fixes, which factors matter most for Google ranking.
+
+**Tips**: Target keywords shouldn't be forced (natural language matters), headlines should be descriptive (include keyword when possible), keep title 50-60 chars for full display in search results, meta description 150-160 chars, internal links help Google understand site structure.
+
+**FAQ**: Q: What's a good SEO score? A: Aim for 75+, but don't obsess over the number—focus on the specific recommendations. Q: Will fixing SEO guarantee top rankings? A: Good on-page SEO helps, but also need quality content and backlinks.
+
+Follow structure from master prompt. Start writing now.
+
+---
+
+## Prompt 08: WhatsApp Link Generator Article
+
+Write a 2000+ word article about WhatsApp Link Generator for a free tools website.
+
+**Tool Name**: WhatsApp Link Generator
+**Primary Keyword**: "WhatsApp link generator"
+**Secondary Keywords**: "WhatsApp link", "WhatsApp chat link", "WhatsApp QR code"
+**Target Audience**: Business owners, marketers, customer service teams, small businesses
+
+**Unique Angle**: Turn your WhatsApp into a customer communication channel. Make it easy for customers to message you.
+
+**Hook**: "Your website has a 'contact us' form. How many people actually submit it? What if you gave them a 'chat on WhatsApp' button instead?"
+
+**Key Use Cases**:
+1. E-commerce business adding WhatsApp chat to website (customer support via WhatsApp)
+2. Real estate agent sharing WhatsApp link in listings (prospects can ask questions instantly)
+3. Services business (salon, repair shop) taking bookings via WhatsApp
+4. Marketer running campaigns with WhatsApp link (drive qualified conversations)
+
+**Features Section**: Explain how WhatsApp links work (clicking opens chat with your number), no phone number display (privacy), pre-filled messages (optional), ease of setup compared to chatbots, mobile-first (most people have WhatsApp).
+
+**Tips**: Use pre-filled message to set context ("Hi, I'm interested in your services..."), add WhatsApp link prominently on website, use in ads and email signatures, WhatsApp groups for team notifications (when customer reaches out), respond quickly (people expect WhatsApp = instant).
+
+**FAQ**: Q: Do I need WhatsApp Business account? A: Regular WhatsApp works, but Business account adds features like auto-replies. Q: Will my phone number be public? A: No, links don't expose your number, only your name shows in the chat.
+
+Follow structure from master prompt. Start writing now.
+
+---
+
+## Prompt 09: WhatsApp Message Formatter Article
+
+Write a 2000+ word article about WhatsApp Message Formatter for a free tools website.
+
+**Tool Name**: WhatsApp Message Formatter
+**Primary Keyword**: "WhatsApp formatter"
+**Secondary Keywords**: "WhatsApp text formatting", "WhatsApp bold", "WhatsApp italic", "WhatsApp strikethrough"
+**Target Audience**: WhatsApp users (personal and business), marketers, customer service teams
+
+**Unique Angle**: Make your WhatsApp messages stand out. Formatting helps your important messages get noticed.
+
+**Hook**: "Your WhatsApp message blends in with everyone else's. The recipient scrolls past without reading."
+
+**Key Use Cases**:
+1. Personal user emphasizing important parts of messages (**bold** for key points, *italic* for emphasis)
+2. Small business formatting customer messages (make order confirmations stand out)
+3. Customer service agent formatting help articles shared via WhatsApp
+4. Marketer creating formatted product descriptions for WhatsApp channels
+
+**Features Section**: Explain formatting options (bold, italic, strikethrough, monospace), when to use each (bold for emphasis, italic for asides, strikethrough for corrections, monospace for code/commands), how formatting improves readability and engagement.
+
+**Tips**: Don't over-format (excessive formatting looks unprofessional), use bold sparingly (only for most important info), strikethrough for corrections looks more professional than deleting and retyping, monospace useful for product codes or commands, emojis + formatting = engaging messages.
+
+**FAQ**: Q: Does the recipient need special apps to see formatting? A: No, standard WhatsApp shows all formatting. Q: Can I format links? A: Yes, you can make links bold or italic.
+
+Follow structure from master prompt. Start writing now.
