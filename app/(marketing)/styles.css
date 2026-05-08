@@ -408,6 +408,7 @@
 
 .marketing-context .core-ring {
   border: 1px solid rgba(37, 99, 235, 0.18);
+  transform-origin: center;
 }
 
 .marketing-context .ring-one {
