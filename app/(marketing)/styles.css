@@ -1180,16 +1180,19 @@
   .marketing-context .ring-one {
     width: 220px;
     height: 220px;
+    animation: rotateRing 16s linear infinite;
   }
 
   .marketing-context .ring-two {
     width: 160px;
     height: 160px;
+    animation: rotateRingReverse 13s linear infinite;
   }
 
   .marketing-context .ring-three {
     width: 105px;
     height: 105px;
+    animation: rotateRing 10s linear infinite;
   }
 }
 
