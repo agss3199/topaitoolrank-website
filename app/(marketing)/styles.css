@@ -199,7 +199,7 @@
 .marketing-context .hero {
   position: relative;
   min-height: 100vh;
-  padding: 150px 0 90px;
+  padding: 230px 0 90px;
   display: flex;
   align-items: center;
   overflow-x: hidden;
@@ -1008,6 +1008,24 @@
 .marketing-context .btn-primary:active,
 .marketing-context .btn-secondary:active {
   transform: scale(0.97);
+}
+
+/* --- Desktop (1024px+) — Ensure Animations Visible --- */
+
+@media (min-width: 1024px) {
+  .marketing-context .ring-one,
+  .marketing-context .ring-two,
+  .marketing-context .ring-three {
+    animation: rotateRing 16s linear infinite;
+  }
+
+  .marketing-context .ring-two {
+    animation: rotateRingReverse 13s linear infinite;
+  }
+
+  .marketing-context .ring-three {
+    animation: rotateRing 10s linear infinite;
+  }
 }
 
 /* --- Responsive --- */
