@@ -1,8 +1,46 @@
-# Project Skills — WA Sender Deployment Knowledge
+# Project Skills — Micro-SaaS & Tool Pages
 
-This directory contains project-specific skills documenting patterns, anti-patterns, and solutions discovered during WA Sender development and validation.
+This directory contains project-specific skills documenting patterns, anti-patterns, and solutions discovered during micro-SaaS tool development, WA Sender deployment, and site-wide modernization.
 
 ## Available Skills
+
+### Component Consolidation Pattern (NEW — May 2026)
+**File**: `component-consolidation/SKILL.md`  
+**Topics**:
+- Extract duplicate components into shared location
+- Unify imports across 3+ pages using path aliases
+- Delete old implementations and verify no orphaned code
+- CSS Module scoping for component isolation
+- Red team checklist for consolidation
+
+**Use this skill when**:
+- Consolidating duplicate Header, Footer, Layout, or Navigation components
+- Reducing code duplication across tool pages
+- Establishing single source of truth for site-wide components
+- Verifying imports are consistent and consolidated
+
+**Example**: Consolidated Header.tsx (11 pages) and removed 2,400 LOC of duplicate code
+
+---
+
+### Link Hygiene Pattern (NEW — May 2026)
+**File**: `link-hygiene/SKILL.md`  
+**Topics**:
+- Remove broken placeholder links (`href="#"`, `/missing`, hardcoded domains)
+- Verify all footer/navigation links resolve correctly
+- Use Next.js `<Link>` for internal routes, `<a>` for external
+- Anchor link patterns (`#home`, `#tools`, `#contact`)
+- Sitemap implications of broken links
+
+**Use this skill when**:
+- Reviewing footer and navigation for broken links
+- Deciding whether to implement or remove placeholder pages
+- Fixing 404 errors from non-existent routes
+- Cleaning up UI before deployment
+
+**Example**: Removed `/tools` link (404), removed `#documentation` (placeholder)
+
+---
 
 ### WA Sender Deployment & Session Persistence
 **File**: `wa-sender-deployment.md`  
@@ -71,4 +109,5 @@ Skills should be updated when:
 ---
 
 **Created**: 2026-05-06  
-**Last Updated**: 2026-05-06 16:00 UTC
+**Last Updated**: 2026-05-08 11:30 UTC  
+**Skills**: 3 (Component Consolidation, Link Hygiene, WA Sender Deployment)
