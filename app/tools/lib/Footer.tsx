@@ -35,9 +35,6 @@ export default function Footer() {
             {tool.name}
           </Link>
         ))}
-        <Link href="/tools" className={styles.toolFooterLink}>
-          View all tools
-        </Link>
       </div>
 
       {/* Resources Column */}
@@ -46,12 +43,6 @@ export default function Footer() {
         <Link href="/blogs" className={styles.toolFooterLink}>
           Blog
         </Link>
-        <a href="#" className={styles.toolFooterLink}>
-          Documentation
-        </a>
-        <a href="#" className={styles.toolFooterLink}>
-          API Docs
-        </a>
       </div>
 
       {/* Legal Column */}
