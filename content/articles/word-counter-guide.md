@@ -77,7 +77,7 @@ Sentiment analysis tells you whether your writing leans positive, negative, or n
 
 Writing style analysis flags common problems like passive voice overuse, adverb overuse, or overly complex sentence structures. Not all of these are problems in every context. Academic writing sometimes requires passive voice. Creative writing might benefit from abundant adverbs. But awareness of these patterns helps you make intentional choices rather than defaulting to habitual patterns.
 
-Integration with other tools makes word counters more valuable. If you use our [Email Subject Tester](/tools/email-subject-tester) for testing email campaign subject lines, you can combine that with word count data about your email body content to optimize the entire email package. Understanding what works based on metrics helps you refine your approach continuously.
+Integration with other tools makes word counters more valuable. If you use our [JSON Formatter](/tools/json-formatter) for handling structured data, word count metrics help you understand payload sizes and optimize data transfer efficiency. Understanding what works based on metrics helps you refine your approach continuously.
 
 ## Making Word Count Work for You
 

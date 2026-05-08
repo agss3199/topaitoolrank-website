@@ -39,6 +39,7 @@ export default function UTMLinkBuilderPage() {
   const [generatedURL, setGeneratedURL] = useState("");
   const [articleContent, setArticleContent] = useState<string>("");
   const [articleLoading, setArticleLoading] = useState(true);
+  const [articleError, setArticleError] = useState<string>("");
   const [copyMessage, setCopyMessage] = useState("");
 
   // Load from localStorage on mount
@@ -119,9 +120,15 @@ Source: topaitoolrank.com UTM Link Builder`;
         if (res.ok) {
           const data = await res.json();
           setArticleContent(data.content || '');
+          setArticleError('');
+        } else {
+          setArticleError('Failed to load article: ' + (res.statusText || 'Unknown error'));
+          setArticleContent('');
         }
       } catch (error) {
         console.error('Failed to load article:', error);
+        setArticleError('Unable to load article. Please refresh the page.');
+        setArticleContent('');
       } finally {
         setArticleLoading(false);
       }
@@ -386,6 +393,11 @@ Source: topaitoolrank.com UTM Link Builder`;
       </main>
     </div>
     {/* Article Section */}
+      {articleError && (
+        <div className={cls(styles, "utm-link-builder__article-error")}>
+          <p>{articleError}</p>
+        </div>
+      )}
       {!articleLoading && articleContent && (
         <div className={cls(styles, "utm-link-builder__article-container")}>
           <ArticleSection content={articleContent} />

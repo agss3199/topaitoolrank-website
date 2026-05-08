@@ -71,7 +71,7 @@ If you're working with APIs regularly, consider using a tool that combines forma
 
 When working in a team, establish a standard for how JSON should be formatted in your project. This might be a specific indentation level, a particular way of ordering keys, or specific naming conventions. Document this standard so everyone follows it consistently. This prevents merge conflicts and makes code reviews more productive since everyone's formatting looks the same.
 
-The next time you're working with JSON and it looks like an incomprehensible mess, take a moment to format it properly. You'll be amazed at how much clearer everything becomes. And when you're measuring the size of your JSON output to optimize your data transmission, our [Word Counter](/tools/word-counter) tool can help you understand exactly how much data you're working with and where optimization opportunities might exist. For APIs that generate large JSON responses, we also recommend using our [Email Subject Tester](/tools/email-subject-tester) if you're testing API metadata or response formatting across different systems.
+The next time you're working with JSON and it looks like an incomprehensible mess, take a moment to format it properly. You'll be amazed at how much clearer everything becomes. And when you're measuring the size of your JSON output to optimize your data transmission, our [Word Counter](/tools/word-counter) tool can help you understand exactly how much data you're working with and where optimization opportunities might exist. If you're building APIs or web services that return JSON, our [UTM Link Builder](/tools/utm-link-builder) helps you track how your API-driven links perform across marketing channels.
 
 ## JSON Formatting Tools and Workflows
 

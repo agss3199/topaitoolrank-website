@@ -32,6 +32,7 @@ export default function JSONFormatterPage() {
   const [outputMode, setOutputMode] = useState<"formatted" | "minified" | "sorted">("formatted");
   const [articleContent, setArticleContent] = useState<string>("");
   const [articleLoading, setArticleLoading] = useState(true);
+  const [articleError, setArticleError] = useState<string>("");
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -47,9 +48,15 @@ export default function JSONFormatterPage() {
         if (res.ok) {
           const data = await res.json();
           setArticleContent(data.content || '');
+          setArticleError('');
+        } else {
+          setArticleError('Failed to load article: ' + (res.statusText || 'Unknown error'));
+          setArticleContent('');
         }
       } catch (error) {
         console.error('Failed to load article:', error);
+        setArticleError('Unable to load article. Please refresh the page.');
+        setArticleContent('');
       } finally {
         setArticleLoading(false);
       }
@@ -251,6 +258,11 @@ export default function JSONFormatterPage() {
       </main>
 
       {/* Article Section */}
+      {articleError && (
+        <div className={cls(styles, "json-formatter__article-error")}>
+          <p>{articleError}</p>
+        </div>
+      )}
       {!articleLoading && articleContent && (
         <div className={cls(styles, "json-formatter__article-container")}>
           <ArticleSection content={articleContent} />
