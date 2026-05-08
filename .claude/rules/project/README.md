@@ -47,6 +47,28 @@ This directory contains project-specific rules enforcing mandatory patterns, con
 
 ---
 
+### Responsive Animation Safety
+**File**: `responsive-animation-safety.md`  
+**Applies to**:
+- `app/**/*.css` — all CSS files
+- `**/*.module.css` — CSS modules with animations
+
+**Mandatory Checks**:
+1. Media query overrides that change dimensions must re-declare animation properties
+2. Animation properties explicitly stated in both base and media query rules
+3. CSS variables used for reused animations (single source of truth)
+4. Animations verified visually at all breakpoints (mobile, tablet, desktop)
+
+**Enforcement**: This rule blocks commits if:
+- Media query overrides dimensions without re-declaring animations (silent failure)
+- Animation properties are omitted from media query rules
+- Animation durations differ across breakpoints without documentation
+- Animations tested at only one breakpoint
+
+**Origin**: 2026-05-08 — Homepage neural core rings silently stopped animating on desktop when media query changed dimensions without preserving animation properties. Fixed in commit 17ca20f.
+
+---
+
 ## Rule Structure
 
 Each project rule should specify:
@@ -99,5 +121,5 @@ Do NOT create rules for one-time workarounds. Rules should outlive the incident 
 ---
 
 **Created**: 2026-05-06  
-**Last Updated**: 2026-05-07 16:45 UTC  
-**Rules**: 4 (CSS Module Safety, Session Debounce Safety, Debounce Server Calls, Payload Size Guard)
+**Last Updated**: 2026-05-08 03:55 UTC  
+**Rules**: 5 (CSS Module Safety, Session Debounce Safety, Debounce Server Calls, Payload Size Guard, Responsive Animation Safety)

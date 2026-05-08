@@ -42,6 +42,27 @@ This directory contains project-specific skills documenting patterns, anti-patte
 
 ---
 
+### Responsive Animation Safety (NEW — May 2026)
+**File**: `responsive-animation-safety/SKILL.md`  
+**Topics**:
+- Prevent silent animation loss in media query overrides
+- CSS cascade and property override patterns
+- Explicit animation re-declaration in responsive CSS
+- CSS variables for DRY animation properties
+- Detection and prevention strategies
+- Testing animations across all breakpoints
+
+**Use this skill when**:
+- Building responsive components with animations
+- Debugging animations that work on mobile but not desktop
+- Reviewing media query CSS for animation properties
+- Preventing silent failures in responsive design
+- Setting up animation coverage checks in CI
+
+**Example**: Fixed neural core rings — animations were silently removed on desktop when media query resized them (commit 17ca20f)
+
+---
+
 ### WA Sender Deployment & Session Persistence
 **File**: `wa-sender-deployment.md`  
 **Topics**:
@@ -109,5 +130,5 @@ Skills should be updated when:
 ---
 
 **Created**: 2026-05-06  
-**Last Updated**: 2026-05-08 11:30 UTC  
-**Skills**: 3 (Component Consolidation, Link Hygiene, WA Sender Deployment)
+**Last Updated**: 2026-05-08 03:50 UTC  
+**Skills**: 4 (Component Consolidation, Link Hygiene, WA Sender Deployment, Responsive Animation Safety)
