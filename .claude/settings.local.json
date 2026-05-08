@@ -121,7 +121,8 @@
       "Bash(xargs -I {} sh -c 'echo \"=== {} ===\" && ls -lt {} | head -3')",
       "Bash(find \"C:\\\\Users\\\\MONICA\\\\Desktop\\\\Abhishek_Softwares_All_old\\\\Top_AI_Tool_Rank\\\\content\\\\articles\" -name \"*.md\" -exec grep -l \"^$\" {} \\\\;)",
       "Bash(cat next.config.*)",
-      "Bash(npx eslint:*)"
+      "Bash(npx eslint:*)",
+      "Bash(awk '{print $NF, $6, $7, $8}')"
     ]
   }
 }

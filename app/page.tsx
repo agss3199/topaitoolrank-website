@@ -1,34 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import "./(marketing)/styles.css";
+import Header from "@/app/components/Header";
 
 export default function HomePage() {
-  const hamburgerRef = useRef<HTMLButtonElement>(null);
-  const navMenuRef = useRef<HTMLUListElement>(null);
-
   useEffect(() => {
-    // Hamburger menu toggle
-    const hamburger = hamburgerRef.current;
-    const navMenu = navMenuRef.current;
-
-    if (hamburger && navMenu) {
-      hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("active");
-        navMenu.classList.toggle("active");
-        const isExpanded = hamburger.classList.contains("active");
-        hamburger.setAttribute("aria-expanded", String(isExpanded));
-        hamburger.setAttribute("aria-label", isExpanded ? "Close menu" : "Open menu");
-      });
-
-      document.querySelectorAll(".nav-link").forEach((link) => {
-        link.addEventListener("click", () => {
-          hamburger.classList.remove("active");
-          navMenu.classList.remove("active");
-        });
-      });
-    }
-
     // Reveal scroll animations
     const revealItems = document.querySelectorAll(".reveal");
     const revealObserver = new IntersectionObserver(
@@ -47,109 +24,7 @@ export default function HomePage() {
 
   return (
     <div className="marketing-context">
-      <nav className="navbar" aria-label="Main navigation">
-        <div className="container nav-container">
-          <div className="logo">
-            <a href="#home">Top AI Tool Rank</a>
-          </div>
-
-          <ul className="nav-menu" id="navMenu" ref={navMenuRef}>
-            <li>
-              <a href="#home" className="nav-link">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#services" className="nav-link">
-                Services
-              </a>
-            </li>
-
-            <li className="nav-item-dropdown">
-              <a href="#tools" className="nav-link">
-                Tools
-              </a>
-              <ul className="dropdown">
-                <li>
-                  <a href="/tools/whatsapp-message-formatter" rel="noopener">
-                    WhatsApp Message Formatter
-                  </a>
-                </li>
-                <li>
-                  <a href="/tools/whatsapp-link-generator" rel="noopener">
-                    WhatsApp Link Generator
-                  </a>
-                </li>
-                <li>
-                  <a href="/tools/word-counter" rel="noopener">
-                    Word Counter
-                  </a>
-                </li>
-                <li>
-                  <a href="/tools/ai-prompt-generator" rel="noopener">
-                    AI Prompt Generator
-                  </a>
-                </li>
-                <li>
-                  <a href="/tools/email-subject-tester" rel="noopener">
-                    Email Subject Tester
-                  </a>
-                </li>
-                <li>
-                  <a href="/tools/utm-link-builder" rel="noopener">
-                    UTM Link Builder
-                  </a>
-                </li>
-                <li>
-                  <a href="/tools/json-formatter" rel="noopener">
-                    JSON Formatter
-                  </a>
-                </li>
-                <li>
-                  <a href="/tools/invoice-generator" rel="noopener">
-                    Invoice Generator
-                  </a>
-                </li>
-                <li>
-                  <a href="/tools/seo-analyzer" rel="noopener">
-                    SEO Analyzer
-                  </a>
-                </li>
-                <li>
-                  <a href="/tools/wa-sender" rel="noopener">
-                    WA Sender
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <a href="/blogs/" className="nav-link">
-                Blogs
-              </a>
-            </li>
-            <li>
-              <a href="#contact" className="nav-link nav-pill">
-                Contact
-              </a>
-            </li>
-          </ul>
-
-          <button
-            type="button"
-            className="hamburger"
-            id="hamburger"
-            ref={hamburgerRef}
-            aria-label="Open menu"
-            aria-expanded="false"
-            aria-controls="navMenu"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-        </div>
-      </nav>
+      <Header />
 
       <main id="main">
         <section id="home" className="hero">

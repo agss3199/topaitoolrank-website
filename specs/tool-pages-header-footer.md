@@ -76,11 +76,14 @@ Shared header and footer components for all 9 micro-SaaS tool pages (excluding W
 
 ### Implementation Details
 
-- **Location**: Create `app/tools/lib/Header.tsx` as shared React component
-- **Import path**: All tool pages import from `../lib/Header`
-- **CSS Module**: Single `Header.module.css` shared across all tools
-- **No client isolation**: Header is intentionally shared (exception to tool isolation pattern)
+- **Location**: Create `app/components/Header.tsx` as shared React component
+- **Import path**: All pages (homepage and tool pages) import from `@/app/components/Header`
+- **CSS Module**: Single `Header.module.css` shared across all pages
+- **Shared across site**: Header is intentionally universal UI (not tool-specific)
 - **Accessibility**: ARIA labels on navigation, keyboard navigation support
+
+**Architecture Rationale** (updated 2026-05-08):
+Headers are site-wide UI components, not tool-specific infrastructure. Shared UI belongs in `app/components/` per Next.js conventions. The original spec placed headers in `app/tools/lib/` when headers were tool-only. This update reflects the new unified header used on both homepage and all tool pages. All pages import from the canonical `app/components/Header` location.
 
 ## Footer Component
 

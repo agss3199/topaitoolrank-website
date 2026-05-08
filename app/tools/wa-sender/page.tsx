@@ -6,7 +6,7 @@ export const dynamicParams = false;
 import { useState, useRef, useCallback, useEffect, useMemo, lazy, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import * as XLSX from 'xlsx';
-import Header from '../lib/Header';
+import Header from "@/app/components/Header";
 import Footer from '../lib/Footer';
 import { useAuth } from '@/lib/useAuth';
 import { Button } from '@/app/components/Button';

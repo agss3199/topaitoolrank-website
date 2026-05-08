@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic';
 export const dynamicParams = false;
 
 import { useState, useEffect, useMemo } from "react";
-import Header from "../lib/Header";
+import Header from "@/app/components/Header";
 import Footer from "../lib/Footer";
 import styles from "./styles.css";
 import {
