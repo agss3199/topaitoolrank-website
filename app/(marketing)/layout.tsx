@@ -27,7 +27,6 @@ export const metadata: Metadata = {
     title: "Free AI Tools Directory | Top Rated 2026",
     description:
       "Discover 100+ free AI tools for writing, coding, design, and more.",
-    images: ["https://topaitoolrank.com/og-images/homepage.jpg"],
   },
 };
 
