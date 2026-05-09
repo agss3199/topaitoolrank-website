@@ -19,13 +19,7 @@ export const metadata: Metadata = {
       "Discover 100+ free AI tools for every task. No sign-up required.",
     url: "https://topaitoolrank.com",
     type: "website",
-    images: [
-      {
-        url: "https://topaitoolrank.com/og-images/homepage.jpg",
-        width: 1200,
-        height: 630,
-      },
-    ],
+
     siteName: "Top AI Tool Rank",
   },
   twitter: {
