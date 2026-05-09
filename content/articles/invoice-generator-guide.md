@@ -94,3 +94,17 @@ Being easy to work with includes making it easy to pay. If a client has to jump 
 Consistency in invoicing also signals reliability. Clients come to expect invoices at certain times with certain information. Meeting these expectations builds trust. Failing to meet them creates doubt about your competence.
 
 The good news is that having a solid invoicing system isn't complicated or expensive. Whether you use a simple template or sophisticated accounting software, the structure is the same. You include the necessary information, follow consistent formatting, track everything systematically, and send promptly. Do these things and you've solved a major small business problem. If you're tracking invoice payment links in your marketing, our [UTM Link Builder](/tools/utm-link-builder) helps you create trackable payment links that show you exactly which marketing channels drive your invoice payments.
+
+## Frequently Asked Questions
+
+**Q: What is an invoice and what information must it include?**
+A: An invoice is a legal document requesting payment for work completed or products sold. It must include your business information, client information, invoice number and date, itemized list of what's being billed, price per item, total amount due, payment terms (like Net 30), and payment instructions. This information creates a clear record for both parties.
+
+**Q: Can I customize invoice templates, or do they have to follow a specific format?**
+A: Invoices don't have to follow a rigid format, but they must include all required information clearly. Our invoice generator lets you customize the template with your company branding, logo, colors, and layout while ensuring all essential fields are included. The customization options let you maintain professional branding while remaining compliant.
+
+**Q: Are there different types of invoices for different situations?**
+A: Yes, invoices vary by business type. Service-based invoices emphasize hourly rates and descriptions. Product-based invoices list items with quantities. Project invoices bill for entire projects. Retainer invoices bill for ongoing services in advance. Our generator handles all types and lets you create the right format for your business model.
+
+**Q: Is our invoice generator free to use?**
+A: Yes, completely free. Generate unlimited professional invoices without signup, no credit card required, and no limits on how many you create or use.

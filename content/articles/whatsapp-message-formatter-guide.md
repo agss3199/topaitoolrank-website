@@ -111,3 +111,17 @@ Building team norms around formatting creates consistency. If your team always u
 Using formatting templates for common message types makes communication faster and clearer. If your invoice messages always follow a certain format with amounts in bold, clients learn to recognize and trust that format. Patterns improve both efficiency and trust.
 
 Teaching the next generation about WhatsApp formatting ensures this skill gets passed along. Younger people might take it for granted that these tools exist, but understanding when and how to use them effectively requires explicit teaching.
+
+## Frequently Asked Questions
+
+**Q: What types of text formatting does WhatsApp support?**
+A: WhatsApp supports bold (wrap in asterisks: *bold*), italic (wrap in underscores: _italic_), strikethrough (wrap in tildes: ~strikethrough~), and monospace code formatting (wrap in backticks: `code`). You can combine these for greater emphasis. These simple formatting options work on all devices and help make your messages clearer and more professional.
+
+**Q: How can formatting improve my WhatsApp business communications?**
+A: Formatting creates visual hierarchy that makes important information stand out. Use bold for key facts or deadlines, monospace for codes or reference numbers, italics for context or side notes, and lists for multiple items or steps. Properly formatted messages are easier to read, especially on mobile phones, and create a professional impression that builds customer trust.
+
+**Q: Do WhatsApp formatting options work on all phones and devices?**
+A: Yes, WhatsApp formatting is supported across all major devices and platforms. Bold, italic, strikethrough, and monospace formatting display consistently on iOS, Android, and desktop WhatsApp. Always test important formatted messages on mobile devices to ensure they display correctly for your recipients.
+
+**Q: Is there a tool that helps me create properly formatted WhatsApp messages?**
+A: Yes! Our WhatsApp message formatter lets you write and preview formatted messages, then copy the properly formatted text to paste into WhatsApp. It shows you exactly how your formatting will appear, helping you craft professional messages with the right emphasis before sending.

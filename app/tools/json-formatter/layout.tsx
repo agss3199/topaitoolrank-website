@@ -5,12 +5,14 @@ const BRAND = 'AI Tool Rank';
 
 export const metadata: Metadata = {
   title: 'JSON Formatter: Beautify & Validate JSON | AI Tool Rank',
-  description: 'Free JSON formatter tool. Beautify, validate, and minify JSON with syntax highlighting. No sign-up required.',
+  description: 'Free JSON formatter and validator. Beautify, minify, and debug JSON instantly with real-time syntax highlighting. No sign-up required. Built for developers.',
   keywords: ['JSON formatter', 'JSON beautifier', 'JSON validator', 'minify JSON'],
-  canonical: `${DOMAIN}/tools/json-formatter`,
+  alternates: {
+    canonical: `${DOMAIN}/tools/json-formatter`,
+  },
   openGraph: {
     title: 'JSON Formatter: Beautify & Validate JSON | AI Tool Rank',
-    description: 'Free JSON formatter tool. Beautify, validate, and minify JSON with syntax highlighting.',
+    description: 'Free JSON formatter and validator. Beautify, minify, and debug JSON instantly with real-time syntax highlighting. No sign-up required.',
     url: `${DOMAIN}/tools/json-formatter`,
     type: 'website',
     siteName: BRAND,
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'JSON Formatter: Beautify & Validate JSON | AI Tool Rank',
-    description: 'Free JSON formatter tool. Beautify, validate, and minify JSON with syntax highlighting.',
+    description: 'Free JSON formatter and validator. Beautify, minify, and debug JSON instantly with real-time syntax highlighting. No sign-up required.',
     images: [`${DOMAIN}/og-images/json-formatter.png`],
   },
 };

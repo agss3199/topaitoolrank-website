@@ -25,7 +25,9 @@ import styles from "./styles.css";
 import { markdownToWhatsApp, MARKDOWN_SYNTAX_HINTS } from "./lib/markdown-to-whatsapp";
 import { downloadAsFile, copyToClipboard, loadFromlocalStorage, saveTolocalStorage } from "./lib/utils";
 import { cls } from "../lib/css-module-safe";
+import BreadcrumbSchema from "../lib/BreadcrumbSchema";
 import { ArticleSection } from "../lib/ArticleSection";
+import FAQSchema from "../lib/FAQSchema";
 import Preview from "./components/Preview";
 
 const LOCALSTORAGE_KEY = "wam-draft";
@@ -132,6 +134,13 @@ export default function WAMFormatterPage() {
 
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: 'https://topaitoolrank.com' },
+          { name: 'Tools', url: 'https://topaitoolrank.com/tools' },
+          { name: 'WhatsApp Message Formatter', url: 'https://topaitoolrank.com/tools/whatsapp-message-formatter' },
+        ]}
+      />
       <Header />
       <div className={cls(styles, "whatsapp-message-formatter")}>
         <header className={cls(styles, "whatsapp-message-formatter__header")}>
@@ -231,6 +240,14 @@ export default function WAMFormatterPage() {
           <ArticleSection content={articleContent} />
         </div>
       )}
+      <FAQSchema
+        questions={[
+          { q: "What types of text formatting does WhatsApp support?", a: "WhatsApp supports bold (wrap in asterisks: *bold*), italic (wrap in underscores: _italic_), strikethrough (wrap in tildes: ~strikethrough~), and monospace code formatting (wrap in backticks: `code`). You can combine these for greater emphasis. These simple formatting options work on all devices and help make your messages clearer and more professional." },
+          { q: "How can formatting improve my WhatsApp business communications?", a: "Formatting creates visual hierarchy that makes important information stand out. Use bold for key facts or deadlines, monospace for codes or reference numbers, italics for context or side notes, and lists for multiple items or steps. Properly formatted messages are easier to read, especially on mobile phones, and create a professional impression that builds customer trust." },
+          { q: "Do WhatsApp formatting options work on all phones and devices?", a: "Yes, WhatsApp formatting is supported across all major devices and platforms. Bold, italic, strikethrough, and monospace formatting display consistently on iOS, Android, and desktop WhatsApp. Always test important formatted messages on mobile devices to ensure they display correctly for your recipients." },
+          { q: "Is there a tool that helps me create properly formatted WhatsApp messages?", a: "Yes! Our WhatsApp message formatter lets you write and preview formatted messages, then copy the properly formatted text to paste into WhatsApp. It shows you exactly how your formatting will appear, helping you craft professional messages with the right emphasis before sending." },
+        ]}
+      />
     <Footer />
     </>
   );

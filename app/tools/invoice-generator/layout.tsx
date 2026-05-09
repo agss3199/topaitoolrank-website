@@ -5,12 +5,14 @@ const BRAND = 'AI Tool Rank';
 
 export const metadata: Metadata = {
   title: 'Invoice Generator: Create Professional Invoices | AI Tool Rank',
-  description: 'Free invoice generator tool. Create professional invoices in seconds for freelancers and small businesses. No sign-up required.',
+  description: 'Free invoice generator for freelancers and small businesses. Create polished, itemized invoices and download as text. No sign-up required. Fast and simple.',
   keywords: ['invoice generator', 'invoice maker', 'free invoice', 'professional invoice'],
-  canonical: `${DOMAIN}/tools/invoice-generator`,
+  alternates: {
+    canonical: `${DOMAIN}/tools/invoice-generator`,
+  },
   openGraph: {
     title: 'Invoice Generator: Create Professional Invoices | AI Tool Rank',
-    description: 'Free invoice generator tool. Create professional invoices in seconds.',
+    description: 'Free invoice generator for freelancers and small businesses. Create polished, itemized invoices and download as text.',
     url: `${DOMAIN}/tools/invoice-generator`,
     type: 'website',
     siteName: BRAND,
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Invoice Generator: Create Professional Invoices | AI Tool Rank',
-    description: 'Free invoice generator tool. Create professional invoices in seconds.',
+    description: 'Free invoice generator for freelancers and small businesses. Create polished, itemized invoices and download as text.',
     images: [`${DOMAIN}/og-images/invoice-generator.png`],
   },
 };

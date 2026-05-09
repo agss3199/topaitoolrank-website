@@ -76,3 +76,17 @@ Unsubscribe rate measures what percentage of recipients remove themselves from y
 List growth measures how your audience size changes over time. Every email you send results in some unsubscribes. New signups hopefully offset those. If your unsubscribe rate is creeping up, something in your emails including the subject lines might be causing problems.
 
 Ultimately, the purpose of testing your subject lines is simple. You want more people to open your emails and engage with your content. That engagement leads to clicks, conversions, and revenue. The investment in testing subject lines, understanding how they display, and optimizing based on data pays dividends in improved email performance. Your subject line is too important to guess about. If you're tracking email campaign performance, our [UTM Link Builder](/tools/utm-link-builder) helps you create trackable links that you can include in your emails, allowing you to measure which subject lines and campaigns drive the most valuable clicks.
+
+## Frequently Asked Questions
+
+**Q: What is an email subject line tester and why is it important?**
+A: An email subject line tester shows you how your subject line displays across different email clients and devices (Gmail, Outlook, Apple Mail, mobile phones, etc.). Since email clients display subject lines differently, a tester helps you see what your recipients actually see before you send, ensuring nothing gets cut off or displays incorrectly.
+
+**Q: How can I improve my email open rates using better subject lines?**
+A: The most effective approach is A/B testing—send two versions with different subject lines to portions of your audience and measure which gets more opens. Combine this with understanding your audience's preferences (do they like questions, urgency, personalization?) and you can dramatically improve performance.
+
+**Q: Is testing email subject lines free?**
+A: Our email subject line tester is completely free to use. Test unlimited subject lines, see how they display across different clients, and optimize your campaigns without any cost or signup required.
+
+**Q: How accurate is the preview display across different email clients?**
+A: Our tester shows accurate previews based on each email client's actual rendering engine. Subject line length, character limits, and emoji rendering are all displayed as they will appear to your recipients. This means you can confidently send knowing exactly how your subject line will look.

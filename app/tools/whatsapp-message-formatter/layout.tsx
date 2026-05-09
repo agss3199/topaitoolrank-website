@@ -5,12 +5,14 @@ const BRAND = 'AI Tool Rank';
 
 export const metadata: Metadata = {
   title: 'WhatsApp Formatter: Format Messages | AI Tool Rank',
-  description: 'Free WhatsApp message formatter. Add bold, italic, and other text formatting to WhatsApp messages. No sign-up required.',
+  description: 'Free WhatsApp message formatter. Apply bold, italic, strikethrough, and monospace styling to your messages before sending. No sign-up required. Easy to use.',
   keywords: ['whatsapp formatter', 'whatsapp text formatting', 'whatsapp bold text', 'message formatter'],
-  canonical: `${DOMAIN}/tools/whatsapp-message-formatter`,
+  alternates: {
+    canonical: `${DOMAIN}/tools/whatsapp-message-formatter`,
+  },
   openGraph: {
     title: 'WhatsApp Formatter: Format Messages | AI Tool Rank',
-    description: 'Free WhatsApp message formatter. Add bold, italic, and other text formatting.',
+    description: 'Free WhatsApp message formatter. Apply bold, italic, strikethrough, and monospace styling to your messages before sending.',
     url: `${DOMAIN}/tools/whatsapp-message-formatter`,
     type: 'website',
     siteName: BRAND,
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'WhatsApp Formatter: Format Messages | AI Tool Rank',
-    description: 'Free WhatsApp message formatter. Add bold, italic, and other text formatting.',
+    description: 'Free WhatsApp message formatter. Apply bold, italic, strikethrough, and monospace styling to your messages before sending.',
     images: [`${DOMAIN}/og-images/whatsapp-message-formatter.png`],
   },
 };

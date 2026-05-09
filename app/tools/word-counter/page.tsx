@@ -10,7 +10,9 @@ import styles from "./styles.css";
 import { analyzeText } from "./lib/text-analyzer";
 import { copyToClipboard, saveTolocalStorage, loadFromlocalStorage } from "./lib/utils";
 import { cls } from "../lib/css-module-safe";
+import BreadcrumbSchema from "../lib/BreadcrumbSchema";
 import { ArticleSection } from "../lib/ArticleSection";
+import FAQSchema from "../lib/FAQSchema";
 
 const LOCALSTORAGE_KEY = "wc-text";
 
@@ -65,6 +67,13 @@ export default function WordCounterPage() {
 
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: 'https://topaitoolrank.com' },
+          { name: 'Tools', url: 'https://topaitoolrank.com/tools' },
+          { name: 'Word Counter', url: 'https://topaitoolrank.com/tools/word-counter' },
+        ]}
+      />
       <Header />
       <div className={cls(styles, "word-counter")}>
         <header className={cls(styles, "word-counter__header")}>
@@ -169,6 +178,14 @@ export default function WordCounterPage() {
           <ArticleSection content={articleContent} />
         </div>
       )}
+      <FAQSchema
+        questions={[
+          { q: "What exactly does a word counter do and how is it different from built-in word counts?", a: "A word counter provides comprehensive metrics including word count, character count (with and without spaces), paragraph count, sentence count, and average sentence length. While most text editors have basic word counting, a dedicated word counter gives you detailed breakdowns across multiple metrics in one place, making it easier to analyze your content structure." },
+          { q: "How does a word counter know what counts as a word?", a: "A word counter identifies words by looking for spaces and punctuation. Most counters treat contractions (like \"don't\") as single words and hyphenated words (like \"state-of-the-art\") as one or two words depending on the tool. Understanding these conventions helps you hit exact word count targets when precision matters." },
+          { q: "Why should I use a word counter while writing instead of just checking at the end?", a: "Checking word count during your writing process keeps you aware of your progress and helps prevent last-minute panics. If you're targeting one thousand words and discover at the end you've only written seven hundred, you've wasted time. Periodic checks let you adjust your approach as you go." },
+          { q: "Is accuracy important, and will different word counters give me different results?", a: "Yes, slight variations exist between different word counters depending on how they handle contractions, hyphenated words, and numbers. For critical assignments with strict word limits, use the same counter throughout or verify in the system where you'll be submitting the work." },
+        ]}
+      />
     <Footer />
     </>
   );

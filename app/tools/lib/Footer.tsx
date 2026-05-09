@@ -48,7 +48,7 @@ export default function Footer() {
       {/* Legal Column */}
       <div className={styles.toolFooterColumn}>
         <h3 className={styles.toolFooterColumnTitle}>Legal</h3>
-        <Link href="/privacy" className={styles.toolFooterLink}>
+        <Link href="/privacy-policy" className={styles.toolFooterLink}>
           Privacy Policy
         </Link>
         <Link href="/terms" className={styles.toolFooterLink}>

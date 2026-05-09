@@ -5,12 +5,14 @@ const BRAND = 'AI Tool Rank';
 
 export const metadata: Metadata = {
   title: 'AI Prompt Generator: Create Better Prompts | AI Tool Rank',
-  description: 'Free AI prompt generator for ChatGPT and Claude. Create better prompts with structure and examples. No sign-up required.',
+  description: 'Free AI prompt generator. Build structured prompts for ChatGPT, Claude, and other AI tools using proven templates. No sign-up required. Get better output.',
   keywords: ['prompt generator', 'ai prompt engineering', 'chatgpt prompt', 'prompt templates'],
-  canonical: `${DOMAIN}/tools/ai-prompt-generator`,
+  alternates: {
+    canonical: `${DOMAIN}/tools/ai-prompt-generator`,
+  },
   openGraph: {
     title: 'AI Prompt Generator: Create Better Prompts | AI Tool Rank',
-    description: 'Free AI prompt generator for ChatGPT and Claude. Create better prompts with structure.',
+    description: 'Free AI prompt generator. Build structured prompts for ChatGPT, Claude, and other AI tools using proven templates.',
     url: `${DOMAIN}/tools/ai-prompt-generator`,
     type: 'website',
     siteName: BRAND,
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'AI Prompt Generator: Create Better Prompts | AI Tool Rank',
-    description: 'Free AI prompt generator for ChatGPT and Claude.',
+    description: 'Free AI prompt generator. Build structured prompts for ChatGPT, Claude, and other AI tools using proven templates.',
     images: [`${DOMAIN}/og-images/ai-prompt-generator.png`],
   },
 };

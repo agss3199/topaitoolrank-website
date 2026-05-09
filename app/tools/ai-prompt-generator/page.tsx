@@ -17,7 +17,9 @@ import { TEMPLATES } from "./lib/templates";
 import { buildPrompt, validateVariables, initializeVariables } from "./lib/prompt-builder";
 import { copyToClipboard, downloadAsFile, saveTolocalStorage, loadFromlocalStorage } from "./lib/utils";
 import { cls } from "../lib/css-module-safe";
+import BreadcrumbSchema from "../lib/BreadcrumbSchema";
 import { ArticleSection } from "../lib/ArticleSection";
+import FAQSchema from "../lib/FAQSchema";
 import UseCaseSelector from "./components/UseCaseSelector";
 import VariableInput from "./components/VariableInput";
 import PromptPreview from "./components/PromptPreview";
@@ -135,6 +137,13 @@ export default function AIPromptGeneratorPage() {
 
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: 'https://topaitoolrank.com' },
+          { name: 'Tools', url: 'https://topaitoolrank.com/tools' },
+          { name: 'AI Prompt Generator', url: 'https://topaitoolrank.com/tools/ai-prompt-generator' },
+        ]}
+      />
       <Header />
       <div className={cls(styles, "ai-prompt-generator")}>
         <header className={cls(styles, "ai-prompt-generator__header")}>
@@ -210,6 +219,14 @@ export default function AIPromptGeneratorPage() {
           <ArticleSection content={articleContent} />
         </div>
       )}
+      <FAQSchema
+        questions={[
+          { q: "What is an AI prompt and how does it differ from a regular question?", a: "A prompt is an instruction to an AI system that goes beyond just asking a question. It includes context, specifies the desired format, defines the tone, and often includes constraints or examples. Regular questions work, but detailed prompts generate much higher quality and more useful responses tailored to your actual needs." },
+          { q: "How can I make my AI prompts more effective?", a: "The most effective prompts include specific context (your situation, goals, constraints), clear examples of what you want, details about your audience or use case, and the format you want the response in. Instead of \"write an email,\" try \"write a professional email to a skeptical client explaining why our service will save them money, keep it to three short paragraphs, and use friendly but formal tone.\"" },
+          { q: "Why is prompt engineering considered an important skill now?", a: "As AI tools become more integrated into work and creative processes, the ability to get useful outputs from AI determines how much value you extract. Good prompts save hours of manual revision work. Poor prompts produce mediocre results that need significant rework. Developing prompt skills is like developing communication skills\u2014it multiplies your effectiveness with the tool." },
+          { q: "What are the best practices for getting consistent, high-quality responses from AI?", a: "Provide examples of the style or format you want, be specific about constraints (length, tone, audience), break complex tasks into smaller prompts, iterate with follow-ups to refine results, and ask the AI to explain its thinking. Treating it as a conversation rather than a one-shot request produces much better long-term outcomes." },
+        ]}
+      />
     <Footer />
     </>
   );

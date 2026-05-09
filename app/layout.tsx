@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import React from "react";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import OrganizationSchema from "@/app/lib/OrganizationSchema";
+import NavigationSchema from "@/app/lib/NavigationSchema";
 import "./globals.css";
 import "./components/components.css";
 
@@ -33,6 +35,8 @@ export default function RootLayout({
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <OrganizationSchema />
+        <NavigationSchema />
       </head>
       <body>
         <a href="#main" className="skip-to-content">Skip to main content</a>

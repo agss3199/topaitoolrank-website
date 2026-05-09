@@ -84,3 +84,17 @@ Teaching teams about JSON formatting standards prevents inconsistencies. If ever
 Using formatted JSON in documentation improves readability. When you show API responses or configuration examples in your docs, formatting them makes them easier to understand. Readers shouldn't have to mentally parse unformatted JSON.
 
 JSON formatting isn't glamorous, but it's foundational to working with data effectively. It touches almost every modern application in some way. Mastering JSON formatting, understanding its limitations, and knowing how to validate and optimize it are skills that serve you well throughout your career in technology.
+
+## Frequently Asked Questions
+
+**Q: What exactly is JSON and why is it so widely used?**
+A: JSON (JavaScript Object Notation) is a lightweight text format for storing and transmitting structured data. It's widely used because it's language-independent, human-readable, and natively supported by web browsers and most programming languages. Every time you use an API or load configuration files, you're working with JSON.
+
+**Q: Why should I use a JSON formatter instead of just looking at the raw data?**
+A: Unformatted JSON is a single line of text that's nearly impossible for humans to parse. A formatter adds indentation, line breaks, and structure that make the data instantly readable. This helps you spot errors, understand complex nested structures, and debug API responses in seconds instead of minutes.
+
+**Q: Is your JSON formatter free to use?**
+A: Yes, completely. Our JSON formatter is free with no signup required, no login needed, and no credit card. You can format unlimited JSON documents for as long as you need.
+
+**Q: Can I format very large JSON files, or is there a size limit?**
+A: Our formatter handles large JSON files efficiently. There's no practical limit—even multi-megabyte files process quickly. However, extremely large files may take a few additional seconds, but they work reliably every time.

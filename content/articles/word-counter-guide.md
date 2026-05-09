@@ -84,3 +84,17 @@ Integration with other tools makes word counters more valuable. If you use our [
 The most important insight about word counting is that it's not about hitting a number arbitrarily. It's about understanding your content and making it as effective as possible. Sometimes that means being concise. Sometimes it means being comprehensive. A word counter helps you understand what you've actually written versus what you intended to write.
 
 Whether you're a professional writer hitting specific targets, a student meeting assignment requirements, or someone who just wants to understand what they've written, a word counter is an essential tool. It transforms vague notions about length into concrete data you can use to make decisions. That clarity makes the writing process faster and the final product better.
+
+## Frequently Asked Questions
+
+**Q: What exactly does a word counter do and how is it different from built-in word counts?**
+A: A word counter provides comprehensive metrics including word count, character count (with and without spaces), paragraph count, sentence count, and average sentence length. While most text editors have basic word counting, a dedicated word counter gives you detailed breakdowns across multiple metrics in one place, making it easier to analyze your content structure.
+
+**Q: How does a word counter know what counts as a word?**
+A: A word counter identifies words by looking for spaces and punctuation. Most counters treat contractions (like "don't") as single words and hyphenated words (like "state-of-the-art") as one or two words depending on the tool. Understanding these conventions helps you hit exact word count targets when precision matters.
+
+**Q: Why should I use a word counter while writing instead of just checking at the end?**
+A: Checking word count during your writing process keeps you aware of your progress and helps prevent last-minute panics. If you're targeting one thousand words and discover at the end you've only written seven hundred, you've wasted time. Periodic checks let you adjust your approach as you go.
+
+**Q: Is accuracy important, and will different word counters give me different results?**
+A: Yes, slight variations exist between different word counters depending on how they handle contractions, hyphenated words, and numbers. For critical assignments with strict word limits, use the same counter throughout or verify in the system where you'll be submitting the work.

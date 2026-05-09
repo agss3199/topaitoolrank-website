@@ -18,7 +18,9 @@ import { validatePhoneNumber } from "./lib/phone-validator";
 import { generateQRCode, downloadQRCode } from "./lib/qr-generator";
 import { copyToClipboard, downloadAsFile, loadFromlocalStorage, saveTolocalStorage } from "./lib/utils";
 import { cls } from "../lib/css-module-safe";
+import BreadcrumbSchema from "../lib/BreadcrumbSchema";
 import { ArticleSection } from "../lib/ArticleSection";
+import FAQSchema from "../lib/FAQSchema";
 
 const LOCALSTORAGE_PHONE_KEY = "wlg-phone";
 const LOCALSTORAGE_MESSAGE_KEY = "wlg-message";
@@ -120,6 +122,13 @@ export default function WhatsAppLinkGeneratorPage() {
 
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: 'https://topaitoolrank.com' },
+          { name: 'Tools', url: 'https://topaitoolrank.com/tools' },
+          { name: 'WhatsApp Link Generator', url: 'https://topaitoolrank.com/tools/whatsapp-link-generator' },
+        ]}
+      />
       <Header />
       <div className={cls(styles, "whatsapp-link-generator")}>
         <header className={cls(styles, "whatsapp-link-generator__header")}>
@@ -250,6 +259,14 @@ export default function WhatsAppLinkGeneratorPage() {
           <ArticleSection content={articleContent} />
         </div>
       )}
+      <FAQSchema
+        questions={[
+          { q: "What is a WhatsApp link and how does it work?", a: "A WhatsApp link is a special URL that opens WhatsApp with a pre-populated message ready to send. When someone clicks your WhatsApp link, their WhatsApp app opens with your business number already entered and an optional message text displayed. They can send the message as-is or edit it, making it simple to start a conversation without manually entering your number." },
+          { q: "How do I create a WhatsApp link, and can I customize the message?", a: "Our WhatsApp link generator makes it simple\u2014you enter your phone number and the message you want to appear (optional), and we generate your link. You can customize messages for different purposes: \"I have a question\" for your website, \"I'd like to purchase\" for your ads, \"I need support\" for your contact page. Different messages for different contexts help you understand where inquiries come from." },
+          { q: "Can I track which marketing campaigns drive WhatsApp messages, or create QR codes?", a: "Yes! You can use different WhatsApp links with different pre-populated messages for different channels, and track which messages get used. Our generator also creates QR codes from your links that you can put on business cards, posters, or printed materials. When scanned, they open WhatsApp ready to chat with you." },
+          { q: "Is the WhatsApp link generator free?", a: "Yes, completely free. Generate unlimited WhatsApp links and QR codes without signup or cost. Start driving WhatsApp conversations immediately." },
+        ]}
+      />
     <Footer />
     </>
   );

@@ -84,3 +84,17 @@ Researchers use prompts to help with literature reviews, summarize complex paper
 Teachers use prompts to create lesson plans, generate practice problems, explain concepts different ways, and create assessments. These prompts should specify grade level and learning objectives.
 
 The reality is that AI tools are as good as the prompts you give them. Spend time crafting thoughtful prompts that specify what you want, provide context, and give examples. The small extra effort in writing better prompts pays dividends in the quality of outputs. And if you're crafting prompts that are particularly long or complex, our [Word Counter](/tools/word-counter) tool helps ensure you're being clear without being unnecessarily verbose. If you use AI to generate JSON or structured data, our [JSON Formatter](/tools/json-formatter) helps you validate and format the output before using it in your applications.
+
+## Frequently Asked Questions
+
+**Q: What is an AI prompt and how does it differ from a regular question?**
+A: A prompt is an instruction to an AI system that goes beyond just asking a question. It includes context, specifies the desired format, defines the tone, and often includes constraints or examples. Regular questions work, but detailed prompts generate much higher quality and more useful responses tailored to your actual needs.
+
+**Q: How can I make my AI prompts more effective?**
+A: The most effective prompts include specific context (your situation, goals, constraints), clear examples of what you want, details about your audience or use case, and the format you want the response in. Instead of "write an email," try "write a professional email to a skeptical client explaining why our service will save them money, keep it to three short paragraphs, and use friendly but formal tone."
+
+**Q: Why is prompt engineering considered an important skill now?**
+A: As AI tools become more integrated into work and creative processes, the ability to get useful outputs from AI determines how much value you extract. Good prompts save hours of manual revision work. Poor prompts produce mediocre results that need significant rework. Developing prompt skills is like developing communication skills—it multiplies your effectiveness with the tool.
+
+**Q: What are the best practices for getting consistent, high-quality responses from AI?**
+A: Provide examples of the style or format you want, be specific about constraints (length, tone, audience), break complex tasks into smaller prompts, iterate with follow-ups to refine results, and ask the AI to explain its thinking. Treating it as a conversation rather than a one-shot request produces much better long-term outcomes.

@@ -5,12 +5,14 @@ const BRAND = 'AI Tool Rank';
 
 export const metadata: Metadata = {
   title: 'WhatsApp Link Generator: Create WhatsApp Links | AI Tool Rank',
-  description: 'Free WhatsApp link generator. Create clickable WhatsApp chat links for your website. No sign-up required.',
+  description: 'Free WhatsApp link and QR code generator. Create click-to-chat links with pre-filled messages for websites and marketing. No sign-up required. Instant.',
   keywords: ['whatsapp link generator', 'whatsapp qr code', 'whatsapp business', 'click to chat'],
-  canonical: `${DOMAIN}/tools/whatsapp-link-generator`,
+  alternates: {
+    canonical: `${DOMAIN}/tools/whatsapp-link-generator`,
+  },
   openGraph: {
     title: 'WhatsApp Link Generator: Create WhatsApp Links | AI Tool Rank',
-    description: 'Free WhatsApp link generator. Create clickable WhatsApp chat links for your website.',
+    description: 'Free WhatsApp link and QR code generator. Create click-to-chat links with pre-filled messages for websites and marketing.',
     url: `${DOMAIN}/tools/whatsapp-link-generator`,
     type: 'website',
     siteName: BRAND,
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'WhatsApp Link Generator: Create WhatsApp Links | AI Tool Rank',
-    description: 'Free WhatsApp link generator. Create clickable WhatsApp chat links.',
+    description: 'Free WhatsApp link and QR code generator. Create click-to-chat links with pre-filled messages for websites and marketing.',
     images: [`${DOMAIN}/og-images/whatsapp-link-generator.png`],
   },
 };

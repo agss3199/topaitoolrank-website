@@ -86,3 +86,17 @@ Understanding how your WhatsApp link performs helps you improve. You can see how
 Setting expectations in your WhatsApp chat helps manage response time. If you can only respond during business hours, say so. If you're likely to have high volume, let people know there might be a wait. Setting expectations prevents frustration.
 
 Different team members can manage different conversations. One person might handle sales inquiries. Another handles support. This specialization makes responses more relevant and faster because each person is focused on their domain.
+
+## Frequently Asked Questions
+
+**Q: What is a WhatsApp link and how does it work?**
+A: A WhatsApp link is a special URL that opens WhatsApp with a pre-populated message ready to send. When someone clicks your WhatsApp link, their WhatsApp app opens with your business number already entered and an optional message text displayed. They can send the message as-is or edit it, making it simple to start a conversation without manually entering your number.
+
+**Q: How do I create a WhatsApp link, and can I customize the message?**
+A: Our WhatsApp link generator makes it simple—you enter your phone number and the message you want to appear (optional), and we generate your link. You can customize messages for different purposes: "I have a question" for your website, "I'd like to purchase" for your ads, "I need support" for your contact page. Different messages for different contexts help you understand where inquiries come from.
+
+**Q: Can I track which marketing campaigns drive WhatsApp messages, or create QR codes?**
+A: Yes! You can use different WhatsApp links with different pre-populated messages for different channels, and track which messages get used. Our generator also creates QR codes from your links that you can put on business cards, posters, or printed materials. When scanned, they open WhatsApp ready to chat with you.
+
+**Q: Is the WhatsApp link generator free?**
+A: Yes, completely free. Generate unlimited WhatsApp links and QR codes without signup or cost. Start driving WhatsApp conversations immediately.

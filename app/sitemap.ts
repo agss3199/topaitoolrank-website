@@ -83,68 +83,76 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
   })();
 
-  // Tool pages
+  // Tool pages (fixed lastModified date instead of dynamic new Date())
+  const toolPublishDate = new Date('2026-05-07'); // Tool articles published date
   const toolPages: MetadataRoute.Sitemap = [
+    // Tools directory listing page
+    {
+      url: `${baseUrl}/tools`,
+      lastModified: new Date('2026-05-08'),
+      changeFrequency: 'weekly' as const,
+      priority: 0.85,
+    },
     // Tier 1 tools (primary SEO focus) - priority 0.8
     {
       url: `${baseUrl}/tools/json-formatter`,
-      lastModified: new Date(),
+      lastModified: toolPublishDate,
       changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
     {
       url: `${baseUrl}/tools/word-counter`,
-      lastModified: new Date(),
+      lastModified: toolPublishDate,
       changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
     {
       url: `${baseUrl}/tools/email-subject-tester`,
-      lastModified: new Date(),
+      lastModified: toolPublishDate,
       changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
     // Tier 2 tools - priority 0.7
     {
       url: `${baseUrl}/tools/ai-prompt-generator`,
-      lastModified: new Date(),
+      lastModified: toolPublishDate,
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     },
     {
       url: `${baseUrl}/tools/utm-link-builder`,
-      lastModified: new Date(),
+      lastModified: toolPublishDate,
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     },
     {
       url: `${baseUrl}/tools/invoice-generator`,
-      lastModified: new Date(),
+      lastModified: toolPublishDate,
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     },
     {
       url: `${baseUrl}/tools/seo-analyzer`,
-      lastModified: new Date(),
+      lastModified: toolPublishDate,
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     },
     {
       url: `${baseUrl}/tools/whatsapp-link-generator`,
-      lastModified: new Date(),
+      lastModified: toolPublishDate,
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     },
     {
       url: `${baseUrl}/tools/whatsapp-message-formatter`,
-      lastModified: new Date(),
+      lastModified: toolPublishDate,
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     },
     // WA-Sender tool
     {
       url: `${baseUrl}/tools/wa-sender`,
-      lastModified: new Date(),
+      lastModified: toolPublishDate,
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     },
@@ -166,22 +174,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Auth pages (public routes, not indexed heavily)
-  const authPages: MetadataRoute.Sitemap = [
-    {
-      url: `${baseUrl}/auth/login`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/auth/signup`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.3,
-    },
-  ];
-
-  // Combine all entries — order matters for clarity (core → blog → articles → tags → categories → tools → legal → auth)
-  return [...corePages, ...blogPages, ...articleUrls, ...tagUrls, ...categoryUrls, ...toolPages, ...legalPages, ...authPages];
+  // Combine all entries — order matters for clarity (core → blog → articles → tags → categories → tools → legal)
+  // Note: Auth pages (/auth/login, /auth/signup) are excluded from sitemap as they are not meant for SEO indexing
+  return [...corePages, ...blogPages, ...articleUrls, ...tagUrls, ...categoryUrls, ...toolPages, ...legalPages];
 }

@@ -5,12 +5,14 @@ const BRAND = 'AI Tool Rank';
 
 export const metadata: Metadata = {
   title: 'UTM Link Builder: Track Campaign Links | AI Tool Rank',
-  description: 'Free UTM link builder. Create tracking links for Google Analytics campaigns instantly. No sign-up required.',
+  description: 'Free UTM link builder for marketers. Generate campaign tracking URLs for Google Analytics with source, medium, and content parameters. No sign-up required.',
   keywords: ['utm builder', 'utm parameter', 'google analytics', 'campaign tracking', 'url builder'],
-  canonical: `${DOMAIN}/tools/utm-link-builder`,
+  alternates: {
+    canonical: `${DOMAIN}/tools/utm-link-builder`,
+  },
   openGraph: {
     title: 'UTM Link Builder: Track Campaign Links | AI Tool Rank',
-    description: 'Free UTM link builder. Create tracking links for Google Analytics campaigns instantly.',
+    description: 'Free UTM link builder for marketers. Generate campaign tracking URLs for Google Analytics with source, medium, and content parameters.',
     url: `${DOMAIN}/tools/utm-link-builder`,
     type: 'website',
     siteName: BRAND,
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'UTM Link Builder: Track Campaign Links | AI Tool Rank',
-    description: 'Free UTM link builder. Create tracking links for Google Analytics campaigns.',
+    description: 'Free UTM link builder for marketers. Generate campaign tracking URLs for Google Analytics with source, medium, and content parameters.',
     images: [`${DOMAIN}/og-images/utm-link-builder.png`],
   },
 };

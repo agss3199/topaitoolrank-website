@@ -49,6 +49,15 @@ const nextConfig: NextConfig = {
             value: "public, max-age=60, s-maxage=3600"
           }
         ]
+      },
+      {
+        source: "/tools/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=60, s-maxage=3600"
+          }
+        ]
       }
     ];
   },

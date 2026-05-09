@@ -18,7 +18,9 @@ import {
 } from "./lib/seo-analyzer";
 import { fetchPageMetadata, getScoreColor, getScoreLabel, copyToClipboard, downloadAsFile } from "./lib/utils";
 import { cls } from "../lib/css-module-safe";
+import BreadcrumbSchema from "../lib/BreadcrumbSchema";
 import { ArticleSection } from "../lib/ArticleSection";
+import FAQSchema from "../lib/FAQSchema";
 
 export default function SEOAnalyzerPage() {
   const [url, setUrl] = useState("");
@@ -164,6 +166,13 @@ ${suggestions.map(s => `- ${s}`).join("\n")}`;
 
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: 'https://topaitoolrank.com' },
+          { name: 'Tools', url: 'https://topaitoolrank.com/tools' },
+          { name: 'SEO Analyzer', url: 'https://topaitoolrank.com/tools/seo-analyzer' },
+        ]}
+      />
       <Header />
       <div className={cls(styles, "seo-analyzer")}>
         <header className={cls(styles, "seo-analyzer__header")}>
@@ -356,6 +365,14 @@ ${suggestions.map(s => `- ${s}`).join("\n")}`;
           <ArticleSection content={articleContent} />
         </div>
       )}
+      <FAQSchema
+        questions={[
+          { q: "What exactly is SEO and what does an SEO analyzer check?", a: "SEO (search engine optimization) is the practice of improving your website's visibility in search engines like Google. An SEO analyzer examines factors like page speed, mobile optimization, keyword usage, content depth, title tags, meta descriptions, heading structure, and backlink profile. It identifies problems that prevent your pages from ranking well and suggests improvements." },
+          { q: "How can I improve my search engine ranking?", a: "Effective strategies include creating comprehensive content that answers what people are searching for, ensuring your site is fast and mobile-friendly, building quality backlinks from authoritative sites, optimizing title tags and meta descriptions for click-through rate, using headers to structure your content clearly, and improving your page speed. Focus on matching what people are actually searching for with high-quality content." },
+          { q: "Is SEO analysis free to perform?", a: "Many SEO analysis tools are free or have free tiers that provide valuable insights. Our SEO analyzer is completely free and shows you the key metrics that affect your rankings without requiring any payment or signup." },
+          { q: "How accurate are SEO analysis tools, and will they tell me my actual Google ranking?", a: "Modern SEO analyzers provide highly accurate assessments of on-page factors and technical issues. They can estimate ranking difficulty, show you how your site appears to search engines, and identify optimization opportunities. However, they provide analysis based on best practices, not real-time ranking prediction\u2014actual rankings depend on Google's proprietary algorithm and competition." },
+        ]}
+      />
     <Footer />
     </>
   );

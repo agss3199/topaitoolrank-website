@@ -12,6 +12,7 @@ import { useState, useEffect, useMemo } from "react";
 import Header from "@/app/components/Header";
 import Footer from "../lib/Footer";
 import { ArticleSection } from "../lib/ArticleSection";
+import FAQSchema from "../lib/FAQSchema";
 import styles from "./styles.css";
 import {
   parseJSON,
@@ -23,6 +24,7 @@ import {
   getComplexity,
 } from "./lib/json-utils";
 import { cls } from "../lib/css-module-safe";
+import BreadcrumbSchema from "../lib/BreadcrumbSchema";
 
 const LOCALSTORAGE_KEY = "jf-input";
 
@@ -136,6 +138,13 @@ export default function JSONFormatterPage() {
 
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: 'https://topaitoolrank.com' },
+          { name: 'Tools', url: 'https://topaitoolrank.com/tools' },
+          { name: 'JSON Formatter', url: 'https://topaitoolrank.com/tools/json-formatter' },
+        ]}
+      />
       <Header />
       <div className={cls(styles, "json-formatter")}>
         <header className={cls(styles, "json-formatter__header")}>
@@ -268,6 +277,14 @@ export default function JSONFormatterPage() {
           <ArticleSection content={articleContent} />
         </div>
       )}
+      <FAQSchema
+        questions={[
+          { q: "What exactly is JSON and why is it so widely used?", a: "JSON (JavaScript Object Notation) is a lightweight text format for storing and transmitting structured data. It's widely used because it's language-independent, human-readable, and natively supported by web browsers and most programming languages. Every time you use an API or load configuration files, you're working with JSON." },
+          { q: "Why should I use a JSON formatter instead of just looking at the raw data?", a: "Unformatted JSON is a single line of text that's nearly impossible for humans to parse. A formatter adds indentation, line breaks, and structure that make the data instantly readable. This helps you spot errors, understand complex nested structures, and debug API responses in seconds instead of minutes." },
+          { q: "Is your JSON formatter free to use?", a: "Yes, completely. Our JSON formatter is free with no signup required, no login needed, and no credit card. You can format unlimited JSON documents for as long as you need." },
+          { q: "Can I format very large JSON files, or is there a size limit?", a: "Our formatter handles large JSON files efficiently. There's no practical limit—even multi-megabyte files process quickly. However, extremely large files may take a few additional seconds, but they work reliably every time." },
+        ]}
+      />
     </div>
     <Footer />
     </>

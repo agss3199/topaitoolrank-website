@@ -27,7 +27,9 @@ import {
   loadFromlocalStorage,
 } from "./lib/utils";
 import { cls } from "../lib/css-module-safe";
+import BreadcrumbSchema from "../lib/BreadcrumbSchema";
 import { ArticleSection } from "../lib/ArticleSection";
+import FAQSchema from "../lib/FAQSchema";
 
 const LOCALSTORAGE_KEY = "ig-data";
 
@@ -151,6 +153,13 @@ export default function InvoiceGeneratorPage() {
 
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: 'https://topaitoolrank.com' },
+          { name: 'Tools', url: 'https://topaitoolrank.com/tools' },
+          { name: 'Invoice Generator', url: 'https://topaitoolrank.com/tools/invoice-generator' },
+        ]}
+      />
       <Header />
       <div className={cls(styles, "invoice-generator")}>
         <header className={cls(styles, "invoice-generator__header")}>
@@ -417,6 +426,14 @@ export default function InvoiceGeneratorPage() {
           <ArticleSection content={articleContent} />
         </div>
       )}
+      <FAQSchema
+        questions={[
+          { q: "What is an invoice and what information must it include?", a: "An invoice is a legal document requesting payment for work completed or products sold. It must include your business information, client information, invoice number and date, itemized list of what's being billed, price per item, total amount due, payment terms (like Net 30), and payment instructions. This information creates a clear record for both parties." },
+          { q: "Can I customize invoice templates, or do they have to follow a specific format?", a: "Invoices don't have to follow a rigid format, but they must include all required information clearly. Our invoice generator lets you customize the template with your company branding, logo, colors, and layout while ensuring all essential fields are included. The customization options let you maintain professional branding while remaining compliant." },
+          { q: "Are there different types of invoices for different situations?", a: "Yes, invoices vary by business type. Service-based invoices emphasize hourly rates and descriptions. Product-based invoices list items with quantities. Project invoices bill for entire projects. Retainer invoices bill for ongoing services in advance. Our generator handles all types and lets you create the right format for your business model." },
+          { q: "Is our invoice generator free to use?", a: "Yes, completely free. Generate unlimited professional invoices without signup, no credit card required, and no limits on how many you create or use." },
+        ]}
+      />
     <Footer />
     </>
   );

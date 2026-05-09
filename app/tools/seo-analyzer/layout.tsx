@@ -5,12 +5,14 @@ const BRAND = 'AI Tool Rank';
 
 export const metadata: Metadata = {
   title: 'SEO Analyzer: Check On-Page SEO | AI Tool Rank',
-  description: 'Free SEO analyzer tool. Check on-page SEO scores and get optimization recommendations. No sign-up required.',
+  description: 'Free on-page SEO analyzer. Check your SEO score, keyword density, meta tags, and readability in seconds. No sign-up required. Actionable recommendations.',
   keywords: ['seo analyzer', 'seo checker', 'website audit', 'seo tool', 'search engine optimization'],
-  canonical: `${DOMAIN}/tools/seo-analyzer`,
+  alternates: {
+    canonical: `${DOMAIN}/tools/seo-analyzer`,
+  },
   openGraph: {
     title: 'SEO Analyzer: Check On-Page SEO | AI Tool Rank',
-    description: 'Free SEO analyzer tool. Check on-page SEO scores and get optimization recommendations.',
+    description: 'Free on-page SEO analyzer. Check your SEO score, keyword density, meta tags, and readability in seconds.',
     url: `${DOMAIN}/tools/seo-analyzer`,
     type: 'website',
     siteName: BRAND,
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'SEO Analyzer: Check On-Page SEO | AI Tool Rank',
-    description: 'Free SEO analyzer tool. Check on-page SEO scores and get optimization recommendations.',
+    description: 'Free on-page SEO analyzer. Check your SEO score, keyword density, meta tags, and readability in seconds.',
     images: [`${DOMAIN}/og-images/seo-analyzer.png`],
   },
 };

@@ -77,9 +77,18 @@ function getRefreshToken(request: NextRequest): string | null {
 /**
  * Main proxy function (Next.js 16 replaces deprecated middleware).
  * Runs on every request to validate authentication and tool-scoped access.
+ * Also handles www to non-www redirect for SEO consolidation.
  */
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Redirect www to non-www domain (SEO: avoid duplicate content)
+  const host = request.headers.get('host');
+  if (host?.startsWith('www.')) {
+    const url = request.nextUrl.clone();
+    url.host = host.substring(4); // Remove 'www.' prefix
+    return NextResponse.redirect(url, { status: 301 });
+  }
 
   // Log request (masked)
   const accessToken = getAccessToken(request);

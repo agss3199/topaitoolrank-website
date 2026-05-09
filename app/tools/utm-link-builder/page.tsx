@@ -22,7 +22,9 @@ import {
 } from "./lib/utm-builder";
 import { copyToClipboard, downloadAsFile, saveTolocalStorage, loadFromlocalStorage } from "./lib/utils";
 import { cls } from "../lib/css-module-safe";
+import BreadcrumbSchema from "../lib/BreadcrumbSchema";
 import { ArticleSection } from "../lib/ArticleSection";
+import FAQSchema from "../lib/FAQSchema";
 
 const LOCALSTORAGE_KEY = "ulb-params";
 
@@ -138,6 +140,13 @@ Source: topaitoolrank.com UTM Link Builder`;
 
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: 'https://topaitoolrank.com' },
+          { name: 'Tools', url: 'https://topaitoolrank.com/tools' },
+          { name: 'UTM Link Builder', url: 'https://topaitoolrank.com/tools/utm-link-builder' },
+        ]}
+      />
       <Header />
       <div className={cls(styles, "utm-link-builder")}>
         <header className={cls(styles, "utm-link-builder__header")}>
@@ -403,6 +412,14 @@ Source: topaitoolrank.com UTM Link Builder`;
           <ArticleSection content={articleContent} />
         </div>
       )}
+      <FAQSchema
+        questions={[
+          { q: "What is a UTM parameter and why do I need it for tracking?", a: "UTM parameters are tags you add to the end of a URL that tell analytics tools where traffic came from. For example, a link might have ?utm_source=facebook&utm_medium=social&utm_campaign=spring_sale. When someone clicks the link, Google Analytics captures these tags and lets you see which campaigns, sources, and channels drove traffic to your site." },
+          { q: "How is the UTM link structure set up, and what are the required parameters?", a: "The structure adds parameters to your URL like: https://yoursite.com?utm_source=SOURCE&utm_medium=MEDIUM&utm_campaign=CAMPAIGN. The three core parameters are source (where traffic comes from), medium (how they arrive), and campaign (what promotion/initiative it's part of). Two optional parameters are content and term for more detailed tracking." },
+          { q: "Can I track multiple campaigns at once, and how do UTM tags help organize that?", a: "Yes. By using consistent naming conventions, you can run multiple campaigns and track them all. For example, email, Facebook, and LinkedIn campaigns promoting the same product can share the same campaign name but have different medium values (email, social, social). This lets you compare which channel performs best for the same offer." },
+          { q: "Is the UTM link builder tool free?", a: "Our UTM link builder is completely free. Generate unlimited trackable links, establish naming conventions, and start tracking campaign performance without any cost or signup required." },
+        ]}
+      />
     <Footer />
     </>
   );

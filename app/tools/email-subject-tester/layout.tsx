@@ -5,12 +5,14 @@ const BRAND = 'AI Tool Rank';
 
 export const metadata: Metadata = {
   title: 'Email Subject Tester: Optimize Subject Lines | AI Tool Rank',
-  description: 'Free email subject line tester. Preview subject lines across email clients and detect spam words. No sign-up required.',
+  description: 'Free email subject line tester. Score your subject lines, detect spam trigger words, and preview across email clients. No sign-up required. Boost opens.',
   keywords: ['email subject tester', 'subject line preview', 'email marketing tool', 'inbox preview'],
-  canonical: `${DOMAIN}/tools/email-subject-tester`,
+  alternates: {
+    canonical: `${DOMAIN}/tools/email-subject-tester`,
+  },
   openGraph: {
     title: 'Email Subject Tester: Optimize Subject Lines | AI Tool Rank',
-    description: 'Free email subject line tester. Preview subject lines across email clients.',
+    description: 'Free email subject line tester. Score your subject lines, detect spam trigger words, and preview across email clients.',
     url: `${DOMAIN}/tools/email-subject-tester`,
     type: 'website',
     siteName: BRAND,
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Email Subject Tester: Optimize Subject Lines | AI Tool Rank',
-    description: 'Free email subject line tester. Preview subject lines across email clients.',
+    description: 'Free email subject line tester. Score your subject lines, detect spam trigger words, and preview across email clients.',
     images: [`${DOMAIN}/og-images/email-subject-tester.png`],
   },
 };

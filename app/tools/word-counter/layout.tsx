@@ -5,12 +5,14 @@ const BRAND = 'AI Tool Rank';
 
 export const metadata: Metadata = {
   title: 'Word Counter: Count Words & Characters | AI Tool Rank',
-  description: 'Free word counter tool. Count words, characters, sentences, and paragraphs instantly. No sign-up required.',
+  description: 'Free word counter tool. Instantly count words, characters, sentences, and paragraphs with reading time estimates. No sign-up required. Supports any text.',
   keywords: ['word counter', 'character counter', 'text analyzer', 'reading time calculator'],
-  canonical: `${DOMAIN}/tools/word-counter`,
+  alternates: {
+    canonical: `${DOMAIN}/tools/word-counter`,
+  },
   openGraph: {
     title: 'Word Counter: Count Words & Characters | AI Tool Rank',
-    description: 'Free word counter tool. Count words, characters, sentences, and paragraphs instantly.',
+    description: 'Free word counter tool. Instantly count words, characters, sentences, and paragraphs with reading time estimates. No sign-up required.',
     url: `${DOMAIN}/tools/word-counter`,
     type: 'website',
     siteName: BRAND,
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Word Counter: Count Words & Characters | AI Tool Rank',
-    description: 'Free word counter tool. Count words, characters, sentences, and paragraphs instantly.',
+    description: 'Free word counter tool. Instantly count words, characters, sentences, and paragraphs with reading time estimates. No sign-up required.',
     images: [`${DOMAIN}/og-images/word-counter.png`],
   },
 };

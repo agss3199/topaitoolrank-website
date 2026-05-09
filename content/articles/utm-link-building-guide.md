@@ -80,3 +80,17 @@ A key insight from UTM data is often about channel efficiency. You might discove
 The attribution question matters. The last click gets credit by default. But what if the first impression matters more? What if you need five touchpoints before conversion? UTM-tagged data lets you analyze these patterns and understand your customer journey better. Over time, you build sophistication about how your channels interact.
 
 Regular reporting on UTM data keeps your marketing aligned. Monthly or quarterly reports that show which campaigns drove traffic, which ones converted, and what the ROI was help teams see the impact of their work. These reports should inform future strategy.
+
+## Frequently Asked Questions
+
+**Q: What is a UTM parameter and why do I need it for tracking?**
+A: UTM parameters are tags you add to the end of a URL that tell analytics tools where traffic came from. For example, a link might have ?utm_source=facebook&utm_medium=social&utm_campaign=spring_sale. When someone clicks the link, Google Analytics captures these tags and lets you see which campaigns, sources, and channels drove traffic to your site.
+
+**Q: How is the UTM link structure set up, and what are the required parameters?**
+A: The structure adds parameters to your URL like: https://yoursite.com?utm_source=SOURCE&utm_medium=MEDIUM&utm_campaign=CAMPAIGN. The three core parameters are source (where traffic comes from), medium (how they arrive), and campaign (what promotion/initiative it's part of). Two optional parameters are content and term for more detailed tracking.
+
+**Q: Can I track multiple campaigns at once, and how do UTM tags help organize that?**
+A: Yes. By using consistent naming conventions, you can run multiple campaigns and track them all. For example, email, Facebook, and LinkedIn campaigns promoting the same product can share the same campaign name but have different medium values (email, social, social). This lets you compare which channel performs best for the same offer.
+
+**Q: Is the UTM link builder tool free?**
+A: Our UTM link builder is completely free. Generate unlimited trackable links, establish naming conventions, and start tracking campaign performance without any cost or signup required.
