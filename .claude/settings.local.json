@@ -122,7 +122,13 @@
       "Bash(find \"C:\\\\Users\\\\MONICA\\\\Desktop\\\\Abhishek_Softwares_All_old\\\\Top_AI_Tool_Rank\\\\content\\\\articles\" -name \"*.md\" -exec grep -l \"^$\" {} \\\\;)",
       "Bash(cat next.config.*)",
       "Bash(npx eslint:*)",
-      "Bash(awk '{print $NF, $6, $7, $8}')"
+      "Bash(awk '{print $NF, $6, $7, $8}')",
+      "Bash(awk '/\\\\.ring-one|\\\\.ring-two|\\\\.ring-three|\\\\.neural-core|\\\\.core-ring/{p=1} p{print; if\\(/}/\\)p=0}' app/\\\\\\(marketing\\\\\\)/styles.css)",
+      "Bash(awk '/@media/{inblock=1; media=$0} inblock{print NR\": \"$0} /^}/ && inblock{inblock=0}' app/\\\\\\(marketing\\\\\\)/styles.css)",
+      "Bash(sed -n '414,427p' app/\\\\\\(marketing\\\\\\)/styles.css)",
+      "Bash(sed -n '1016,1030p' app/\\\\\\(marketing\\\\\\)/styles.css)",
+      "Bash(sed -n '1199,1216p' app/\\\\\\(marketing\\\\\\)/styles.css)",
+      "Bash(next lint:*)"
     ]
   }
 }

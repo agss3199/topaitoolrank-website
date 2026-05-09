@@ -243,6 +243,64 @@ export default function JsonFormatterPage() {
 | WhatsApp Link Generator | WhatsApp Link Generator: Create Links \| AI Tool Rank | Free WhatsApp link generator. Create clickable WhatsApp chat links for your website. | whatsapp-link-generator.jpg | WhatsApp link generator |
 | WhatsApp Message Formatter | WhatsApp Formatter: Format Messages \| AI Tool Rank | Free WhatsApp message formatter. Add bold, italic, and other text formatting to WhatsApp messages. | whatsapp-message-formatter.jpg | WhatsApp formatter |
 
+## Caching & Performance
+
+Tool pages must be cached at multiple layers to optimize Core Web Vitals and reduce server load:
+
+### Browser Caching (Client-Side)
+
+```typescript
+// next.config.ts
+headers: [
+  {
+    source: '/tools/:path*',
+    headers: [
+      {
+        key: 'Cache-Control',
+        value: 'public, max-age=60',
+      },
+    ],
+  },
+]
+```
+
+- **max-age=60**: Browser caches for 1 minute
+- **public**: Intermediary caches (CDN) can also cache
+
+### CDN Caching (Vercel Edge)
+
+```typescript
+// next.config.ts
+headers: [
+  {
+    source: '/tools/:path*',
+    headers: [
+      {
+        key: 'Cache-Control',
+        value: 's-maxage=3600, stale-while-revalidate=86400',
+      },
+    ],
+  },
+]
+```
+
+- **s-maxage=3600**: Vercel CDN caches for 1 hour
+- **stale-while-revalidate=86400**: CDN serves stale content while revalidating (24 hour window)
+
+### Strategy
+
+This two-layer caching balances:
+- **Freshness**: Content stale no longer than 1 hour in CDN, 1 minute in browsers
+- **Performance**: Reduces server requests by ~99% for repeat visitors within same hour
+- **Consistency**: Invalidates automatically on deployment (static export)
+
+### Update Frequency
+
+Tool pages content changes infrequently:
+- Metadata updates: Deployed via next.config.ts (invalidates CDN on deploy)
+- Article updates: Deployed via content/ changes (invalidates CDN on deploy)
+- Interactive features: Client-side, no server cache impact
+
 ## Success Criteria
 
 - All 9 tools have correct metadata exported
@@ -253,3 +311,4 @@ export default function JsonFormatterPage() {
 - Structured data is valid (test via schema.org validator)
 - Mobile viewport is configured
 - No Search Console errors for metadata
+- Tool pages are cached: max-age=60 (browser) + s-maxage=3600 (CDN)

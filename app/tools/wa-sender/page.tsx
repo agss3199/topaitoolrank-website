@@ -15,6 +15,7 @@ import { Badge } from '@/app/components/Badge';
 import { WASenderTemplate } from '@/app/lib/types/wa-sender';
 import { substituteVariables } from '@/app/lib/templates';
 import { useWASender } from '@/app/tools/wa-sender/context';
+import BreadcrumbSchema from "../lib/BreadcrumbSchema";
 import './wa-sender.css';
 
 // Lazy-load TemplateModal and ContactModal since they're only used when user clicks button
@@ -761,6 +762,13 @@ export default function WASenderPage() {
 
   return (
     <>
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: 'https://topaitoolrank.com' },
+          { name: 'Tools', url: 'https://topaitoolrank.com/tools' },
+          { name: 'WA Sender', url: 'https://topaitoolrank.com/tools/wa-sender' },
+        ]}
+      />
       <Header />
       <div className="wa-page">
         {/* Background animations */}

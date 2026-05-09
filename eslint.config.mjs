@@ -1,5 +1,7 @@
 import js from '@eslint/js';
 import typescriptParser from '@typescript-eslint/parser';
+import typescriptPlugin from '@typescript-eslint/eslint-plugin';
+import globals from 'globals';
 
 export default [
   {
@@ -13,6 +15,11 @@ export default [
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       parser: typescriptParser,
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        React: 'readonly',
+      },
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
@@ -20,6 +27,9 @@ export default [
           jsx: true,
         },
       },
+    },
+    plugins: {
+      '@typescript-eslint': typescriptPlugin,
     },
     rules: {
       ...js.configs.recommended.rules,
