@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://topaitoolrank.com'),
   title: "Top AI Tool Rank",
   description:
-    "Building custom software solutions for businesses worldwide.",
+    "Discover, compare, and rank AI tools. Free directory of 100+ AI tools for writing, coding, design, and more. Expert reviews and hands-on comparisons.",
   icons: {
     icon: "/favicon.svg",
   },

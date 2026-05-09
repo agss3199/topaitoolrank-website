@@ -45,12 +45,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    console.log('[POST /api/wa-sender/contacts/export]', {
-      format,
-      size_bytes: csv.length,
-      lines: csv.split('\n').length - 1, // Exclude final newline
-    });
-
     return new NextResponse(csv, {
       status: 200,
       headers: {
@@ -60,7 +54,6 @@ export async function POST(req: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('[POST /api/wa-sender/contacts/export]', error);
     return NextResponse.json(
       { error: 'Failed to export contacts' },
       { status: 500 }

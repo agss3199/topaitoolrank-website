@@ -102,8 +102,6 @@ export default function ContactsPage() {
       setSelectedContact(null);
       setShowDeleteConfirm(false);
 
-      // Show success message
-      console.log('Contact deleted successfully');
     } catch (err) {
       alert(`Delete failed: ${err instanceof Error ? err.message : 'Unknown error'}`);
     } finally {

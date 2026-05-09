@@ -108,17 +108,8 @@ export async function POST(req: NextRequest) {
     const client = createAuthenticatedClient(token);
     const result = await db.importContacts(client, contacts);
 
-    console.log('[POST /api/wa-sender/contacts/import]', {
-      import_session_id: result.import_session_id,
-      total_rows: result.total_rows,
-      imported_count: result.imported_count,
-      duplicate_count: result.duplicate_count,
-      error_count: result.error_count,
-    });
-
     return NextResponse.json(result, { status: 202 });
   } catch (error) {
-    console.error('[POST /api/wa-sender/contacts/import]', error);
     return NextResponse.json(
       { error: 'Failed to import contacts' },
       { status: 500 }
