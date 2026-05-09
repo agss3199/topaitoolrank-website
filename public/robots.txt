@@ -2,5 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /assets/
 Disallow: /private/
+Disallow: /api/
+Disallow: /auth/
+Crawl-delay: 1
 
 Sitemap: https://topaitoolrank.com/sitemap.xml
