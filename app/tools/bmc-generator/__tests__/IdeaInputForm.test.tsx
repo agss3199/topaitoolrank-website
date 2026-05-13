@@ -193,31 +193,31 @@ describe('IdeaInputForm Component (structural verification)', () => {
 
   describe('CSS Module Usage', () => {
     it('applies container class', () => {
-      expect(componentSource).toContain('className={styles.container}');
+      expect(componentSource).toContain("cls(styles, 'container')");
     });
 
     it('applies header class', () => {
-      expect(componentSource).toContain('className={styles.header}');
+      expect(componentSource).toContain("cls(styles, 'header')");
     });
 
     it('applies textarea class', () => {
-      expect(componentSource).toContain('className={styles.textarea}');
+      expect(componentSource).toContain("cls(styles, 'textarea')");
     });
 
     it('applies error message class', () => {
-      expect(componentSource).toContain('className={styles.errorMessage}');
+      expect(componentSource).toContain("cls(styles, 'errorMessage')");
     });
 
     it('applies submit button class', () => {
-      expect(componentSource).toContain('className={styles.submitButton}');
+      expect(componentSource).toContain("cls(styles, 'submitButton')");
     });
 
     it('applies loading spinner class', () => {
-      expect(componentSource).toContain('className={styles.spinner}');
+      expect(componentSource).toContain("cls(styles, 'spinner')");
     });
 
     it('applies clear button class', () => {
-      expect(componentSource).toContain('className={styles.clearButton}');
+      expect(componentSource).toContain("cls(styles, 'clearButton')");
     });
 
     it('applies character counter error class conditionally', () => {
