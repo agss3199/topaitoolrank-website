@@ -1,0 +1,354 @@
+/* BMC Generator — Idea Input Form Styles */
+
+.container {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Form Container */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Textarea Input */
+.textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  background: #f9fafb;
+  color: #1e293b;
+  resize: vertical;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  outline: none;
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+.textarea::placeholder {
+  color: #9ca3af;
+}
+
+.textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+  background: #ffffff;
+}
+
+.textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #f3f4f6;
+}
+
+/* Character Counter */
+.charCounterContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.25rem 0;
+}
+
+.charCounter {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #64748b;
+  letter-spacing: 0.3px;
+}
+
+.charCounterError .charCounter {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+/* Error Message */
+.errorMessage {
+  background: #fef2f2;
+  border: 1.5px solid #fecaca;
+  border-radius: 8px;
+  padding: 0.875rem 1rem;
+  color: #dc2626;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Info Section */
+.infoSection {
+  background: #f0f9ff;
+  border: 1.5px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.infoText {
+  font-size: 0.875rem;
+  color: #1e40af;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.highlight {
+  font-weight: 700;
+  color: #1d4ed8;
+}
+
+/* Button Group */
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.submitButton {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: #2563eb;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.submitButton:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.submitButton:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}
+
+.submitButton:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Loading State */
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Clear Button */
+.clearButton {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #64748b;
+  background: #f1f5f9;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+  outline: none;
+  min-height: 44px;
+}
+
+.clearButton:hover:not(:disabled) {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+}
+
+.clearButton:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.clearButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.clearButton:focus-visible {
+  outline: 2px solid #64748b;
+  outline-offset: 2px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 1.5rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+  }
+
+  .textarea {
+    min-height: 100px;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+  }
+
+  .form {
+    gap: 1.25rem;
+  }
+
+  .infoSection {
+    padding: 0.875rem;
+  }
+
+  .infoText {
+    font-size: 0.8125rem;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .submitButton,
+  .clearButton {
+    min-height: 48px;
+  }
+}
+
+/* Tablet Responsive */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .container {
+    padding: 2rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .textarea {
+    min-height: 110px;
+  }
+
+  .buttonGroup {
+    gap: 0.875rem;
+  }
+}
+
+/* Accessibility */
+.textarea:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: -1px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: more) {
+  .textarea {
+    border-color: #000000;
+  }
+
+  .textarea:focus {
+    border-color: #0000ff;
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #0000ff;
+  }
+
+  .submitButton {
+    border: 2px solid #ffffff;
+  }
+
+  .submitButton:disabled {
+    border-color: #666666;
+  }
+
+  .clearButton {
+    border-color: #000000;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .textarea,
+  .submitButton,
+  .clearButton {
+    transition: none;
+  }
+
+  .spinner {
+    animation: none;
+    border-top-color: transparent;
+    opacity: 0.5;
+  }
+}
