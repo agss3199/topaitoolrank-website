@@ -114,6 +114,11 @@ export default function Header() {
                 </a>
               </li>
               <li>
+                <a href="/tools/palm-reader" rel="noopener">
+                  Palm Reader
+                </a>
+              </li>
+              <li>
                 <a href="/tools/wa-sender" rel="noopener">
                   WA Sender
                 </a>
