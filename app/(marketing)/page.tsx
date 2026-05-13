@@ -19,19 +19,16 @@ export default function HomePage() {
                 <h1>Build the software your business actually needs.</h1>
 
                 <p className="hero-subtitle">
-                  I help founders, operators, and growing teams turn messy
-                  workflows into clean AI-powered systems, dashboards,
-                  automations, and web products.
+                  I turn your messy workflows into software that runs without you.
                 </p>
 
                 <div className="hero-actions">
                   <a href="#contact" className="cta-button primary">
                     Discuss Your Project
                   </a>
-                  <a href="#services" className="cta-button secondary">
-                    View Services
-                  </a>
                 </div>
+
+                <a href="#services" className="hero-anchor-link">See how it works ↓</a>
 
                 <div className="hero-proof">
                   <div>
@@ -57,25 +54,21 @@ export default function HomePage() {
                     <span></span>
                   </div>
 
-                  <div className="neural-core">
-                    <div className="core-ring ring-one"></div>
-                    <div className="core-ring ring-two"></div>
-                    <div className="core-ring ring-three"></div>
-                    <div className="core-center"></div>
-                  </div>
-
-                  <div className="system-lines">
-                    <div>
-                      <span>Lead workflow automation</span>
-                      <b>98%</b>
+                  <div className="dashboard-mockup">
+                    <div className="mock-panel">
+                      <div className="mock-title">Automation Status</div>
+                      <div className="mock-chart"></div>
                     </div>
-                    <div>
-                      <span>AI content engine</span>
-                      <b>Live</b>
+                    <div className="mock-panel">
+                      <div className="mock-title">Active Tasks</div>
+                      <div className="mock-stats">
+                        <div className="stat-item">24<span>Completed</span></div>
+                        <div className="stat-item">8<span>Pending</span></div>
+                      </div>
                     </div>
-                    <div>
-                      <span>Custom dashboard</span>
-                      <b>Ready</b>
+                    <div className="mock-panel">
+                      <div className="mock-title">System Health</div>
+                      <div className="mock-badge online">● Online</div>
                     </div>
                   </div>
                 </div>
@@ -83,6 +76,29 @@ export default function HomePage() {
                 <div className="floating-chip chip-one">AI Agents</div>
                 <div className="floating-chip chip-two">Dashboards</div>
                 <div className="floating-chip chip-three">Automation</div>
+              </div>
+            </div>
+          </section>
+
+          <section id="services" className="problem-frame section-padding">
+            <div className="container">
+              <div className="problem-content reveal">
+                <span className="section-kicker">The real problem</span>
+                <h2>You don't need more software. You need software that fits.</h2>
+
+                <div className="problem-cards">
+                  <article className="problem-card">
+                    <p>Your team uses 6 tools that don't talk to each other</p>
+                  </article>
+
+                  <article className="problem-card">
+                    <p>Your ops workflow lives in spreadsheets and WhatsApp</p>
+                  </article>
+
+                  <article className="problem-card">
+                    <p>You tried off-the-shelf and it's close, but not quite</p>
+                  </article>
+                </div>
               </div>
             </div>
           </section>
@@ -108,7 +124,7 @@ export default function HomePage() {
             </div>
           </section>
 
-          <section id="services" className="services section-padding">
+          <section className="services section-padding">
             <div className="container">
               <div className="section-heading reveal">
                 <span className="section-kicker">Services</span>
@@ -121,40 +137,35 @@ export default function HomePage() {
               </div>
 
               <div className="services-grid">
-                <article className="service-card reveal">
+                <article className="service-card service-primary reveal reveal-tilt">
                   <div className="service-icon">01</div>
                   <h3>Custom Software Development</h3>
                   <p>
-                    Web apps, portals, dashboards, CRMs, admin panels, and
-                    workflow systems built around your exact business process.
+                    Build bespoke systems that fit your exact workflow. A logistics company replaced 4 spreadsheets with one automated dashboard. Onboarding now takes 4 minutes instead of 40.
                   </p>
                 </article>
 
-                <article className="service-card reveal delay-1">
+                <article className="service-card service-primary reveal reveal-tilt delay-1">
                   <div className="service-icon">02</div>
                   <h3>AI Automation Systems</h3>
                   <p>
-                    Automate repetitive work using AI agents, document
-                    processing, lead qualification, content workflows, and smart
-                    assistants.
+                    Reduce manual work with AI agents and document processing. A legal team automated contract review, cutting processing time from 3 hours to 12 minutes per document.
                   </p>
                 </article>
 
-                <article className="service-card service-card-offset reveal delay-2">
+                <article className="service-card reveal reveal-tilt delay-2">
                   <div className="service-icon">03</div>
                   <h3>MVP &amp; Product Builds</h3>
                   <p>
-                    Turn an idea into a polished first version that can be shown
-                    to customers, investors, or internal teams.
+                    Polished first versions in weeks, not months. From concept to working product you can show customers or investors.
                   </p>
                 </article>
 
-                <article className="service-card reveal delay-3">
+                <article className="service-card reveal reveal-tilt delay-3">
                   <div className="service-icon">04</div>
                   <h3>Dashboards &amp; Internal Tools</h3>
                   <p>
-                    Centralize business data, track operations, manage teams,
-                    monitor leads, and make decisions faster.
+                    Centralize data, visualize operations, and empower teams to make faster decisions with real-time insights.
                   </p>
                 </article>
               </div>
@@ -164,107 +175,40 @@ export default function HomePage() {
           <section id="tools" className="tools section-padding">
             <div className="container">
               <div className="section-heading reveal">
-                <span className="section-kicker">Tools</span>
-                <h2>Live tools and experiments</h2>
-                <p>I do not just talk about software. I build, test, and ship real tools.</p>
+                <span className="section-kicker">Proof of work</span>
+                <h2>I ship working software. Here are some you can try.</h2>
               </div>
 
               <div className="tools-grid">
                 <article className="tool-card reveal">
                   <div>
                     <span className="tool-badge">Live</span>
-                    <h3>WhatsApp Message Formatter</h3>
-                    <p>Transform markdown into WhatsApp-formatted text with bold, italic, and code styling.</p>
-                  </div>
-                  <a href="/tools/whatsapp-message-formatter" className="tool-link">
-                    Try Tool &rarr;
-                  </a>
-                </article>
-
-                <article className="tool-card reveal delay-1">
-                  <div>
-                    <span className="tool-badge">Live</span>
-                    <h3>WhatsApp Link Generator</h3>
-                    <p>Generate direct WhatsApp chat links and QR codes for quick messaging without saving contacts.</p>
-                  </div>
-                  <a href="/tools/whatsapp-link-generator" className="tool-link">
-                    Try Tool &rarr;
-                  </a>
-                </article>
-
-                <article className="tool-card reveal delay-2">
-                  <div>
-                    <span className="tool-badge">Live</span>
-                    <h3>Word Counter</h3>
-                    <p>Real-time word, character, and sentence counting with readability metrics for any text.</p>
-                  </div>
-                  <a href="/tools/word-counter" className="tool-link">
-                    Try Tool &rarr;
-                  </a>
-                </article>
-
-                <article className="tool-card reveal delay-3">
-                  <div>
-                    <span className="tool-badge">Live</span>
-                    <h3>AI Prompt Generator</h3>
-                    <p>Create structured, effective prompts for AI models with business use case templates.</p>
-                  </div>
-                  <a href="/tools/ai-prompt-generator" className="tool-link">
-                    Try Tool &rarr;
-                  </a>
-                </article>
-
-                <article className="tool-card reveal delay-1">
-                  <div>
-                    <span className="tool-badge">Live</span>
-                    <h3>Email Subject Tester</h3>
-                    <p>A/B test email subject lines with scoring and improvement suggestions for higher open rates.</p>
-                  </div>
-                  <a href="/tools/email-subject-tester" className="tool-link">
-                    Try Tool &rarr;
-                  </a>
-                </article>
-
-                <article className="tool-card reveal delay-2">
-                  <div>
-                    <span className="tool-badge">Live</span>
-                    <h3>UTM Link Builder</h3>
-                    <p>Build and track campaign URLs with automatic UTM parameter generation for analytics.</p>
-                  </div>
-                  <a href="/tools/utm-link-builder" className="tool-link">
-                    Try Tool &rarr;
-                  </a>
-                </article>
-
-                <article className="tool-card reveal delay-3">
-                  <div>
-                    <span className="tool-badge">Live</span>
-                    <h3>JSON Formatter</h3>
-                    <p>Format, validate, and beautify JSON with error detection and inline previews.</p>
-                  </div>
-                  <a href="/tools/json-formatter" className="tool-link">
-                    Try Tool &rarr;
-                  </a>
-                </article>
-
-                <article className="tool-card reveal delay-1">
-                  <div>
-                    <span className="tool-badge">Live</span>
                     <h3>Invoice Generator</h3>
-                    <p>Create professional invoices instantly with customizable templates and PDF download.</p>
+                    <p>Professional invoices with customizable templates and instant PDF export.</p>
                   </div>
                   <a href="/tools/invoice-generator" className="tool-link">
                     Try Tool &rarr;
                   </a>
                 </article>
 
-                <article className="tool-card reveal delay-2">
+                <article className="tool-card reveal delay-1">
                   <div>
                     <span className="tool-badge">Live</span>
                     <h3>SEO Analyzer</h3>
-                    <p>Analyze any webpage for SEO optimization opportunities and meta tag compliance.</p>
+                    <p>Analyze webpages for SEO optimization and meta tag compliance in seconds.</p>
                   </div>
                   <a href="/tools/seo-analyzer" className="tool-link">
+                    Try Tool &rarr;
+                  </a>
+                </article>
+
+                <article className="tool-card reveal delay-2">
+                  <div>
+                    <span className="tool-badge">Live</span>
+                    <h3>AI Prompt Generator</h3>
+                    <p>Create structured, effective prompts for AI models with business templates.</p>
+                  </div>
+                  <a href="/tools/ai-prompt-generator" className="tool-link">
                     Try Tool &rarr;
                   </a>
                 </article>
@@ -273,12 +217,16 @@ export default function HomePage() {
                   <div>
                     <span className="tool-badge">Live</span>
                     <h3>WA Sender</h3>
-                    <p>A practical communication tool designed to make outreach and WhatsApp-based workflows easier.</p>
+                    <p>Streamline WhatsApp outreach with bulk messaging and workflow automation.</p>
                   </div>
                   <a href="/tools/wa-sender" className="tool-link">
                     Try Tool &rarr;
                   </a>
                 </article>
+              </div>
+
+              <div className="tools-footer reveal">
+                <a href="/tools" className="tools-all-link">See all tools →</a>
               </div>
             </div>
           </section>
@@ -421,16 +369,63 @@ export default function HomePage() {
                   />
                 </div>
 
-                <div className="form-group">
-                  <label htmlFor="message" className="form-label sr-only">Your Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    placeholder="Tell me what you want to build"
-                    rows={5}
-                    required
-                    aria-required="true"
-                  ></textarea>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="budget" className="form-label sr-only">Budget Range</label>
+                    <select
+                      id="budget"
+                      name="budget"
+                      aria-label="Budget Range"
+                    >
+                      <option value="">Budget Range</option>
+                      <option value="5-10k">$5K - $10K</option>
+                      <option value="10-25k">$10K - $25K</option>
+                      <option value="25k-plus">$25K+</option>
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="timeline" className="form-label sr-only">Timeline</label>
+                    <select
+                      id="timeline"
+                      name="timeline"
+                      aria-label="Timeline"
+                    >
+                      <option value="">Timeline</option>
+                      <option value="1-2-weeks">1-2 Weeks</option>
+                      <option value="1-month">1 Month</option>
+                      <option value="2-3-months">2-3 Months</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="projectType" className="form-label sr-only">Project Type</label>
+                    <select
+                      id="projectType"
+                      name="projectType"
+                      aria-label="Project Type"
+                    >
+                      <option value="">Project Type</option>
+                      <option value="custom-software">Custom Software</option>
+                      <option value="ai-automation">AI Automation</option>
+                      <option value="mvp">MVP/Product</option>
+                      <option value="dashboard">Dashboard/Tool</option>
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="message" className="form-label sr-only">Your Message</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      placeholder="Tell me what you want to build"
+                      rows={3}
+                      required
+                      aria-required="true"
+                    ></textarea>
+                  </div>
                 </div>
 
                 <button type="submit" className="cta-button primary" id="submitBtn">

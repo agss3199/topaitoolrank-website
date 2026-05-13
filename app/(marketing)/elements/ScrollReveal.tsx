@@ -16,12 +16,15 @@ export default function ScrollReveal({
   children: React.ReactNode;
 }) {
   useEffect(() => {
-    const revealItems = document.querySelectorAll(".reveal");
+    const revealItems = document.querySelectorAll(
+      ".reveal, .reveal-tilt, .reveal-left, .reveal-right, .reveal-scale"
+    );
     const revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
           }
         });
       },
