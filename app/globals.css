@@ -115,7 +115,44 @@
 
   /* Transition */
   --transition: all 0.3s ease;
+
+  /* ---- Todo 004: Responsive Breakpoints ---- */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1440px;
 }
+
+/* =============================================================
+   Todo 004: Responsive Design Baseline
+   ============================================================= */
+
+/* Base container — all screens */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md); /* 16px sides */
+}
+
+/* Mobile optimization — smaller padding on tiny screens */
+@media (max-width: 640px) {
+  .container {
+    padding: 0 var(--spacing-sm); /* 8px sides */
+  }
+}
+
+/* Large screens — maintain max-width, don't grow beyond */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+/* CSS Cascade Safety Rule
+ * When media queries override properties, dependent properties MUST be re-declared.
+ * Example: if animation is declared in base rule, it must be re-declared in @media.
+ * See rules/project/responsive-animation-safety.md for details.
+ */
 
 /* ---- Responsive typography handled via clamp() ---- */
 /* Font sizes scale automatically based on viewport width between min and max values.
@@ -133,6 +170,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 120px; /* Fixed header (72px) + top offset (18px) + buffer (30px) */
 }
 
 body {
@@ -155,26 +193,22 @@ a {
 .skip-to-content {
   position: absolute;
   left: -9999px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  z-index: 10000;
-  padding: 12px 24px;
+  z-index: 999;
+  padding: 8px 16px;
   background: var(--color-accent);
-  color: var(--color-black);
-  font-weight: 700;
+  color: var(--color-white);
+  border-radius: 4px;
   text-decoration: none;
-  border-radius: 0 0 8px 8px;
+  font-weight: 600;
 }
 
 .skip-to-content:focus {
   position: fixed;
+  top: 100px; /* Below fixed header (72px + 18px top offset + 10px buffer) */
   left: 16px;
-  top: 0;
-  width: auto;
-  height: auto;
-  overflow: visible;
+  z-index: 999;
+  outline: 2px solid var(--color-accent-hover);
+  outline-offset: 2px;
 }
 
 .sr-only {

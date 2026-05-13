@@ -35,7 +35,7 @@ const ORCHESTRATOR_TIMEOUT_MS = 5_000;
 const GENERATION_TOKEN_BYTES = 32;
 const GENERATION_TOKEN_TTL_SECONDS = 30 * 60; // 30 minutes
 const MAX_DAILY_GENERATIONS = 20;
-const GLOBAL_DAILY_COST_CEILING_USD = 500;
+const GLOBAL_DAILY_COST_CEILING_USD = 0.50; // $0.50/day budget cap per spec
 const CONCURRENT_GENERATION_TTL_MS = 5 * 60 * 1000; // 5 min TTL for stale entries
 const MAX_PAYLOAD_BYTES = 100 * 1024; // 100KB for a text idea
 
@@ -110,6 +110,20 @@ function evictStaleConcurrentEntries(): void {
   for (const [sessionId, entry] of concurrentGenerations.entries()) {
     if (now - entry.startTime > entry.timeoutMs) {
       concurrentGenerations.delete(sessionId);
+    }
+  }
+}
+
+/**
+ * Evict stale SSE session state.
+ * Entries older than 30 minutes are removed.
+ */
+function evictStaleSSEState(): void {
+  const now = Date.now();
+  const SSE_STATE_TTL_MS = 30 * 60 * 1000; // 30 minutes
+  for (const [sessionId, entry] of sseSessionState.entries()) {
+    if (now - entry.createdAt > SSE_STATE_TTL_MS) {
+      sseSessionState.delete(sessionId);
     }
   }
 }
@@ -200,6 +214,7 @@ export async function POST(request: Request): Promise<Response> {
   // Housekeeping: evict stale entries and reset daily counters
   evictStaleConcurrentEntries();
   resetDailyCountersIfNeeded();
+  evictStaleSSEState();
 
   // -----------------------------------------------------------------------
   // 1. Per-IP rate limit (check before any processing)
@@ -286,7 +301,7 @@ export async function POST(request: Request): Promise<Response> {
 
   if (!idea || typeof idea !== 'string') {
     return Response.json(
-      { error: 'Missing or invalid "idea" field. Must be a string.' },
+      { error: 'Invalid input provided.' },
       {
         status: 400,
         headers: { 'Cache-Control': 'no-store, no-cache' },
@@ -298,7 +313,7 @@ export async function POST(request: Request): Promise<Response> {
   if (trimmedIdea.length < IDEA_MIN_LENGTH || trimmedIdea.length > IDEA_MAX_LENGTH) {
     return Response.json(
       {
-        error: `Idea must be ${IDEA_MIN_LENGTH}-${IDEA_MAX_LENGTH} characters. Current length: ${trimmedIdea.length}.`,
+        error: 'Invalid input provided.',
       },
       {
         status: 400,

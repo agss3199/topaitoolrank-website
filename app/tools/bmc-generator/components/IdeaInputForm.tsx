@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useMemo } from 'react';
 import { apiClient, APIError } from '../lib/api-client';
+import { cls } from '../lib/css-module-safe';
 import styles from '../styles/idea-input-form.module.css';
 
 interface IdeaInputFormProps {
@@ -82,23 +83,23 @@ export default function IdeaInputForm({ onQuestionsReceived }: IdeaInputFormProp
   }, []);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <h1 className={styles.title}>BMC Generator</h1>
-        <p className={styles.subtitle}>
+    <div className={cls(styles, 'container')}>
+      <div className={cls(styles, 'header')}>
+        <h1 className={cls(styles, 'title')}>BMC Generator</h1>
+        <p className={cls(styles, 'subtitle')}>
           Describe your business idea in plain English. Be specific about the problem you solve and who benefits.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={handleSubmit} className={cls(styles, 'form')}>
         {/* Idea Input Field */}
-        <div className={styles.fieldGroup}>
-          <label htmlFor="idea-input" className={styles.label}>
+        <div className={cls(styles, 'fieldGroup')}>
+          <label htmlFor="idea-input" className={cls(styles, 'label')}>
             My idea:
           </label>
           <textarea
             id="idea-input"
-            className={styles.textarea}
+            className={cls(styles, 'textarea')}
             value={idea}
             onChange={handleIdeaChange}
             placeholder="E.g., AI-powered fitness coach that provides personalized workout routines based on user fitness level and available equipment..."
@@ -109,13 +110,13 @@ export default function IdeaInputForm({ onQuestionsReceived }: IdeaInputFormProp
 
           {/* Character Counter */}
           <div
-            className={`${styles.charCounterContainer} ${
-              charCount > MAX_CHARS ? styles.charCounterError : ''
+            className={`${cls(styles, 'charCounterContainer')} ${
+              charCount > MAX_CHARS ? cls(styles, 'charCounterError') : ''
             }`}
             aria-live="polite"
             aria-atomic="true"
           >
-            <span className={styles.charCounter}>
+            <span className={cls(styles, 'charCounter')}>
               {charCount}/{MAX_CHARS} characters
             </span>
           </div>
@@ -123,32 +124,32 @@ export default function IdeaInputForm({ onQuestionsReceived }: IdeaInputFormProp
 
         {/* Error Message */}
         {error && (
-          <div id="idea-error" className={styles.errorMessage} role="alert">
+          <div id="idea-error" className={cls(styles, 'errorMessage')} role="alert">
             {error}
           </div>
         )}
 
         {/* Info Section */}
-        <div className={styles.infoSection}>
-          <p className={styles.infoText}>
-            Estimated cost: <span className={styles.highlight}>$0.02-0.05</span>
+        <div className={cls(styles, 'infoSection')}>
+          <p className={cls(styles, 'infoText')}>
+            Estimated cost: <span className={cls(styles, 'highlight')}>$0.02-0.05</span>
           </p>
-          <p className={styles.infoText}>
-            Estimated time: <span className={styles.highlight}>45-90 seconds</span>
+          <p className={cls(styles, 'infoText')}>
+            Estimated time: <span className={cls(styles, 'highlight')}>45-90 seconds</span>
           </p>
         </div>
 
         {/* Button Group */}
-        <div className={styles.buttonGroup}>
+        <div className={cls(styles, 'buttonGroup')}>
           <button
             type="submit"
             disabled={!isValidLength || loading}
-            className={styles.submitButton}
+            className={cls(styles, 'submitButton')}
             aria-label={loading ? 'Analyzing your idea...' : 'Analyze your business idea'}
           >
             {loading ? (
-              <span className={styles.loadingContainer}>
-                <span className={styles.spinner} aria-hidden="true" />
+              <span className={cls(styles, 'loadingContainer')}>
+                <span className={cls(styles, 'spinner')} aria-hidden="true" />
                 Analyzing...
               </span>
             ) : (
@@ -160,7 +161,7 @@ export default function IdeaInputForm({ onQuestionsReceived }: IdeaInputFormProp
             type="button"
             onClick={handleClear}
             disabled={loading || charCount === 0}
-            className={styles.clearButton}
+            className={cls(styles, 'clearButton')}
             aria-label="Clear the input field"
           >
             Clear

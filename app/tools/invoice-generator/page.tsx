@@ -26,6 +26,8 @@ import {
   saveTolocalStorage,
   loadFromlocalStorage,
 } from "./lib/utils";
+import { generateInvoicePDF } from "./lib/pdf-generator";
+import logger from "@/app/lib/logger";
 import { cls } from "../lib/css-module-safe";
 import BreadcrumbSchema from "../lib/BreadcrumbSchema";
 import { ArticleSection } from "../lib/ArticleSection";
@@ -96,7 +98,7 @@ export default function InvoiceGeneratorPage() {
           setArticleContent('');
         }
       } catch (error) {
-        console.error('Failed to load article:', error);
+        logger.error('article.load.failed', { errorType: error instanceof Error ? error.constructor.name : typeof error });
         setArticleError('Unable to load article. Please refresh the page.');
         setArticleContent('');
       } finally {
@@ -146,9 +148,45 @@ export default function InvoiceGeneratorPage() {
     }));
   };
 
-  const handleDownloadPDF = () => {
+  const handleDownloadPDF = async () => {
+    const previewElement = document.getElementById('invoice-preview');
+    if (!previewElement || !data.companyName || !data.clientName) {
+      logger.warn('invoice.pdf.incomplete_form', {
+        hasPreview: !!previewElement,
+        hasCompanyName: !!data.companyName,
+        hasClientName: !!data.clientName,
+      });
+      return;
+    }
+
+    try {
+      await generateInvoicePDF(previewElement, {
+        invoiceNumber: data.invoiceNumber,
+        companyName: data.companyName,
+        companyEmail: data.companyEmail || '',
+        companyPhone: data.companyPhone || '',
+        clientName: data.clientName,
+        clientEmail: data.clientEmail || '',
+        clientPhone: data.clientPhone || '',
+        items: data.items || [],
+        notes: data.notes || '',
+        terms: data.terms || '',
+      });
+    } catch (error) {
+      logger.error('invoice.pdf.download_failed', {
+        errorType: error instanceof Error ? error.constructor.name : typeof error,
+        isValidationError: error instanceof Error && error.message.includes('invalid characters'),
+      });
+    }
+  };
+
+  const handleDownloadText = () => {
     const textInvoice = generateTextInvoice(data);
     downloadAsFile(textInvoice, `invoice-${data.invoiceNumber}.txt`);
+  };
+
+  const handlePrint = () => {
+    window.print();
   };
 
   return (
@@ -360,7 +398,21 @@ export default function InvoiceGeneratorPage() {
                 className={cls(styles, "invoice-generator__btn")}
                 disabled={!validation.valid}
               >
-                ⬇️ Download Invoice
+                Download as PDF
+              </button>
+              <button
+                onClick={handleDownloadText}
+                className={cls(styles, "invoice-generator__btn")}
+                disabled={!validation.valid}
+              >
+                Download as Text
+              </button>
+              <button
+                onClick={handlePrint}
+                className={cls(styles, "invoice-generator__btn")}
+                disabled={!validation.valid}
+              >
+                Print
               </button>
             </div>
           </section>
@@ -369,7 +421,7 @@ export default function InvoiceGeneratorPage() {
           {showPreview && validation.valid && (
             <section className={cls(styles, "invoice-generator__preview-section")}>
               <h2 className={cls(styles, "invoice-generator__preview-title")}>Preview</h2>
-              <div className={cls(styles, "invoice-generator__preview")}>
+              <div id="invoice-preview" className={cls(styles, "invoice-generator__preview")}>
                 <pre className={cls(styles, "invoice-generator__preview-text")}>
                   {generateTextInvoice(data)}
                 </pre>

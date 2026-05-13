@@ -2,6 +2,8 @@
  * Invoice Generator - Isolated Utilities
  */
 
+import logger from '@/app/lib/logger';
+
 export function downloadAsFile(content: string, filename: string, type: string = "text/plain"): void {
   const blob = new Blob([content], { type });
   const url = URL.createObjectURL(blob);
@@ -33,7 +35,7 @@ export function saveTolocalStorage(key: string, value: string): void {
   try {
     localStorage.setItem(key, value);
   } catch (error) {
-    console.error("localStorage save failed:", error);
+    logger.error('localStorage.save.failed', { errorType: error instanceof Error ? error.constructor.name : typeof error });
   }
 }
 
@@ -41,7 +43,7 @@ export function loadFromlocalStorage(key: string): string | null {
   try {
     return localStorage.getItem(key);
   } catch (error) {
-    console.error("localStorage load failed:", error);
+    logger.error('localStorage.load.failed', { errorType: error instanceof Error ? error.constructor.name : typeof error });
     return null;
   }
 }

@@ -40,7 +40,9 @@ export default function RootLayout({
       </head>
       <body>
         <a href="#main" className="skip-to-content">Skip to main content</a>
-        {children}
+        <main id="main">
+          {children}
+        </main>
 
         {/* Main JS for form handling, nav, animations */}
         <script src="/js/main.js"></script>

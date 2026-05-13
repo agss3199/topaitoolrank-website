@@ -371,19 +371,41 @@
 }
 
 @media print {
-  .invoice-generator__header {
-    border-bottom: none;
+  /* Hide everything except invoice preview */
+  .invoice-generator__header,
+  .invoice-generator__form-section,
+  .invoice-generator__actions,
+  .invoice-generator__summary,
+  .invoice-generator__footer,
+  .invoice-generator__article-container,
+  .invoice-generator__article-error {
+    display: none;
   }
 
-  .invoice-generator__form-section,
-  .invoice-generator__summary,
-  .invoice-generator__actions {
-    display: none;
+  /* Show preview full page */
+  .invoice-generator__preview-section {
+    display: block;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
   }
 
   .invoice-generator__preview {
     border: none;
     padding: 0;
     overflow: visible;
+    page-break-inside: avoid;
+    print-color-adjust: exact;
+  }
+
+  /* Optimize for printing */
+  body {
+    background: white;
+    color: black;
+  }
+
+  @page {
+    margin: 0.5in;
+    size: letter;
   }
 }

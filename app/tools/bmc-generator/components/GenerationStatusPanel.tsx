@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { SSEManager, createSSEManager } from '../lib/sse-manager';
+import { cls } from '../lib/css-module-safe';
 import type { AgentStatus } from '../lib/types';
 import styles from '../styles/generation-status-panel.module.css';
 
@@ -34,15 +35,15 @@ function formatRemaining(elapsedMs: number): string {
 }
 
 function getProgressColor(progress: number): string {
-  if (progress < 0.5) return styles.phaseBarFillBlue;
-  if (progress < 0.8) return styles.phaseBarFillYellow;
-  return styles.phaseBarFillRed;
+  if (progress < 0.5) return cls(styles, 'phaseBarFillBlue');
+  if (progress < 0.8) return cls(styles, 'phaseBarFillYellow');
+  return cls(styles, 'phaseBarFillRed');
 }
 
 function getCostClass(cost: number): string {
-  if (cost < 0.03) return styles.costGreen;
-  if (cost <= 0.04) return styles.costYellow;
-  return styles.costRed;
+  if (cost < 0.03) return cls(styles, 'costGreen');
+  if (cost <= 0.04) return cls(styles, 'costYellow');
+  return cls(styles, 'costRed');
 }
 
 export default function GenerationStatusPanel({
@@ -127,24 +128,24 @@ export default function GenerationStatusPanel({
   }, [sessionId, handleProgress, handleComplete, handleError]);
 
   return (
-    <section className={styles.panel} aria-label="Generation progress">
-      <header className={styles.header}>
-        <h2 className={styles.title}>Generating Your Business Model Canvas</h2>
-        <p className={styles.warning} role="alert">
+    <section className={cls(styles, 'panel')} aria-label="Generation progress">
+      <header className={cls(styles, 'header')}>
+        <h2 className={cls(styles, 'title')}>Generating Your Business Model Canvas</h2>
+        <p className={cls(styles, 'warning')} role="alert">
           Do not refresh or leave this page
         </p>
       </header>
 
       {/* Phase progress bars */}
       <div
-        className={styles.phaseBars}
+        className={cls(styles, 'phaseBars')}
         role="group"
         aria-label="Phase progress indicators"
       >
         {phases.map((phase, idx) => (
           <div
             key={idx}
-            className={styles.phaseBarTrack}
+            className={cls(styles, 'phaseBarTrack')}
             role="progressbar"
             aria-valuenow={Math.round(phase.progress * 100)}
             aria-valuemin={0}
@@ -152,15 +153,15 @@ export default function GenerationStatusPanel({
             aria-label={`Phase ${idx + 1} progress: ${Math.round(phase.progress * 100)}%`}
           >
             <div
-              className={`${styles.phaseBarFill} ${
-                idx === 0 ? styles.phaseBarFillGray : getProgressColor(phase.progress)
+              className={`${cls(styles, 'phaseBarFill')} ${
+                idx === 0 ? cls(styles, 'phaseBarFillGray') : getProgressColor(phase.progress)
               }`}
               style={{ width: `${phase.progress * 100}%` }}
             />
           </div>
         ))}
       </div>
-      <div className={styles.phaseLabels}>
+      <div className={cls(styles, 'phaseLabels')}>
         <span>Phase 1</span>
         <span>Phase 2</span>
         <span>Phase 3</span>
@@ -168,32 +169,32 @@ export default function GenerationStatusPanel({
       </div>
 
       {/* Active agent */}
-      <div className={styles.agentName} aria-live="polite" aria-label="Active agent">
+      <div className={cls(styles, 'agentName')} aria-live="polite" aria-label="Active agent">
         {activeAgent}
       </div>
 
       {/* Timing */}
-      <div className={styles.timingRow}>
+      <div className={cls(styles, 'timingRow')}>
         <span aria-label="Elapsed time">Elapsed: {formatElapsed(elapsedMs)}</span>
         <span aria-label="Estimated remaining time">{formatRemaining(elapsedMs)}</span>
       </div>
 
       {/* Cost */}
-      <div className={styles.costDisplay}>
+      <div className={cls(styles, 'costDisplay')}>
         <div
-          className={`${styles.costValue} ${getCostClass(currentCost)}`}
+          className={`${cls(styles, 'costValue')} ${getCostClass(currentCost)}`}
           aria-label={`Current cost: $${currentCost.toFixed(4)}`}
         >
           ${currentCost.toFixed(4)}
         </div>
-        <div className={styles.costLabel}>
+        <div className={cls(styles, 'costLabel')}>
           estimated total: ${estimatedCost.toFixed(3)}
         </div>
       </div>
 
       {/* Error display */}
       {error && (
-        <div className={styles.errorBox} role="alert" aria-label="Generation error">
+        <div className={cls(styles, 'errorBox')} role="alert" aria-label="Generation error">
           {error}
         </div>
       )}

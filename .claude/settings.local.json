@@ -128,7 +128,20 @@
       "Bash(sed -n '414,427p' app/\\\\\\(marketing\\\\\\)/styles.css)",
       "Bash(sed -n '1016,1030p' app/\\\\\\(marketing\\\\\\)/styles.css)",
       "Bash(sed -n '1199,1216p' app/\\\\\\(marketing\\\\\\)/styles.css)",
-      "Bash(next lint:*)"
+      "Bash(next lint:*)",
+      "Bash(find app/tools/invoice* -name \"*.tsx\" -o -name \"*.ts\")",
+      "Bash(mv todos/active/001-fix-header-content-compensation.md todos/completed/)",
+      "Bash(mv todos/active/002-add-header-footer-to-blogs.md todos/completed/)",
+      "Bash(mv todos/active/003-invoice-pdf-export-with-security.md todos/completed/)",
+      "Bash(mv todos/active/004-responsive-design-baseline.md todos/completed/)",
+      "Bash(mv todos/active/601-fix-header-content-compensation.md todos/completed/)",
+      "Bash(mv todos/active/602-add-header-footer-to-blogs.md todos/completed/)",
+      "Bash(mv todos/active/603-invoice-pdf-export.md todos/completed/)",
+      "Bash(mv todos/active/604-responsive-design-baseline.md todos/completed/)",
+      "Bash(npx jest:*)",
+      "Bash(cat \"C:\\\\\\\\Users\\\\\\\\MONICA\\\\\\\\Desktop\\\\\\\\Abhishek_Softwares_All_old\\\\\\\\Top_AI_Tool_Rank\\\\\\\\workspaces\\\\\\\\bmc-generator\\\\\\\\specs\\\\\\\\api-orchestration.md\")",
+      "Bash(cat /c/Users/MONICA/Desktop/Abhishek_Softwares_All_old/Top_AI_Tool_Rank/jest.config.*)",
+      "Bash(bash /tmp/verify_gaps.sh)"
     ]
   }
 }

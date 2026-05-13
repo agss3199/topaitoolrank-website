@@ -48,6 +48,15 @@ SEO & Deployment (2 todos)
 
 ## Todo List (All Tasks)
 
+### LAYOUT & BUG FIXES (Priority — implement before tool waves)
+
+Run in order (601 → 602, 603 and 604 can be parallel after 601):
+
+- [ ] **601-fix-header-content-compensation** — CRITICAL: Add scroll-padding-top + skip-to-content link; content hidden behind fixed header
+- [ ] **602-add-header-footer-to-blogs** — CRITICAL: Import Header + Footer into app/blogs/layout.tsx; blogs have zero navigation (depends: 601)
+- [ ] **603-invoice-pdf-export** — HIGH: Replace .txt export with jsPDF + html2canvas; add print support and input validation
+- [ ] **604-responsive-design-baseline** — HIGH: Add container class, spacing scale, breakpoint constants to globals.css (depends: 601)
+
 ### SETUP
 
 - [ ] **001-setup-tool-infrastructure** — Create app/tools/ folder structure and CSS isolation template

@@ -75,6 +75,32 @@ interface TokenVerifyResult {
 }
 
 /**
+ * Create a fresh generation token for /generate (after /answers succeeds).
+ * Same format as in /start: base64url(payload).base64url(hmac_signature)
+ */
+function createGenerationToken(sessionId: string, secret: string): string {
+  const randomBytes = crypto.randomBytes(32).toString('hex');
+  const now = Math.floor(Date.now() / 1000);
+  const GENERATION_TOKEN_TTL_SECONDS = 30 * 60; // 30 minutes
+
+  const payload = {
+    sid: sessionId,
+    rnd: randomBytes,
+    iat: now,
+    exp: now + GENERATION_TOKEN_TTL_SECONDS,
+    used: false,
+  };
+
+  const payloadB64 = Buffer.from(JSON.stringify(payload)).toString('base64url');
+  const signature = crypto
+    .createHmac('sha256', secret)
+    .update(payloadB64)
+    .digest('base64url');
+
+  return `${payloadB64}.${signature}`;
+}
+
+/**
  * Verify generation_token: HMAC signature, session binding, expiration, single-use.
  */
 function verifyGenerationToken(
@@ -508,7 +534,24 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   // -----------------------------------------------------------------------
-  // 10. Build success response
+  // 10. Create fresh generation_token for /generate (bound to authenticated user)
+  // -----------------------------------------------------------------------
+  let freshGenerationToken: string;
+  try {
+    // Token bound to authenticated username, not client-supplied session_id
+    freshGenerationToken = createGenerationToken(sessionResult.username!, secret);
+  } catch {
+    return Response.json(
+      { error: 'Failed to prepare for generation. Please try again.' },
+      {
+        status: 500,
+        headers: { 'Cache-Control': 'no-store, no-cache' },
+      }
+    );
+  }
+
+  // -----------------------------------------------------------------------
+  // 11. Build success response
   // -----------------------------------------------------------------------
   const latencyMs = Math.round(performance.now() - t0);
   console.info(
@@ -526,6 +569,7 @@ export async function POST(request: Request): Promise<Response> {
     JSON.stringify({
       session_id,
       context: validatedContext,
+      generation_token: freshGenerationToken,
       next_action: 'start_generation',
     }),
     {
