@@ -41,9 +41,9 @@ describe('camera-constants', () => {
   });
 
   it('has spec-compliant thresholds', () => {
-    expect(CONFIDENCE_THRESHOLD).toBe(0.75);
+    expect(CONFIDENCE_THRESHOLD).toBe(0.85);
     expect(QUALITY_THRESHOLD).toBe(60);
-    expect(STABILITY_DELTA_THRESHOLD).toBe(5);
+    expect(STABILITY_DELTA_THRESHOLD).toBe(4);
     expect(CENTER_RANGE_MIN).toBe(0.25);
     expect(CENTER_RANGE_MAX).toBe(0.75);
   });
@@ -52,8 +52,8 @@ describe('camera-constants', () => {
     expect(PALM_CENTER_LANDMARK_INDEX).toBe(9);
   });
 
-  it('requires 15 stable frames before capture', () => {
-    expect(STABLE_FRAMES_REQUIRED).toBe(15);
+  it('requires 60 stable frames (2 seconds) before capture', () => {
+    expect(STABLE_FRAMES_REQUIRED).toBe(60);
   });
 });
 
@@ -143,7 +143,7 @@ describe('status message selection', () => {
   }): string {
     if (!opts.hasHand) return STATUS_MESSAGES.NO_HAND;
     if (!opts.centered) return STATUS_MESSAGES.NOT_CENTERED;
-    if (opts.qScore < QUALITY_THRESHOLD) return STATUS_MESSAGES.LOW_QUALITY;
+    if (opts.qScore < CONFIDENCE_THRESHOLD * 100) return STATUS_MESSAGES.LOW_QUALITY;
     if (opts.stableFrames > STABLE_FRAMES_REQUIRED && opts.captureAttempts === 0) {
       return STATUS_MESSAGES.CAPTURING;
     }
@@ -160,23 +160,23 @@ describe('status message selection', () => {
       .toBe('Move palm to center');
   });
 
-  it('shows "Better lighting needed" when quality low', () => {
-    expect(getStatus({ hasHand: true, centered: true, qScore: 50, stableFrames: 20, captureAttempts: 0 }))
+  it('shows "Better lighting needed" when quality low (< 85%)', () => {
+    expect(getStatus({ hasHand: true, centered: true, qScore: 84, stableFrames: 65, captureAttempts: 0 }))
       .toBe('Better lighting needed');
   });
 
-  it('shows "Hold steady..." when not yet stable enough', () => {
-    expect(getStatus({ hasHand: true, centered: true, qScore: 80, stableFrames: 5, captureAttempts: 0 }))
+  it('shows "Hold steady..." when not yet stable enough (< 60 frames)', () => {
+    expect(getStatus({ hasHand: true, centered: true, qScore: 90, stableFrames: 59, captureAttempts: 0 }))
       .toBe('Hold steady...');
   });
 
   it('shows "✅ Ready! Capturing..." when all conditions met', () => {
-    expect(getStatus({ hasHand: true, centered: true, qScore: 80, stableFrames: 20, captureAttempts: 0 }))
+    expect(getStatus({ hasHand: true, centered: true, qScore: 90, stableFrames: 65, captureAttempts: 0 }))
       .toBe('✅ Ready! Capturing...');
   });
 
   it('shows "Hold steady..." after first capture attempt', () => {
-    expect(getStatus({ hasHand: true, centered: true, qScore: 80, stableFrames: 20, captureAttempts: 1 }))
+    expect(getStatus({ hasHand: true, centered: true, qScore: 90, stableFrames: 65, captureAttempts: 1 }))
       .toBe('Hold steady...');
   });
 });
