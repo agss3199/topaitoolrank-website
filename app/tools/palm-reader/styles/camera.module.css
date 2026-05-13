@@ -1,0 +1,159 @@
+/* Camera View — palm reader tool camera overlay and controls */
+
+.container {
+  position: relative;
+  background-color: #000;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.video {
+  width: 100%;
+  display: none;
+}
+
+.canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 4 / 3;
+}
+
+/* Semi-transparent overlay for status/controls */
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+
+/* Quality + status info block (top-left) */
+.quality-block {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: fit-content;
+}
+
+.quality-text {
+  font-size: 0.875rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  line-height: 1.25;
+}
+
+.status-text {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  color: #fff;
+}
+
+/* QualityMeter bar */
+.meter-wrapper {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+}
+
+.meter-label {
+  font-size: 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  margin-bottom: 0.25rem;
+}
+
+.meter-track {
+  width: 6rem;
+  height: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.meter-fill {
+  height: 100%;
+  background-color: #4ade80; /* green-400 */
+  border-radius: 9999px;
+  transition: width 300ms ease;
+}
+
+/* Bottom controls row */
+.controls {
+  display: flex;
+  gap: 1rem;
+}
+
+.home-button {
+  background-color: #1f2937; /* gray-800 */
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background-color 200ms ease;
+}
+
+.home-button:hover {
+  background-color: #111827; /* gray-900 */
+}
+
+/* Responsive: tablet */
+@media (max-width: 768px) {
+  .overlay {
+    padding: 1rem;
+  }
+
+  .quality-block {
+    padding: 0.75rem;
+  }
+
+  .quality-text {
+    font-size: 0.75rem;
+  }
+
+  .status-text {
+    font-size: 1rem;
+    margin-top: 0.25rem;
+  }
+
+  .home-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+  }
+}
+
+/* Responsive: mobile */
+@media (max-width: 425px) {
+  .overlay {
+    padding: 0.75rem;
+  }
+
+  .quality-block {
+    padding: 0.5rem;
+  }
+
+  .quality-text {
+    font-size: 0.6875rem;
+  }
+
+  .status-text {
+    font-size: 0.875rem;
+  }
+
+  .home-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .meter-track {
+    width: 5rem;
+  }
+}

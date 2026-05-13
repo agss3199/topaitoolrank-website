@@ -143,7 +143,13 @@
       "Bash(cat /c/Users/MONICA/Desktop/Abhishek_Softwares_All_old/Top_AI_Tool_Rank/jest.config.*)",
       "Bash(bash /tmp/verify_gaps.sh)",
       "Bash(bash /tmp/convergence_check.sh)",
-      "Bash(bash /tmp/final_convergence.sh)"
+      "Bash(bash /tmp/final_convergence.sh)",
+      "Bash(cat jest.config.ts)",
+      "Bash(cat jest.config.js)",
+      "Bash(cat jest.config.mjs)",
+      "Bash(cat vitest.config.ts)",
+      "Bash(cat vitest.config.mts)",
+      "Bash(cat vitest.config.js)"
     ]
   }
 }

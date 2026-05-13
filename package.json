@@ -16,6 +16,10 @@
     "test:e2e:update-snapshots": "npx playwright test --update-snapshots"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@mediapipe/camera_utils": "^0.3.1675466862",
+    "@mediapipe/drawing_utils": "^0.3.1675466124",
+    "@mediapipe/hands": "^0.4.1675469240",
     "@next/third-parties": "^16.2.5",
     "@supabase/supabase-js": "^2.105.1",
     "canvas": "^3.2.3",

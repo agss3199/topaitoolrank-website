@@ -12,7 +12,7 @@ import "./tools-directory.css";
 export const metadata: Metadata = {
   title: "Free AI Tools Directory | Top AI Tool Rank",
   description:
-    "Browse 9 free AI-powered tools for developers, marketers, and businesses. JSON formatting, SEO analysis, prompt generation, invoicing, WhatsApp tools, and more. No sign-up required.",
+    "Browse 10 free AI-powered tools for developers, marketers, and businesses. JSON formatting, SEO analysis, prompt generation, invoicing, WhatsApp tools, and more. No sign-up required.",
   openGraph: {
     title: "Free AI Tools Directory | Top AI Tool Rank",
     description:
@@ -32,6 +32,7 @@ const CATEGORY_ORDER: Record<string, string> = {
   Content: "edit",
   "Links & UTM": "link",
   Messaging: "message",
+  Entertainment: "sparkles",
 };
 
 function CategoryIcon({ category }: { category: string }) {
@@ -68,6 +69,12 @@ function CategoryIcon({ category }: { category: string }) {
       return (
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+      );
+    case "Entertainment":
+      return (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 3l1.5 4.5H18l-3.5 2.5 1.5 4.5L12 12l-4 2.5 1.5-4.5L6 7.5h4.5L12 3z" />
         </svg>
       );
     default:

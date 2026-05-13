@@ -13,7 +13,7 @@ export interface ToolSEOConfig {
   color: string;
   emoji: string;
   features: string[];
-  category: "Featured" | "Text & Language" | "Links & UTM" | "Content" | "Messaging";
+  category: "Featured" | "Text & Language" | "Links & UTM" | "Content" | "Messaging" | "Entertainment";
   url: string;
 }
 
@@ -121,6 +121,19 @@ export const TOOL_SEO_CONFIG: Record<string, ToolSEOConfig> = {
     features: ["Link Generator", "QR Code Creation", "Pre-filled Messages", "Batch Generation", "Analytics Tracking"],
     category: "Messaging",
     url: "https://topaitoolrank.com/tools/whatsapp-link-generator",
+  },
+  "palm-reader": {
+    slug: "palm-reader",
+    title: "Palm Reader - AI-Powered Palm Reading Entertainment",
+    description: "Get a fun AI-powered palm reading using your camera. Upload or capture a photo of your palm and receive an entertaining personality and fortune analysis.",
+    longDescription: "The Palm Reader uses computer vision and generative AI to provide entertaining palm readings. Capture or upload a photo of your palm, and our AI analyzes the lines and features to generate a fun personality reading and fortune prediction. For entertainment purposes only.",
+    keywords: ["palm reader", "palm reading", "ai fortune teller", "hand reading", "palmistry ai"],
+    ogImage: "/og-images/palm-reader.png",
+    color: "#8b5cf6",
+    emoji: "🖐️",
+    features: ["Camera Capture", "AI Analysis", "Personality Reading", "Fortune Prediction", "Entertainment"],
+    category: "Entertainment",
+    url: "https://topaitoolrank.com/tools/palm-reader",
   },
   "whatsapp-message-formatter": {
     slug: "whatsapp-message-formatter",

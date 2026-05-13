@@ -1,0 +1,203 @@
+/* Results View — palm reading results display */
+
+.container {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #1f2937; /* gray-800 */
+}
+
+/* Individual palm line section */
+.line-section {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Color-coded left borders per spec R4 */
+.line-border-life {
+  border-left: 4px solid #ef4444;
+}
+
+.line-border-heart {
+  border-left: 4px solid #ec4899;
+}
+
+.line-border-head {
+  border-left: 4px solid #3b82f6;
+}
+
+.line-border-fate {
+  border-left: 4px solid #eab308;
+}
+
+.line-border-sun {
+  border-left: 4px solid #f97316;
+}
+
+.line-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.line-description {
+  font-size: 0.875rem;
+  color: #374151; /* gray-700 */
+  margin-bottom: 0.25rem;
+}
+
+.line-interpretation {
+  font-size: 0.875rem;
+  color: #4b5563; /* gray-600 */
+  font-style: italic;
+}
+
+/* Overall reading — indigo accent */
+.overall-reading {
+  background-color: #eef2ff; /* indigo-50 */
+  border-left: 4px solid #4f46e5; /* indigo-600 */
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.overall-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #312e81; /* indigo-900 */
+}
+
+.overall-text {
+  font-size: 0.875rem;
+  color: #3730a3; /* indigo-800 */
+}
+
+/* Tips — green accent */
+.tips {
+  background-color: #f0fdf4; /* green-50 */
+  border-left: 4px solid #16a34a; /* green-600 */
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.tips-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #14532d; /* green-900 */
+}
+
+.tips-text {
+  font-size: 0.875rem;
+  color: #166534; /* green-800 */
+}
+
+/* Action buttons */
+.buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+.button-primary {
+  background-color: #4f46e5; /* indigo-600 */
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+  font-size: 1rem;
+}
+
+.button-primary:hover {
+  background-color: #4338ca; /* indigo-700 */
+}
+
+.button-secondary {
+  background-color: #4b5563; /* gray-600 */
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+  font-size: 1rem;
+}
+
+.button-secondary:hover {
+  background-color: #374151; /* gray-700 */
+}
+
+/* Attribution */
+.attribution {
+  font-size: 0.75rem; /* 12px */
+  color: #9ca3af; /* gray-400 */
+  text-align: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb; /* gray-200 */
+}
+
+/* Responsive: tablet */
+@media (max-width: 768px) {
+  .heading {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .line-section,
+  .overall-reading,
+  .tips {
+    padding: 0.75rem;
+  }
+
+  .button-primary,
+  .button-secondary {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9375rem;
+  }
+}
+
+/* Responsive: mobile */
+@media (max-width: 425px) {
+  .container {
+    gap: 0.75rem;
+  }
+
+  .heading {
+    font-size: 1.125rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .button-primary,
+  .button-secondary {
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    font-size: 1rem; /* touch-friendly size */
+  }
+}
