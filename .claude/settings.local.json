@@ -141,7 +141,9 @@
       "Bash(npx jest:*)",
       "Bash(cat \"C:\\\\\\\\Users\\\\\\\\MONICA\\\\\\\\Desktop\\\\\\\\Abhishek_Softwares_All_old\\\\\\\\Top_AI_Tool_Rank\\\\\\\\workspaces\\\\\\\\bmc-generator\\\\\\\\specs\\\\\\\\api-orchestration.md\")",
       "Bash(cat /c/Users/MONICA/Desktop/Abhishek_Softwares_All_old/Top_AI_Tool_Rank/jest.config.*)",
-      "Bash(bash /tmp/verify_gaps.sh)"
+      "Bash(bash /tmp/verify_gaps.sh)",
+      "Bash(bash /tmp/convergence_check.sh)",
+      "Bash(bash /tmp/final_convergence.sh)"
     ]
   }
 }
