@@ -430,22 +430,6 @@
   margin-bottom: 12px;
 }
 
-.marketing-context .mock-chart {
-  width: 100%;
-  height: 80px;
-  background: linear-gradient(90deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.2) 50%, rgba(37, 99, 235, 0.1) 100%);
-  border-radius: 8px;
-  position: relative;
-  overflow: hidden;
-}
-
-.marketing-context .mock-chart::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 40%, rgba(37, 99, 235, 0.15) 70%, transparent 100%);
-}
-
 .marketing-context .mock-stats {
   display: flex;
   flex-direction: column;

@@ -56,8 +56,10 @@ export default function HomePage() {
 
                   <div className="dashboard-mockup">
                     <div className="mock-panel">
-                      <div className="mock-title">Automation Status</div>
-                      <div className="mock-chart"></div>
+                      <div className="mock-title">Processing Queue</div>
+                      <div className="mock-stats">
+                        <div className="stat-item">156<span>Documents processed</span></div>
+                      </div>
                     </div>
                     <div className="mock-panel">
                       <div className="mock-title">Active Tasks</div>
