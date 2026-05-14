@@ -149,7 +149,13 @@
       "Bash(cat jest.config.mjs)",
       "Bash(cat vitest.config.ts)",
       "Bash(cat vitest.config.mts)",
-      "Bash(cat vitest.config.js)"
+      "Bash(cat vitest.config.js)",
+      "Bash(mv workspaces/palm-reader-tool-integration/todos/active/008-implement-two-tier-stability-validation.md workspaces/palm-reader-tool-integration/todos/completed/)",
+      "Bash(mv workspaces/palm-reader-tool-integration/todos/active/009-integrate-all-detectors-into-cameraview.md workspaces/palm-reader-tool-integration/todos/completed/)",
+      "Bash(mv workspaces/palm-reader-tool-integration/todos/active/010-final-integration-testing-deployment.md workspaces/palm-reader-tool-integration/todos/completed/)",
+      "Bash(mv workspaces/palm-reader-tool-integration/todos/active/005-build-hand-shape-validator.md workspaces/palm-reader-tool-integration/todos/completed/)",
+      "Bash(mv workspaces/palm-reader-tool-integration/todos/active/006-detect-hand-orientation.md workspaces/palm-reader-tool-integration/todos/completed/)",
+      "Bash(mv workspaces/palm-reader-tool-integration/todos/active/007-build-palm-line-visibility-detector.md workspaces/palm-reader-tool-integration/todos/completed/)"
     ]
   }
 }

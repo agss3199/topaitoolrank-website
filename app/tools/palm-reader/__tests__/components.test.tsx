@@ -170,9 +170,9 @@ describe('status message selection', () => {
       .toBe('Hold steady...');
   });
 
-  it('shows "✅ Ready! Capturing..." when all conditions met', () => {
+  it('shows "Ready! Capturing..." when all conditions met', () => {
     expect(getStatus({ hasHand: true, centered: true, qScore: 90, stableFrames: 65, captureAttempts: 0 }))
-      .toBe('✅ Ready! Capturing...');
+      .toBe('Ready! Capturing...');
   });
 
   it('shows "Hold steady..." after first capture attempt', () => {

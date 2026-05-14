@@ -51,13 +51,54 @@ export const CONNECTION_COLOR = '#00ff00';
 export const LANDMARK_LINE_WIDTH = 1;
 export const CONNECTION_LINE_WIDTH = 2;
 
+/** Hand shape validation — openness score thresholds */
+export const HAND_OPENNESS_THRESHOLD = 1.5;
+export const HAND_OPENNESS_PARTIAL = 1.0;
+
+/** Number of frames to average for openness score smoothing */
+export const OPENNESS_FRAME_SMOOTHING = 5;
+
+/** Two-tier stability: detection stability (hand consistently visible) */
+export const DETECTION_STABILITY_FRAMES = 20;
+
+/** Two-tier stability: movement stability (hand stopped moving) */
+export const MOVEMENT_STABILITY_FRAMES = 60;
+
+/** Palm line visibility thresholds */
+export const MIN_VISIBLE_LINES = 4;
+export const MAX_VISIBLE_LINES = 5;
+
+/** Overlay color palette for capture readiness */
+export const COLOR_RED = '#FF0000';
+export const COLOR_YELLOW = '#FFFF00';
+export const COLOR_GREEN = '#00FF00';
+
+/** Smooth CSS transition duration (ms) for overlay color changes */
+export const COLOR_TRANSITION_MS = 300;
+
+/** Maximum acceptable hand rotation in degrees before capture blocked */
+export const ACCEPTABLE_HAND_ROTATION = 5;
+
+/** Hand skeleton rendering — landmark circle radius */
+export const LANDMARK_RADIUS = 4;
+
+/** Hand skeleton rendering — boundary ring radius as fraction of canvas size */
+export const BOUNDARY_RING_RADIUS_FRACTION = 0.35;
+
+/** Pre-capture validation time in ms (final check before capture triggers) */
+export const FINAL_VALIDATION_MS = 50;
+
 /** Status messages */
 export const STATUS_MESSAGES = {
   LOADING: 'Loading...',
   NO_HAND: 'Point palm at camera',
   NOT_CENTERED: 'Move palm to center',
   LOW_QUALITY: 'Better lighting needed',
+  DETECTING_HAND: 'Detecting hand...',
   HOLD_STEADY: 'Hold steady...',
-  CAPTURING: '✅ Ready! Capturing...',
+  CAPTURING: 'Ready! Capturing...',
+  OPEN_PALM: 'Open your palm',
+  SHOW_PALM_LINES: 'Show more of palm',
+  ROTATE_HAND: 'Rotate hand to show palm',
   CAMERA_ERROR: 'Camera error',
 } as const;

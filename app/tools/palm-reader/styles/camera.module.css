@@ -1,11 +1,27 @@
 /* Camera View — palm reader tool camera overlay and controls */
 
+@keyframes greenPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(0, 255, 0, 0.35);
+  }
+  100% {
+    box-shadow: 0 0 0 15px rgba(0, 255, 0, 0);
+  }
+}
+
 .container {
   position: relative;
   background-color: #000;
   border-radius: 0.5rem;
   overflow: hidden;
   max-width: 100%;
+}
+
+.container.pulsing {
+  animation: greenPulse 1.2s ease-out infinite;
 }
 
 .video {
