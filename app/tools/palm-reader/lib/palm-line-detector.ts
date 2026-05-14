@@ -68,7 +68,7 @@ const ANGLE_TO_LINES: ReadonlyArray<{ maxAngle: number; lines: number }> = [
  * Minimum hand size (wrist-to-middle-tip distance in normalized coords)
  * below which we apply no size bonus. Above this, larger hands get a +1 line bonus.
  */
-const HAND_SIZE_BONUS_THRESHOLD = 0.5;
+const HAND_SIZE_BONUS_THRESHOLD = 0.35;
 
 /**
  * Calculate the palm angle relative to the camera.
