@@ -52,8 +52,8 @@ export const LANDMARK_LINE_WIDTH = 1;
 export const CONNECTION_LINE_WIDTH = 2;
 
 /** Hand shape validation — openness score thresholds */
-export const HAND_OPENNESS_THRESHOLD = 1.1;
-export const HAND_OPENNESS_PARTIAL = 0.9;
+export const HAND_OPENNESS_THRESHOLD = 0.8;
+export const HAND_OPENNESS_PARTIAL = 0.5;
 
 /** Number of frames to average for openness score smoothing */
 export const OPENNESS_FRAME_SMOOTHING = 5;
@@ -62,10 +62,10 @@ export const OPENNESS_FRAME_SMOOTHING = 5;
 export const DETECTION_STABILITY_FRAMES = 15;
 
 /** Two-tier stability: movement stability (hand stopped moving) */
-export const MOVEMENT_STABILITY_FRAMES = 40;
+export const MOVEMENT_STABILITY_FRAMES = 20;
 
 /** Palm line visibility thresholds */
-export const MIN_VISIBLE_LINES = 2;
+export const MIN_VISIBLE_LINES = 1;
 export const MAX_VISIBLE_LINES = 5;
 
 /** Overlay color palette for capture readiness */
